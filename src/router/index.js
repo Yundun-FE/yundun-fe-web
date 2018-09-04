@@ -22,7 +22,11 @@ import Layout from '../pages/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/pages/login/index'), hidden: true },
+  {
+    path: '/login',
+    component: () => import('@/pages/login/index'),
+    hidden: true
+  },
   { path: '/404', component: () => import('@/pages/404'), hidden: true },
 
   {
@@ -31,11 +35,13 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     // hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/pages/dashboard/index'),
-      meta: { title: 'Dashboard' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/pages/dashboard/index'),
+        meta: { title: 'Dashboard' }
+      }
+    ]
   },
 
   {
@@ -73,6 +79,32 @@ export const constantRouterMap = [
         name: 'Cmd',
         component: () => import('@/pages/cmd/index'),
         meta: { title: 'Cmd' }
+      }
+    ]
+  },
+
+  {
+    path: '/website',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Website',
+        component: () => import('@/pages/website/index'),
+        meta: { title: 'Website' }
+      }
+    ]
+  },
+
+  {
+    path: '/progress',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Progress',
+        component: () => import('@/pages/progress/index'),
+        meta: { title: 'Progress' }
       }
     ]
   },
