@@ -1,15 +1,20 @@
-<style lang="postcss">
-</style>
 <template>
   <page>
     <div slot="header">
       <el-button @click="handleClickAdd">新增</el-button>
     </div>
-    <el-row :gutter="12">
-      <el-col v-for="item in list" :span="8" :key="item.id">
-        <card-job :data="item" @on-edit="handleEdit(item)" />
-      </el-col>
-    </el-row>
+    <el-table v-loading="loading" :data="list">
+      <el-table-column
+        prop="title"
+        label="标题"
+        width="180"/>
+      <el-table-column
+        prop="name"
+        label="用户名"/>
+      <el-table-column
+        prop="password"
+        label="密码"/>
+    </el-table>
     <dialog-add ref="dialogAdd" @init-list="init" />
   </page>
 </template>
@@ -17,15 +22,16 @@
 <script>
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
-import CardJob from '@/components/Card/CardJob'
 import DialogAdd from './Dialog/DialogAdd'
 
 export default {
-  components: { Page, CardJob, DialogAdd },
+  components: { Page, DialogAdd },
+
   props: {},
 
   data() {
     return {
+      loading: true,
       list: [],
       total: 0
     }
@@ -39,10 +45,12 @@ export default {
 
   methods: {
     async init() {
-      const { list, total } = await Explorer.jobList()
+      this.loading = true
+      const { list, total } = await Explorer.accountList()
       Object.assign(this, {
         list, total
       })
+      this.loading = false
     },
 
     handleEdit(form) {

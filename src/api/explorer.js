@@ -64,5 +64,67 @@ export default {
       method: 'get',
       data
     })
+  },
+
+  accountCreate: function accountCreate(data) {
+    return request({
+      url: `${base}/accounts`,
+      method: 'post',
+      data
+    })
+  },
+
+  accountDelete: function accountDelete(id) {
+    return request({
+      url: `${base}/accounts/${id}`,
+      method: 'delete'
+    })
+  },
+
+  accountUpdate: function accountUpdate(id, data) {
+    return request({
+      url: `${base}/accounts/${id}`,
+      method: 'put',
+      data
+    })
+  },
+
+  accountList: function accountList(data) {
+    return request({
+      url: `${base}/accounts`,
+      method: 'get',
+      data
+    })
+  },
+
+  cmdCreate: function cmdCreate(data) {
+    return request({
+      url: `${base}/cmds`,
+      method: 'post',
+      data
+    })
+  },
+
+  cmdDelete: function cmdDelete(id) {
+    return request({
+      url: `${base}/cmds/${id}`,
+      method: 'delete'
+    })
+  },
+
+  cmdUpdate: function cmdUpdate(id, data) {
+    return request({
+      url: `${base}/cmds/${id}`,
+      method: 'put',
+      data
+    })
+  },
+
+  cmdList: function cmdList(data) {
+    return request({
+      url: `${base}/cmds`,
+      method: 'get',
+      data
+    })
   }
 }
