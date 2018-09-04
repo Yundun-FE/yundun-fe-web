@@ -126,5 +126,36 @@ export default {
       method: 'get',
       data
     })
+  },
+
+  websiteCreate: function websiteCreate(data) {
+    return request({
+      url: `${base}/websites`,
+      method: 'post',
+      data
+    })
+  },
+
+  websiteDelete: function websiteDelete(id) {
+    return request({
+      url: `${base}/websites/${id}`,
+      method: 'delete'
+    })
+  },
+
+  websiteUpdate: function websiteUpdate(id, data) {
+    return request({
+      url: `${base}/websites/${id}`,
+      method: 'put',
+      data
+    })
+  },
+
+  websiteList: function websiteList(data) {
+    return request({
+      url: `${base}/websites`,
+      method: 'get',
+      data
+    })
   }
 }

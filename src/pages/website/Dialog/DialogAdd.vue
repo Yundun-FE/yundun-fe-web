@@ -9,9 +9,6 @@
       <el-form-item label="URL">
         <el-input v-model="form.url" />
       </el-form-item>
-      <el-form-item label="ENV">
-        <el-input v-model="form.env" />
-      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取 消</el-button>
@@ -32,8 +29,7 @@ export default {
       isEdit: false,
       form: {
         title: '',
-        url: '',
-        env: ''
+        url: ''
       }
     }
   },
@@ -44,12 +40,12 @@ export default {
     async handleSave() {
       const { form, isEdit } = this
 
-      const { title, url, env } = form
-      const data = { title, url, env }
+      const { title, url } = form
+      const data = { title, url }
 
       this.loadingSubmit = true
       try {
-        await isEdit ? this.$Api.Explorer.jobUpdate(form.id, data) : this.$Api.Explorer.jobCreate(data)
+        await isEdit ? this.$Api.Explorer.websiteUpdate(form.id, data) : this.$Api.Explorer.websiteCreate(data)
       } catch (e) {
         this.loadingSubmit = false
         return
