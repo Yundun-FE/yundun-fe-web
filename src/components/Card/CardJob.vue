@@ -1,0 +1,53 @@
+<style lang="stylus">
+.card-job {
+  margin-bottom: 12px;
+}
+</style>
+
+<template>
+  <el-card class="card-job">
+    <div slot="header" class="clearfix">
+      <span> {{ data.title }}</span>
+      <el-button style="float: right; padding: 3px 0" type="text" @click="handleEdit">编辑</el-button>
+    </div>
+    <a :href="data.url" target="_blank">{{ data.url }}</a>
+  </el-card>
+</template>
+
+<script>
+const TYPE_MAP = {
+  test: {
+    name: '测试',
+    color: 'default'
+  },
+  pre: {
+    name: '预发布',
+    color: 'warning'
+  },
+  'test-online': {
+    name: '线上测服',
+    color: 'success'
+  },
+  prod: {
+    name: '线上',
+    color: 'success'
+  }
+}
+
+export default {
+
+  components: {},
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    }
+  },
+
+  methods: {
+    handleEdit() {
+      this.$emit('on-edit')
+    }
+  }
+}
+</script>

@@ -1,0 +1,62 @@
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* User Defined */
+  --disabled-color: #848484;
+  --pseudo-background-color: #eaf4fc;
+  --pseudo-hover-background-color: #d7edfe;
+  --light-green: #f3faeb;
+  --orange: #fe8520;
+  --light-orange: #fff3e8;
+  --gray: #969696;
+  --red: #fe371a;
+  --dark-green: #008333;
+  --error-red: #ff1500;
+  --error-light-red: #ffe7e5;
+  --disabled-color: #848484;
+  --pseudo-background-color: #eaf4fc;
+  --border-gray: #eaeaea;
+  --button-border-gray: gray;
+  --tip-border: #b7dbf6;
+  --tip-background: #f7fbfd;
+  --wrap-background: #f7f7f7;
+
+  /* Transition */
+  --all-transition: all .3s cubic-bezier(.645,.045,.355,1);
+  --fade-transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  --fade-linear-transition: opacity 200ms linear;
+  --md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms, opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) 100ms;
+  --border-transition-base: border-color .2s cubic-bezier(.645,.045,.355,1);
+  --color-transition-base: color .2s cubic-bezier(.645,.045,.355,1);
+
+  /* Colors */
+  --color-primary: #2d90e6;
+  --color-primary-light-1: mix(var(--color-white), var(--color-primary), 10%);
+  --color-primary-light-2: mix(var(--color-white), var(--color-primary), 20%);
+  --color-primary-light-3: mix(var(--color-white), var(--color-primary), 30%);
+  --color-primary-light-4: mix(var(--color-white), var(--color-primary), 40%);
+  --color-primary-light-5: mix(var(--color-white), var(--color-primary), 50%);
+  --color-primary-light-6: mix(var(--color-white), var(--color-primary), 60%);
+  --color-primary-light-7: mix(var(--color-white), var(--color-primary), 70%);
+  --color-primary-light-8: mix(var(--color-white), var(--color-primary), 80%);
+  --color-primary-light-9: mix(var(--color-white), var(--color-primary), 90%);
+
+  --color-text-base: #333333;
+
+  --color-success: #13ce66;
+  --color-warning: #f7ba2a;
+  --color-danger: #ff4949;
+  --color-info: #50bfff;
+
+  --status-success: #52c41a;
+  --status-error: #f5222d;
+  --status-default: #CCC;
+  --status-processing: #1890ff;
+  --status-warning: #faad14;
+
+  --color-text-primary: #303133;
+  --color-text-regular: #606266;
+  --color-text-secondary: #909399;
+  --color-text-placeholder: #c0c4cc;
+}
