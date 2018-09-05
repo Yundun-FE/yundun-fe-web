@@ -1,14 +1,13 @@
+<style lang="postcss">
+</style>
 <template>
-  <el-dialog :visible.sync="visible" :title="edit ? '编辑项目' : '新增项目'">
+  <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
       <el-form-item label="标题">
         <el-input v-model="form.title" />
       </el-form-item>
-      <el-form-item label="用户名">
-        <el-input v-model="form.name" />
-      </el-form-item>
-      <el-form-item label="密码">
-        <el-input v-model="form.password" />
+      <el-form-item label="URL">
+        <el-input v-model="form.url" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -19,34 +18,29 @@
 </template>
 
 <script>
-import { deepClone } from '@/utils/util'
-
-const FORM = {
-  title: '',
-  name: '',
-  password: ''
-}
-
 export default {
   data() {
     return {
       visible: false,
       loadingSubmit: false,
-      edit: false,
-      form: FORM
+      isEdit: false,
+      form: {
+        title: '',
+        url: ''
+      }
     }
   },
 
   methods: {
     async handleSave() {
-      const { form, edit } = this
+      const { form, isEdit } = this
 
-      const { title, name, password } = form
-      const data = { title, name, password }
+      const { title, url } = form
+      const data = { title, url }
 
       this.loadingSubmit = true
       try {
-        await edit ? this.$Api.Explorer.accountUpdate(form.id, data) : this.$Api.Explorer.accountCreate(data)
+        await isEdit ? this.$Api.Explorer.websiteUpdate(form.id, data) : this.$Api.Explorer.websiteCreate(data)
       } catch (e) {
         this.loadingSubmit = false
         return
@@ -57,8 +51,8 @@ export default {
       this.$emit('init-list')
     },
     open(form) {
-      this.form = form ? Object.assign(this.form, form) : deepClone(FORM)
-      this.edit = !!form
+      this.isEdit = !!form
+      Object.assign(this.form, form)
       this.visible = true
     }
   }

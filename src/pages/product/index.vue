@@ -68,7 +68,7 @@ export default {
     },
 
     handleClickAdd() {
-      this.$refs.dialogAdd.open()
+      this.$refs['dialog-edit'].open()
     }
   }
 }

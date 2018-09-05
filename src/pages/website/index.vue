@@ -7,17 +7,17 @@
       <el-table-column prop="title" label="标题" width="180" />
       <el-table-column prop="url" label="网址" />
     </el-table>
-    <dialog-add ref="dialogAdd" @init-list="init" />
+    <dialog-edit ref="dialogEdit" @init-list="init" />
   </page>
 </template>
 
 <script>
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
-import DialogAdd from './Dialog/DialogAdd'
+import DialogEdit from './Dialog/DialogEdit'
 
 export default {
-  components: { Page, DialogAdd },
+  components: { Page, DialogEdit },
 
   props: {},
 
@@ -46,10 +46,10 @@ export default {
     },
 
     handleEdit(form) {
-      this.$refs.dialogAdd.open(form)
+      this.$refs.dialogEdit.open(form)
     },
     handleClickAdd() {
-      this.$refs.dialogAdd.open()
+      this.$refs.dialogEdit.open()
     }
   }
 }

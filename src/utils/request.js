@@ -11,7 +11,7 @@ const service = axios.create({
 service.interceptors.response.use(
   response => {
     const { status, data } = response
-    const { message, errors } = data
+    const { message, errors, code } = data
     // 正常返回
     if (status === 200) {
       if (message) {
@@ -21,7 +21,8 @@ service.interceptors.response.use(
           duration: 5 * 1000
         })
       }
-      if (errors) return Promise.reject(data)
+
+      if (errors || code > 0) return Promise.reject(data)
       return response.data
     } else {
       Message({
