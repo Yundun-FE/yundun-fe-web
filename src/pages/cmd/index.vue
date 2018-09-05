@@ -4,27 +4,25 @@
       <el-button @click="handleClickAdd">新增</el-button>
     </div>
     <el-table v-loading="loading" :data="list">
-      <el-table-column
-        prop="title"
-        label="标题"
-        width="180"/>
-      <el-table-column
-        prop="content"
-        label="指令"/>
+      <el-table-column prop="title" label="标题" width="180" />
+      <el-table-column prop="content" label="指令" />
+      <el-table-column label="操作" width="180">
+        <template slot-scope="scope">
+          <el-button type="text" @click="handleEdit(scope.row)">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
-    <dialog-add ref="dialogAdd" @init-list="init" />
+    <dialog-edit ref="dialogEdit" @init-list="init" />
   </page>
 </template>
 
 <script>
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
-import DialogAdd from './Dialog/DialogAdd'
+import DialogEdit from './Dialog/DialogEdit'
 
 export default {
-  components: { Page, DialogAdd },
-
-  props: {},
+  components: { Page, DialogEdit },
 
   data() {
     return {
@@ -33,8 +31,6 @@ export default {
       total: 0
     }
   },
-
-  computed: {},
 
   mounted() {
     this.init()
@@ -51,10 +47,10 @@ export default {
     },
 
     handleEdit(form) {
-      this.$refs.dialogAdd.open(form)
+      this.$refs.dialogEdit.open(form)
     },
     handleClickAdd() {
-      this.$refs.dialogAdd.open()
+      this.$refs.dialogEdit.open()
     }
   }
 }

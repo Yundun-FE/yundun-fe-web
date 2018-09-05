@@ -11,6 +11,11 @@
       <el-button style="float: right; padding: 3px 0" type="text" @click="handleEdit">编辑</el-button>
     </div>
     <a :href="data.url" target="_blank">{{ data.url }}</a>
+    <div>
+      <el-button type="text" @click="handleEdit('account')">账号</el-button>
+      <el-button type="text" @click="handleEdit('cmd')">指令</el-button>
+    </div>
+
   </el-card>
 </template>
 
@@ -40,13 +45,13 @@ export default {
   props: {
     data: {
       type: Object,
-      default: () => {}
+      default: () => { }
     }
   },
 
   methods: {
-    handleEdit() {
-      this.$emit('on-edit')
+    handleEdit(name) {
+      this.$emit('on-edit', name)
     }
   }
 }

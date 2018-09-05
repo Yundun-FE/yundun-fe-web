@@ -4,13 +4,8 @@
       <el-button @click="handleClickAdd">新增</el-button>
     </div>
     <el-table v-loading="loading" :data="list">
-      <el-table-column
-        prop="title"
-        label="标题"
-        width="180"/>
-      <el-table-column
-        prop="url"
-        label="网址"/>
+      <el-table-column prop="title" label="标题" width="180" />
+      <el-table-column prop="url" label="网址" />
     </el-table>
     <dialog-add ref="dialogAdd" @init-list="init" />
   </page>

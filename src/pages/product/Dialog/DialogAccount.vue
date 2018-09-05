@@ -1,11 +1,19 @@
+<style lang="postcss">
+</style>
 <template>
-  <el-dialog :visible.sync="visible" :title="edit ? '编辑项目' : '新增项目'">
+  <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
       <el-form-item label="标题">
         <el-input v-model="form.title" />
       </el-form-item>
-      <el-form-item label="内容">
-        <el-input v-model="form.content" />
+      <el-form-item label="URL">
+        <el-input v-model="form.url" />
+      </el-form-item>
+      <el-form-item label="ENV">
+        <el-input v-model="form.env" />
+      </el-form-item>
+      <el-form-item label="项目名称">
+        <el-input v-model="form.name" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -16,33 +24,36 @@
 </template>
 
 <script>
-import { deepClone } from '@/utils/util'
-
-const FORM = {
-  title: '',
-  content: ''
-}
-
 export default {
+  components: {},
+  props: {},
+
   data() {
     return {
       visible: false,
       loadingSubmit: false,
-      edit: false,
-      form: FORM
+      isEdit: false,
+      form: {
+        title: '',
+        url: '',
+        env: '',
+        name: ''
+      }
     }
   },
 
+  computed: {},
+
   methods: {
     async handleSave() {
-      const { form, edit } = this
+      const { form, isEdit } = this
 
-      const { title, content } = form
-      const data = { title, content }
+      const { title, url, env, name } = form
+      const data = { title, url, env, name }
 
       this.loadingSubmit = true
       try {
-        await edit ? this.$Api.Explorer.cmdUpdate(form.id, data) : this.$Api.Explorer.cmdCreate(data)
+        isEdit ? await this.$Api.Explorer.jobUpdate(form.id, data) : await this.$Api.Explorer.jobCreate(data)
       } catch (e) {
         this.loadingSubmit = false
         return
@@ -53,8 +64,8 @@ export default {
       this.$emit('init-list')
     },
     open(form) {
-      this.form = form ? Object.assign(this.form, form) : deepClone(FORM)
-      this.edit = !!form
+      this.isEdit = !!form
+      Object.assign(this.form, form)
       this.visible = true
     }
   }
