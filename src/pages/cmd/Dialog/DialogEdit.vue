@@ -3,7 +3,7 @@
     <el-form label-width="80px">
       <el-form-item label="绑定项目">
         <el-select v-model="form.jid" placeholder="请选择">
-          <el-option v-for="item in listJob" :key="item.id" :label="`${item.title} - ${item.env}`" :value="item.id"/>
+          <el-option v-for="item in listJob" :key="item.id" :label="`${item.title} - ${item.env}`" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="标题">
@@ -40,12 +40,21 @@ export default {
     }
   },
 
+  mounted() {
+    this.init()
+  },
+
   methods: {
+    async init() {
+      const { list } = await this.$Api.Explorer.jobList()
+      this.listJob = list
+    },
+
     async handleSave() {
       const { form, edit } = this
 
-      const { title, content } = form
-      const data = { title, content }
+      const { title, content, jid } = form
+      const data = { title, content, jid }
 
       this.loadingSubmit = true
       try {

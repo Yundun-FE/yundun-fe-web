@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const base = ''
+const base = 'http://192.168.5.189:9100'
 // const base = 'explorer-service'
 
 export default {
@@ -156,6 +156,21 @@ export default {
       url: `${base}/websites`,
       method: 'get',
       data
+    })
+  },
+
+  progressName: function progressName(name) {
+    return request({
+      url: `${base}/progresses/${name}`,
+      method: 'get'
+    })
+  },
+
+  jobStart: function jobStart(name) {
+    return request({
+      url: `http://172.16.100.40:8080/job/${name}/build`,
+      method: 'post',
+      params: { delay: '0sec' }
     })
   }
 }

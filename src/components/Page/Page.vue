@@ -1,9 +1,9 @@
 <style lang="stylus">
 .page {
-  padding: 24px;
+  // padding: 24px;
 
   &-header {
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
   }
 }
 </style>

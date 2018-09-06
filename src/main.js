@@ -8,6 +8,7 @@ import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import Explorer from '@/api/explorer'
 
 import '@/styles/index.scss' // global css
+import '@/styles/iconfont/iconfont.css'
 
 import App from './App'
 import router from './router'
@@ -19,8 +20,8 @@ import '@/permission' // permission control
 Vue.prototype.$Api = {
   Explorer
 }
-Vue.use(ElementUI, { locale })
 
+Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
 new Vue({

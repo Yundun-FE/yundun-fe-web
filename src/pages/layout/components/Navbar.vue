@@ -1,92 +1,103 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
-    <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
-    <breadcrumb />
-    <el-dropdown class="avatar-container" trigger="click">
-      <div class="avatar-wrapper">
-        <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-        <i class="el-icon-caret-bottom"/>
-      </div>
+  <div class="menu" mode="horizontal">
+    <!-- <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" /> -->
+    <!-- <breadcrumb /> -->
+    <!-- {{ list }} -->
+
+    <!-- <el-menu-item v-for="item in list" :key="item.id" >{{ item.title }}</el-menu-item> -->
+
+    <ul class="list-website">
+      <li v-for="item in list" :key="item.id" class="list-website-item">
+        <a :href="item.url">{{ item.title }}</a>
+      </li>
+    </ul>
+
+    <el-dropdown class="menu-item menu-item--setting" trigger="click">
+      <el-button size="mini" icon="yundun-fe yicon-setting" circle/>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
             Home
           </el-dropdown-item>
         </router-link>
-        <el-dropdown-item divided>
-          <span style="display:block;" @click="logout">LogOut</span>
-        </el-dropdown-item>
+        <router-link class="inlineBlock" to="/product/index">
+          <el-dropdown-item>
+            Product
+          </el-dropdown-item>
+        </router-link>
+        <router-link class="inlineBlock" to="/cmd/index">
+          <el-dropdown-item>
+            CMD
+          </el-dropdown-item>
+        </router-link>
+        <router-link class="inlineBlock" to="/website/index">
+          <el-dropdown-item>
+            Website
+          </el-dropdown-item>
+        </router-link>
+        <router-link class="inlineBlock" to="/account/index">
+          <el-dropdown-item>
+            Account
+          </el-dropdown-item>
+        </router-link>
       </el-dropdown-menu>
     </el-dropdown>
-  </el-menu>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
+import Explorer from '@/api/explorer'
 
 export default {
-  components: {
-    Breadcrumb,
-    Hamburger
+  data() {
+    return {
+      list: []
+    }
   },
-  computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar'
-    ])
+
+  mounted() {
+    this.init()
   },
+
   methods: {
-    toggleSideBar() {
-      this.$store.dispatch('ToggleSideBar')
-    },
-    logout() {
-      this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
-      })
+    async init() {
+      const { list, total } = await Explorer.websiteList()
+      this.list = list
     }
   }
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-.navbar {
-  height: 50px;
-  line-height: 50px;
+<style lang="stylus">
+.menu {
   border-radius: 0px !important;
-  .hamburger-container {
-    line-height: 58px;
-    height: 50px;
-    float: left;
-    padding: 0 10px;
+  text-align: right;
+  border-bottom: 1px solid #EEE;
+
+  &-item {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 12px;
   }
-  .screenfull {
-    position: absolute;
-    right: 90px;
-    top: 16px;
-    color: red;
-  }
-  .avatar-container {
-    height: 50px;
+}
+
+.list-website {
+  float: left;
+
+  &-item {
     display: inline-block;
-    position: absolute;
-    right: 35px;
-    .avatar-wrapper {
-      cursor: pointer;
-      margin-top: 5px;
-      position: relative;
-      .user-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-      }
-      .el-icon-caret-bottom {
-        position: absolute;
-        right: -20px;
-        top: 25px;
-        font-size: 12px;
-      }
+    margin-right 10px;
+
+    a {
+      display: inline-block;
+      line-height: 60px;
+      height: 60px;
+      padding: 0 12px;
+      font-size: 14px;
+    }
+
+    &:hover {
+      color: #409EFF;
     }
   }
 }
