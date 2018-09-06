@@ -47,8 +47,8 @@
       margin: 0px;
       font-weight: 500;
       color: #666;
-      margin-right: 0px;
-      font-size: 16px;
+      margin-right: 2px;
+      font-size: 14px;
     }
   }
 

@@ -3,7 +3,7 @@
     <!-- <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/> -->
     <!-- <sidebar class="sidebar-container"/> -->
     <div class="main-container">
-      <navbar/>
+      <!-- <navbar/> -->
       <app-main/>
     </div>
   </div>

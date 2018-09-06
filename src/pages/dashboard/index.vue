@@ -1,8 +1,12 @@
-<style lang="postcss">
+<style lang="stylus">
+.page-dashboard {
+  width: 320px;
+}
 </style>
 
 <template>
-  <page>
+  <page class="page-dashboard">
+    <ds-menu/>
     <div class="list">
       <card-job v-for="item in list" :span="12" :key="item.id" :data="item" :progress="mapProgress[item.name]" @on-edit="handleEdit(item)" />
     </div>
@@ -13,9 +17,10 @@
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
 import CardJob from '@/components/Card/CardJob'
+import DsMenu from '@/pages/layout/components/Menu'
 
 export default {
-  components: { Page, CardJob },
+  components: { Page, CardJob, DsMenu },
   props: {},
 
   data() {

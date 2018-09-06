@@ -21,7 +21,6 @@ body {
 }
 
 #app {
-  width: 560px;
   margin: 0 auto;
   background: #fff;
 }
