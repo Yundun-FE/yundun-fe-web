@@ -67,10 +67,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       // in certain cases, and in webpack 4, chunk order in HTML doesn't
       // matter anyway
     }),
-    new ScriptExtHtmlWebpackPlugin({
-      //`runtime` must same as runtimeChunk name. default is `runtime`
-      inline: /runtime\..*\.js$/
-    }),
+    // new ScriptExtHtmlWebpackPlugin({
+    //   //`runtime` must same as runtimeChunk name. default is `runtime`
+    //   inline: /runtime\..*\.js$/
+    // }),
     // keep chunk.id stable when chunk has no name
     new webpack.NamedChunksPlugin(chunk => {
       if (chunk.name) {
