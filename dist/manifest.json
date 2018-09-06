@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "YundunFE",
+  "version": "0.1.3",
+  "description": "云端前端开发工具",
+  "icons": {
+    "16": "images/yundun-16.png",
+    "48": "images/yundun-48.png",
+    "128": "images/yundun-128.png"
+  },
+  "web_accessible_resources": ["images/yundun-128.png"],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/yundun-16.png",
+      "48": "images/yundun-48.png"
+    },
+    "default_title": "YundunFE",
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": ["storage", "notifications", "http://*/*", "https://*/*"],
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "js": ["content.js"],
+    "run_at": "document_start",
+    "all_frames": true
+  }]
+}

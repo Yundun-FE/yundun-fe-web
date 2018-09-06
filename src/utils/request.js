@@ -2,8 +2,8 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 
 const service = axios.create({
-  // baseURL: 'http://api.17disney.com/',
-  baseURL: '/',
+  baseURL: 'http://192.168.5.189:9100/',
+  // baseURL: '/',
   timeout: 15000
 })
 

@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
-// const base = 'http://localhost:7601'
-const base = 'explorer-service'
+const base = ''
+// const base = 'explorer-service'
 
 export default {
   productCreate: function productCreate(data) {
