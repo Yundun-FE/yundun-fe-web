@@ -100,7 +100,9 @@
       <i v-if="progress && progress.progress" class="icon-status icon-status--progress el-icon-loading" />
       <i v-else class="icon-status icon-status--success el-icon-circle-check" />
       <h3 class="text--title">
-        {{ data.title }}
+        <a :href="data.url" target="_blank">
+          {{ data.title }}
+        </a>
       </h3>
       <el-tag :type="TYPE_MAP[data.env]['type']" size="mini" class="tag">
         {{ TYPE_MAP[data.env]['name'] }}
@@ -128,14 +130,7 @@
           </li>
           <li v-if="data.name" class="action-item">
             <el-tooltip content="立即构建" placement="top">
-              <el-button type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)"/>
-            </el-tooltip>
-          </li>
-          <li class="action-item">
-            <el-tooltip content="立即访问" placement="top">
-              <a :href="data.url" target="_blank">
-                <el-button type="primary" size="mini" icon="yundun-fe yicon-arrowright" circle/>
-              </a>
+              <el-button type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
             </el-tooltip>
           </li>
         </ul>
