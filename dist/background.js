@@ -4,7 +4,12 @@
     axios.get('http://192.168.5.189:9100/progresses').then(function(response) {
       const { data } = response
       const count = data.length
-      chrome.browserAction.setBadgeText({ text: count.toString() })
+
+      if (count > 0) {
+        chrome.browserAction.setBadgeText({ text: count.toString() })
+      } else {
+        chrome.browserAction.setBadgeText({ text: '' })
+      }
     })
   }
 
