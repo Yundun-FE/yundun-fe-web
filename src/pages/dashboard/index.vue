@@ -66,10 +66,10 @@ export default {
         if (progress) count++
       }
 
-      console.log(count)
+      chrome.browserAction.setBadgeText({ text: count.toString() }) // eslint-disable-line
 
       Storage.set({
-        easyTodoStorage: count
+        progressNum: count
       })
 
       this.mapProgress = mapProgress

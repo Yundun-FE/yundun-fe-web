@@ -18,16 +18,24 @@ async function login() {
   axios
     .post('/api/sso/V4/login', `username=${name}&password=${password}`)
     .then(function(response) {
+      // chrome.extension.sendMessage({
+      //   message: 'loginSuccess'
+      // })
       window.location = document.referrer || '/'
     })
     .catch(function(error) {
       console.log(error)
+      chrome.extension.sendMessage({
+        message: error
+      })
     })
 }
 
 document.onkeydown = function(e) {
   var keyCode = e.keyCode || e.which || e.charCode
   var ctrlKey = e.ctrlKey || e.metaKey
+
+  // CTRL + Y
   if (ctrlKey && keyCode == 89) {
     login()
   }
