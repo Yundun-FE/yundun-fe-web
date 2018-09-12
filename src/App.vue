@@ -5,8 +5,23 @@
 </template>
 
 <script>
+import Explorer from '@/api/explorer'
+import Lockr from 'lockr'
+import Storage from '@/utils/storage'
+
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    this.initAccount()
+  },
+  methods: {
+    async initAccount() {
+      const { list } = await Explorer.accountList()
+      Storage.set({
+        testAccount: list
+      })
+    }
+  }
 }
 </script>
 

@@ -18,6 +18,7 @@ import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
 import CardJob from '@/components/Card/CardJob'
 import DsMenu from '@/pages/layout/components/Menu'
+import Storage from '@/utils/storage'
 
 export default {
   components: { Page, CardJob, DsMenu },
@@ -49,16 +50,27 @@ export default {
       clearInterval(this.interval)
       this.interval = setInterval(this.initProgress, 10000)
     },
-
+    // 读取编译进度
     async initProgress() {
       const listId = this.list.map(_ => _.name).filter(_ => _)
 
       const mapProgress = {}
 
+      let count = 0
       for (let i = 0; i < listId.length; i++) {
         const name = listId[i]
-        mapProgress[name] = await Explorer.progressName(name)
+
+        const dataProgress = await Explorer.progressName(name)
+        mapProgress[name] = dataProgress
+        const { progress } = dataProgress
+        if (progress) count++
       }
+
+      console.log(count)
+
+      Storage.set({
+        easyTodoStorage: count
+      })
 
       this.mapProgress = mapProgress
     },
