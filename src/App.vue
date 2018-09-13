@@ -6,7 +6,6 @@
 
 <script>
 import Explorer from '@/api/explorer'
-import Lockr from 'lockr'
 import Storage from '@/utils/storage'
 
 export default {

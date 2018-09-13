@@ -8,7 +8,7 @@
   <page class="page-dashboard">
     <ds-menu/>
     <div class="list">
-      <card-job v-for="item in list" :span="12" :key="item.id" :data="item" :progress="mapProgress[item.name]" @on-edit="handleEdit(item)" />
+      <card-job v-for="item in list" :span="12" :key="item.id" :data="item" :progress="mapProgress[item.name]" @on-build="handleBuild" @on-edit="handleEdit(item)" />
     </div>
   </page>
 </template>
@@ -33,8 +33,6 @@ export default {
     }
   },
 
-  computed: {},
-
   mounted() {
     this.init()
   },
@@ -50,29 +48,21 @@ export default {
       clearInterval(this.interval)
       this.interval = setInterval(this.initProgress, 10000)
     },
+    async initProgressItem(name) {
+      const data = await Explorer.progressName(name)
+      this.$set(this.mapProgress, name, data)
+    },
+    handleBuild(name) {
+      this.initProgressItem(name)
+    },
     // 读取编译进度
     async initProgress() {
       const listId = this.list.map(_ => _.name).filter(_ => _)
 
-      const mapProgress = {}
-
-      let count = 0
       for (let i = 0; i < listId.length; i++) {
         const name = listId[i]
-
-        const dataProgress = await Explorer.progressName(name)
-        mapProgress[name] = dataProgress
-        const { progress } = dataProgress
-        if (progress) count++
+        this.initProgressItem(name)
       }
-
-      chrome.browserAction.setBadgeText({ text: count.toString() }) // eslint-disable-line
-
-      Storage.set({
-        progressNum: count
-      })
-
-      this.mapProgress = mapProgress
     },
 
     handleEdit(form, name = 'edit') {

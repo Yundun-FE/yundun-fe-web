@@ -130,7 +130,7 @@
           </li>
           <li v-if="data.name" class="action-item">
             <el-tooltip content="立即构建" placement="top">
-              <el-button type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
+              <el-button :disabled="progressing" type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
             </el-tooltip>
           </li>
         </ul>
@@ -185,9 +185,18 @@ export default {
     }
   },
 
+  computed: {
+    progressing() {
+      if (this.progress && this.progress.progress) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
   methods: {
     handleBuild(name) {
-      Explorer.jobStart(name)
+      this.$emit('on-build', name)
     }
   }
 }
