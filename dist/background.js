@@ -1,5 +1,23 @@
-;(function() {
+;(async function() {
   var interval
+
+  function getStorage(key) {
+    return new Promise(function(resolve) {
+      // eslint-disable-next-line
+      chrome.storage.sync.get(key, function(rs) {
+        resolve(rs[key])
+      })
+    })
+  }
+
+  const setting = await getStorage('setting')
+  let username
+  if (setting) {
+    username = setting.username
+  }
+  if (!username) {
+    username = `yundun-${parseInt(Math.random() * 1000000)}`
+  }
 
   function initProgress() {
     axios.get('http://192.168.5.189:9100/progresses').then(function(response) {
@@ -12,7 +30,7 @@
     })
 
     axios
-      .get('http://192.168.5.189:9100/notices?clientid=yundun')
+      .get(`http://192.168.5.189:9100/notices?clientid=${username}`)
       .then(function(response) {
         const { data = [] } = response
 
