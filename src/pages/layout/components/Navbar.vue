@@ -1,9 +1,5 @@
 <template>
-  <div class="menu" mode="horizontal">
-    <!-- <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" /> -->
-    <!-- <breadcrumb /> -->
-    <!-- {{ list }} -->
-    <!-- <el-menu-item v-for="item in list" :key="item.id" >{{ item.title }}</el-menu-item> -->
+  <div class="menu">
     <ul class="list-website">
       <li v-for="item in list" :key="item.id" class="list-website-item">
         <a :href="item.url" target="_blank">{{ item.title }}</a>
@@ -11,7 +7,7 @@
     </ul>
 
     <el-dropdown class="menu-item menu-item--setting" trigger="click">
-      <el-button size="mini" icon="yundun-fe yicon-setting" circle/>
+      <el-button type="primary" size="mini" icon="yundun-fe yicon-setting" circle/>
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
@@ -67,14 +63,16 @@ export default {
 </script>
 
 <style lang="stylus">
+@require '../../../styles/var.styl';
+
 .menu {
   display: flex;
   overflow: hidden;
   border-bottom: 1px solid #EEE;
+  background: $color-primary;
+  padding: 6px 0;
 
   &-item {
-    height: 60px;
-    line-height: 60px;
     padding: 0 12px;
   }
 
@@ -86,18 +84,18 @@ export default {
 .list-website {
   &-item {
     display: inline-block;
-    margin-right: 10px;
-
     a {
       display: inline-block;
-      line-height: 60px;
-      height: 60px;
+      line-height: 32px;
+      height: 32px;
       padding: 0 12px;
-      font-size: 14px;
-    }
+      transition: 0.15s;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
 
-    &:hover {
-      color: #409EFF;
+      &:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
     }
   }
 }
