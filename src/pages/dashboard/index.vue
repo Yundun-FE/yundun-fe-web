@@ -52,17 +52,17 @@ export default {
       const data = await Explorer.progressName(name)
       this.$set(this.mapProgress, name, data)
     },
-    handleBuild(name) {
-      this.initProgressItem(name)
+    async handleBuild(name) {
+      this.$set(this.mapProgress, name, { progress: 1 })
+      await Explorer.jobStart(name)
     },
     // 读取编译进度
     async initProgress() {
-      const listId = this.list.map(_ => _.name).filter(_ => _)
-
-      for (let i = 0; i < listId.length; i++) {
-        const name = listId[i]
-        this.initProgressItem(name)
-      }
+      const data = await Explorer.progressList()
+      data.forEach(item => {
+        const { name } = item
+        this.$set(this.mapProgress, name, item)
+      })
     },
 
     handleEdit(form, name = 'edit') {

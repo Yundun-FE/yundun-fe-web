@@ -49,6 +49,11 @@
       color: #666;
       margin-right: 2px;
       font-size: 14px;
+      transition: .15s;
+
+      &:hover {
+        color: #409EFF;
+      }
     }
   }
 
@@ -136,7 +141,6 @@
         </ul>
       </div>
     </div>
-
     <!-- </a> -->
   </div>
 </template>

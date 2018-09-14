@@ -159,6 +159,13 @@ export default {
     })
   },
 
+  progressList: function progressList(name) {
+    return request({
+      url: `${base}/progresses`,
+      method: 'get'
+    })
+  },
+
   progressName: function progressName(name) {
     return request({
       url: `${base}/progresses/${name}`,
