@@ -18,9 +18,6 @@ async function login() {
   axios
     .post('/api/sso/V4/login', `username=${name}&password=${password}`)
     .then(function(response) {
-      // chrome.extension.sendMessage({
-      //   message: 'loginSuccess'
-      // })
       window.location = document.referrer || '/'
     })
     .catch(function(error) {
@@ -31,6 +28,7 @@ async function login() {
     })
 }
 
+// 一键登录
 document.onkeydown = function(e) {
   var keyCode = e.keyCode || e.which || e.charCode
   var ctrlKey = e.ctrlKey || e.metaKey

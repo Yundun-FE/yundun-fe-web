@@ -1,7 +1,7 @@
 <template>
   <page>
     <div slot="header">
-      <el-button @click="handleClickAdd">新增</el-button>
+      <el-button type="primary" size="small" @click="handleClickAdd">新增</el-button>
     </div>
     <el-table v-loading="loading" :data="list">
       <el-table-column prop="title" label="标题" width="180" />

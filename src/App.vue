@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="postcss">
+<style lang="stylus">
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -32,11 +32,15 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
   background: #eff2f7;
+
+  .el-dialog {
+    width: 100%;
+    max-width: 600px;
+  }
 }
 
 #app {
   margin: 0 auto;
   background: #fff;
 }
-
 </style>

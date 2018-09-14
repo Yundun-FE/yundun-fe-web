@@ -6,11 +6,9 @@
       const { data } = response
       const count = data.length
 
-      if (count > 0) {
-        chrome.browserAction.setBadgeText({ text: count.toString() })
-      } else {
-        chrome.browserAction.setBadgeText({ text: '' })
-      }
+      chrome.browserAction.setBadgeText({
+        text: count > 0 ? count.toString() : ''
+      })
     })
 
     axios
@@ -20,7 +18,6 @@
 
         data.forEach(item => {
           const { content } = item
-
           const [name, status] = content.split(',')
 
           chrome.notifications.create({
@@ -40,15 +37,9 @@
     const { message } = request
     chrome.notifications.create('', {
       iconUrl: 'images/yundun-128.png',
-      type: 'list',
+      type: 'basic',
       title: '提醒',
-      message,
-      items: [
-        {
-          title: '提醒',
-          message
-        }
-      ]
+      message
     })
   })
 })()

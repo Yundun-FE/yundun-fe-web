@@ -11,27 +11,32 @@
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
-            Home
+            主页
           </el-dropdown-item>
         </router-link>
         <router-link class="inlineBlock" to="/product/index">
           <el-dropdown-item>
-            Product
+            项目管理
           </el-dropdown-item>
         </router-link>
         <router-link class="inlineBlock" to="/cmd/index">
           <el-dropdown-item>
-            CMD
+            指令管理
           </el-dropdown-item>
         </router-link>
         <router-link class="inlineBlock" to="/website/index">
           <el-dropdown-item>
-            Website
+            常用网站
           </el-dropdown-item>
         </router-link>
         <router-link class="inlineBlock" to="/account/index">
           <el-dropdown-item>
-            Account
+            账号管理
+          </el-dropdown-item>
+        </router-link>
+        <router-link class="inlineBlock" to="/setting/index">
+          <el-dropdown-item>
+            设置
           </el-dropdown-item>
         </router-link>
       </el-dropdown-menu>

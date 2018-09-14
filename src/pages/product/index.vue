@@ -3,24 +3,17 @@
 <template>
   <page>
     <div slot="header">
-      <el-button @click="handleClickAdd">新增</el-button>
+      <el-button size="small" type="primary" @click="handleClickAdd">新增</el-button>
     </div>
-    <!-- <el-row :gutter="12">
-      <el-col v-for="item in list" :span="8" :key="item.id">
-        <card-job :data="item" @on-edit="handleEdit(item)" />
-      </el-col>
-    </el-row> -->
 
     <el-table :data="list">
       <el-table-column prop="title" label="标题" />
-      <el-table-column prop="name" label="名称" />
-      <el-table-column prop="url" label="URL" />
+      <!-- <el-table-column prop="name" label="名称" /> -->
+      <!-- <el-table-column prop="url" label="URL" /> -->
       <el-table-column prop="env" label="ENV" width="100" />
-      <el-table-column label="操作" width="180">
+      <el-table-column align="right" label="操作" width="100">
         <template slot-scope="scope">
-          <el-button type="text" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button type="text" @click="handleEdit(scope.row, 'account')">账号</el-button>
-          <el-button type="text" @click="handleEdit(scope.row, 'cmd')">指令</el-button>
+          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>

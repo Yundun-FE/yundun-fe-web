@@ -109,6 +109,19 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/setting',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Setting',
+        component: () => import('@/pages/setting/index'),
+        meta: { title: 'Setting' }
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
 ]
 

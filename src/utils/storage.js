@@ -35,7 +35,8 @@ if (env === 'development') {
 
 if (env === 'production') {
   storage.set = function(items) {
-    chrome.storage.sync.set(items) // eslint-disable-line
+    // eslint-disable-next-line
+    chrome.storage.sync.set(items)
   }
 
   storage.get = function(key) {

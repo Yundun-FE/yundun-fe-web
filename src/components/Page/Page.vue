@@ -1,15 +1,15 @@
 <style lang="stylus">
 .page {
-  // padding: 24px;
-
+  // padding: 12px;
   &-header {
-    // padding-bottom: 10px;
+    padding: 12px;
+    border-bottom: 1px solid #EEE;
   }
 }
 </style>
 <template>
   <div class="page">
-    <div class="page-header">
+    <div v-if="$slots.header" class="page-header">
       <slot name="header" />
     </div>
     <slot/>
