@@ -53,6 +53,12 @@ export const constantRouterMap = [
         name: 'Product',
         component: () => import('@/pages/product/index'),
         meta: { title: 'Product' }
+      },
+      {
+        path: 'id/:id',
+        name: 'ProductDetail',
+        component: () => import('@/pages/product/detail'),
+        meta: { title: 'Product' }
       }
     ]
   },

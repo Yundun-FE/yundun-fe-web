@@ -11,9 +11,12 @@
       <!-- <el-table-column prop="name" label="名称" /> -->
       <!-- <el-table-column prop="url" label="URL" /> -->
       <el-table-column prop="env" label="ENV" width="100" />
-      <el-table-column align="right" label="操作" width="100">
+      <el-table-column align="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <router-link :to="`id/${scope.row.id}`">
+            <el-button type="primary" size="small" @click="handleEdit(scope.row)">进入</el-button>
+          </router-link>
         </template>
       </el-table-column>
     </el-table>
