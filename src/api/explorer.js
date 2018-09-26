@@ -66,6 +66,35 @@ export default {
     })
   },
 
+  jobId(id) {
+    return request({
+      url: `${base}/jobs/${id}`,
+      method: 'get'
+    })
+  },
+
+  jobExecutorNumber(name, number) {
+    return request({
+      url: `${base}/jobs/executor/${name}/${number}`,
+      method: 'get'
+    })
+  },
+
+  jobExecutorList(name) {
+    return request({
+      url: `${base}/jobs/executor/${name}`,
+      method: 'get'
+    })
+  },
+
+  jenkinsJobStart(name, data) {
+    return request({
+      url: `${base}/jenkins/jobs/${name}/start`,
+      method: 'post',
+      data
+    })
+  },
+
   accountCreate: function accountCreate(data) {
     return request({
       url: `${base}/accounts`,
