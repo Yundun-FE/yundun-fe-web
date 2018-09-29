@@ -26,7 +26,6 @@ export default {
 
 <style lang="stylus">
 body {
-  height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

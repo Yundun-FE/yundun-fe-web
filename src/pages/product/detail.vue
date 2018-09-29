@@ -25,15 +25,16 @@
         已选{{ total }}个
       </p>
     </div>
-    <el-table :data="list" :row-class-name="tableRowClassName">
+    <el-table :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
+      <el-table-column :show-overflow-tooltip="scope.row.open" type="selection" width="55" />
       <el-table-column label="ID" width="80" prop="symbol" />
       <el-table-column label="标识" width="200" prop="name" />
       <el-table-column label="名称" prop="title" />
-      <el-table-column label="开关" width="80" align="right">
+      <!-- <el-table-column label="开关" width="80" align="right">
         <template slot-scope="scope">
           <el-switch v-model="scope.row.open" @change="updateList" />
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
   </page>
 </template>
@@ -58,7 +59,8 @@ export default {
       },
       name: 'home-v5-frontend_node-tester',
       info: {},
-      listExecutor: []
+      listExecutor: [],
+      multipleSelection: []
     }
   },
 
@@ -76,6 +78,9 @@ export default {
   },
 
   methods: {
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
     tableRowClassName({ row, rowIndex }) {
       if (row.open) {
         return 'row-open'
