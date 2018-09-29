@@ -57,14 +57,16 @@ export default {
         config: []
       },
       name: 'home-v5-frontend_node-tester',
-      total: 0,
       info: {},
       listExecutor: []
     }
   },
 
   computed: {
-
+    total() {
+      const listOpen = this.list.filter(_ => _.open)
+      return listOpen.length
+    }
   },
 
   async mounted() {
@@ -83,11 +85,8 @@ export default {
     updateList() {
       const { list } = this
       const listOpen = list.filter(_ => _.open)
-      const total = listOpen.length
 
       const config = listOpen.map(_ => _.symbol)
-
-      this.total = total
       this.form.config = config
     },
     // 开始编译
