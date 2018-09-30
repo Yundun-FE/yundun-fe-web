@@ -1,3 +1,5 @@
+// import { format, compareAsc } from 'date-fns/esm'
+
 export function formatSeconds(value) {
   var secondTime = parseInt(value)// 秒
   var minuteTime = 0// 分
@@ -15,13 +17,13 @@ export function formatSeconds(value) {
       minuteTime = parseInt(minuteTime % 60)
     }
   }
-  var result = '' + parseInt(secondTime)
+  var result = '' + parseInt(secondTime) + '秒'
 
   if (minuteTime > 0) {
-    result = '' + parseInt(minuteTime) + ':' + result
+    result = '' + parseInt(minuteTime) + '分' + result
   }
   if (hourTime > 0) {
-    result = '' + parseInt(hourTime) + ':' + result
+    result = '' + parseInt(hourTime) + '时' + result
   }
   return result
 }
