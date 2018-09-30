@@ -22,11 +22,11 @@
     <div slot="header">
       <el-button :disabled="total === 0" size="small" type="success" @click="startBuild">开始编译</el-button>
       <p class="text--desc">
-        已选{{ total }}个
+        已选{{ total }}个，预计耗时{{ buildTimes | formatSeconds }}
       </p>
     </div>
-    <el-table :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
-      <el-table-column :show-overflow-tooltip="scope.row.open" type="selection" width="55" />
+    <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" />
       <el-table-column label="ID" width="80" prop="symbol" />
       <el-table-column label="标识" width="200" prop="name" />
       <el-table-column label="名称" prop="title" />
@@ -59,15 +59,16 @@ export default {
       },
       name: 'home-v5-frontend_node-tester',
       info: {},
-      listExecutor: [],
-      multipleSelection: []
+      listExecutor: []
     }
   },
 
   computed: {
+    buildTimes() {
+      return 100 + this.total * 30
+    },
     total() {
-      const listOpen = this.list.filter(_ => _.open)
-      return listOpen.length
+      return this.form.config.length
     }
   },
 
@@ -79,21 +80,21 @@ export default {
 
   methods: {
     handleSelectionChange(val) {
-      this.multipleSelection = val
+      this.form.config = val.map(item => item.symbol)
     },
     tableRowClassName({ row, rowIndex }) {
       if (row.open) {
         return 'row-open'
       }
     },
-    // 更新列表
-    updateList() {
-      const { list } = this
-      const listOpen = list.filter(_ => _.open)
+    // // 更新列表
+    // updateList() {
+    //   const { list } = this
+    //   const listOpen = list.filter(_ => _.open)
 
-      const config = listOpen.map(_ => _.symbol)
-      this.form.config = config
-    },
+    //   const config = listOpen.map(_ => _.symbol)
+    //   this.form.config = config
+    // },
     // 开始编译
     async startBuild() {
       const { name, form } = this
@@ -105,11 +106,16 @@ export default {
       const item = listExecutor[0]
 
       const { config } = item
+      const listHistory = []
       this.list.forEach(item => {
         if (config.includes(item.symbol)) {
           item.open = true
+          listHistory.push(item)
         }
       })
+
+      // 勾选
+      listHistory.map(item => this.$refs.table.toggleRowSelection(item))
 
       this.listExecutor = listExecutor
     },

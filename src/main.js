@@ -13,6 +13,7 @@ import '@/styles/iconfont/iconfont.css'
 import App from './App'
 import router from './router'
 import store from './store'
+import { installFilter } from '@/service/filter'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -21,6 +22,7 @@ Vue.prototype.$Api = {
   Explorer
 }
 
+installFilter(Vue)
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
