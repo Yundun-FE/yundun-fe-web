@@ -23,9 +23,8 @@
       <el-button :loading="buildProgress !== 0" :disabled="total === 0" size="small" type="success" @click="startBuild">
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>
-
       <el-button v-if="buildProgress !== 0" size="small"><a :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`" target="_blank">编译进度</a></el-button>
-      <el-dropdown split-button type="primary" size="small" @click="handleClickDetail">
+      <!-- <el-dropdown split-button type="primary" size="small" @click="handleClickDetail">
         Jenins
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -34,7 +33,7 @@
           <el-dropdown-item>双皮奶</el-dropdown-item>
           <el-dropdown-item>蚵仔煎</el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
       <p class="text--desc">
         已选{{ total }}个，预计耗时{{ buildTimes | formatSeconds }}
       </p>
