@@ -10,7 +10,8 @@
     "build": "node build/build.js",
     "build:report": "npm_config_report=true npm run build",
     "lint": "eslint --ext .js,.vue src",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "release": "cd ./server && npm run start"
   },
   "dependencies": {
     "axios": "0.18.0",
