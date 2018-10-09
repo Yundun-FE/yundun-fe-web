@@ -11,6 +11,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.static = {
+    prefix: '/',
     dir: path.join(appInfo.baseDir, '../dist'),
   };
 
