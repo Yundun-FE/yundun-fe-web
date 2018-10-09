@@ -10,7 +10,7 @@
     "build:report": "npm_config_report=true npm run build",
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint",
-    "release": "cd ./server && npm run start",
+    "release": "cd ./server && npm run stop && npm run start",
     "start": "cd ./server && npm run dev"
   },
   "dependencies": {
