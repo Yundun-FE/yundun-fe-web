@@ -1,8 +1,8 @@
 <template>
   <div :class="{'is-home': path === '/dashboard'}" class="app-wrapper">
     <div class="main-container">
-      <navbar/>
-      <app-main/>
+      <navbar />
+      <app-main />
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
   position: relative;
   height: 100%;
   width: 720px;
+  margin: 0 auto;
 
   &.is-home {
     margin: 0 auto;

@@ -1,5 +1,3 @@
-<style lang="postcss">
-</style>
 <template>
   <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
@@ -10,7 +8,7 @@
         <el-input v-model="form.url" />
       </el-form-item>
       <el-form-item label="ENV">
-        <el-input v-model="form.env" />
+        <Select v-model="form.env" :options="SELECT_ENV"/>
       </el-form-item>
       <el-form-item label="项目名称">
         <el-input v-model="form.name" />
@@ -24,12 +22,32 @@
 </template>
 
 <script>
-export default {
-  components: {},
-  props: {},
+import Select from '@/components/Select/Select'
 
+const SELECT_ENV = [
+  {
+    label: 'TEST',
+    value: 'test'
+  },
+  {
+    label: 'PRE',
+    value: 'pre'
+  },
+  {
+    label: 'TEST-ONLINE',
+    value: 'test-online'
+  },
+  {
+    label: 'PROD',
+    value: 'prod'
+  }
+]
+
+export default {
+  components: { Select },
   data() {
     return {
+      SELECT_ENV,
       visible: false,
       loadingSubmit: false,
       isEdit: false,
@@ -41,8 +59,6 @@ export default {
       }
     }
   },
-
-  computed: {},
 
   methods: {
     async handleSave() {

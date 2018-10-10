@@ -20,6 +20,7 @@
 <template>
   <page class="pageProductDetail">
     <div slot="header">
+      <el-button type="default" size="small" icon="el-icon-back" circle @click="$router.go(-1)"/>
       <el-button :loading="buildProgress !== 0" :disabled="total === 0" size="small" type="success" @click="startBuild">
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>

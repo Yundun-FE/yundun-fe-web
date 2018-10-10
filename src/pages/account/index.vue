@@ -10,6 +10,7 @@
       <el-table-column label="操作" align="right" width="80">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <ActionDelete @click="handleDelete(scope.row)" />
         </template>
       </el-table-column>
     </el-table>
@@ -20,12 +21,12 @@
 <script>
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
+import ActionDelete from '@/components/Action/ActionDelete'
 import DialogEdit from './Dialog/DialogEdit'
+import Notice from '@/service/notice'
 
 export default {
-  components: { Page, DialogEdit },
-
-  props: {},
+  components: { Page, DialogEdit, ActionDelete },
 
   data() {
     return {
@@ -34,8 +35,6 @@ export default {
       total: 0
     }
   },
-
-  computed: {},
 
   mounted() {
     this.init()
@@ -54,8 +53,20 @@ export default {
     handleEdit(form) {
       this.$refs.dialogEdit.open(form)
     },
+
     handleClickAdd() {
       this.$refs.dialogEdit.open()
+    },
+
+    async handleDelete(item) {
+      try {
+        await Explorer.accountDelete(item.id)
+      } catch (e) {
+        Notice('DELETE_ERROR', e)
+        return
+      }
+      Notice('DELETE_SUCCESS')
+      this.init()
     }
   }
 }

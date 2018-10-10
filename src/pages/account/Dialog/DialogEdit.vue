@@ -26,7 +26,7 @@
 <script>
 import { deepClone } from '@/utils/util'
 
-const FORM = {
+const FORM_RAW = {
   title: '',
   name: '',
   password: '',
@@ -39,7 +39,7 @@ export default {
       visible: false,
       loadingSubmit: false,
       edit: false,
-      form: FORM,
+      form: deepClone(FORM_RAW),
       listJob: []
     }
   },
@@ -74,8 +74,7 @@ export default {
     },
 
     open(form) {
-      console.log(form)
-      this.form = form ? Object.assign(this.form, form) : deepClone(FORM)
+      this.form = form ? Object.assign(this.form, form) : deepClone(FORM_RAW)
       this.edit = !!form
       this.visible = true
     }
