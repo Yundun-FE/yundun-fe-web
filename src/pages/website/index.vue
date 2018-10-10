@@ -6,6 +6,11 @@
     <el-table v-loading="loading" :data="list">
       <el-table-column prop="title" label="标题" width="180" />
       <el-table-column prop="url" label="网址" />
+      <el-table-column align="right" label="操作" width="120">
+        <template slot-scope="scope">
+          <ActionDelete @click="handleDelete(scope.row)"/>
+        </template>
+      </el-table-column>
     </el-table>
     <dialog-edit ref="dialogEdit" @init-list="init" />
   </page>
@@ -14,12 +19,12 @@
 <script>
 import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
+import ActionDelete from '@/components/Action/ActionDelete'
 import DialogEdit from './Dialog/DialogEdit'
+import Notice from '@/service/notice'
 
 export default {
-  components: { Page, DialogEdit },
-
-  props: {},
+  components: { Page, DialogEdit, ActionDelete },
 
   data() {
     return {
@@ -28,8 +33,6 @@ export default {
       total: 0
     }
   },
-
-  computed: {},
 
   mounted() {
     this.init()
@@ -45,9 +48,17 @@ export default {
       this.loading = false
     },
 
-    handleEdit(form) {
-      this.$refs.dialogEdit.open(form)
+    async handleDelete(item) {
+      try {
+        await Explorer.websiteDelete(item.id)
+      } catch (e) {
+        Notice('DELETE_ERROR', e)
+        return
+      }
+      Notice('DELETE_SUCCESS')
+      this.init()
     },
+
     handleClickAdd() {
       this.$refs.dialogEdit.open()
     }
