@@ -49,7 +49,7 @@
       color: #666;
       margin-right: 2px;
       font-size: 14px;
-      transition: .15s;
+      transition: 0.15s;
 
       &:hover {
         color: #409EFF;
@@ -130,13 +130,28 @@
                   </el-tooltip>
                 </li>
               </ul>
-              <el-button slot="reference" type="info" size="mini" icon="yundun-fe yicon-code" circle/>
+              <el-button slot="reference" type="default" size="mini" icon="yundun-fe yicon-code" circle />
             </el-popover>
           </li>
-          <li v-if="data.name" class="action-item">
+          <!-- <li v-if="data.name" class="action-item">
             <el-tooltip content="立即构建" placement="top">
               <el-button :disabled="progressing" type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
             </el-tooltip>
+          </li> -->
+          <li v-if="data.name" class="action-item">
+            <el-dropdown trigger="click">
+              <el-button type="primary" size="mini" icon="yundun-fe yicon-reload" circle />
+              <el-dropdown-menu slot="dropdown" class="user-dropdown">
+                <el-dropdown-item @click="handleBuild(data.name)">
+                  立即构建
+                </el-dropdown-item>
+                <router-link :to="`/product/id/${data.id}`" class="inlineBlock">
+                  <el-dropdown-item>
+                    高级构建
+                  </el-dropdown-item>
+                </router-link>
+              </el-dropdown-menu>
+            </el-dropdown>
           </li>
         </ul>
       </div>
