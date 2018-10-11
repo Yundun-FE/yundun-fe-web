@@ -44,11 +44,12 @@
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="构建历史" name="history">
-        <el-table ref="table" :data="listExecutor" >
+        <el-table ref="table" :data="listExecutor">
           <el-table-column label="ID" width="80" prop="id" />
           <el-table-column label="NUMBER" prop="number" />
           <el-table-column label="时长" prop="duration" />
           <el-table-column label="项目" prop="config" />
+          <el-table-column label="时间" prop="created_at" />
           <el-table-column label="状态" prop="status" width="100" />
         </el-table>
       </el-tab-pane>

@@ -6,6 +6,7 @@
   "author": "fanbook <616@17disney.com>",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev:release": "cross-env NODE_ENV=production webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
     "build:report": "npm_config_report=true npm run build",
     "lint": "eslint --ext .js,.vue src",
@@ -38,6 +39,7 @@
     "babel-preset-stage-2": "6.24.1",
     "chalk": "2.4.1",
     "copy-webpack-plugin": "4.5.2",
+    "cross-env": "^5.2.0",
     "css-loader": "1.0.0",
     "eslint": "4.19.1",
     "eslint-friendly-formatter": "4.0.1",

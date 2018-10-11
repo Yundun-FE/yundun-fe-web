@@ -1,7 +1,10 @@
 import request from '@/utils/request'
 
-// const base = 'http://192.168.5.189:9100'
-const base = 'http://127.0.0.1:7001'
+let base = 'http://192.168.5.189:9100'
+
+if (process.env.API_ENV === 'development') {
+  base = 'http://127.0.0.1:7001'
+}
 
 export default {
   productCreate: function productCreate(data) {
