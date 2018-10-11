@@ -23,6 +23,15 @@ function notice(name, err) {
       message = '创建失败'
       type = 'error'
       break
+
+    case 'EDIT_SUCCESS':
+      message = '编辑成功'
+      break
+
+    case 'EDIT_ERROR':
+      message = '编辑失败'
+      type = 'error'
+      break
   }
 
   if (err && err.message) {

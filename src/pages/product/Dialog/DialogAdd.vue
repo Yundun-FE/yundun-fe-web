@@ -8,10 +8,13 @@
         <el-input v-model="form.url" />
       </el-form-item>
       <el-form-item label="ENV">
-        <Select v-model="form.env" :options="SELECT_ENV"/>
+        <Select v-model="form.env" :options="SELECT_ENV" />
       </el-form-item>
       <el-form-item label="项目名称">
         <el-input v-model="form.name" />
+      </el-form-item>
+      <el-form-item label="编译配置">
+        <el-input :autosize="{minRows: 5}" v-model="form.setting" type="textarea" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -23,6 +26,8 @@
 
 <script>
 import Select from '@/components/Select/Select'
+import { deepClone } from '@/utils'
+import Notice from '@/service/notice'
 
 const SELECT_ENV = [
   {
@@ -43,6 +48,16 @@ const SELECT_ENV = [
   }
 ]
 
+const FORM_RAW = {
+  title: '',
+  url: '',
+  env: '',
+  name: '',
+  setting: ''
+}
+
+const FORM_KEYS = Object.keys(FORM_RAW)
+
 export default {
   components: { Select },
   data() {
@@ -51,12 +66,7 @@ export default {
       visible: false,
       loadingSubmit: false,
       isEdit: false,
-      form: {
-        title: '',
-        url: '',
-        env: '',
-        name: ''
-      }
+      form: deepClone(FORM_RAW)
     }
   },
 
@@ -64,19 +74,27 @@ export default {
     async handleSave() {
       const { form, isEdit } = this
 
-      const { title, url, env, name } = form
-      const data = { title, url, env, name }
+      const data = {}
+      for (const k in form) {
+        const item = form[k]
+        if (FORM_KEYS.includes(k)) {
+          data[k] = item
+        }
+      }
 
       this.loadingSubmit = true
       try {
         isEdit ? await this.$Api.Explorer.jobUpdate(form.id, data) : await this.$Api.Explorer.jobCreate(data)
       } catch (e) {
         this.loadingSubmit = false
+        isEdit ? Notice('EDIT_ERROR', e) : Notice('CREATE_ERROR', e)
         return
       }
 
       this.loadingSubmit = false
       this.visible = false
+
+      isEdit ? Notice('EDIT_SUCCESS') : Notice('CREATE_SUCCESS')
       this.$emit('init-list')
     },
     open(form) {

@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
-const base = 'http://192.168.5.189:9100'
-// const base = 'explorer-service'
+// const base = 'http://192.168.5.189:9100'
+const base = 'http://127.0.0.1:7001'
 
 export default {
   productCreate: function productCreate(data) {

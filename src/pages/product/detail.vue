@@ -20,7 +20,7 @@
 <template>
   <page class="pageProductDetail">
     <div slot="header">
-      <el-button type="default" size="small" icon="el-icon-back" circle @click="$router.go(-1)"/>
+      <el-button type="default" size="small" icon="el-icon-back" circle @click="$router.go(-1)" />
       <el-button :loading="buildProgress !== 0" :disabled="total === 0" size="small" type="success" @click="startBuild">
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>
@@ -36,7 +36,7 @@
         </el-dropdown-menu>
       </el-dropdown> -->
       <p class="text--desc">
-        已选{{ total }}个，预计耗时{{ buildTimes | formatSeconds }}
+        已选{{ total }}个<template v-if="total > 0">，预计耗时{{ buildTimes | formatSeconds }}</template>
       </p>
     </div>
     <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
@@ -60,8 +60,8 @@
 
 <script>
 import Explorer from '@/api/explorer'
+import Notice from '@/service/notice'
 import Page from '@/components/Page/Page'
-import configBuild from '@/assets/constant/config-build.json'
 import { deepClone } from '@/utils/util'
 
 const TYPE_TEXT = {
@@ -94,11 +94,10 @@ export default {
   computed: {
     buildProgress() {
       const { progress } = this.infoStatus
-      console.log(progress)
       return progress || 0
     },
     buildTimes() {
-      return 100 + this.total * 20
+      return 30 + this.total * 20
     },
     total() {
       return this.form.config.length
@@ -107,7 +106,6 @@ export default {
 
   async mounted() {
     await this.initInfo()
-    this.init()
     this.initExecutorList()
 
     this.initStatus()
@@ -127,6 +125,7 @@ export default {
     async startBuild() {
       const { name, form } = this
       await Explorer.jenkinsJobStart(name, form)
+      this.infoStatus.progress = 1
     },
     // 遍历历史列表
     async initExecutorList() {
@@ -155,15 +154,18 @@ export default {
     // 项目详情
     async initInfo() {
       const data = await Explorer.jobId(this.id)
+
+      const { setting } = data
+      this.list = JSON.parse(setting)
+      this.init()
       this.info = data
     },
     // 初始化
     init() {
-      const list = deepClone(configBuild)
-      list.forEach(item => {
+      // const list = deepClone(configBuild)
+      this.list.forEach(item => {
         item.open = false
       })
-      this.list = list
     }
   }
 }

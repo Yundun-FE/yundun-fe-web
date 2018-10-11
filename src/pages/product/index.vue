@@ -15,7 +15,7 @@
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <router-link :to="`id/${scope.row.id}`">
-            <el-button type="primary" size="mini">进入</el-button>
+            <el-button :disabled="!scope.row.setting" type="primary" size="mini">编译</el-button>
           </router-link>
         </template>
       </el-table-column>
