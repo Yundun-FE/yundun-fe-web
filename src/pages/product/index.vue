@@ -1,22 +1,19 @@
-<style lang="postcss">
-</style>
 <template>
   <page>
     <div slot="header">
       <el-button size="small" type="primary" @click="handleClickAdd">新增</el-button>
     </div>
-
     <el-table :data="list">
-      <el-table-column prop="title" label="标题" />
-      <!-- <el-table-column prop="name" label="名称" /> -->
-      <!-- <el-table-column prop="url" label="URL" /> -->
+      <el-table-column prop="title" label="名称" />
       <el-table-column prop="env" label="ENV" width="100" />
       <el-table-column align="right" label="操作" width="150">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-          <router-link :to="`id/${scope.row.id}`">
-            <el-button :disabled="!scope.row.setting" type="primary" size="mini">编译</el-button>
-          </router-link>
+          <el-tooltip :disabled="scope.row.setting" class="item" effect="dark" content="未进行编译配置" placement="top">
+            <span style="margin-left:10px">
+              <el-button :disabled="!scope.row.setting" type="primary" size="mini" @click="goBuild">编译</el-button>
+            </span>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -56,6 +53,12 @@ export default {
       const { list, total } = await Explorer.jobList()
       Object.assign(this, {
         list, total
+      })
+    },
+
+    goBuild(row) {
+      this.$route.push({
+        path: `id/${row.id}`
       })
     },
 
