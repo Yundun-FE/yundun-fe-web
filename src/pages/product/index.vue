@@ -15,7 +15,7 @@
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <el-tooltip :disabled="!!scope.row.setting" class="item" effect="dark" content="未进行编译配置" placement="top">
             <span style="margin-left:10px">
-              <el-button :disabled="!scope.row.setting" type="primary" size="mini" @click="goBuild">编译</el-button>
+              <el-button :disabled="!scope.row.setting" type="primary" size="mini" @click="goBuild(scope.row)">编译</el-button>
             </span>
           </el-tooltip>
         </template>
@@ -61,7 +61,7 @@ export default {
     },
 
     goBuild(row) {
-      this.$route.push({
+      this.$router.push({
         path: `id/${row.id}`
       })
     },

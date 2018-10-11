@@ -25,36 +25,34 @@
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>
       <el-button v-if="buildProgress !== 0" size="small"><a :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`" target="_blank">编译进度</a></el-button>
-      <!-- <el-dropdown split-button type="primary" size="small" @click="handleClickDetail">
-        Jenins
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>黄金糕</el-dropdown-item>
-          <el-dropdown-item>狮子头</el-dropdown-item>
-          <el-dropdown-item>螺蛳粉</el-dropdown-item>
-          <el-dropdown-item>双皮奶</el-dropdown-item>
-          <el-dropdown-item>蚵仔煎</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown> -->
       <p class="text--desc">
         已选{{ total }}个<template v-if="total > 0">，预计耗时{{ buildTimes | formatSeconds }}</template>
       </p>
     </div>
-    <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
-      <el-table-column label="ID" width="80" prop="symbol" />
-      <el-table-column label="名称" prop="title" />
-      <el-table-column label="标识" width="200" prop="name" />
-      <el-table-column label="类型" width="150" prop="type">
-        <template slot-scope="scope">
-          {{ TYPE_TEXT[scope.row.type] }}
-        </template>
-      </el-table-column>
-      <el-table-column align="right" type="selection" width="55" />
-      <!-- <el-table-column label="开关" width="80" align="right">
-        <template slot-scope="scope">
-          <el-switch v-model="scope.row.open" @change="updateList" />
-        </template>
-      </el-table-column> -->
-    </el-table>
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="编译" name="build">
+        <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
+          <el-table-column label="ID" width="80" prop="symbol" />
+          <el-table-column label="名称" prop="title" />
+          <el-table-column label="标识" width="200" prop="name" />
+          <el-table-column label="类型" width="150" prop="type">
+            <template slot-scope="scope">
+              {{ TYPE_TEXT[scope.row.type] }}
+            </template>
+          </el-table-column>
+          <el-table-column align="right" type="selection" width="55" />
+        </el-table>
+      </el-tab-pane>
+      <el-tab-pane label="构建历史" name="history">
+        <el-table ref="table" :data="listExecutor" >
+          <el-table-column label="ID" width="80" prop="id" />
+          <el-table-column label="NUMBER" prop="number" />
+          <el-table-column label="时长" prop="duration" />
+          <el-table-column label="项目" prop="config" />
+          <el-table-column label="状态" prop="status" width="100" />
+        </el-table>
+      </el-tab-pane>
+    </el-tabs>
   </page>
 </template>
 
@@ -76,6 +74,7 @@ export default {
   data() {
     return {
       TYPE_TEXT,
+      activeName: 'build',
       id: this.$route.params.id,
       list: [],
       form: {
