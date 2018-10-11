@@ -2,7 +2,9 @@ import request from '@/utils/request'
 
 let base = 'http://192.168.5.189:9100'
 
-if (process.env.API_ENV === 'development') {
+console.log(process.env.NODE_ENV)
+
+if (process.env.NODE_ENV === 'development') {
   base = 'http://127.0.0.1:7001'
 }
 
