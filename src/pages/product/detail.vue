@@ -132,6 +132,8 @@ export default {
       const listExecutor = await Explorer.jobExecutorList(this.info.name)
       const item = listExecutor[0]
 
+      if (!item) return
+
       const { config } = item
       const listHistory = []
       this.list.forEach(item => {
@@ -156,9 +158,14 @@ export default {
       const data = await Explorer.jobId(this.id)
 
       const { setting } = data
-      this.list = JSON.parse(setting)
-      this.init()
       this.info = data
+      this.init()
+
+      try {
+        this.list = JSON.parse(setting)
+      } catch (e) {
+        this.list = []
+      }
     },
     // 初始化
     init() {
