@@ -2,9 +2,10 @@ import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import Retry from '@/utils/retry.js'
 
+let networkError = false
+
 const service = axios.create({
   baseURL: '/',
-  // baseURL: '/',
   timeout: 15000
 })
 
@@ -49,14 +50,23 @@ const request = function(options) {
         resolve(data)
       },
       fail: function(err) {
+        if (networkError) {
+          reject(err)
+          return
+        }
+
         MessageBox.confirm('请刷新重试', '网络错误', {
           confirmButtonText: '刷新',
           type: 'warning',
           showCancelButton: false,
           center: true
-        }).then(() => {
-          location.reload()
         })
+          .then(() => {
+            location.reload()
+          })
+          .catch(() => {})
+
+        networkError = true
         reject(err)
       }
     })

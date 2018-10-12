@@ -60,8 +60,10 @@ export default {
 
   methods: {
     async init() {
-      const { list, total } = await Explorer.websiteList()
-      this.list = list
+      const data = await Explorer.websiteList()
+      if (!data) return
+
+      this.list = data.list
     }
   }
 }

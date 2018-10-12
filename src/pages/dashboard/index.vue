@@ -1,6 +1,3 @@
-<style lang="stylus">
-</style>
-
 <template>
   <page class="page-dashboard">
     <div class="list">
@@ -35,19 +32,22 @@ export default {
 
   methods: {
     async init() {
-      const { list, total } = await Explorer.jobList()
-      Object.assign(this, {
-        list, total
-      })
+      const data = await Explorer.jobList()
+      if (!data) return
+
+      this.list = data.list
+      this.total = data.total
 
       this.initProgress()
       clearInterval(this.interval)
       this.interval = setInterval(this.initProgress, 10000)
     },
+
     async initProgressItem(name) {
       const data = await Explorer.progressName(name)
       this.$set(this.mapProgress, name, data)
     },
+
     async handleBuild(name) {
       this.$set(this.mapProgress, name, { progress: 1 })
       await Explorer.jobStart(name)

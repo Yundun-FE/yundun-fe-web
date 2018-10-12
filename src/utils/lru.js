@@ -1,9 +1,9 @@
-function LRU (opts) {
+function LRU(opts) {
   if (!(this instanceof LRU)) {
     return new LRU(opts)
   }
   if (typeof opts === 'number') {
-    opts = {max: opts}
+    opts = { max: opts }
   }
   if (!opts) {
     opts = {}
@@ -15,17 +15,17 @@ function LRU (opts) {
   this.maxAge = opts.maxAge || 0
 }
 
-LRU.prototype.remove = function (key) {
+LRU.prototype.remove = function(key) {
   if (typeof key !== 'string') key = '' + key
   if (!this.cache.hasOwnProperty(key)) return
 
-  let element = this.cache[key]
+  const element = this.cache[key]
   delete this.cache[key]
   this._unlink(key, element.prev, element.next)
   return element.value
 }
 
-LRU.prototype._unlink = function (key, prev, next) {
+LRU.prototype._unlink = function(key, prev, next) {
   this.length--
 
   if (this.length === 0) {
@@ -44,11 +44,11 @@ LRU.prototype._unlink = function (key, prev, next) {
   }
 }
 
-LRU.prototype.peek = function (key) {
+LRU.prototype.peek = function(key) {
   return this.cache.hasOwnProperty(key) ? this.cache[key].value : null
 }
 
-LRU.prototype.set = function (key, value) {
+LRU.prototype.set = function(key, value) {
   if (typeof key !== 'string') key = '' + key
 
   let element
@@ -58,15 +58,15 @@ LRU.prototype.set = function (key, value) {
     element.value = value
     if (this.maxAge) element.modified = Date.now()
 
-        // If it's already the head, there's nothing more to do:
+    // If it's already the head, there's nothing more to do:
     if (key === this.head) return value
     this._unlink(key, element.prev, element.next)
   } else {
-    element = {value: value, modified: 0, next: null, prev: null}
+    element = { value: value, modified: 0, next: null, prev: null }
     if (this.maxAge) element.modified = Date.now()
     this.cache[key] = element
 
-        // Eviction is only possible if the key didn't already exist:
+    // Eviction is only possible if the key didn't already exist:
     if (this.length === this.max) this.evict()
   }
 
@@ -81,12 +81,12 @@ LRU.prototype.set = function (key, value) {
   return value
 }
 
-LRU.prototype.get = function (key) {
+LRU.prototype.get = function(key) {
   // console.log('key', key)
   if (typeof key !== 'string') key = '' + key
   if (!this.cache.hasOwnProperty(key)) return
 
-  let element = this.cache[key]
+  const element = this.cache[key]
 
   if (this.maxAge && (Date.now() - element.modified) > this.maxAge) {
     this.remove(key)
@@ -98,14 +98,14 @@ LRU.prototype.get = function (key) {
       this.tail = element.next
       this.cache[this.tail].prev = null
     } else {
-            // Set prev.next -> element.next:
+      // Set prev.next -> element.next:
       this.cache[element.prev].next = element.next
     }
 
-        // Set element.next.prev -> element.prev:
+    // Set element.next.prev -> element.prev:
     this.cache[element.next].prev = element.prev
 
-        // Element is the new head
+    // Element is the new head
     this.cache[this.head].next = key
     element.prev = this.head
     element.next = null
@@ -115,7 +115,7 @@ LRU.prototype.get = function (key) {
   return element.value
 }
 
-LRU.prototype.evict = function () {
+LRU.prototype.evict = function() {
   if (!this.tail) return
   this.remove(this.tail)
 }

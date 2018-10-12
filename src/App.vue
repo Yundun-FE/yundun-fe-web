@@ -15,9 +15,11 @@ export default {
   },
   methods: {
     async initAccount() {
-      const { list } = await Explorer.accountList()
+      const data = await Explorer.accountList()
+      if (!data) return
+
       Storage.set({
-        testAccount: list
+        testAccount: data.list
       })
     }
   }

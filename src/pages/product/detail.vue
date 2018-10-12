@@ -44,7 +44,7 @@
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="构建历史" name="history">
-        <el-table ref="table" :data="listExecutor">
+        <el-table :data="listExecutor">
           <el-table-column label="ID" width="80" prop="id" />
           <el-table-column label="NUMBER" prop="number" />
           <el-table-column label="时长" prop="duration" />
@@ -66,7 +66,8 @@ import { deepClone } from '@/utils/util'
 const TYPE_TEXT = {
   'wp': '网页',
   'cp': '控制台',
-  'pr': '感知图'
+  'pr': '感知图',
+  'pp': '支付'
 }
 
 export default {
@@ -106,6 +107,7 @@ export default {
 
   async mounted() {
     await this.initInfo()
+
     this.initExecutorList()
 
     this.initStatus()
@@ -130,23 +132,21 @@ export default {
     // 遍历历史列表
     async initExecutorList() {
       const listExecutor = await Explorer.jobExecutorList(this.info.name)
-      const item = listExecutor[0]
+      if (!listExecutor || !listExecutor[0]) return
 
+      const item = listExecutor[0]
       if (!item) return
 
       const { config } = item
-      const listHistory = []
-      this.list.forEach(item => {
-        item.type = item.symbol.replace(/\d/g, '')
+      const list = this.list
 
+      list.forEach(item => {
         if (config.includes(item.symbol)) {
+          this.$refs.table.toggleRowSelection(item, true)
           item.open = true
-          listHistory.push(item)
         }
       })
 
-      // 勾选
-      listHistory.map(item => this.$refs.table.toggleRowSelection(item))
       this.listExecutor = listExecutor
     },
     // 读取编译状态
@@ -159,20 +159,20 @@ export default {
 
       const { setting } = data
       this.info = data
-      this.init()
 
+      let list = []
       try {
-        this.list = JSON.parse(setting)
+        list = JSON.parse(setting)
       } catch (e) {
         this.list = []
       }
-    },
-    // 初始化
-    init() {
-      // const list = deepClone(configBuild)
-      this.list.forEach(item => {
+
+      list.forEach(item => {
         item.open = false
+        item.type = item.symbol.replace(/\d/g, '')
       })
+
+      this.list = list
     }
   }
 }
