@@ -32,10 +32,10 @@
     <el-tabs v-model="activeName">
       <el-tab-pane label="编译" name="build">
         <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
-          <el-table-column label="ID" width="80" prop="symbol" />
+          <el-table-column label="ID" sortable width="80" prop="symbol" />
           <el-table-column label="名称" prop="title" />
           <el-table-column label="标识" width="200" prop="name" />
-          <el-table-column label="类型" width="150" prop="type">
+          <el-table-column :filters="filterTypeText" :filter-method="filterType" label="类型" width="150" prop="type" filter-placement="bottom-end">
             <template slot-scope="scope">
               {{ TYPE_TEXT[scope.row.type] }}
             </template>
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       TYPE_TEXT,
+      filterTypeText: [],
       activeName: 'build',
       id: this.$route.params.id,
       list: [],
@@ -97,24 +98,36 @@ export default {
       const { progress } = this.infoStatus
       return progress || 0
     },
+    // 编译耗时计算
     buildTimes() {
       return 30 + this.total * 20
     },
+
     total() {
       return this.form.config.length
     }
   },
 
   async mounted() {
+    for (const k in TYPE_TEXT) {
+      this.filterTypeText.push({
+        text: TYPE_TEXT[k],
+        value: k
+      })
+    }
+
     await this.initInfo()
 
     this.initExecutorList()
-
     this.initStatus()
     this.interval = setInterval(this.initStatus, 10000)
   },
 
   methods: {
+    filterType(value, row) {
+      return row.type === value
+    },
+
     handleSelectionChange(val) {
       this.form.config = val.map(item => item.symbol)
     },
