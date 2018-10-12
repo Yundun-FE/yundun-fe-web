@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
+import Retry from '@/utils/retry.js'
 
 const service = axios.create({
   baseURL: '/',
@@ -34,15 +35,54 @@ service.interceptors.response.use(
     }
   },
   error => {
-    const { message } = error
-    console.log(JSON.stringify(error))
-    Message({
-      message,
-      type: 'error',
-      duration: 5 * 1000
-    })
     return Promise.reject(error)
   }
 )
 
-export default service
+const request = function(options) {
+  return new Promise((resolve, reject) => {
+    const retry = new Retry({
+      timeout: 8000,
+      interval: 200,
+      max: 3,
+      done: function(data) {
+        resolve(data)
+      },
+      fail: function(err) {
+        MessageBox.confirm('请刷新重试', '网络错误', {
+          confirmButtonText: '刷新',
+          type: 'warning',
+          showCancelButton: false,
+          center: true
+        }).then(() => {
+          location.reload()
+        })
+        reject(err)
+      }
+    })
+
+    retry.start(async(done, retry) => {
+      let data
+      try {
+        data = await service(options)
+      } catch (error) {
+        const { message } = error
+
+        // 网络错误则重试
+        if (message === 'Network Error') {
+          retry()
+        } else {
+          Message({
+            message,
+            type: 'error',
+            duration: 5 * 1000
+          })
+          done()
+        }
+      }
+      done(data)
+    })
+  })
+}
+
+export default request
