@@ -3,10 +3,10 @@
   "version": "0.4.0",
   "license": "MIT",
   "description": "YundunFE Web",
-  "author": "fanbook <616@17disney.com>",
+  "author": "fanbo <616@17disney.com>",
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "dev:release": "cross-env NODE_ENV=production webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "cross-env APP_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev:release": "cross-env APP_ENV=production webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
     "build:report": "npm_config_report=true npm run build",
     "lint": "eslint --ext .js,.vue src",
