@@ -33,8 +33,11 @@
       <el-tab-pane label="编译" name="build">
         <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
           <el-table-column label="ID" sortable width="80" prop="symbol" />
-          <el-table-column label="名称" prop="title" />
-          <el-table-column label="标识" width="200" prop="name" />
+          <el-table-column label="名称" prop="title">
+            <template slot-scope="scope">
+              {{ scope.row.title }}（{{ scope.row.name }}）
+            </template>
+          </el-table-column>
           <el-table-column :filters="filterTypeText" :filter-method="filterType" label="类型" width="150" prop="type" filter-placement="bottom-end">
             <template slot-scope="scope">
               {{ TYPE_TEXT[scope.row.type] }}
@@ -45,12 +48,23 @@
       </el-tab-pane>
       <el-tab-pane label="构建历史" name="history">
         <el-table :data="listExecutor">
-          <el-table-column label="ID" width="80" prop="id" />
-          <el-table-column label="NUMBER" prop="number" />
-          <el-table-column label="时长" prop="duration" />
+          <el-table-column label="版本" prop="number" />
+          <el-table-column label="时长" prop="duration" >
+            <template slot-scope="scope">
+              {{ scope.row.duration / 1000 | formatSeconds }}
+            </template>
+          </el-table-column>
           <el-table-column label="项目" prop="config" />
-          <el-table-column label="时间" prop="created_at" />
-          <el-table-column label="状态" prop="status" width="100" />
+          <el-table-column label="状态" prop="status" width="100" >
+            <template slot-scope="scope">
+              <ColumnStatus :status="scope.row.status"/>
+            </template>
+          </el-table-column>
+          <el-table-column label="时间" prop="created_at" >
+            <template slot-scope="scope">
+              {{ scope.row.created_at }}
+            </template>
+          </el-table-column>
         </el-table>
       </el-tab-pane>
     </el-tabs>
@@ -61,6 +75,7 @@
 import Explorer from '@/api/explorer'
 import Notice from '@/service/notice'
 import Page from '@/components/Page/Page'
+import ColumnStatus from '@/components/Column/ColumnStatus'
 import { deepClone } from '@/utils/util'
 
 const TYPE_TEXT = {
@@ -71,13 +86,13 @@ const TYPE_TEXT = {
 }
 
 export default {
-  components: { Page },
+  components: { Page, ColumnStatus },
 
   data() {
     return {
       TYPE_TEXT,
       filterTypeText: [],
-      activeName: 'build',
+      activeName: this.$route.query.active || 'build',
       id: this.$route.params.id,
       list: [],
       form: {
@@ -105,6 +120,16 @@ export default {
 
     total() {
       return this.form.config.length
+    }
+  },
+
+  watch: {
+    activeName(val) {
+      this.$route.push({
+        query: {
+          active: val
+        }
+      })
     }
   },
 
@@ -138,9 +163,9 @@ export default {
     },
     // 开始编译
     async startBuild() {
+      this.infoStatus.progress = 1
       const { name, form } = this
       await Explorer.jenkinsJobStart(name, form)
-      this.infoStatus.progress = 1
     },
     // 遍历历史列表
     async initExecutorList() {
@@ -159,7 +184,6 @@ export default {
           item.open = true
         }
       })
-
       this.listExecutor = listExecutor
     },
     // 读取编译状态
