@@ -98,7 +98,7 @@ export default {
       form: {
         config: []
       },
-      name: 'home-v5-frontend_node-tester',
+      name: '',
       info: {},
       infoStatus: {
         progress: 0
@@ -196,6 +196,7 @@ export default {
 
       const { setting } = data
       this.info = data
+      this.name = data.name
 
       let list = []
       try {
