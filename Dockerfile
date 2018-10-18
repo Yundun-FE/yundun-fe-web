@@ -5,5 +5,5 @@ WORKDIR /app
 
 RUN yarn install
 
-EXPOSE 80
+EXPOSE 7701
 CMD ["npm", "run", "release"]
