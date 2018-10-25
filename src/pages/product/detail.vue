@@ -210,6 +210,8 @@ export default {
         item.type = item.symbol.replace(/\d/g, '')
       })
 
+      console.log(list.map(_ => _.symbol).join(','))
+
       this.list = list
     }
   }

@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-let base = 'http://192.168.5.189:9100'
+let base = 'http://192.168.5.222:9100'
 if (process.env.APP_ENV === 'development') {
   base = 'http://127.0.0.1:7001'
 }
