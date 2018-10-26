@@ -1,6 +1,7 @@
 import request from '@/utils/request'
+import { SERVER_URL } from '@/constant/server'
 
-let base = 'http://192.168.5.222:9100'
+let base = SERVER_URL['explorer']
 if (process.env.APP_ENV === 'development') {
   base = 'http://127.0.0.1:7001'
 }
