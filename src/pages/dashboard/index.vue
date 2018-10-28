@@ -1,5 +1,11 @@
+<style lang="postcss" scoped>
+.list {
+  min-height: 500px;
+}
+</style>
+
 <template>
-  <page class="page-dashboard">
+  <page :loading="loading" class="page-dashboard">
     <div class="list">
       <card-job v-for="item in list" :span="12" :key="item.id" :data="item" :progress="mapProgress[item.name]" @on-build="handleBuild" @on-edit="handleEdit(item)" />
     </div>
@@ -11,6 +17,7 @@ import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
 import CardJob from '@/components/Card/CardJob'
 import Storage from '@/utils/storage'
+import { constructor } from '@/utils/aop'
 
 export default {
   components: { Page, CardJob },
@@ -19,6 +26,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       list: [],
       mapProgress: {},
       total: 0,
@@ -32,8 +40,14 @@ export default {
 
   methods: {
     async init() {
-      const data = await Explorer.jobList()
-      if (!data) return
+      this.loading = true
+
+      let data
+      try {
+        data = await Explorer.jobList()
+      } catch (e) {
+        return
+      }
 
       this.list = data.list
       this.total = data.total
@@ -41,6 +55,7 @@ export default {
       this.initProgress()
       clearInterval(this.interval)
       this.interval = setInterval(this.initProgress, 10000)
+      this.loading = false
     },
 
     async initProgressItem(name) {
