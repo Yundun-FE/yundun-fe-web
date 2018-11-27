@@ -2,9 +2,8 @@ import request from '@/utils/request'
 import { SERVER_URL } from '@/constant/server'
 
 let base = SERVER_URL['explorer']
-if (process.env.APP_ENV === 'development') {
-  base = 'http://127.0.0.1:7001'
-}
+console.log(process.env)
+if (process.env.APP_ENV === 'development') base = 'http://127.0.0.1:7001'
 
 export default {
   productCreate: function productCreate(data) {

@@ -21,10 +21,12 @@
   <page class="pageProductDetail">
     <div slot="header">
       <el-button type="default" size="small" icon="el-icon-back" circle @click="$router.go(-1)" />
-      <el-button :loading="buildProgress !== 0" :disabled="total === 0" size="small" type="success" @click="startBuild">
+      <el-button size="small" type="success" @click="startBuild">
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>
       <el-button v-if="buildProgress !== 0" size="small"><a :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`" target="_blank">编译进度</a></el-button>
+      <el-button size="small" @click="initExecutorList">刷新</el-button>
+      <el-input v-model="cmdBuild"/>
       <p class="text--desc">
         已选{{ total }}个<template v-if="total > 0">，预计耗时{{ buildTimes | formatSeconds }}</template>
       </p>
@@ -92,7 +94,7 @@ export default {
     return {
       TYPE_TEXT,
       filterTypeText: [],
-      activeName: this.$route.query.active || 'build',
+      activeName: 'build',
       id: this.$route.params.id,
       list: [],
       form: {
@@ -104,7 +106,8 @@ export default {
         progress: 0
       },
       listExecutor: [],
-      interval: null
+      interval: null,
+      cmdBuild: ''
     }
   },
 
@@ -120,16 +123,6 @@ export default {
 
     total() {
       return this.form.config.length
-    }
-  },
-
-  watch: {
-    activeName(val) {
-      this.$route.push({
-        query: {
-          active: val
-        }
-      })
     }
   },
 
@@ -152,10 +145,13 @@ export default {
     filterType(value, row) {
       return row.type === value
     },
-
+    // 选择项目
     handleSelectionChange(val) {
-      this.form.config = val.map(item => item.symbol)
+      const list = val.map(item => item.symbol)
+      this.cmdBuild = `npm run build:group ${list.join(',')}`
+      this.form.config = list
     },
+
     tableRowClassName({ row, rowIndex }) {
       if (row.open) {
         return 'row-open'
@@ -209,9 +205,6 @@ export default {
         item.open = false
         item.type = item.symbol.replace(/\d/g, '')
       })
-
-      console.log(list.map(_ => _.symbol).join(','))
-
       this.list = list
     }
   }
