@@ -3,6 +3,7 @@
   .page-header {
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 
     .text--desc {
       float: right;
@@ -14,62 +15,150 @@
   .row-open {
     background: rgb(250, 250, 250);
   }
+
+  .el-alert {
+    margin-top: 8px;
+  }
 }
 </style>
 
 <template>
   <page class="pageProductDetail">
     <div slot="header">
-      <el-button type="default" size="small" icon="el-icon-back" circle @click="$router.go(-1)" />
-      <el-button size="small" type="success" @click="startBuild">
+      <h2>
+        {{ info.title }} {{ info.env }}
+      </h2>
+      <el-button
+        type="default"
+        size="small"
+        icon="el-icon-back"
+        circle
+        @click="$router.go(-1)"
+      />
+      <el-button
+        size="small"
+        type="success"
+        @click="startBuild"
+      >
         {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
       </el-button>
-      <el-button v-if="buildProgress !== 0" size="small"><a :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`" target="_blank">编译进度</a></el-button>
-      <el-button size="small" @click="initExecutorList">刷新</el-button>
-      <el-input v-model="cmdBuild"/>
-      <p class="text--desc">
-        已选{{ total }}个<template v-if="total > 0">，预计耗时{{ buildTimes | formatSeconds }}</template>
-      </p>
+      <el-button
+        v-if="buildProgress !== 0"
+        size="small"
+      ><a
+        :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`"
+        target="_blank"
+      >编译进度</a></el-button>
+      <el-button
+        size="small"
+        @click="initExecutorList"
+      >刷新</el-button>
+
+      <div class="pull-right">
+        <router-link :to="`${id}/log?name=${info.name}`">
+          <el-button size="small">构建历史</el-button>
+        </router-link>
+      </div>
+      <el-input
+        v-model="cmdBuild"
+        size="small"
+      />
+
+      <!-- <el-radio-group
+        v-model="radio5"
+        size="small"
+      >
+        <el-radio-button v-for="(item, index) in" label="上海"/>
+        <el-radio-button label="广州"/>
+        <el-radio-button label="深圳"/>
+      </el-radio-group> -->
+      <FormRadioButton
+        v-model="filters.type"
+        :radios="FILTER_TYPE"
+        default-text="全部"
+        default-value=""
+      />
+
+      <el-alert
+        v-if="total"
+        :closable="false"
+        :title="`已选${ total }个，预计耗时${ formatSeconds(buildTimes) }`"
+        type="success"
+      />
     </div>
-    <el-tabs v-model="activeName">
-      <el-tab-pane label="编译" name="build">
-        <el-table ref="table" :data="list" :row-class-name="tableRowClassName" @selection-change="handleSelectionChange">
-          <el-table-column label="ID" sortable width="80" prop="symbol" />
-          <el-table-column label="名称" prop="title">
-            <template slot-scope="scope">
-              {{ scope.row.title }}（{{ scope.row.name }}）
-            </template>
-          </el-table-column>
-          <el-table-column :filters="filterTypeText" :filter-method="filterType" label="类型" width="150" prop="type" filter-placement="bottom-end">
-            <template slot-scope="scope">
-              {{ TYPE_TEXT[scope.row.type] }}
-            </template>
-          </el-table-column>
-          <el-table-column align="right" type="selection" width="55" />
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="构建历史" name="history">
-        <el-table :data="listExecutor">
-          <el-table-column label="版本" prop="number" />
-          <el-table-column label="时长" prop="duration" >
-            <template slot-scope="scope">
-              {{ scope.row.duration / 1000 | formatSeconds }}
-            </template>
-          </el-table-column>
-          <el-table-column label="项目" prop="config" />
-          <el-table-column label="状态" prop="status" width="100" >
-            <template slot-scope="scope">
-              <ColumnStatus :status="scope.row.status"/>
-            </template>
-          </el-table-column>
-          <el-table-column label="时间" prop="created_at" >
-            <template slot-scope="scope">
-              {{ scope.row.created_at }}
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
-    </el-tabs>
+    <!-- 列表 -->
+    <!-- <el-row :gutter="12">
+      <el-col
+        v-for="(item, index) in list"
+        :span="8"
+        :key="index"
+      >
+        <el-card style="margin-bottom: 12px">
+          <div
+            slot="header"
+            class="clearfix"
+          >
+            <span>{{ item.title || item.name }}</span>
+            <el-button
+              style="float: right; padding: 3px 0"
+              type="text"
+            >立即编译</el-button>
+          </div>
+          <el-checkbox v-model="item.open">选择</el-checkbox>
+          {{ item.symbol }}
+        </el-card>
+      </el-col>
+    </el-row> -->
+
+    <el-table
+      ref="table"
+      :data="list"
+      :row-class-name="tableRowClassName"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column
+        align="right"
+        type="selection"
+        width="55"
+      />
+      <el-table-column
+        label="ID"
+        sortable
+        width="80"
+        prop="symbol"
+      />
+      <el-table-column
+        label="名称"
+        prop="title"
+      >
+        <template slot-scope="scope">
+          {{ scope.row.title }}（{{ scope.row.name }}）
+        </template>
+      </el-table-column>
+      <el-table-column
+        :filters="filterTypeText"
+        :filter-method="filterType"
+        label="类型"
+        width="150"
+        prop="type"
+        filter-placement="bottom-end"
+      >
+        <template slot-scope="scope">
+          {{ TYPE_TEXT[scope.row.type] }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        width="150"
+      >
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="handleStartBuild(scope.row)"
+          >编译</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
   </page>
 </template>
 
@@ -79,6 +168,27 @@ import Notice from '@/service/notice'
 import Page from '@/components/Page/Page'
 import ColumnStatus from '@/components/Column/ColumnStatus'
 import { deepClone } from '@/utils/util'
+import { formatSeconds } from '@/utils/date'
+import FormRadioButton from '@/components/Form/FormRadioButton'
+
+const FILTER_TYPE = [
+  {
+    label: '网页',
+    value: 'wp'
+  },
+  {
+    label: '控制台',
+    value: 'cp'
+  },
+  {
+    label: '感知图',
+    value: 'pr'
+  },
+  {
+    label: '支付',
+    value: 'pp'
+  }
+]
 
 const TYPE_TEXT = {
   'wp': '网页',
@@ -88,10 +198,12 @@ const TYPE_TEXT = {
 }
 
 export default {
-  components: { Page, ColumnStatus },
+  components: { Page, ColumnStatus, FormRadioButton },
 
   data() {
     return {
+      FILTER_TYPE,
+      formatSeconds,
       TYPE_TEXT,
       filterTypeText: [],
       activeName: 'build',
@@ -107,7 +219,10 @@ export default {
       },
       listExecutor: [],
       interval: null,
-      cmdBuild: ''
+      cmdBuild: '',
+      filters: {
+        type: ''
+      }
     }
   },
 
@@ -118,7 +233,7 @@ export default {
     },
     // 编译耗时计算
     buildTimes() {
-      return 30 + this.total * 20
+      return 100 + this.total * 30
     },
 
     total() {
@@ -144,6 +259,13 @@ export default {
   methods: {
     filterType(value, row) {
       return row.type === value
+    },
+    async handleStartBuild(row) {
+      const form = {
+        config: [row.symbol]
+      }
+      const { name } = this
+      Explorer.jenkinsJobStart(name, form)
     },
     // 选择项目
     handleSelectionChange(val) {

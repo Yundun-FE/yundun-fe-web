@@ -31,7 +31,7 @@ export default {
   @include clearfix;
   position: relative;
   height: 100%;
-  width: 720px;
+  max-width: 960px;
   margin: 0 auto;
 
   &.is-home {

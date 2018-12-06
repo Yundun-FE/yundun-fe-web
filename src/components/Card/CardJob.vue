@@ -100,16 +100,34 @@
 
 <template>
   <div class="card-job">
-    <el-progress v-if="progress && progress.progress" :text-inside="true" :stroke-width="5" :percentage="progress.progress" />
+    <el-progress
+      v-if="progress && progress.progress"
+      :text-inside="true"
+      :stroke-width="5"
+      :percentage="progress.progress"
+    />
     <div class="card-job__header">
-      <i v-if="progress && progress.progress" class="icon-status icon-status--progress el-icon-loading" />
-      <i v-else class="icon-status icon-status--success el-icon-circle-check" />
+      <i
+        v-if="progress && progress.progress"
+        class="icon-status icon-status--progress el-icon-loading"
+      />
+      <i
+        v-else
+        class="icon-status icon-status--success el-icon-circle-check"
+      />
       <h3 class="text--title">
-        <a :href="data.url" target="_blank">
+        <a
+          :href="data.url"
+          target="_blank"
+        >
           {{ data.title }}
         </a>
       </h3>
-      <el-tag :type="TYPE_MAP[data.env]['type']" size="mini" class="tag">
+      <el-tag
+        :type="TYPE_MAP[data.env]['type']"
+        size="mini"
+        class="tag"
+      >
         {{ TYPE_MAP[data.env]['name'] }}
       </el-tag>
     </div>
@@ -119,18 +137,37 @@
           <!-- <li class="action-item">
           <el-button type="info" size="mini" icon="yundun-fe yicon-user" circle/>
         </li> -->
-          <li v-if="data.cmds && data.cmds.length > 0" class="action-item">
-            <el-popover placement="bottom" trigger="hover">
+          <li
+            v-if="data.cmds && data.cmds.length > 0"
+            class="action-item"
+          >
+            <el-popover
+              placement="bottom"
+              trigger="hover"
+            >
               <ul class="list-cmds">
-                <li v-for="item in data.cmds" :key="item.id" class="list-cmds-item">
-                  <el-tooltip :content="item.title" placement="top">
+                <li
+                  v-for="item in data.cmds"
+                  :key="item.id"
+                  class="list-cmds-item"
+                >
+                  <el-tooltip
+                    :content="item.title"
+                    placement="top"
+                  >
                     <div>
                       {{ item.content }}
                     </div>
                   </el-tooltip>
                 </li>
               </ul>
-              <el-button slot="reference" type="default" size="mini" icon="yundun-fe yicon-code" circle />
+              <el-button
+                slot="reference"
+                type="default"
+                size="mini"
+                icon="yundun-fe yicon-code"
+                circle
+              />
             </el-popover>
           </li>
           <!-- <li v-if="data.name" class="action-item">
@@ -138,20 +175,21 @@
               <el-button :disabled="progressing" type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
             </el-tooltip>
           </li> -->
-          <li v-if="data.name" class="action-item">
-            <el-dropdown trigger="click">
-              <el-button type="primary" size="mini" icon="yundun-fe yicon-reload" circle />
-              <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                <el-dropdown-item @click="handleBuild(data.name)">
-                  立即构建
-                </el-dropdown-item>
-                <router-link :to="`/product/id/${data.id}`" class="inlineBlock">
-                  <el-dropdown-item>
-                    高级构建
-                  </el-dropdown-item>
-                </router-link>
-              </el-dropdown-menu>
-            </el-dropdown>
+          <li
+            v-if="data.name"
+            class="action-item"
+          >
+            <router-link
+              :to="`/product/id/${data.id}`"
+              class="inlineBlock"
+            >
+              <el-button
+                type="primary"
+                size="mini"
+                icon="yundun-fe yicon-arrowright"
+                circle
+              />
+            </router-link>
           </li>
         </ul>
       </div>
