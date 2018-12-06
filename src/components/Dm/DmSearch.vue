@@ -1,6 +1,6 @@
 <style lang="postcss">
 .DmSearch{
-  padding: 5px 10px;
+  padding: 5px 0px;
 }
 </style>
 

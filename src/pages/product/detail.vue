@@ -15,10 +15,6 @@
   .row-open {
     background: rgb(250, 250, 250);
   }
-
-  .el-alert {
-    margin-top: 8px;
-  }
 }
 </style>
 
@@ -28,57 +24,59 @@
       <h2>
         {{ info.title }} {{ info.env }}
       </h2>
-      <el-button
-        type="default"
-        size="small"
-        icon="el-icon-back"
-        circle
-        @click="$router.go(-1)"
+      <el-progress
+        v-if="infoStatus.progress && infoStatus.progress>=0"
+        :percentage="infoStatus.progress"
       />
-      <el-button
-        size="small"
-        type="success"
-        @click="startBuild"
-      >
-        {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
-      </el-button>
-      <el-button
-        v-if="buildProgress !== 0"
-        size="small"
-      ><a
-        :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`"
-        target="_blank"
-      >编译进度</a></el-button>
-      <el-button
-        size="small"
-        @click="initExecutorList"
-      >刷新</el-button>
+      <DmSearch>
+        <DmSearchItem>
+          <el-button
+            type="default"
+            size="small"
+            icon="el-icon-back"
+            circle
+            @click="$router.go(-1)"
+          />
+          <el-button
+            size="small"
+            type="success"
+            @click="startBuild"
+          >
+            {{ buildProgress !== 0 ? '正在构建' : '开始构建' }}
+          </el-button>
+          <el-button
+            v-if="buildProgress !== 0"
+            size="small"
+          ><a
+            :href="`http://172.16.100.40:8080/job/${name}/${infoStatus.number}/console`"
+            target="_blank"
+          >编译进度</a></el-button>
+          <el-button
+            size="small"
+            @click="initExecutorList"
+          >刷新</el-button>
 
-      <div class="pull-right">
-        <router-link :to="`${id}/log?name=${info.name}`">
-          <el-button size="small">构建历史</el-button>
-        </router-link>
-      </div>
-      <el-input
-        v-model="cmdBuild"
-        size="small"
-      />
-
-      <!-- <el-radio-group
-        v-model="radio5"
-        size="small"
-      >
-        <el-radio-button v-for="(item, index) in" label="上海"/>
-        <el-radio-button label="广州"/>
-        <el-radio-button label="深圳"/>
-      </el-radio-group> -->
-      <FormRadioButton
-        v-model="filters.type"
-        :radios="FILTER_TYPE"
-        default-text="全部"
-        default-value=""
-      />
-
+          <div class="pull-right">
+            <router-link :to="`${id}/log?name=${info.name}`">
+              <el-button size="small">构建历史</el-button>
+            </router-link>
+          </div>
+        </DmSearchItem>
+        <DmSearchItem>
+          <el-input
+            v-model="cmdBuild"
+            size="small"
+          />
+        </DmSearchItem>
+        <DmSearchItem>
+          <FormRadioButton
+            v-model="filters.type"
+            :radios="FILTER_TYPE"
+            default-text="全部"
+            default-value=""
+          />
+        </DmSearchItem>
+      </DmSearch>
       <el-alert
         v-if="total"
         :closable="false"
@@ -86,33 +84,9 @@
         type="success"
       />
     </div>
-    <!-- 列表 -->
-    <!-- <el-row :gutter="12">
-      <el-col
-        v-for="(item, index) in list"
-        :span="8"
-        :key="index"
-      >
-        <el-card style="margin-bottom: 12px">
-          <div
-            slot="header"
-            class="clearfix"
-          >
-            <span>{{ item.title || item.name }}</span>
-            <el-button
-              style="float: right; padding: 3px 0"
-              type="text"
-            >立即编译</el-button>
-          </div>
-          <el-checkbox v-model="item.open">选择</el-checkbox>
-          {{ item.symbol }}
-        </el-card>
-      </el-col>
-    </el-row> -->
-
     <el-table
       ref="table"
-      :data="list"
+      :data="listFilter"
       :row-class-name="tableRowClassName"
       @selection-change="handleSelectionChange"
     >
@@ -136,12 +110,9 @@
         </template>
       </el-table-column>
       <el-table-column
-        :filters="filterTypeText"
-        :filter-method="filterType"
         label="类型"
         width="150"
         prop="type"
-        filter-placement="bottom-end"
       >
         <template slot-scope="scope">
           {{ TYPE_TEXT[scope.row.type] }}
@@ -149,7 +120,7 @@
       </el-table-column>
       <el-table-column
         label="操作"
-        width="150"
+        width="100"
       >
         <template slot-scope="scope">
           <el-button
@@ -170,6 +141,8 @@ import ColumnStatus from '@/components/Column/ColumnStatus'
 import { deepClone } from '@/utils/util'
 import { formatSeconds } from '@/utils/date'
 import FormRadioButton from '@/components/Form/FormRadioButton'
+import DmSearch from '@/components/Dm/DmSearch'
+import DmSearchItem from '@/components/Dm/DmSearchItem'
 
 const FILTER_TYPE = [
   {
@@ -198,7 +171,7 @@ const TYPE_TEXT = {
 }
 
 export default {
-  components: { Page, ColumnStatus, FormRadioButton },
+  components: { Page, ColumnStatus, FormRadioButton, DmSearch, DmSearchItem },
 
   data() {
     return {
@@ -238,17 +211,16 @@ export default {
 
     total() {
       return this.form.config.length
+    },
+
+    listFilter() {
+      const { type } = this.filters
+      const { list } = this
+      return type ? list.filter(_ => _.type === this.filters.type) : list
     }
   },
 
   async mounted() {
-    for (const k in TYPE_TEXT) {
-      this.filterTypeText.push({
-        text: TYPE_TEXT[k],
-        value: k
-      })
-    }
-
     await this.initInfo()
 
     this.initExecutorList()
@@ -265,7 +237,15 @@ export default {
         config: [row.symbol]
       }
       const { name } = this
-      Explorer.jenkinsJobStart(name, form)
+
+      const ret = await Explorer.jenkinsJobStart(name, form)
+      const { message } = ret
+      if (!message) {
+        this.$message({
+          message: '开始编译',
+          type: 'success'
+        })
+      }
     },
     // 选择项目
     handleSelectionChange(val) {
