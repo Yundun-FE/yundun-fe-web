@@ -223,14 +223,23 @@ export default {
   methods: {
     async init() {
       await this.getInfo()
-      this.initExecutorList()
-      this.initStatus()
-      this.interval = setInterval(this.initStatus, 10000)
+      const { info } = this
+      if (info.setting) {
+        this.initExecutorList()
+        this.initStatus()
+        this.interval = setInterval(this.initStatus, 10000)
+      } else {
+        if (info.cmds[0]) {
+          this.cmdBuild = info.cmds[0].content
+        }
+        this.interval = null
+      }
     },
 
     filterType(value, row) {
       return row.type === value
     },
+
     async handleStartBuild(row) {
       const form = {
         config: [row.symbol]
@@ -294,18 +303,21 @@ export default {
       this.info = data
       this.name = data.name
 
-      let list = []
-      try {
-        list = JSON.parse(setting)
-      } catch (e) {
-        this.list = []
+      if (setting) {
+        let list = []
+        try {
+          list = JSON.parse(setting)
+        } catch (e) {
+          this.list = []
+        }
+
+        list.forEach(item => {
+          item.open = false
+          item.type = item.symbol.replace(/\d/g, '')
+        })
+        this.list = list
       }
 
-      list.forEach(item => {
-        item.open = false
-        item.type = item.symbol.replace(/\d/g, '')
-      })
-      this.list = list
       this.getMoreInfo()
     },
     // 切换环境
@@ -333,7 +345,6 @@ export default {
       envList.forEach(item => {
         const dItem = listMap[item.value]
         item.show = envs.includes(item.value)
-        item.disabled = !dItem.setting
         item.value = dItem.id
       })
 
