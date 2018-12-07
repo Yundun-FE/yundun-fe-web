@@ -14,3 +14,11 @@ export function deepClone(source) {
   }
   return targetObj
 }
+
+export function listToObj(list, key) {
+  const obj = {}
+  list.forEach(item => {
+    obj[item[key]] = item
+  })
+  return obj
+}

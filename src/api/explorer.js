@@ -59,11 +59,11 @@ export default {
     })
   },
 
-  jobList: function jobList(data) {
+  jobList: function jobList(params) {
     return request({
       url: `${base}/jobs`,
       method: 'get',
-      data
+      params
     })
   },
 

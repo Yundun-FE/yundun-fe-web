@@ -18,6 +18,9 @@ import { installFilter } from '@/service/filter'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import { labelView } from '@/service/filter'
+Vue.filter('labelView', labelView)
+
 Vue.prototype.$Api = {
   Explorer
 }

@@ -22,12 +22,20 @@
   <page class="pageProductDetail">
     <div slot="header">
       <h2>
-        {{ info.title }} {{ info.env }}
+        {{ info.title }}
+        <span class="pull-right">
+          <FormRadioButton
+            v-model="id"
+            :radios="selectEnv"
+            @change="handleEnvChange"
+          />
+        </span>
       </h2>
       <el-progress
         v-if="infoStatus.progress && infoStatus.progress>=0"
         :percentage="infoStatus.progress"
       />
+      <!-- TOOLBAR -->
       <DmSearch>
         <DmSearchItem>
           <el-button
@@ -55,11 +63,22 @@
             size="small"
             @click="initExecutorList"
           >刷新</el-button>
-
           <div class="pull-right">
             <router-link :to="`${id}/log?name=${info.name}`">
               <el-button size="small">构建历史</el-button>
             </router-link>
+            <el-tooltip
+              :content="info.url"
+              placement="top"
+            >
+              <el-button
+                size="small"
+                type="primary"
+              ><a
+                :href="info.url"
+                target="_blank"
+              >立即访问</a></el-button>
+            </el-tooltip>
           </div>
         </DmSearchItem>
         <DmSearchItem>
@@ -71,7 +90,7 @@
         <DmSearchItem>
           <FormRadioButton
             v-model="filters.type"
-            :radios="FILTER_TYPE"
+            :radios="MODULES_TYPE"
             default-text="全部"
             default-value=""
           />
@@ -84,6 +103,7 @@
         type="success"
       />
     </div>
+    <!-- 列表 -->
     <el-table
       ref="table"
       :data="listFilter"
@@ -115,7 +135,7 @@
         prop="type"
       >
         <template slot-scope="scope">
-          {{ TYPE_TEXT[scope.row.type] }}
+          {{ scope.row.type | labelView(MODULES_TYPE) }}
         </template>
       </el-table-column>
       <el-table-column
@@ -124,7 +144,7 @@
       >
         <template slot-scope="scope">
           <el-button
-            size="mini"
+            size="small"
             @click="handleStartBuild(scope.row)"
           >编译</el-button>
         </template>
@@ -138,59 +158,35 @@ import Explorer from '@/api/explorer'
 import Notice from '@/service/notice'
 import Page from '@/components/Page/Page'
 import ColumnStatus from '@/components/Column/ColumnStatus'
-import { deepClone } from '@/utils/util'
+import { deepClone, listToObj } from '@/utils/util'
 import { formatSeconds } from '@/utils/date'
 import FormRadioButton from '@/components/Form/FormRadioButton'
 import DmSearch from '@/components/Dm/DmSearch'
 import DmSearchItem from '@/components/Dm/DmSearchItem'
-
-const FILTER_TYPE = [
-  {
-    label: '网页',
-    value: 'wp'
-  },
-  {
-    label: '控制台',
-    value: 'cp'
-  },
-  {
-    label: '感知图',
-    value: 'pr'
-  },
-  {
-    label: '支付',
-    value: 'pp'
-  }
-]
-
-const TYPE_TEXT = {
-  'wp': '网页',
-  'cp': '控制台',
-  'pr': '感知图',
-  'pp': '支付'
-}
+import { MODULES_TYPE, ENV } from '@/constant/label'
+import { labelView } from '@/service/filter'
 
 export default {
   components: { Page, ColumnStatus, FormRadioButton, DmSearch, DmSearchItem },
 
   data() {
     return {
-      FILTER_TYPE,
+      id: this.$route.params.id,
+      ENV,
+      MODULES_TYPE,
       formatSeconds,
-      TYPE_TEXT,
       filterTypeText: [],
       activeName: 'build',
-      id: this.$route.params.id,
+      selectEnv: [],
       list: [],
       form: {
         config: []
       },
-      name: '',
       info: {},
+      name: '',
       infoStatus: {
         progress: 0
       },
-      listExecutor: [],
       interval: null,
       cmdBuild: '',
       filters: {
@@ -220,15 +216,18 @@ export default {
     }
   },
 
-  async mounted() {
-    await this.initInfo()
-
-    this.initExecutorList()
-    this.initStatus()
-    this.interval = setInterval(this.initStatus, 10000)
+  mounted() {
+    this.init()
   },
 
   methods: {
+    async init() {
+      await this.getInfo()
+      this.initExecutorList()
+      this.initStatus()
+      this.interval = setInterval(this.initStatus, 10000)
+    },
+
     filterType(value, row) {
       return row.type === value
     },
@@ -282,14 +281,13 @@ export default {
           item.open = true
         }
       })
-      this.listExecutor = listExecutor
     },
     // 读取编译状态
     async initStatus() {
       this.infoStatus = await Explorer.progressName(this.name)
     },
-    // 项目详情
-    async initInfo() {
+    // 读取项目详情
+    async getInfo() {
       const data = await Explorer.jobId(this.id)
 
       const { setting } = data
@@ -308,6 +306,38 @@ export default {
         item.type = item.symbol.replace(/\d/g, '')
       })
       this.list = list
+      this.getMoreInfo()
+    },
+    // 切换环境
+    handleEnvChange(val) {
+      this.$router.push({
+        path: `${val}`
+      })
+      this.init()
+    },
+
+    async getMoreInfo() {
+      const { title } = this.info
+      const data = await Explorer.jobList({ title })
+
+      const { list } = data
+      list.forEach(_ => {
+        _.label = labelView(_.env, ENV)
+      })
+
+      const envs = list.map(_ => _.env)
+
+      const envList = deepClone(ENV)
+      const listMap = listToObj(list, 'env')
+
+      envList.forEach(item => {
+        const dItem = listMap[item.value]
+        item.show = envs.includes(item.value)
+        item.disabled = !dItem.setting
+        item.value = dItem.id
+      })
+
+      this.selectEnv = envList.filter(_ => _.show)
     }
   }
 }

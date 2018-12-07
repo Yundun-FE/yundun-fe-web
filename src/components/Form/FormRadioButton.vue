@@ -1,6 +1,5 @@
 <template>
-  <el-radio-group v-model="val" size="small">
-    {{ defaultValue }}
+  <el-radio-group v-model="val" size="small" @change="handleChange">
     <el-radio-button v-if="defaultText" :label="defaultValue" :key="defaultValue">{{ defaultText }}</el-radio-button>
     <el-radio-button v-for="item in radios" :key="item.value" :disabled="item.disabled" :label="item.value">{{ item.label }}</el-radio-button>
     <slot/>
@@ -48,6 +47,12 @@ export default create({
     },
     value(val) {
       this.val = val
+    }
+  },
+
+  methods: {
+    handleChange(val) {
+      this.$emit('change', val)
     }
   }
 })
