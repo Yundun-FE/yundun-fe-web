@@ -89,6 +89,7 @@
         </DmSearchItem>
         <DmSearchItem>
           <FormRadioButton
+            id="filter_type"
             v-model="filters.type"
             :radios="MODULES_TYPE"
             default-text="全部"

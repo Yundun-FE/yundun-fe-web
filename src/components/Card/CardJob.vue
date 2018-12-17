@@ -181,6 +181,7 @@
           >
             <router-link
               :to="`/product/id/${data.id}`"
+              :id="`product_${data.id}`"
               class="inlineBlock"
             >
               <el-button
