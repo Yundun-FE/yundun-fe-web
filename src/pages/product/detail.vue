@@ -109,6 +109,7 @@
       ref="table"
       :data="listFilter"
       :row-class-name="tableRowClassName"
+      highlight-current-row
       @selection-change="handleSelectionChange"
     >
       <el-table-column
@@ -141,13 +142,20 @@
       </el-table-column>
       <el-table-column
         label="操作"
-        width="100"
+        width="150"
       >
         <template slot-scope="scope">
           <el-button
             size="small"
             @click="handleStartBuild(scope.row)"
           >编译</el-button>
+          <el-button
+            :type="scope.row.collection ? 'warning' : 'default'"
+            size="small"
+            icon="el-icon-star-off"
+            circle
+            @click="handleCollection(scope.row.symbol)"
+          />
         </template>
       </el-table-column>
     </el-table>
@@ -166,6 +174,7 @@ import DmSearch from '@/components/Dm/DmSearch'
 import DmSearchItem from '@/components/Dm/DmSearchItem'
 import { MODULES_TYPE, ENV } from '@/constant/label'
 import { labelView } from '@/service/filter'
+import Lockr from 'lockr'
 
 export default {
   components: { Page, ColumnStatus, FormRadioButton, DmSearch, DmSearchItem },
@@ -192,7 +201,8 @@ export default {
       cmdBuild: '',
       filters: {
         type: ''
-      }
+      },
+      collection: new Set()
     }
   },
 
@@ -213,8 +223,15 @@ export default {
     listFilter() {
       const { type } = this.filters
       const { list } = this
+      Lockr.set('filters', this.filters)
       return type ? list.filter(_ => _.type === this.filters.type) : list
     }
+  },
+
+  created() {
+    const filters = Lockr.get('filters')
+    this.filters = Object.assign(this.filters, filters)
+    this.collection = new Set(Lockr.get('collection'))
   },
 
   mounted() {
@@ -222,6 +239,13 @@ export default {
   },
 
   methods: {
+    handleCollection(val) {
+      const { collection } = this
+      collection.has(val) ? collection.delete(val) : collection.add(val)
+      this.initList()
+      Lockr.set('collection', collection)
+    },
+
     async init() {
       await this.getInfo()
       const { info } = this
@@ -264,7 +288,7 @@ export default {
     },
 
     tableRowClassName({ row, rowIndex }) {
-      if (row.open) {
+      if (row.open || row.collection) {
         return 'row-open'
       }
     },
@@ -311,16 +335,26 @@ export default {
         } catch (e) {
           this.list = []
         }
-
         list.forEach(item => {
           item.open = false
+          item.collection = false
           item.type = item.symbol.replace(/\d/g, '')
         })
         this.list = list
+        this.initList()
       }
 
       this.getMoreInfo()
     },
+
+    initList() {
+      this.list.forEach(item => {
+        item.collection = this.collection.has(item.symbol)
+        // item.collection &&
+        // this.$refs.table.setCurrentRow(item)
+      })
+    },
+
     // 切换环境
     handleEnvChange(val) {
       this.$router.push({
@@ -339,16 +373,13 @@ export default {
       })
 
       const envs = list.map(_ => _.env)
-
       const envList = deepClone(ENV)
       const listMap = listToObj(list, 'env')
-
       envList.forEach(item => {
         const dItem = listMap[item.value]
         item.show = envs.includes(item.value)
         item.value = dItem.id
       })
-
       this.selectEnv = envList.filter(_ => _.show)
     }
   }
