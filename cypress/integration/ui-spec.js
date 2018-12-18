@@ -23,9 +23,23 @@ it('类型选择检查', () => {
   cy.contains('pp1')
 })
 
-// it('product page', () => {
-//   cy.visit('#/product/index')
-// })
+it('product page', () => {
+  cy.visit('#/product/index')
+
+  cy.get('#btnAdd').click()
+  cy.get('#form_title').type('title')
+  cy.get('#form_url').type('url')
+  cy.get('#form_env').click()
+  cy.get('.el-select-dropdown__list li:eq(1)').click()
+  cy.get('#form_name').type('name')
+  cy.get('#form_setting').type('{}')
+  cy.get('#btn-cancel').click()
+
+  cy.get('#btnAdd').click()
+  // cy.get('.el-dialog').contains('取 消').click()
+
+  cy.get('#form_title').should('have.value', 'title')
+})
 
 // it('product page-3', () => {
 //   cy.visit('#/product/id/4')

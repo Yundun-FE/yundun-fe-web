@@ -1,7 +1,7 @@
 <template>
   <page>
     <div slot="header">
-      <el-button size="small" type="primary" @click="handleClickAdd">新增</el-button>
+      <el-button id="btnAdd" size="small" type="primary" @click="handleClickAdd">新增</el-button>
     </div>
     <el-table :data="list">
       <el-table-column prop="title" label="名称" >
