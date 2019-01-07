@@ -1,9 +1,30 @@
 <template>
-  <div :class="{'is-home': path === '/dashboard'}" class="app-wrapper">
-    <div class="main-container">
-      <navbar />
-      <app-main />
-    </div>
+  <div class="app-wrapper">
+    <el-container>
+      <el-aside width="200px">
+        <Sidebar />
+      </el-aside>
+      <el-container>
+        <el-header>
+          <navbar />
+        </el-header>
+        <el-main>
+          <app-main />
+        </el-main>
+      </el-container>
+    </el-container>
+
+    <!-- <el-container>
+      <el-aside width="200px">
+        <Sidebar />
+      </el-aside>
+      <el-container>
+        <navbar />
+        <el-main>
+          <app-main />
+        </el-main>
+      </el-container>
+    </el-container> -->
   </div>
 </template>
 
@@ -25,18 +46,36 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-@import 'src/styles/mixin.scss';
+<style lang="stylus">
+@require '../../styles/var.styl';
+
+// @import "src/styles/mixin.scss";
 .app-wrapper {
-  @include clearfix;
   position: relative;
   height: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+
+  >.el-container {
+    height: 100%;
+
+    .el-scrollbar, .el-menu {
+      height: 100%;
+    }
+
+    .el-scrollbar__view {
+      height: 100%;
+    }
+
+    .el-scrollbar__wrap {
+      overflow-x: hidden !important;
+    }
+  }
 
   &.is-home {
     margin: 0 auto;
-    width: 320px;
+  }
+
+  .el-header {
+    background: $color-primary;
   }
 
   &.mobile.openSidebar {
@@ -44,6 +83,7 @@ export default {
     top: 0;
   }
 }
+
 .drawer-bg {
   background: #000;
   opacity: 0.3;

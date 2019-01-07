@@ -172,7 +172,7 @@ import { formatSeconds } from '@/utils/date'
 import FormRadioButton from '@/components/Form/FormRadioButton'
 import DmSearch from '@/components/Dm/DmSearch'
 import DmSearchItem from '@/components/Dm/DmSearchItem'
-import { MODULES_TYPE, ENV } from '@/constant/label'
+import { MODULES_TYPE, ENV } from '@/constants/label'
 import { labelView } from '@/service/filter'
 import Lockr from 'lockr'
 

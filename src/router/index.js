@@ -21,124 +21,140 @@ import Layout from '../pages/layout/Layout'
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [
-  {
-    path: '/login',
-    component: () => import('@/pages/login/index'),
-    hidden: true
-  },
-  { path: '/404', component: () => import('@/pages/404'), hidden: true },
+export const constantRouterMap = [{
+  path: '/login',
+  component: () => import('@/pages/login/index'),
+  hidden: true
+},
+{
+  path: '/404',
+  component: () => import('@/pages/404'),
+  hidden: true
+},
 
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    name: 'Dashboard',
-    // hidden: true,
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/pages/dashboard/index'),
-        meta: { title: 'Dashboard' }
-      }
-    ]
-  },
+{
+  path: '/',
+  component: Layout,
+  redirect: '/dashboard',
+  name: 'Dashboard',
+  // hidden: true,
+  children: [{
+    path: 'dashboard',
+    component: () => import('@/pages/dashboard/index'),
+    meta: {
+      title: '控制台'
+    }
+  }]
+},
 
-  {
-    path: '/product',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Product',
-        component: () => import('@/pages/product/index'),
-        meta: { title: 'Product' }
-      },
-      {
-        path: 'id/:id',
-        name: 'ProductDetail',
-        component: () => import('@/pages/product/detail'),
-        meta: { title: 'Product' }
-      },
-      {
-        path: 'id/:id/log',
-        name: 'ProductLog',
-        component: () => import('@/pages/product/log'),
-        meta: { title: 'Log' }
-      }
-    ]
+{
+  path: '/product',
+  component: Layout,
+  hidden: true,
+  children: [{
+    path: 'index',
+    name: 'Product',
+    component: () => import('@/pages/product/index'),
+    meta: {
+      title: '项目管理'
+    }
   },
-
   {
-    path: '/account',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Account',
-        component: () => import('@/pages/account/index'),
-        meta: { title: 'Account' }
-      }
-    ]
+    path: 'id/:id',
+    name: 'ProductDetail',
+    component: () => import('@/pages/product/detail'),
+    meta: {
+      title: '项目详情'
+    }
   },
-
   {
-    path: '/cmd',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Cmd',
-        component: () => import('@/pages/cmd/index'),
-        meta: { title: 'Cmd' }
-      }
-    ]
-  },
+    path: 'id/:id/log',
+    name: 'ProductLog',
+    component: () => import('@/pages/product/log'),
+    meta: {
+      title: 'Log'
+    }
+  }
+  ]
+},
 
-  {
-    path: '/website',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Website',
-        component: () => import('@/pages/website/index'),
-        meta: { title: 'Website' }
-      }
-    ]
-  },
+{
+  path: '/account',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Account',
+    component: () => import('@/pages/account/index'),
+    meta: {
+      title: '账号管理'
+    }
+  }]
+},
 
-  {
-    path: '/progress',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Progress',
-        component: () => import('@/pages/progress/index'),
-        meta: { title: 'Progress' }
-      }
-    ]
-  },
+{
+  path: '/cmd',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Cmd',
+    component: () => import('@/pages/cmd/index'),
+    meta: {
+      title: '命令管理'
+    }
+  }]
+},
 
-  {
-    path: '/setting',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Setting',
-        component: () => import('@/pages/setting/index'),
-        meta: { title: 'Setting' }
-      }
-    ]
-  },
+{
+  path: '/website',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Website',
+    component: () => import('@/pages/website/index'),
+    meta: {
+      title: '网站管理'
+    }
+  }]
+},
 
-  { path: '*', redirect: '/404', hidden: true }
+{
+  path: '/progress',
+  component: Layout,
+  hidden: true,
+  children: [{
+    path: 'index',
+    name: 'Progress',
+    component: () => import('@/pages/progress/index'),
+    meta: {
+      title: 'Progress'
+    }
+  }]
+},
+
+{
+  path: '/setting',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Setting',
+    component: () => import('@/pages/setting/index'),
+    meta: {
+      title: '配置'
+    }
+  }]
+},
+
+{
+  path: '*',
+  redirect: '/404',
+  hidden: true
+}
 ]
 
 export default new Router({
   // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes: constantRouterMap
 })

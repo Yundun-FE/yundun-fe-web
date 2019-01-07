@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { SERVER_URL } from '@/constant/server'
+import { SERVER_URL } from '@/constants/server'
 
 const base = SERVER_URL['explorer']
 // if (process.env.APP_ENV === 'development') base = 'http://127.0.0.1:7001'

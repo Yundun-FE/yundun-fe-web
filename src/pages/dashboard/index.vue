@@ -5,10 +5,25 @@
 </style>
 
 <template>
-  <page :loading="loading" class="page-dashboard">
-    <div class="list">
-      <card-job v-for="item in list" :span="12" :key="item.id" :data="item" :progress="mapProgress[item.name]" @on-build="handleBuild" @on-edit="handleEdit(item)" />
-    </div>
+  <page
+    :loading="loading"
+    class="page-dashboard"
+  >
+    <el-row :gutter="12">
+      <el-col :span="24">
+        <el-card>
+          <card-job
+            v-for="item in list"
+            :span="12"
+            :key="item.id"
+            :data="item"
+            :progress="mapProgress[item.name]"
+            @on-build="handleBuild"
+            @on-edit="handleEdit(item)"
+          />
+        </el-card>
+      </el-col>
+    </el-row>
   </page>
 </template>
 
