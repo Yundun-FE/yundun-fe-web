@@ -183,18 +183,18 @@ export const constantRouterMap = [{
   }]
 },
 
-// {
-//   path: '/menus',
-//   component: Layout,
-//   children: [{
-//     path: '',
-//     name: 'menu',
-//     component: () => import('@/pages/menu/index'),
-//     meta: {
-//       title: '目录管理'
-//     }
-//   }]
-// },
+{
+  path: '/menus',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'menu',
+    component: () => import('@/pages/menu/index'),
+    meta: {
+      title: '目录管理'
+    }
+  }]
+},
 
 {
   path: '*',
