@@ -23,7 +23,6 @@ export default {
     async initRules(url) {
       const data = await Fetch.get(url, { resources: 'rules' })
       const { form, rules } = data
-      form.assets = JSON.stringify(form.assets)
       this.FORM = form
       this.RULES = rules
     },
@@ -36,7 +35,6 @@ export default {
       this.$refs.form.validate(valid => {
         if (!valid) return
         const form = deepClone(this.form)
-        form.assets = JSON.parse(form.assets)
         form._mode = this.mode
         this.$emit('submit', form)
       })

@@ -157,18 +157,31 @@ export const constantRouterMap = [{
   }]
 },
 
-// {
-//   path: '/brands',
-//   component: Layout,
-//   children: [{
-//     path: '',
-//     name: 'brand',
-//     component: () => import('@/pages/brand/index'),
-//     meta: {
-//       title: '品牌管理'
-//     }
-//   }]
-// },
+{
+  path: '/brands',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'brand',
+    component: () => import('@/pages/brand/index'),
+    meta: {
+      title: '品牌管理'
+    }
+  }]
+},
+
+{
+  path: '/brandVersions',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'brandVersion',
+    component: () => import('@/pages/brandVersion/index'),
+    meta: {
+      title: '品牌组'
+    }
+  }]
+},
 
 // {
 //   path: '/menus',

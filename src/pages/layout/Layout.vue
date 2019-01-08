@@ -70,6 +70,10 @@ export default {
     }
   }
 
+  .el-main {
+    background: rgb(242, 242, 242);
+  }
+
   &.is-home {
     margin: 0 auto;
   }

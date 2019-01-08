@@ -34,11 +34,6 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
   // background: #eff2f7;
   height: 100%;
-
-  .el-dialog {
-    width: 100%;
-    max-width: 600px;
-  }
 }
 
 #app {

@@ -13,13 +13,18 @@
         >新增</el-button>
       </div>
       <el-table-column
+        prop="id"
+        label="ID"
+        min-width="50"
+      />
+      <el-table-column
         prop="name"
         label="名称"
         min-width="180"
       />
       <el-table-column
-        prop="website"
-        label="网站"
+        prop="code"
+        label="CODE"
         min-width="180"
       />
       <el-table-column
@@ -29,16 +34,18 @@
       >
         <template slot-scope="scope">
           <el-button
-            type="text"
+            plain
+            size="mini"
             @click="handleEdit(scope.row)"
           >编辑</el-button>
           <el-button
-            type="text"
+            plain
+            size="mini"
+            type="danger"
             @click="handleDelete(scope.row.id)"
           >删除</el-button>
         </template>
       </el-table-column>
-
     </DmConsole>
     <DialogRow
       ref="DialogRow"
@@ -59,7 +66,7 @@ export default {
   methods: {
     async handleRowSubmit(form) {
       try {
-        await this.updateApi('/agents', form)
+        await this.updateApi('/brands', form)
       } catch (e) {
         return
       }
@@ -69,7 +76,7 @@ export default {
     },
 
     async handleDelete(id) {
-      await this.Fetch.delete(`/agents/${id}`)
+      await this.Fetch.delete(`/brands/${id}`)
       this.actionSuccess()
       this.init()
     },
@@ -80,7 +87,7 @@ export default {
     },
 
     init(params) {
-      this.updateList('/agents', params)
+      this.updateList('/brands', params)
     }
   }
 }
