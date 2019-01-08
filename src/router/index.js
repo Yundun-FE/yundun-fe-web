@@ -152,11 +152,36 @@ export const constantRouterMap = [{
     name: 'Agent',
     component: () => import('@/pages/agent/index'),
     meta: {
-      title: '品牌管理'
+      title: '代理商管理'
     }
-  }
-  ]
+  }]
 },
+
+// {
+//   path: '/brands',
+//   component: Layout,
+//   children: [{
+//     path: '',
+//     name: 'brand',
+//     component: () => import('@/pages/brand/index'),
+//     meta: {
+//       title: '品牌管理'
+//     }
+//   }]
+// },
+
+// {
+//   path: '/menus',
+//   component: Layout,
+//   children: [{
+//     path: '',
+//     name: 'menu',
+//     component: () => import('@/pages/menu/index'),
+//     meta: {
+//       title: '目录管理'
+//     }
+//   }]
+// },
 
 {
   path: '*',

@@ -1,10 +1,13 @@
 <template>
   <page>
-    <DmConsole>
+    <DmConsole
+      ref="DmConsole"
+      @init="init"
+    >
       <div slot="toolbar">
         <el-button
           type="primary"
-          @click="handleClickAdd"
+          @click="$refs.DialogRow.handleOpen()"
         >新增</el-button>
       </div>
       <el-table
@@ -23,65 +26,62 @@
         <el-table-column
           label="操作"
           align="right"
-          width="80"
+          width="180"
         >
           <template slot-scope="scope">
             <el-button
               type="text"
               @click="handleEdit(scope.row)"
             >编辑</el-button>
+            <el-button
+              type="text"
+              @click="handleDelete(scope.row.id)"
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </DmConsole>
-    <DialogAdd ref="DialogAdd" @submit="handleAddSubmit"/>
+    <DialogRow
+      ref="DialogRow"
+      @submit="handleRowSubmit"
+    />
   </page>
 </template>
 
 <script>
-import DialogAdd from './components/DialogAdd'
-import Fetch from '@/utils/fetch'
+import consolePage from '@/mixins/consolePage'
+import DialogRow from './components/DialogRow'
 
 export default {
-  components: { DialogAdd },
+  components: { DialogRow },
 
-  data() {
-    return {
-      loading: true,
-      list: [],
-      total: 0
-    }
-  },
-
-  mounted() {
-    this.init()
-  },
+  mixins: [consolePage],
 
   methods: {
-    async init() {
-      this.loading = true
-      const data = await Fetch.get('/agents')
-      this.list = data.list
-      this.loading = false
-    },
-
-    handleEdit(form) {
-      this.$refs.DialogAdd.handleOpen(form)
-    },
-
-    async handleAddSubmit(form) {
-      const mode = form._mode
+    async handleRowSubmit(form) {
       try {
-        mode === 'EDIT' ? await Fetch.put(`/agents/${form.id}`, form) : await Fetch.post('/agents', form)
+        await this.updateApi('/agents', form)
       } catch (e) {
         return
       }
-      this.$refs.DialogAdd.handleClose()
+      this.$refs.DialogRow.handleClose()
+      this.actionSuccess()
       this.init()
     },
 
-    handleClickAdd() {
-      this.$refs.DialogAdd.handleOpen()
+    async handleDelete(id) {
+      await this.Fetch.delete(`/agents/${id}`)
+      this.actionSuccess()
+      this.init()
+    },
+
+    handleEdit(form) {
+      form.assets = JSON.stringify(form.assets)
+      this.$refs.DialogRow.handleOpen(form, 'EDIT')
+    },
+
+    init(params) {
+      this.updateList('/agents', params)
     }
   }
 }

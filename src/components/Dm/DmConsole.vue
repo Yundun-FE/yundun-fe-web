@@ -55,8 +55,12 @@ export default create({
     }
   },
 
+  mounted() {
+    this.handleEmit()
+  },
+
   methods: {
-    initTotal(total) {
+    updateTotal(total) {
       this.total = total
     },
 
@@ -73,14 +77,14 @@ export default create({
       this.$emit('init', params)
     },
 
-    handleSizeChange(per_page) {
-      this.pagination.per_page = per_page
-      this.pagination.page = 1
+    handleSizeChange(pageSize) {
+      this.pageSize = pageSize
+      this.page = 1
       this.handleEmit()
     },
 
     handleCurrentChange(page) {
-      this.pagination.page = page
+      this.page = page
       this.handleEmit()
     }
   }

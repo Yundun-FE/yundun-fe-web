@@ -1,6 +1,3 @@
-<style lang="postcss" scoped>
-</style>
-
 <template>
   <Dialog
     v-loading
@@ -70,59 +67,28 @@
 <script>
 import create from '@/utils/create-basic'
 import { deepClone } from '@/utils'
-import Fetch from '@/utils/fetch'
+import consoleDialog from '@/mixins/consoleDialog'
 
 const FORM = {}
 
 export default create({
   name: 'DialogAdd',
 
+  mixins: [consoleDialog],
+
   data() {
     return {
-      RULES: {},
-      FORM: {},
-      open: false,
-      mode: '',
-      form: {}
-    }
-  },
-
-  computed: {
-    title() {
-      const name = '代理商'
-      return this.mode === 'EDIT' ? `修改${name}` : `新增${name}`
+      baseName: '代理商'
     }
   },
 
   methods: {
-    async initRules() {
-      const data = await Fetch.get('/agents', { resources: 'rules' })
-      const { form, rules } = data
-      form.assets = JSON.stringify(form.assets)
-      this.FORM = form
-      this.RULES = rules
-    },
-
     async handleOpen(form = {}, mode) {
       this.mode = mode
-      await this.initRules()
+      await this.initRules('/agents')
       this.form = Object.assign(deepClone(this.FORM), form)
       this.$refs.form && this.$refs.form.clearValidate()
       this.open = true
-    },
-
-    handleClose() {
-      this.open = false
-    },
-
-    handleSubmit() {
-      this.$refs.form.validate(valid => {
-        if (!valid) return
-        const form = deepClone(this.form)
-        form.assets = JSON.parse(form.assets)
-        form._mode = this.mode
-        this.$emit('submit', form)
-      })
     }
   }
 })
