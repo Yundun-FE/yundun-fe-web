@@ -252,7 +252,7 @@ export default {
       if (info.setting) {
         this.initExecutorList()
         this.initStatus()
-        this.interval = setInterval(this.initStatus, 10000)
+        // this.interval = setInterval(this.initStatus, 10000)
       } else {
         if (info.cmds[0]) {
           this.cmdBuild = info.cmds[0].content

@@ -145,6 +145,20 @@ export const constantRouterMap = [{
 },
 
 {
+  path: '/agents',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'Agent',
+    component: () => import('@/pages/agent/index'),
+    meta: {
+      title: '品牌管理'
+    }
+  }
+  ]
+},
+
+{
   path: '*',
   redirect: '/404',
   hidden: true

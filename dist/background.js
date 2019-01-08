@@ -49,7 +49,7 @@
   }
 
   initProgress()
-  interval = setInterval(initProgress, 10000)
+  // interval = setInterval(initProgress, 10000)
 
   chrome.runtime.onMessage.addListener(function(request) {
     const { message } = request

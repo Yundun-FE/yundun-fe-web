@@ -69,7 +69,7 @@ export default {
 
       this.initProgress()
       clearInterval(this.interval)
-      this.interval = setInterval(this.initProgress, 10000)
+      // this.interval = setInterval(this.initProgress, 10000)
       this.loading = false
     },
 

@@ -21,6 +21,7 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
+    "vue/require-default-prop": 0,
     "vue/no-unused-vars": 0,
     "vue/name-property-casing": ["error", "PascalCase"],
     'accessor-pairs': 2,

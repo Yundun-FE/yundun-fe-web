@@ -18,7 +18,7 @@
 
 <script>
 export default {
-
+  name: 'Page',
   components: {},
   props: {},
 

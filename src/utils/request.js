@@ -76,7 +76,20 @@ const request = function(options) {
       try {
         data = await service(options)
       } catch (error) {
-        const { message } = error
+        const { response } = error
+        let message = error.message
+        if (response.data) {
+          const { message: mainMessage, errors } = response.data
+          if (errors) {
+            if (errors.length > 0) {
+              message = errors[0].message || message
+            } else {
+              message = errors.message || message
+            }
+          } else {
+            message = mainMessage || message
+          }
+        }
 
         // 网络错误则重试
         if (message === 'Network Error') {
@@ -87,7 +100,7 @@ const request = function(options) {
             type: 'error',
             duration: 5 * 1000
           })
-          done()
+          reject(error)
         }
       }
       done(data)
