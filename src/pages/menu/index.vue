@@ -13,19 +13,11 @@
         >新增</el-button>
       </div>
       <el-table-column
-        prop="id"
-        label="ID"
-        min-width="50"
-      />
-      <el-table-column
-        prop="name"
-        label="名称"
-        min-width="180"
-      />
-      <el-table-column
-        prop="code"
-        label="CODE"
-        min-width="180"
+        v-for="(item ,index) in table"
+        :key="index"
+        :prop="item.prop"
+        :label="item.label"
+        :min-width="item.minWidth"
       />
       <el-table-column
         label="操作"
@@ -62,6 +54,10 @@ export default {
   components: { DialogRow },
 
   mixins: [consolePage],
+
+  created() {
+    this.initTable('/menus')
+  },
 
   methods: {
     async handleRowSubmit(form) {

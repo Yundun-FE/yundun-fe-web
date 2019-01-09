@@ -3,6 +3,7 @@ import Fetch from '@/utils/fetch'
 export default {
   data() {
     return {
+      table: [],
       Fetch,
       loading: true,
       list: []
@@ -10,6 +11,11 @@ export default {
   },
 
   methods: {
+    async initTable(url) {
+      const data = await this.Fetch.get(url, { resources: 'table' })
+      this.table = data
+    },
+
     async updateList(url, params) {
       this.loading = true
       const { list, total } = await this.Fetch.get(url, params)

@@ -19,6 +19,7 @@
       >
         <el-input
           v-model="form.name"
+          placeholder="名称"
           style="width: 220px"
         />
       </el-form-item>

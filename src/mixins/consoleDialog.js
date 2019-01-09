@@ -1,11 +1,28 @@
 import Fetch from '@/utils/fetch'
 import { deepClone } from '@/utils'
+import { array2Obj } from '@/utils/array'
+
+function formatForm(data) {
+  const form = {}
+  Object.keys(data).forEach(key => {
+    form[key] = data.default
+  })
+}
+
+function formatRules(data) {
+  const rules = {}
+  Object.keys(data).forEach(key => {
+    rules[key] = data.rules
+  })
+  return rules
+}
 
 export default {
   data() {
     return {
       RULES: {},
       FORM: {},
+      LAYOUT: [],
       mode: '',
       form: {},
       open: false
@@ -20,11 +37,14 @@ export default {
   },
 
   methods: {
+    async initForm(url) {
+      const data = await Fetch.get(url, { resources: 'form' })
+      this.FORM = formatForm(data)
+      this.RULES = formatRules(data)
+      this.LAYOUT = data
+    },
+
     async initRules(url) {
-      const data = await Fetch.get(url, { resources: 'rules' })
-      const { form, rules } = data
-      this.FORM = form
-      this.RULES = rules
     },
 
     handleClose() {
