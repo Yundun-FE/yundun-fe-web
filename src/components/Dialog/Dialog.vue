@@ -8,16 +8,6 @@
       border-bottom: 1px solid #eee;
       padding: 16px;
 
-      .el-dialog__close {
-        font-size: 14px;
-      }
-    }
-
-    &__title {
-      font-size: 14px;
-      padding-left: 12px;
-      height: 20px;
-      border-left: 3px solid #2d90e6;
     }
 
     &__body {
@@ -52,7 +42,6 @@
     <div slot="footer">
       <!-- <slot name="footer"/> -->
       <el-button
-        type="text"
         @click="handleClose"
       >取消</el-button>
       <el-button
@@ -76,7 +65,10 @@ export default {
   name: 'Dialog',
 
   props: {
-    center: Boolean,
+    center: {
+      type: Boolean,
+      default: true
+    },
     title: String,
     visible: Boolean,
     width: [String, Number],

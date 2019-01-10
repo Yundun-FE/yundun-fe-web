@@ -197,6 +197,19 @@ export const constantRouterMap = [{
 },
 
 {
+  path: '/applications',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'application',
+    component: () => import('@/pages/application/index'),
+    meta: {
+      title: '应用管理'
+    }
+  }]
+},
+
+{
   path: '*',
   redirect: '/404',
   hidden: true

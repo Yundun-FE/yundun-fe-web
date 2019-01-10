@@ -1,18 +1,19 @@
 import Fetch from '@/utils/fetch'
-import { deepClone } from '@/utils'
+import { deepClone, isDef } from '@/utils'
 import { array2Obj } from '@/utils/array'
 
 function formatForm(data) {
   const form = {}
-  Object.keys(data).forEach(key => {
-    form[key] = data.default
+  data.forEach(item => {
+    form[item.prop] = isDef(item.default) ? item.default : ''
   })
+  return form
 }
 
 function formatRules(data) {
   const rules = {}
-  Object.keys(data).forEach(key => {
-    rules[key] = data.rules
+  data.forEach(item => {
+    if (item.rules) rules[item.prop] = item.rules
   })
   return rules
 }

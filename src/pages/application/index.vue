@@ -22,20 +22,14 @@
       <el-table-column
         label="操作"
         align="right"
-        width="220"
+        width="180"
       >
         <template slot-scope="scope">
           <el-button
             plain
             size="mini"
-            type="primary"
             @click="handleEdit(scope.row)"
           >编辑</el-button>
-          <el-button
-            plain
-            size="mini"
-            @click="handleClone(scope.row)"
-          >克隆</el-button>
           <el-button
             plain
             size="mini"
@@ -54,7 +48,6 @@
 
 <script>
 import consolePage from '@/mixins/consolePage'
-import { deepClone } from '@/utils'
 import DialogRow from './components/DialogRow'
 
 export default {
@@ -63,21 +56,22 @@ export default {
   mixins: [consolePage],
 
   created() {
-    this.initTable('/menusVersion')
+    this.initTable('/applications')
   },
 
-  // mounted() {
-  //   this.$refs.DialogRow.handleOpen()
-  // },
-
   methods: {
-    handleClone(form) {
-      form.name = form.name + ' COPY'
-      this.handleRowSubmit(form)
-    },
     async handleRowSubmit(form) {
+      // try {
+      //   form.settings = JSON.parse(form.settings)
+      // } catch (e) {
+      //   this.$message({
+      //     type: 'warning',
+      //     message: '格式错误'
+      //   })
+      //   return
+      // }
       try {
-        await this.updateApi('/menusVersion', form)
+        await this.updateApi('/applications', form)
       } catch (e) {
         return
       }
@@ -87,17 +81,18 @@ export default {
     },
 
     async handleDelete(id) {
-      await this.Fetch.delete(`/menusVersion/${id}`)
+      await this.Fetch.delete(`/applications/${id}`)
       this.actionSuccess()
       this.init()
     },
 
     handleEdit(form) {
-      this.$refs.DialogRow.handleOpen(deepClone(form), 'EDIT')
+      form.settings = JSON.stringify(form.settings)
+      this.$refs.DialogRow.handleOpen(form, 'EDIT')
     },
 
     init(params) {
-      this.updateList('/menusVersion', params)
+      this.updateList('/applications', params)
     }
   }
 }

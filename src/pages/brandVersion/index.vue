@@ -13,6 +13,11 @@
         >新增</el-button>
       </div>
       <el-table-column
+        prop="id"
+        label="ID"
+        min-width="80"
+      />
+      <el-table-column
         prop="name"
         label="名称"
         min-width="180"
