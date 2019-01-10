@@ -42,10 +42,11 @@
         />
       </el-form-item>
 
-      <el-form-item>
+      <el-form-item label="目录">
         <el-card
           v-for="(item, index) in form.menus"
           :key="index"
+          style="margin-bottom: 16px"
         >
           <div
             slot="header"
@@ -59,23 +60,23 @@
               style="float: right; padding: 3px 0"
               type="text"
               @click="deleteMenusRow(index)"
-            >删除</el-button>
+            >删除目录</el-button>
           </div>
           <!-- 子菜单 - 应用 -->
-          <el-table :data="item.childrens">
-            <el-table-column
-              prop="id"
-              label="ID"
-            />
+          <el-table
+            :data="item.childrens"
+            :show-header="false"
+          >
             <el-table-column
               prop="name"
               label="名称"
             />
-            <el-table-column
-              label="别名"
-            >
+            <el-table-column label="别名">
               <template slot-scope="scope">
-                <el-input v-model="scope.row.align"/>
+                <el-input
+                  v-model="scope.row.alias"
+                  placeholder="别名"
+                />
               </template>
             </el-table-column>
             <el-table-column
@@ -84,14 +85,20 @@
               align="right"
             >
               <template slot-scope="scope">
-                <el-button @click="item.childrens.splice(scope.$index, 1)">删除</el-button>
+                <el-button
+                  type="text"
+                  @click="item.childrens.splice(scope.$index, 1)"
+                >删除</el-button>
               </template>
             </el-table-column>
           </el-table>
           <div>
-            <el-dropdown @command="addChildrensRow">
-              <el-button type="primary">
-                添加<i class="el-icon-arrow-down el-icon--right" />
+            <el-dropdown
+              trigger="click"
+              @command="addChildrensRow"
+            >
+              <el-button style="margin-top: 16px">
+                添加应用<i class="el-icon-arrow-down el-icon--right" />
               </el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
@@ -104,10 +111,9 @@
           </div>
         </el-card>
         <el-button
-          style="margin-top: 12px"
           type="primary"
           @click="addMenusRow"
-        >新增</el-button>
+        >新增目录</el-button>
       </el-form-item>
     </el-form>
   </Dialog>

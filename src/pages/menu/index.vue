@@ -10,7 +10,7 @@
         <el-button
           type="primary"
           @click="$refs.DialogRow.handleOpen()"
-        >新增</el-button>
+        >创建新目录</el-button>
       </div>
       <el-table-column
         v-for="(item ,index) in table"
@@ -25,23 +25,21 @@
         width="220"
       >
         <template slot-scope="scope">
-          <el-button
-            plain
-            size="mini"
-            type="primary"
+          <el-dropdown
+            split-button
+            trigger="click"
             @click="handleEdit(scope.row)"
-          >编辑</el-button>
-          <el-button
-            plain
-            size="mini"
-            @click="handleClone(scope.row)"
-          >克隆</el-button>
-          <el-button
-            plain
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.row.id)"
-          >删除</el-button>
+            @command="handleAction"
+          >
+            编辑
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item :command="{mode: 'clone', row: scope.row}">克隆</el-dropdown-item>
+              <el-dropdown-item
+                :command="{mode: 'delete', row: scope.row}"
+                divided
+              >删除</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
     </DmConsole>
@@ -71,10 +69,27 @@ export default {
   // },
 
   methods: {
+    handleAction(scope) {
+      const { mode, row } = scope
+      if (mode === 'clone') {
+        this.handleClone(row)
+      } else if (mode === 'delete') {
+        this.$confirm('您确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.handleDelete(row.id)
+        })
+      }
+    },
+
     handleClone(form) {
+      form = deepClone(form)
       form.name = form.name + ' COPY'
       this.handleRowSubmit(form)
     },
+
     async handleRowSubmit(form) {
       try {
         await this.updateApi('/menusVersion', form)

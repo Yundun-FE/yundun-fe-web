@@ -10,7 +10,7 @@
         <el-button
           type="primary"
           @click="$refs.DialogRow.handleOpen()"
-        >新增</el-button>
+        >创建新应用</el-button>
       </div>
       <el-table-column
         v-for="(item ,index) in table"
@@ -25,17 +25,15 @@
         width="180"
       >
         <template slot-scope="scope">
-          <el-button
-            plain
-            size="mini"
-            @click="handleEdit(scope.row)"
-          >编辑</el-button>
-          <el-button
-            plain
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.row.id)"
-          >删除</el-button>
+          <ButtonAction @click="handleEdit(scope.row)" @command="hanldeAction">
+            编辑
+            <template slot="dropdown">
+              <el-dropdown-item
+                :command="{mode: 'delete', row: scope.row}"
+                divided
+              >删除</el-dropdown-item>
+            </template>
+          </ButtonAction>
         </template>
       </el-table-column>
     </DmConsole>
@@ -49,9 +47,10 @@
 <script>
 import consolePage from '@/mixins/consolePage'
 import DialogRow from './components/DialogRow'
+import ButtonAction from '@/components/Button/ButtonAction'
 
 export default {
-  components: { DialogRow },
+  components: { DialogRow, ButtonAction },
 
   mixins: [consolePage],
 
@@ -78,6 +77,13 @@ export default {
       this.$refs.DialogRow.handleClose()
       this.actionSuccess()
       this.init()
+    },
+
+    hanldeAction(scope) {
+      const { mode, row } = scope
+      if (mode === 'delete') {
+        this.handleDelete(row.id)
+      }
     },
 
     async handleDelete(id) {
