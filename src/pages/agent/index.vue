@@ -89,7 +89,6 @@ export default {
     },
 
     handleEdit(form) {
-      form.assets = JSON.stringify(form.assets)
       this.$refs.DialogRow.handleOpen(form, 'EDIT')
     },
 
