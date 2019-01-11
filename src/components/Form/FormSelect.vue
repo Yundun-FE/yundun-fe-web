@@ -1,12 +1,31 @@
 <template>
-  <el-select v-model="val" :placeholder="placeholder" :disabled="disabled" @change="handleChange">
-    <el-option v-if="defaultText" :label="defaultText" value="">{{ defaultText }}</el-option>
-    <el-option v-for="item in selects" :key="item.value" :disabled="item.disabled" :value="item.value" :label="item.label"/>
+  <el-select
+    v-model="val"
+    :size="size"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :filterable="filterable"
+    @change="handleChange"
+  >
+    <el-option
+      v-if="defaultText"
+      :size="size"
+      :label="defaultText"
+      value=""
+    >{{ defaultText }}</el-option>
+    <el-option
+      v-for="item in selects"
+      :size="size"
+      :key="item.value"
+      :disabled="item.disabled"
+      :value="item.value"
+      :label="item.label"
+    />
   </el-select>
 </template>
 
 <script>
-import create from '@/utils/create-basic'
+import create from 'common/utils/create-basic'
 
 export default create({
   name: 'yd-form-select',
@@ -25,6 +44,7 @@ export default create({
         return []
       }
     },
+    filterable: Boolean,
     value: [String, Number]
   },
 

@@ -51,14 +51,14 @@
             min-width="180"
           />
           <el-table-column
-            prop="align"
+            prop="alias"
             label="别名"
             min-width="180"
           >
             <template slot-scope="scope">
               <el-input
                 :disabled="!scope.row.enable"
-                v-model="scope.row.align"
+                v-model="scope.row.alias"
                 placeholder="别名"
               />
             </template>

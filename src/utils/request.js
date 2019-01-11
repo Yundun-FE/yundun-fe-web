@@ -7,6 +7,9 @@ let networkError = false
 const service = axios.create({
   baseURL: '/',
   timeout: 15000
+  // headers: {
+  //   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+  // }
 })
 
 // 拦截器
@@ -76,9 +79,10 @@ const request = function(options) {
       try {
         data = await service(options)
       } catch (error) {
+        console.log(error)
         const { response } = error
         let message = error.message
-        if (response.data) {
+        if (response && response.data) {
           const { message: mainMessage, errors } = response.data
           if (errors) {
             if (errors.length > 0) {

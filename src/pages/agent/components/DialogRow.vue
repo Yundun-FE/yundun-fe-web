@@ -31,7 +31,7 @@
           style="width: 220px"
         />
       </el-form-item>
-      <el-form-item
+      <!-- <el-form-item
         label="资源"
         prop="assets"
       >
@@ -41,7 +41,7 @@
           rows="4"
           style="width: 320px"
         />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item
         label="品牌ID"
         prop="brandId"

@@ -70,8 +70,16 @@
             <el-table-column
               prop="name"
               label="名称"
+              width="100"
             />
-            <el-table-column label="别名">
+            <el-table-column
+              prop="code"
+              label="CODE"
+              width="100"
+            />
+            <el-table-column
+              label="别名"
+            >
               <template slot-scope="scope">
                 <el-input
                   v-model="scope.row.alias"
@@ -83,6 +91,7 @@
               prop="name"
               label="操作"
               align="right"
+              width="80"
             >
               <template slot-scope="scope">
                 <el-button

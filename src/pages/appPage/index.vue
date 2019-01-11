@@ -10,41 +10,37 @@
         <el-button
           type="primary"
           @click="$refs.DialogRow.handleOpen()"
-        >新增</el-button>
+        >创建新页面</el-button>
       </div>
       <el-table-column
-        prop="name"
-        label="名称"
-        min-width="180"
-      />
-      <el-table-column
-        prop="website"
-        label="网站"
-        min-width="180"
+        v-for="(item ,index) in table"
+        :key="index"
+        :prop="item.prop"
+        :label="item.label"
+        :min-width="item.minWidth"
       />
       <el-table-column
         label="操作"
         align="right"
-        width="180"
+        width="220"
       >
         <template slot-scope="scope">
-          <ButtonAction
+          <el-dropdown
             split-button
             trigger="click"
             @click="handleEdit(scope.row)"
             @command="handleAction"
           >
             编辑
-            <template slot="dropdown">
+            <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 :command="{mode: 'delete', row: scope.row}"
                 divided
               >删除</el-dropdown-item>
-            </template>
-          </ButtonAction>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
-
     </DmConsole>
     <DialogRow
       ref="DialogRow"
@@ -55,25 +51,44 @@
 
 <script>
 import consolePage from '@/mixins/consolePage'
+import { deepClone } from '@/utils'
+import { formatLabel } from '@/utils/form'
 import DialogRow from './components/DialogRow'
-import ButtonAction from '@/components/Button/ButtonAction'
 
 export default {
-  components: { DialogRow, ButtonAction },
+  components: { DialogRow },
 
   mixins: [consolePage],
+
+  created() {
+    this.initTable('/appsPages')
+  },
 
   methods: {
     handleAction(scope) {
       const { mode, row } = scope
-      if (mode === 'delete') {
-        this.handleDelete(row.id)
+      if (mode === 'clone') {
+        this.handleClone(row)
+      } else if (mode === 'delete') {
+        this.$confirm('您确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.handleDelete(row.id)
+        })
       }
+    },
+
+    handleClone(form) {
+      form = deepClone(form)
+      form.name = form.name + ' COPY'
+      this.handleRowSubmit(form)
     },
 
     async handleRowSubmit(form) {
       try {
-        await this.updateApi('/agents', form)
+        await this.updateApi('/appsPages', form)
       } catch (e) {
         return
       }
@@ -83,18 +98,17 @@ export default {
     },
 
     async handleDelete(id) {
-      await this.Fetch.delete(`/agents/${id}`)
+      await this.Fetch.delete(`/appsPages/${id}`)
       this.actionSuccess()
       this.init()
     },
 
     handleEdit(form) {
-      form.assets = JSON.stringify(form.assets)
-      this.$refs.DialogRow.handleOpen(form, 'EDIT')
+      this.$refs.DialogRow.handleOpen(deepClone(form), 'EDIT')
     },
 
     init(params) {
-      this.updateList('/agents', params)
+      this.updateList('/appsPages', params)
     }
   }
 }

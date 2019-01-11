@@ -1,14 +1,13 @@
 <style lang="postcss">
 </style>
+<template>
+  <div/>
+</template>
 
 <script>
-import create from '@/utils/create-basic'
-
-export default create({
-  name: 'Form',
+export default {
 
   components: {},
-
   props: {},
 
   data() {
@@ -17,10 +16,6 @@ export default create({
 
   computed: {},
 
-  methods: {},
-
-  render(h) {
-
-  }
-})
+  methods: {}
+}
 </script>

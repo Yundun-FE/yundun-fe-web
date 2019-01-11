@@ -210,6 +210,19 @@ export const constantRouterMap = [{
 },
 
 {
+  path: '/appsPages',
+  component: Layout,
+  children: [{
+    path: '',
+    name: 'appPage',
+    component: () => import('@/pages/appPage/index'),
+    meta: {
+      title: '页面管理'
+    }
+  }]
+},
+
+{
   path: '*',
   redirect: '/404',
   hidden: true
