@@ -6,11 +6,26 @@ export default {
       table: [],
       Fetch,
       loading: true,
-      list: []
+      list: [],
+      multipleSelection: []
+    }
+  },
+
+  computed: {
+    multipleDisable() {
+      return this.multipleSelection.length === 0
     }
   },
 
   methods: {
+    confirmAction(fn) {
+      return this.$confirm('确认执行?', '提示', {
+        type: 'warning'
+      }).then(() => {
+        fn()
+      })
+    },
+
     async initTable(url) {
       const data = await this.Fetch.get(url, { resources: 'table' })
       this.table = data

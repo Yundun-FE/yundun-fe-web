@@ -6,18 +6,29 @@
 
   &__core {
     background: #fff;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    /* box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2); */
   }
 
   &__body {
-    margin-bottom: 12px;
-    min-height: 500px;
+    .el-table {
+      min-height: 500px;
+    }
+
+    .el-loading-mask {
+      top: 42px;
+
+      .el-loading-spinner {
+        top: 30px;
+        margin-top: 0px;
+      }
+    }
   }
 
   &__footer {
     overflow: hidden;
     padding: 12px;
-    border-top: 1px solid #eee;
 
     .el-pagination {
       float: right;
@@ -38,13 +49,24 @@
     <div :class="b('core')">
       <!-- BODY -->
       <div :class="b('body')">
-        <el-table
+        <DmTable
+          :loading="loading"
+          :data="data"
+          :columns="columns"
+        />
+        <!-- <el-table
           v-loading="loading"
           :data="data"
           size="medium"
+          @selection-change="handleSelectionChange"
         >
+          <el-table-column
+            v-if="selection"
+            type="selection"
+            width="55"
+          />
           <slot />
-        </el-table>
+        </el-table> -->
       </div>
       <!-- FOOTER -->
       <div :class="b('footer')">
@@ -64,11 +86,15 @@
 
 <script>
 import create from '@/utils/create-basic'
+import DmTable from './DmTable'
 
 export default create({
   name: 'DmConsole',
 
+  components: { DmTable },
+
   props: {
+    selection: Boolean,
     data: {
       type: Array,
       default: () => []
@@ -76,6 +102,14 @@ export default create({
     loading: {
       type: Boolean,
       default: true
+    },
+    multipleSelection: {
+      type: Array,
+      default: () => []
+    },
+    columns: {
+      type: Array,
+      default: () => []
     }
   },
 
@@ -84,6 +118,7 @@ export default create({
       total: 0,
       page: 1,
       pageSize: 10
+      // multipleSelection: [],
     }
   },
 
@@ -92,6 +127,11 @@ export default create({
   },
 
   methods: {
+    handleSelectionChange(val) {
+      // this.multipleSelection = val
+      this.$emit('update:multipleSelection', val)
+    },
+
     updateTotal(total) {
       this.total = total
     },

@@ -77,8 +77,8 @@
             <template slot-scope="scope">
               <el-upload
                 :on-change="handleUpdate"
-                :data="{token, key: scope.row.key}"
-                :on-success="handleUploadSuccess"
+                :data="{token}"
+                :on-success="res => handleUploadSuccess(res, scope.row.key)"
                 action="https://upload.qiniup.com"
               >
                 <el-button
@@ -116,8 +116,8 @@ export default create({
   },
 
   methods: {
-    handleUploadSuccess(response, file) {
-      const { key, hash } = response
+    handleUploadSuccess(response, key) {
+      const { hash } = response
       this.form.assets.find(_ => _.key === key).value = `${this.urlBase}/${hash}`
     },
 
