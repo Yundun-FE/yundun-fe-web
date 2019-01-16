@@ -9,7 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI, { locale, size: 'small' })
 
 import 'normalize.css/normalize.css'
-import '@/styles/index.scss'
+import '@/styles/index.css'
 import '@/styles/iconfont/iconfont.css'
 
 import { installFilter } from '@/service/filter'

@@ -96,7 +96,7 @@
 
 <script>
 import create from '@/utils/create-basic'
-import { deepClone } from '@/utils'
+import { deepClone, generateMixed } from '@/utils'
 import consoleDialog from '@/mixins/consoleDialog'
 import Fetch from '@/utils/fetch'
 

@@ -1,6 +1,6 @@
-@import './variables.scss';
-@import './mixin.scss';
-@import './transition.scss';
+/* @import './variables.css'; */
+/* @import './mixin.css'; */
+/* @import './transition.css'; */
 
 label {
   font-weight: 700;

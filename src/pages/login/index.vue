@@ -97,7 +97,7 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style lang="postcss">
 $bg:#2d3a4b;
 $light_gray:#eee;
 
@@ -131,10 +131,12 @@ $light_gray:#eee;
 
 </style>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style lang="postcss" scoped>
+
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+
 .login-container {
   position: fixed;
   height: 100%;
