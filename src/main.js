@@ -17,7 +17,7 @@ import { installComponents } from '@/components'
 installFilter(Vue)
 installComponents(Vue)
 
-import '@/icons'
+// import '@/icons'
 import '@/permission'
 
 import Explorer from '@/api/explorer'

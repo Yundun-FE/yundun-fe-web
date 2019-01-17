@@ -15,22 +15,33 @@ export default create({
             prop: column.prop,
             label: column.label,
             minWidth: column.minWidth || '',
-            width: column.width || ''
+            width: column.width || '',
+            align: column.align,
+            headerAlign: column.headerAlign
           }
         })
       )
     })
 
+    // columnsRender.push({
+
+    // })
+
     return createElement('el-table', {
       props: {
         'v-loading': this.loading,
-        'data': this.data
+        'data': this.data,
+        'size': this.size
       }
     }, columnsRender)
   },
 
   props: {
     loading: Boolean,
+    size: {
+      type: String,
+      default: 'medium'
+    },
     data: {
       type: Array,
       default: () => []
