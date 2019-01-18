@@ -1,5 +1,6 @@
-<style lang="stylus">
+<style lang="postcss">
 .page {
+  overflow: hidden;
 
   // padding: 12px;
   &-header {

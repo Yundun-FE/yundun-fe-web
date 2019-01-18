@@ -24,35 +24,13 @@
           @click="handleMultipleAction('Delete')"
         >删除</el-button>
       </div>
-      <el-table-column
-        v-for="(item ,index) in table"
-        :key="index"
-        :prop="item.prop"
-        :label="item.label"
-        :min-width="item.minWidth"
-      />
+
       <el-table-column
         label="操作"
         align="right"
         width="220"
       >
         <template slot-scope="{ row }">
-          <!-- <el-dropdown
-            split-button
-            trigger="click"
-            @click="handleEdit(row)"
-            @command="handleAction"
-          >
-            编辑
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item :command="{mode: 'Clone', row}">克隆</el-dropdown-item>
-              <el-dropdown-item
-                :command="{mode: 'Delete', row}"
-                divided
-              >删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown> -->
-
           <el-dropdown
             split-button
             trigger="click"

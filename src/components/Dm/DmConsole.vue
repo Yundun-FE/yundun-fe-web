@@ -1,5 +1,7 @@
 <style lang="postcss">
 .DmConsole {
+  padding: 20px 30px;
+
   &__toolbar {
     margin-bottom: 12px;
   }
@@ -50,10 +52,13 @@
       <!-- BODY -->
       <div :class="b('body')">
         <DmTable
+          v-if="columns && columns.length > 0"
           :loading="loading"
           :data="data"
           :columns="columns"
-        />
+        >
+          <slot/>
+        </DmTable>
         <!-- <el-table
           v-loading="loading"
           :data="data"

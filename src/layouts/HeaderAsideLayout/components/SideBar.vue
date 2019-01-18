@@ -1,8 +1,8 @@
 <template>
   <scroll-bar>
     <div class="logo">
-      <img src="https://img.alicdn.com/tfs/TB13UQpnYGYBuNjy0FoXXciBFXa-242-134.png" width="40">
-      <span class="site-name">ADMIN LITE</span>
+      <!-- <img src="https://img.alicdn.com/tfs/TB13UQpnYGYBuNjy0FoXXciBFXa-242-134.png" width="40"> -->
+      <span class="site-name">YUNDUN FE</span>
     </div>
     <el-menu
       :show-timeout="200"

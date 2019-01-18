@@ -1,4 +1,3 @@
-
 <script>
 import create from 'common/utils/create-basic'
 
@@ -6,7 +5,14 @@ export default create({
   name: 'DmTable',
 
   render(createElement) {
-    const columnsRender = []
+    const columnsRender = [
+      createElement('el-table-column', {
+        props: {
+          type: 'selection',
+          width: 55
+        }
+      })
+    ]
 
     this.columns.forEach(column => {
       columnsRender.push(
@@ -23,9 +29,9 @@ export default create({
       )
     })
 
-    // columnsRender.push({
-
-    // })
+    columnsRender.push(
+      this.$slots.default
+    )
 
     return createElement('el-table', {
       props: {
@@ -38,6 +44,7 @@ export default create({
 
   props: {
     loading: Boolean,
+    selection: Boolean,
     size: {
       type: String,
       default: 'medium'

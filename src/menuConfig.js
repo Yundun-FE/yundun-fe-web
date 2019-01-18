@@ -11,82 +11,61 @@ const asideMenuConfig = [
     icon: 'el-icon-menu',
     children: [
       {
-        path: '/analysis',
-        name: '分析页'
-      },
-      {
-        path: '/monitor',
-        name: '监控页'
-      },
-      {
-        path: '/workplace',
-        name: '工作台'
+        path: '/',
+        name: '控制台'
       }
     ]
   },
   {
-    path: '/table',
-    name: '表格页',
+    path: '/product',
+    name: '项目管理',
     icon: 'el-icon-date',
     children: [
       {
-        path: '/basic',
-        name: '基础表格'
-      },
-      {
-        path: '/fixed',
-        name: '固定表格'
+        path: '/',
+        name: '所有项目'
       }
     ]
   },
   {
-    path: '/form',
-    name: '表单页',
-    icon: 'el-icon-edit-outline',
-    children: [
-      {
-        path: '/basic',
-        name: '典型表单'
-      },
-      {
-        path: '/signup',
-        name: '注册表单'
-      }
-    ]
+    path: '/account',
+    name: '账号管理',
+    icon: 'el-icon-edit-outline'
   },
   {
-    path: '/charts',
-    name: '图表页',
-    icon: 'el-icon-picture-outline',
-    children: [
-      {
-        path: '/line',
-        name: '折线图'
-      },
-      {
-        path: '/histogram',
-        name: '柱状图'
-      },
-      {
-        path: '/bar',
-        name: '条形图'
-      }
-    ]
+    path: '/cmd',
+    name: '命令管理',
+    icon: 'el-icon-edit-outline'
   },
   {
-    path: '/profile',
-    name: '详情页',
-    icon: 'el-icon-tickets',
-    children: [
-      {
-        path: '/success',
-        name: '基础详情页'
-      },
-      {
-        path: '/fail',
-        name: '失败'
-      }
-    ]
+    path: '/website',
+    name: '网站管理',
+    icon: 'el-icon-edit-outline'
+  },
+  {
+    path: '/setting',
+    name: '配置',
+    icon: 'el-icon-tickets'
+  },
+  {
+    path: '/agents',
+    name: '代理商管理',
+    icon: 'el-icon-tickets'
+  },
+  {
+    path: '/brands',
+    name: '品牌管理',
+    icon: 'el-icon-tickets'
+  },
+  {
+    path: '/brandVersions',
+    name: '品牌组',
+    icon: 'el-icon-tickets'
+  },
+  {
+    path: '/menus',
+    name: '目录管理',
+    icon: 'el-icon-tickets'
   },
   {
     path: '/result',
@@ -102,11 +81,6 @@ const asideMenuConfig = [
         name: '失败'
       }
     ]
-  },
-  {
-    name: 'table-basic',
-    path: '/table/basic',
-    icon: 'home'
   }
 ]
 

@@ -14,7 +14,7 @@
         <el-dropdown>
           <div class="user-profile-body">
             <img class="user-avatar" src="https://img.alicdn.com/tfs/TB1ONhloamWBuNjy1XaXXXCbXXa-200-200.png">
-            <span class="user-name">淘小宝</span>
+            <span class="user-name">云盾</span>
           </div>
           <el-dropdown-menu slot="dropdown" class="user-dropdown">
             <router-link to="/">

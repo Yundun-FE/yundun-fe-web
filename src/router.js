@@ -52,7 +52,7 @@ export const constantRouterMap = [{
   component: Layout,
   hidden: true,
   children: [{
-    path: 'index',
+    path: '',
     name: 'Product',
     component: () => import('@/pages/product/index'),
     meta: {
@@ -82,7 +82,7 @@ export const constantRouterMap = [{
   path: '/account',
   component: Layout,
   children: [{
-    path: 'index',
+    path: '',
     name: 'Account',
     component: () => import('@/pages/account/index'),
     meta: {

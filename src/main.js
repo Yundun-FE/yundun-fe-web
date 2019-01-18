@@ -1,12 +1,11 @@
 import Vue from 'vue'
-import App from './App'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import store from './store'
+import App from './App'
 
-import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/zh-CN'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI, { locale, size: 'small' })
+Vue.use(ElementUI, { size: 'small' })
 
 import 'normalize.css/normalize.css'
 import '@/styles/index.css'
@@ -17,7 +16,6 @@ import { installComponents } from '@/components'
 installFilter(Vue)
 installComponents(Vue)
 
-// import '@/icons'
 import '@/permission'
 
 import Explorer from '@/api/explorer'
