@@ -38,7 +38,6 @@ export default create({
         'selection-change': val => this.$emit('selection-change', val)
       },
       props: {
-        'v-loading': this.loading,
         'data': this.data,
         'size': this.size
       }
@@ -46,7 +45,6 @@ export default create({
   },
 
   props: {
-    loading: Boolean,
     selection: Boolean,
     size: {
       type: String,

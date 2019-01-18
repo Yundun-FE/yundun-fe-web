@@ -57,8 +57,8 @@
       <!-- BODY -->
       <div :class="b('body')">
         <DmTable
+          v-loading="loading"
           v-if="columns && columns.length > 0"
-          :loading="loading"
           :data="data"
           :columns="columns"
           @selection-change="handleSelectionChange"
@@ -132,8 +132,6 @@ export default create({
 
   methods: {
     handleSelectionChange(val) {
-      console.log(val)
-      // this.multipleSelection = val
       this.$emit('update:multipleSelection', val)
     },
 

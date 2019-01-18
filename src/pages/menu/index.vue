@@ -1,11 +1,10 @@
 <template>
   <page>
     <DmConsole
-      ref="DmConsole"
-      :data="list"
       :loading="loading"
-      :multiple-selection.sync="multipleSelection"
+      :data="list"
       :columns="table"
+      :multiple-selection.sync="multipleSelection"
       selection
       @init="init"
     >
@@ -49,28 +48,11 @@
 </template>
 
 <script>
-import consolePage from '@/mixins/consolePage'
-import consoleCudr from '@/mixins/consoleCudr'
+import createCudr from '@/utils/create-cudr'
 import DialogRow from './components/DialogRow'
-import { deepClone } from '@/utils'
 
-export default {
+export default createCudr({
   components: { DialogRow },
-
-  mixins: [consolePage, consoleCudr],
-
-  data() {
-    return {
-      apiName: 'menusVersion'
-    }
-  },
-
-  methods: {
-    handleRowClone(form) {
-      form = deepClone(form)
-      form.name = form.name + ' COPY'
-      this.handleRowSubmit(form)
-    }
-  }
-}
+  apiName: 'menusVersion'
+})
 </script>

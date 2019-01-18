@@ -10,6 +10,10 @@ export default {
     }
   },
 
+  created() {
+    this.initTable(`/${this.apiName}`)
+  },
+
   methods: {
     handleMultipleAction(action) {
       this.$confirm('确认执行?', '提示', {
@@ -31,16 +35,20 @@ export default {
     },
 
     async initTable(url) {
+      this.loading = true
       const data = await this.Fetch.get(url, { resources: 'table' })
       this.table = data
     },
-
+    // 读取数据
     async updateList(url, params) {
       this.loading = true
       const { list, total } = await this.Fetch.get(url, params)
-      this.list = list
-      this.$refs.DmConsole.updateTotal(total)
-      this.loading = false
+      // this.$refs.DmConsole.updateTotal(total)
+
+      setTimeout(() => {
+        this.list = list
+        this.loading = false
+      }, 300)
     },
 
     updateApi(url, form) {

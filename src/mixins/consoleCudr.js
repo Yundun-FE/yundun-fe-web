@@ -15,10 +15,6 @@ export default {
     }
   },
 
-  created() {
-    this.initTable(`/${this.apiName}`)
-  },
-
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val
@@ -75,6 +71,12 @@ export default {
       this.$refs.DialogRow.handleClose()
       this.actionSuccess()
       this.init()
+    },
+
+    handleRowClone(form) {
+      form = deepClone(form)
+      form.name = form.name + ' COPY'
+      this.handleRowSubmit(form)
     }
   }
 }
