@@ -10,11 +10,6 @@
       @init="init"
     >
       <div slot="toolbar">
-        <template slot-scope="scope">
-          <div>
-            {{ scope }}
-          </div>
-        </template>
         <el-button
           type="primary"
           @click="$refs.DialogRow.handleOpen()"
@@ -24,7 +19,6 @@
           @click="handleMultipleAction('Delete')"
         >删除</el-button>
       </div>
-
       <el-table-column
         label="操作"
         align="right"
@@ -34,16 +28,14 @@
           <el-dropdown
             split-button
             trigger="click"
+            size="medium"
             @click="handleEdit(row)"
             @command="handleAction"
           >
             编辑
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item :command="{mode: 'Clone', row}">克隆</el-dropdown-item>
-              <el-dropdown-item
-                :command="{mode: 'Delete', row}"
-                divided
-              >删除</el-dropdown-item>
+              <el-dropdown-item :command="{mode: 'Delete', row}">删除</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -58,47 +50,22 @@
 
 <script>
 import consolePage from '@/mixins/consolePage'
-import { deepClone } from '@/utils'
+import consoleCudr from '@/mixins/consoleCudr'
 import DialogRow from './components/DialogRow'
+import { deepClone } from '@/utils'
 
 export default {
   components: { DialogRow },
 
-  mixins: [consolePage],
+  mixins: [consolePage, consoleCudr],
 
   data() {
     return {
-      action: [
-        {
-          label: '编辑',
-          command: 'Edit'
-        },
-        {
-          label: '克隆',
-          command: 'Edit'
-        },
-        {
-          label: '删除',
-          command: 'Delete'
-        }
-      ]
+      apiName: 'menusVersion'
     }
   },
 
-  created() {
-    this.initTable('/menusVersion')
-  },
-
   methods: {
-    handleMultipleAction(action) {
-      this.$confirm('确认执行?', '提示', {
-        type: 'warning'
-      }).then(() => {
-        const ids = this.multipleSelection.map(_ => _.id).join(',')
-        this.handleDelete(ids)
-      })
-    },
-
     handleAction(scope) {
       const { mode, row } = scope
       if (mode === 'Clone') {
@@ -112,31 +79,6 @@ export default {
       form = deepClone(form)
       form.name = form.name + ' COPY'
       this.handleRowSubmit(form)
-    },
-
-    async handleRowSubmit(form) {
-      try {
-        await this.updateApi('/menusVersion', form)
-      } catch (e) {
-        return
-      }
-      this.$refs.DialogRow.handleClose()
-      this.actionSuccess()
-      this.init()
-    },
-
-    async handleDelete(id) {
-      await this.Fetch.delete(`/menusVersion/${id}`)
-      this.actionSuccess()
-      this.init()
-    },
-
-    handleEdit(form) {
-      this.$refs.DialogRow.handleOpen(deepClone(form), 'EDIT')
-    },
-
-    init(params) {
-      this.updateList('/menusVersion', params)
     }
   }
 }

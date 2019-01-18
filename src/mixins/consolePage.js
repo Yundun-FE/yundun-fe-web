@@ -6,18 +6,22 @@ export default {
       table: [],
       Fetch,
       loading: true,
-      list: [],
-      multipleSelection: []
-    }
-  },
-
-  computed: {
-    multipleDisable() {
-      return this.multipleSelection.length === 0
+      list: []
     }
   },
 
   methods: {
+    handleMultipleAction(action) {
+      this.$confirm('确认执行?', '提示', {
+        type: 'warning'
+      }).then(() => {
+        if (action === 'Delete') {
+          const ids = this.multipleSelection.map(_ => _.id).join(',')
+          this.handleDelete(ids)
+        }
+      })
+    },
+
     confirmAction(fn) {
       return this.$confirm('确认执行?', '提示', {
         type: 'warning'

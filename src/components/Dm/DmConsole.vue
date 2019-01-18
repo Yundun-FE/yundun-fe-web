@@ -2,6 +2,10 @@
 .DmConsole {
   padding: 20px 30px;
 
+  .el-table th{
+    background: rgb(249, 251, 255);
+  }
+
   &__toolbar {
     margin-bottom: 12px;
   }
@@ -10,6 +14,7 @@
     background: #fff;
     border-radius: 3px;
     overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     /* box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2); */
   }
 
@@ -56,22 +61,10 @@
           :loading="loading"
           :data="data"
           :columns="columns"
+          @selection-change="handleSelectionChange"
         >
           <slot/>
         </DmTable>
-        <!-- <el-table
-          v-loading="loading"
-          :data="data"
-          size="medium"
-          @selection-change="handleSelectionChange"
-        >
-          <el-table-column
-            v-if="selection"
-            type="selection"
-            width="55"
-          />
-          <slot />
-        </el-table> -->
       </div>
       <!-- FOOTER -->
       <div :class="b('footer')">
@@ -80,6 +73,7 @@
           :page-sizes="[10, 20, 50, 100]"
           :page-size="pageSize"
           :total="total"
+          background
           layout="total, sizes, prev, pager, next, jumper"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -133,6 +127,7 @@ export default create({
 
   methods: {
     handleSelectionChange(val) {
+      console.log(val)
       // this.multipleSelection = val
       this.$emit('update:multipleSelection', val)
     },

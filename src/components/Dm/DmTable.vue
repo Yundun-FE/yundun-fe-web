@@ -34,6 +34,9 @@ export default create({
     )
 
     return createElement('el-table', {
+      on: {
+        'selection-change': val => this.$emit('selection-change', val)
+      },
       props: {
         'v-loading': this.loading,
         'data': this.data,
@@ -47,7 +50,7 @@ export default create({
     selection: Boolean,
     size: {
       type: String,
-      default: 'medium'
+      default: ''
     },
     data: {
       type: Array,

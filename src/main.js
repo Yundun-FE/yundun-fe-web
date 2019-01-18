@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import App from './App'
 
-Vue.use(ElementUI, { size: 'small' })
+Vue.use(ElementUI)
 
 import 'normalize.css/normalize.css'
 import '@/styles/index.css'
