@@ -93,6 +93,11 @@ export default create({
   components: { DmTable },
 
   props: {
+    createText: {
+      type: String,
+      default: '新增'
+    },
+
     selection: Boolean,
     data: {
       type: Array,

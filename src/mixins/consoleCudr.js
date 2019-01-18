@@ -47,6 +47,15 @@ export default {
       })
     },
 
+    handleRowCommand(scope) {
+      const { mode, row } = scope
+      this[`handleRow${mode}`](row)
+    },
+
+    handleRowDelete(row) {
+      this.handleDelete(row.id)
+    },
+
     async handleDelete(id) {
       // this.$confirm('确认执行?', '提示', {
       //   type: 'warning'

@@ -30,7 +30,7 @@
             trigger="click"
             size="medium"
             @click="handleEdit(row)"
-            @command="handleAction"
+            @command="handleRowCommand"
           >
             编辑
             <el-dropdown-menu slot="dropdown">
@@ -66,16 +66,7 @@ export default {
   },
 
   methods: {
-    handleAction(scope) {
-      const { mode, row } = scope
-      if (mode === 'Clone') {
-        this.handleClone(row)
-      } else if (mode === 'Delete') {
-        this.confirmAction(this.handleDelete(row.id))
-      }
-    },
-
-    handleClone(form) {
+    handleRowClone(form) {
       form = deepClone(form)
       form.name = form.name + ' COPY'
       this.handleRowSubmit(form)
