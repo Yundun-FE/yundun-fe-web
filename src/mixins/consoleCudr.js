@@ -10,7 +10,7 @@ export default {
   },
 
   computed: {
-    multipleDisable() {
+    multipleActionDisable() {
       return this.multipleSelection.length === 0
     }
   },
@@ -24,28 +24,34 @@ export default {
       this.updateList(`/${this.apiName}`, params)
     },
 
-    handleEdit(form) {
-      this.$refs.DialogRow.handleOpen(deepClone(form), 'EDIT')
+    handleRowEdit(scope) {
+      this.$refs.DialogRow.handleOpen(deepClone(scope.row), 'EDIT')
     },
 
     handleUpdate(form) {
       return this.updateApi(`/${this.apiName}`, form)
     },
 
-    handleMultipleAction(action) {
+    handleMultipleAction(e) {
+      const { command } = e
       this.$confirm('确认执行?', '提示', {
         type: 'warning'
       }).then(() => {
-        if (action === 'Delete') {
+        if (command === 'Delete') {
           const ids = this.multipleSelection.map(_ => _.id).join(',')
           this.handleDelete(ids)
         }
       })
     },
 
-    handleRowCommand(scope) {
-      const { mode, row } = scope
-      this[`handleRow${mode}`](row)
+    handleCreate() {
+      this.$refs.DialogRow.handleOpen()
+    },
+
+    handleRowAction(e) {
+      console.log(e)
+      const { command, scope } = e
+      this[`handleRow${command}`](scope)
     },
 
     handleRowDelete(row) {
@@ -73,8 +79,8 @@ export default {
       this.init()
     },
 
-    handleRowClone(form) {
-      form = deepClone(form)
+    handleRowClone(scope) {
+      const form = deepClone(scope.row)
       form.name = form.name + ' COPY'
       this.handleRowSubmit(form)
     }

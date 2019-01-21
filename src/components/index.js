@@ -1,5 +1,6 @@
 import Page from './Page/Page'
 import Form from './Form'
+import Column from './Column'
 import Dialog from './Dialog/Dialog'
 import DmConsole from './Dm/DmConsole'
 
@@ -10,7 +11,8 @@ function install(Vue) {
   install.installed = true
 
   const components = [
-    Form
+    Form,
+    Column
   ]
 
   components.forEach(Component => {

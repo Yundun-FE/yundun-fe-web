@@ -3,7 +3,8 @@ import Fetch from '@/utils/fetch'
 export default {
   data() {
     return {
-      table: [],
+      columns: [],
+      actions: {},
       Fetch,
       loading: true,
       list: []
@@ -15,6 +16,15 @@ export default {
   },
 
   methods: {
+    handleAction(e) {
+      if (typeof e === 'string') {
+        this[`handle${e}`]()
+      } else {
+        const { mode = 'Row' } = e
+        this[`handle${mode}Action`](e)
+      }
+    },
+
     handleMultipleAction(action) {
       this.$confirm('确认执行?', '提示', {
         type: 'warning'
@@ -37,13 +47,14 @@ export default {
     async initTable(url) {
       this.loading = true
       const data = await this.Fetch.get(url, { resources: 'table' })
-      this.table = data
+      this.columns = data.columns
+      this.actions = data.actions
     },
     // 读取数据
     async updateList(url, params) {
       this.loading = true
       const { list, total } = await this.Fetch.get(url, params)
-      // this.$refs.DmConsole.updateTotal(total)
+      this.$refs.DmConsole.updateTotal(total)
 
       setTimeout(() => {
         this.list = list

@@ -2,7 +2,7 @@
 .DmConsole {
   padding: 20px 30px;
 
-  .el-table th{
+  .el-table th {
     background: rgb(249, 251, 255);
   }
 
@@ -19,12 +19,13 @@
   }
 
   &__body {
+    min-height: 500px;
     .el-table {
       min-height: 500px;
     }
 
     .el-loading-mask {
-      top: 42px;
+      top: 47px;
 
       .el-loading-spinner {
         top: 30px;
@@ -47,24 +48,42 @@
 <template>
   <div :class="b()">
     <!-- TOOLBAR -->
-    <div
-      v-if="$slots.toolbar"
-      :class="b('toolbar')"
-    >
+    <div :class="b('toolbar')">
+      <template v-if="actions.toolbar">
+        <el-button
+          v-for="(item, index) in actions.toolbar.list"
+          :key="index"
+          :type="item.type"
+          @click="handleAction(item.command)"
+        >{{ item.label }}</el-button>
+      </template>
+      <!-- MULTIPLE -->
+      <template v-if="actions.multiple">
+        <el-button
+          v-for="(item, index) in actions.multiple.list"
+          :key="`multiple-${index}`"
+          :type="item.type"
+          :disabled="multipleSelection.length === 0"
+          @click="handleAction({ command: item.command, mode: 'Multiple'})"
+        >{{ item.label }}</el-button>
+      </template>
       <slot name="toolbar" />
     </div>
     <div :class="b('core')">
       <!-- BODY -->
       <div :class="b('body')">
-        <DmTable
+        <RenderTable
           v-loading="loading"
           v-if="columns && columns.length > 0"
           :data="data"
           :columns="columns"
+          :selection="selection"
+          :actions="actions"
+          @action="handleAction"
           @selection-change="handleSelectionChange"
         >
-          <slot/>
-        </DmTable>
+          <slot />
+        </RenderTable>
       </div>
       <!-- FOOTER -->
       <div :class="b('footer')">
@@ -85,19 +104,18 @@
 
 <script>
 import create from '@/utils/create-basic'
-import DmTable from './DmTable'
+import RenderTable from './RenderTable'
 
 export default create({
   name: 'DmConsole',
 
-  components: { DmTable },
+  components: { RenderTable },
 
   props: {
     createText: {
       type: String,
       default: '新增'
     },
-
     selection: Boolean,
     data: {
       type: Array,
@@ -114,6 +132,10 @@ export default create({
     columns: {
       type: Array,
       default: () => []
+    },
+    actions: {
+      type: Object,
+      default: () => { }
     }
   },
 
@@ -131,6 +153,11 @@ export default create({
   },
 
   methods: {
+    handleAction(e) {
+      if (!e) return
+      this.$emit('action', e)
+    },
+
     handleSelectionChange(val) {
       this.$emit('update:multipleSelection', val)
     },
