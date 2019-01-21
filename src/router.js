@@ -219,6 +219,10 @@ export const constantRouterMap = [{
     meta: {
       title: '页面管理'
     }
+  }, {
+    path: ':id/edit',
+    name: 'appPage__edit',
+    component: () => import('@/pages/appPage/edit')
   }]
 },
 

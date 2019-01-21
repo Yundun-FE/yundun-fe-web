@@ -2,7 +2,6 @@
 .page {
   overflow: hidden;
 
-  // padding: 12px;
   &-header {
     padding: 12px;
     border-bottom: 1px solid #EEE;
@@ -11,6 +10,9 @@
 </style>
 <template>
   <div class="page">
+    <!-- <el-alert
+      title="成功提示的文案"
+      type="success"/> -->
     <div
       v-if="$slots.header"
       class="page-header"

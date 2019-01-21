@@ -16,6 +16,10 @@ export default {
   },
 
   methods: {
+    init(params) {
+      this.updateList(`/${this.apiName}`, params)
+    },
+
     handleAction(e) {
       if (typeof e === 'string') {
         this[`handle${e}`]()

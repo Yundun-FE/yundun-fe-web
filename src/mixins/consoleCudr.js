@@ -20,10 +20,6 @@ export default {
       this.multipleSelection = val
     },
 
-    init(params) {
-      this.updateList(`/${this.apiName}`, params)
-    },
-
     handleRowEdit(scope) {
       this.$refs.DialogRow.handleOpen(deepClone(scope.row), 'EDIT')
     },
@@ -49,9 +45,15 @@ export default {
     },
 
     handleRowAction(e) {
-      console.log(e)
-      const { command, scope } = e
-      this[`handleRow${command}`](scope)
+      const { command, scope, settings } = e
+
+      if (settings.toPage) {
+        this.$router.push({
+          path: `${this.apiName}/${scope.row.id}/edit`
+        })
+      } else {
+        this[`handleRow${command}`](scope)
+      }
     },
 
     handleRowDelete(row) {
