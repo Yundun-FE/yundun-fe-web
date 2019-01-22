@@ -1,7 +1,5 @@
 <style lang="postcss">
 .DmConsole {
-  padding: 20px 30px;
-
   .el-table th {
     background: rgb(249, 251, 255);
   }
