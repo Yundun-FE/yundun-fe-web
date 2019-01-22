@@ -4,7 +4,10 @@
       <el-breadcrumb-item :to="{ path: '/appsPages' }">页面管理</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/">编辑页面</a></el-breadcrumb-item>
     </el-breadcrumb>
-    <DmEdit @submit="handleSubmit" @on-back="handleBack">
+    <DmEdit
+      @submit="handleSubmit"
+      @on-back="handleBack"
+    >
       <el-form
         ref="form"
         :model="form"
@@ -28,6 +31,12 @@
           <el-input
             v-model="form.code"
             style="width: 220px"
+          />
+        </el-form-item>
+        <el-form-item label="类型">
+          <yd-form-select
+            :selects="LABEL.APP_PAGE_TYPE"
+            v-model="form.type"
           />
         </el-form-item>
         <el-form-item
@@ -110,6 +119,41 @@
             @click="handleRowAdd(form.words, wordsRow)"
           >新增文案</el-button>
         </el-form-item>
+        <!-- 消息配置 -->
+        <el-form-item label="消息">
+          <el-table
+            :data="form.content.notices"
+            border
+          >
+            <el-table-column label="内容">
+              <template slot-scope="scope">
+                <el-input
+                  :rows="1"
+                  v-model="scope.row.content"
+                  type="textarea"
+                  placeholder="内容"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="操作"
+              width="80"
+            >
+              <template slot-scope="scope">
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDelete(form.content.notices, scope.$index)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-button
+            type="primary"
+            style="margin-top: 12px"
+            @click="handleRowAdd(form.content.notices, noticeRow)"
+          >新增</el-button>
+        </el-form-item>
         <!-- 配置 -->
         <el-form-item label="配置">
           <el-table
@@ -147,12 +191,6 @@
                   :radios="selectSettingsType"
                   v-model="scope.row.value"
                 />
-                <!-- <el-input
-                  :rows="1"
-                  v-model="scope.row.value"
-                  style="width: 100px"
-                  placeholder="内容"
-                /> -->
               </template>
             </el-table-column>
             <el-table-column label="代理商">
@@ -161,12 +199,6 @@
                   :radios="selectSettingsType"
                   v-model="scope.row.valueOem"
                 />
-                <!-- <el-input
-                  :rows="1"
-                  v-model="scope.row.value"
-                  style="width: 100px"
-                  placeholder="内容"
-                /> -->
               </template>
             </el-table-column>
             <el-table-column
@@ -188,18 +220,299 @@
             @click="handleRowAdd(form.settings, settingsRow)"
           >新增配置</el-button>
         </el-form-item>
+        <!-- COLUMNS -->
+        <el-form-item
+          v-if="form.content"
+          label="表格栏目"
+        >
+          <el-table
+            :data="form.content.columns"
+            border
+          >
+            <el-table-column
+              label="名称"
+              prop="props.label"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.props.label" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="组件"
+              prop="componentName"
+            >
+              <template slot-scope="scope">
+                <yd-form-select
+                  :selects="LABEL.COLUMN_COMPONENT_NAME"
+                  v-model="scope.row.componentName"
+                  default-text="默认"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="PROP"
+              prop="props.prop"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.props.prop" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="宽度"
+              prop="props.width"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.props.width" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="最小宽度"
+              prop="props.minWidth"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.props.minWidth" />
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-button
+            style="margin-top: 12px"
+            @click="handleRowAdd(form.content.columns, columnsRow)"
+          >新增</el-button>
+        </el-form-item>
+        <!-- ACTION-ROW -->
+        <el-form-item
+          v-if="form.content"
+          label="行操作"
+        >
+          <el-table
+            :data="form.content.actions.row.list"
+            border
+          >
+            <el-table-column
+              label="名称"
+              width="200"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.label" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="类型"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <yd-form-select
+                  :selects="LABEL.BUTTON_TYPE"
+                  v-model="scope.row.type"
+                  default-text="默认"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="命令"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.command" />
+              </template>
+            </el-table-column>
+            <el-table-column label="子操作">
+              <template slot-scope="scope">
+                <el-table
+                  v-if="scope.row.items"
+                  :data="scope.row.items"
+                  border
+                >
+                  <el-table-column
+                    label="名称"
+                    width="100"
+                  >
+                    <template slot-scope="scope">
+                      <el-input v-model="scope.row.label" />
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="类型"
+                    width="100"
+                  >
+                    <template slot-scope="scope">
+                      <yd-form-select
+                        :selects="LABEL.BUTTON_TYPE"
+                        v-model="scope.row.type"
+                        default-text="默认"
+                      />
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="命令"
+                    width="100"
+                  >
+                    <template slot-scope="scope">
+                      <el-input v-model="scope.row.command" />
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="操作"
+                    width="80"
+                  >
+                    <template slot-scope="scope">
+                      <el-button
+                        type="text"
+                        @click="handleActionRowChildDelete(scope.row, scope.$index)"
+                      >删除</el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
+                <el-button
+                  style="margin-top: 12px"
+                  @click="handleActionRowChildAdd(scope.row)"
+                >新增</el-button>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="操作"
+              width="80"
+            >
+              <template slot-scope="scope">
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDelete(form.content.actions.row.list, scope.$index)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-button
+            style="margin-top: 12px"
+            type="primary"
+            @click="handleRowAdd(form.content.actions.row.list, actionRowRow)"
+          >新增</el-button>
+        </el-form-item>
+        <!-- 批量操作 -->
+        <el-form-item
+          v-if="form.content"
+          label="批量操作"
+        >
+          <el-table
+            :data="form.content.actions.multiple.list"
+            border
+          >
+            <el-table-column
+              label="名称"
+              width="200"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.label" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="类型"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <yd-form-select
+                  :selects="LABEL.BUTTON_TYPE"
+                  v-model="scope.row.type"
+                  default-text="默认"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="命令"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.command" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="操作"
+              width="80"
+            >
+              <template slot-scope="scope">
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDelete(form.content.actions.multiple.list, scope.$index)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-button
+            style="margin-top: 12px"
+            type="primary"
+            @click="handleRowAdd(form.content.actions.multiple.list, actionMultipleRow)"
+          >新增</el-button>
+
+        </el-form-item>
+        <!-- 操作 -->
+        <el-form-item
+          v-if="form.content"
+          label="操作"
+        >
+          <el-table
+            :data="form.content.actions.toolbar.list"
+            border
+          >
+            <el-table-column
+              label="名称"
+              width="200"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.label" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="类型"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <yd-form-select
+                  :selects="LABEL.BUTTON_TYPE"
+                  v-model="scope.row.type"
+                  default-text="默认"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="命令"
+              width="100"
+            >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.command" />
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="操作"
+              width="80"
+            >
+              <template slot-scope="scope">
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDelete(form.content.actions.toolbar.list, scope.$index)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-button
+            style="margin-top: 12px"
+            @click="handleRowAdd(form.content.actions.toolbar.list, actionToolbarRow)"
+          >新增</el-button>
+        </el-form-item>
       </el-form>
     </DmEdit>
   </page>
 </template>
 
 <script>
-
 import create from '@/utils/create-basic'
 import { deepClone } from '@/utils'
 import { formatLabel } from '@/utils/form'
 import consoleTable from '@/mixins/consoleTable'
 import consoleEdit from '@/mixins/consoleEdit'
+import * as LABEL from '@/constants/label'
+import { merge } from 'lodash/object'
 
 export default create({
   name: 'DialogAdd',
@@ -208,6 +521,7 @@ export default create({
 
   data() {
     return {
+      LABEL,
       id: '',
       apiName: 'appsPages',
       apps: [],
@@ -216,6 +530,11 @@ export default create({
       selectAgents: [],
       wordsRow: {},
       settingsRow: {},
+      columnsRow: {},
+      actionRowRow: {},
+      noticeRow: {},
+      actionToolbarRow: {},
+      actionMultipleRow: {},
       selectSettingsType: [
         {
           label: '开启',
@@ -270,11 +589,84 @@ export default create({
       this.selectApps = formatLabel(data.list, 'name', 'id')
     },
 
+    handleActionRowChildDelete(row, index) {
+      const { items } = row
+      if (items.length === 0) {
+        row.items = ''
+      } else {
+        this.handleRowDelete(items, index)
+      }
+    },
+    handleActionRowChildAdd(scope) {
+      if (!scope.items) this.$set(scope, 'items', [])
+      this.handleRowAdd(scope.items, this.actionRowRow)
+    },
+
     initData() {
       this.initAppList()
       this.initAgentList()
       this.wordsRow = deepClone(this.FORM.words[0])
       this.settingsRow = deepClone(this.FORM.settings[0])
+
+      const content = {
+        columns: [
+          {
+            componentName: '',
+            props: {
+              prop: '',
+              label: '',
+              minWidth: 100
+            }
+          }
+        ],
+        notices: [
+          {
+            content: '',
+            settings: {}
+          }
+        ],
+        actions: {
+          row: {
+            list: [
+              {
+                label: '',
+                type: '',
+                command: ''
+              }
+            ]
+          },
+          multiple: {
+            list: [
+              {
+                label: '',
+                command: ''
+              }
+            ]
+          },
+          toolbar: {
+            list: [
+              {
+                label: '',
+                command: '',
+                type: ''
+              }
+            ]
+          },
+          search: {
+            label: '搜索',
+            command: 'Search',
+            align: 'right',
+            key: ''
+          }
+        }
+      }
+      this.actionRowRow = deepClone(content.actions.row.list[0])
+      this.actionToolbarRow = deepClone(content.actions.toolbar.list[0])
+      this.actionMultipleRow = deepClone(content.actions.multiple.list[0])
+      this.columnsRow = deepClone(content.columns[0])
+      this.noticeRow = deepClone(content.notices[0])
+
+      this.form.content = merge(content, this.form.content)
     }
   }
 })

@@ -133,6 +133,7 @@ import create from '@/utils/create-basic'
 import { deepClone } from '@/utils'
 import { formatLabel } from '@/utils/form'
 import consoleDialog from '@/mixins/consoleDialog'
+import consoleEdit from '@/mixins/consoleEdit'
 import Fetch from '@/utils/fetch'
 
 const MENU_ROW = {
@@ -143,7 +144,7 @@ const MENU_ROW = {
 export default create({
   name: 'DialogAdd',
 
-  mixins: [consoleDialog],
+  mixins: [consoleDialog, consoleEdit],
 
   data() {
     return {
@@ -176,7 +177,6 @@ export default create({
       const data = await Fetch.get('/applications')
       this.apps = data.list
       this.selectApps = formatLabel(data.list, 'name', 'id')
-      console.log(this.selectApps)
     },
 
     async handleOpen(form = {}, mode) {

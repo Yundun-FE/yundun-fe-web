@@ -24,6 +24,12 @@ export default {
       this.$refs.DialogRow.handleOpen(deepClone(scope.row), 'EDIT')
     },
 
+    handleRowEditpage(scope) {
+      this.$router.push({
+        path: `${this.apiName}/${scope.row.id}/edit`
+      })
+    },
+
     handleUpdate(form) {
       return this.updateApi(`/${this.apiName}`, form)
     },
@@ -44,15 +50,12 @@ export default {
       this.$refs.DialogRow.handleOpen()
     },
 
-    handleRowAction(e) {
-      const { command, scope, settings } = e
-
-      if (settings.toPage) {
-        this.$router.push({
-          path: `${this.apiName}/${scope.row.id}/edit`
-        })
+    handleAction(e) {
+      if (typeof e === 'string') {
+        this[`handle${e}`]()
       } else {
-        this[`handleRow${command}`](scope)
+        const { mode = 'Row', command, scope } = e
+        this[`handle${mode}${command}`](scope)
       }
     },
 
@@ -61,13 +64,9 @@ export default {
     },
 
     async handleDelete(id) {
-      // this.$confirm('确认执行?', '提示', {
-      //   type: 'warning'
-      // }).then(async() => {
       await this.Fetch.delete(`/${this.apiName}/${id}`)
       this.actionSuccess()
       this.init()
-      // })
     },
 
     async handleRowSubmit(form) {
@@ -85,6 +84,22 @@ export default {
       const form = deepClone(scope.row)
       form.name = form.name + ' COPY'
       this.handleRowSubmit(form)
+    },
+
+    updateApi(url, form) {
+      const mode = form._mode
+      if (mode === 'EDIT') {
+        return this.Fetch.put(`${url}/${form.id}`, form)
+      } else {
+        return this.Fetch.post(url, form)
+      }
+    },
+
+    actionSuccess() {
+      this.$message({
+        message: '操作成功',
+        type: 'success'
+      })
     }
   }
 }

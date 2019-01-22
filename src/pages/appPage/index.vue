@@ -23,6 +23,14 @@ import DialogRow from './components/DialogRow'
 
 export default createCudr({
   components: { DialogRow },
-  apiName: 'appsPages'
+  pageName: 'application-page',
+  apiName: 'appsPages',
+  methods: {
+    handleRowDeploy(scope) {
+      console.log(scope)
+      const id = scope.row.id
+      this.Fetch.post(`/${this.apiName}/${id}/deploy`)
+    }
+  }
 })
 </script>

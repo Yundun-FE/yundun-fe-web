@@ -41,7 +41,7 @@ export default {
     initData() {},
 
     async init(id) {
-      this.initForm(`/${this.apiName}`)
+      await this.initForm(`/${this.apiName}`)
       const data = await Fetch.get(`/${this.apiName}/${id}`)
       this.form = Object.assign(deepClone(this.FORM), data)
       this.$refs.form && this.$refs.form.clearValidate()

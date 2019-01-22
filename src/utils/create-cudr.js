@@ -12,6 +12,7 @@ export default function(sfc) {
 
   sfc.data = function() {
     return {
+      pageName: sfc.pageName,
       apiName: sfc.apiName
     }
   }

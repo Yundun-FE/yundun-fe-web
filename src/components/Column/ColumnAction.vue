@@ -38,7 +38,7 @@
         v-else
         :size="size"
         :type="item.type"
-        @click="handleClick(item.command)"
+        @click="handleClick({command: item.command, scope, settings: item})"
       >{{ item.label }}</el-button>
     </span>
   </div>

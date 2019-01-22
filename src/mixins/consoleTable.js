@@ -14,6 +14,10 @@ export default {
 
     handleRowDelete(table, index) {
       table.splice(index, 1)
+    },
+
+    handleTableReset(scope, key, row) {
+      this.$set(scope, key, [deepClone(row)])
     }
   }
 }
