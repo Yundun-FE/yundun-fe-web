@@ -1,5 +1,13 @@
 <style lang="postcss">
 .DmEdit {
+  .el-table th {
+    background: rgb(249, 251, 255);
+  }
+
+  .BlockForm {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
   /* padding: 30px; */
 }
 </style>
@@ -12,9 +20,7 @@
     >
       <slot />
       <div slot="footer">
-        <el-button
-          @click="handleBack"
-        >返回</el-button>
+        <el-button @click="handleBack">返回</el-button>
         <div class="pull-right">
           <el-button
             type="primary"

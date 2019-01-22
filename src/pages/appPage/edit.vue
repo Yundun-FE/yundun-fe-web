@@ -14,56 +14,51 @@
         :rules="RULES"
         label-width="120px"
       >
-        <el-form-item
-          label="名称"
-          prop="name"
-        >
-          <el-input
-            v-model="form.name"
-            placeholder="名称"
-            style="width: 220px"
-          />
-        </el-form-item>
-        <el-form-item
-          label="CODE"
-          prop="code"
-        >
-          <el-input
-            v-model="form.code"
-            style="width: 220px"
-          />
-        </el-form-item>
-        <el-form-item label="类型">
-          <yd-form-select
-            :selects="LABEL.APP_PAGE_TYPE"
-            v-model="form.type"
-          />
-        </el-form-item>
-        <el-form-item
-          label="备注"
-          prop="remarks"
-        >
-          <el-input
-            v-model="form.remarks"
-            style="width: 220px"
-          />
-        </el-form-item>
-        <el-form-item label="绑定应用">
-          <yd-form-select
-            v-model="form.appId"
-            :selects="selectApps"
-            filterable
-          />
-        </el-form-item>
-        <!-- <el-form-item label="代理商">
-          <yd-form-radio-button
-            v-model="agentsType"
-            :radios="selectAgentsType"
-            default-text="默认"
-          />
-        </el-form-item> -->
+        <div class="BlockForm">
+          <el-form-item
+            label="名称"
+            prop="name"
+          >
+            <el-input
+              v-model="form.name"
+              placeholder="名称"
+              style="width: 220px"
+            />
+          </el-form-item>
+          <el-form-item
+            label="CODE"
+            prop="code"
+          >
+            <el-input
+              v-model="form.code"
+              style="width: 220px"
+            />
+          </el-form-item>
+          <el-form-item label="类型">
+            <yd-form-select
+              :selects="LABEL.APP_PAGE_TYPE"
+              v-model="form.type"
+            />
+          </el-form-item>
+          <el-form-item
+            label="备注"
+            prop="remarks"
+          >
+            <el-input
+              v-model="form.remarks"
+              style="width: 220px"
+            />
+          </el-form-item>
+          <el-form-item label="绑定应用">
+            <yd-form-select
+              v-model="form.appId"
+              :selects="selectApps"
+              filterable
+            />
+          </el-form-item>
+        </div>
         <!-- 文案配置 -->
-        <el-form-item label="文案">
+        <!-- <el-form-item label="文案">
           <el-table
             :data="form.words"
             border
@@ -118,44 +113,46 @@
             style="margin-top: 12px"
             @click="handleRowAdd(form.words, wordsRow)"
           >新增文案</el-button>
-        </el-form-item>
+        </el-form-item> -->
         <!-- 消息配置 -->
-        <el-form-item label="消息">
-          <el-table
-            :data="form.content.notices"
-            border
-          >
-            <el-table-column label="内容">
-              <template slot-scope="scope">
-                <el-input
-                  :rows="1"
-                  v-model="scope.row.content"
-                  type="textarea"
-                  placeholder="内容"
-                />
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="操作"
-              width="80"
+        <div class="BlockForm">
+          <el-form-item label="消息提示">
+            <el-table
+              :data="form.content.notices"
+              border
             >
-              <template slot-scope="scope">
-                <el-button
-                  :disabled="disabledEdit"
-                  type="text"
-                  @click="handleRowDelete(form.content.notices, scope.$index)"
-                >删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-button
-            type="primary"
-            style="margin-top: 12px"
-            @click="handleRowAdd(form.content.notices, noticeRow)"
-          >新增</el-button>
-        </el-form-item>
+              <el-table-column label="内容">
+                <template slot-scope="scope">
+                  <el-input
+                    :rows="3"
+                    v-model="scope.row.content"
+                    type="textarea"
+                    placeholder="内容"
+                  />
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="操作"
+                width="80"
+              >
+                <template slot-scope="scope">
+                  <el-button
+                    :disabled="disabledEdit"
+                    type="text"
+                    @click="handleRowDelete(form.content.notices, scope.$index)"
+                  >删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-button
+              type="primary"
+              style="margin-top: 12px"
+              @click="handleRowAdd(form.content.notices, noticeRow)"
+            >新增</el-button>
+          </el-form-item>
+        </div>
         <!-- 配置 -->
-        <el-form-item label="配置">
+        <!-- <el-form-item label="配置">
           <el-table
             :data="form.settings"
             border
@@ -219,7 +216,7 @@
             style="margin-top: 12px"
             @click="handleRowAdd(form.settings, settingsRow)"
           >新增配置</el-button>
-        </el-form-item>
+        </el-form-item> -->
         <!-- COLUMNS -->
         <el-form-item
           v-if="form.content"
