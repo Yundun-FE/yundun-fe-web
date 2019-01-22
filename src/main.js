@@ -11,7 +11,7 @@ import 'normalize.css/normalize.css'
 import '@/styles/index.css'
 import '@/styles/iconfont/iconfont.css'
 
-import { installFilter } from '@/service/filter'
+import { installFilter } from '@/utils/filter'
 import { installComponents } from '@/components'
 installFilter(Vue)
 installComponents(Vue)

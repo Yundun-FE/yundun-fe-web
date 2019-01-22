@@ -23,7 +23,7 @@ import Explorer from '@/api/explorer'
 import Page from '@/components/Page/Page'
 import ActionDelete from '@/components/Action/ActionDelete'
 import DialogEdit from './Dialog/DialogEdit'
-import Notice from '@/service/notice'
+import Notice from '@/utils/notice'
 
 export default {
   components: { Page, DialogEdit, ActionDelete },

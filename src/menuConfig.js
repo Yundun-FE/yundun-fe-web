@@ -71,21 +71,6 @@ const asideMenuConfig = [
     path: '/appsPages',
     name: '页面管理',
     icon: 'el-icon-tickets'
-  },
-  {
-    path: '/result',
-    name: '结果页',
-    icon: 'el-icon-circle-check-outline',
-    children: [
-      {
-        path: '/success',
-        name: '成功'
-      },
-      {
-        path: '/fail',
-        name: '失败'
-      }
-    ]
   }
 ]
 

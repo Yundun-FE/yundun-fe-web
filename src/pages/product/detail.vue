@@ -164,7 +164,7 @@
 
 <script>
 import Explorer from '@/api/explorer'
-import Notice from '@/service/notice'
+import Notice from '@/utils/notice'
 import Page from '@/components/Page/Page'
 import ColumnStatus from '@/components/Column/ColumnStatus'
 import { deepClone, listToObj } from '@/utils/util'
@@ -173,7 +173,7 @@ import FormRadioButton from '@/components/Form/FormRadioButton'
 import DmSearch from '@/components/Dm/DmSearch'
 import DmSearchItem from '@/components/Dm/DmSearchItem'
 import { MODULES_TYPE, ENV } from '@/constants/label'
-import { labelView } from '@/service/filter'
+import { labelView } from '@/utils/filter'
 import Lockr from 'lockr'
 
 export default {

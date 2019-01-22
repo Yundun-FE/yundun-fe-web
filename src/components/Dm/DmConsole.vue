@@ -13,7 +13,6 @@
     border-radius: 3px;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    /* box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2); */
   }
 
   &__body {
@@ -52,6 +51,7 @@
           v-for="(item, index) in actions.toolbar.list"
           :key="index"
           :type="item.type"
+          size="medium"
           @click="handleAction(item.command)"
         >{{ item.label }}</el-button>
       </template>
@@ -62,9 +62,24 @@
           :key="`multiple-${index}`"
           :type="item.type"
           :disabled="multipleSelection.length === 0"
+          size="medium"
           @click="handleAction({ command: item.command, mode: 'Multiple'})"
         >{{ item.label }}</el-button>
       </template>
+
+      <div class="pull-right">
+        <FormSearch
+          size="medium"
+          @submit="handleSearch"
+        />
+        <el-tooltip content="布局配置" placement="top">
+          <el-button
+            icon="el-icon-setting"
+            size="medium"
+            circle
+          />
+        </el-tooltip>
+      </div>
       <slot name="toolbar" />
     </div>
     <div :class="b('core')">
@@ -141,7 +156,10 @@ export default create({
     return {
       total: 0,
       page: 1,
-      pageSize: 10
+      pageSize: 10,
+      params: {
+        name: ''
+      }
       // multipleSelection: [],
     }
   },
@@ -164,6 +182,10 @@ export default create({
       this.total = total
     },
 
+    handleSearch() {
+      this.handleInit()
+    },
+
     handleInit() {
       this.page = 1
       this.handleEmit()
@@ -172,8 +194,9 @@ export default create({
     handleEmit() {
       const { total, page, pageSize } = this
       const params = {
-        total, page, pageSize
+        total, page, pageSize, ... this.params
       }
+
       this.$emit('init', params)
     },
 

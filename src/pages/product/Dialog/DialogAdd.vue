@@ -27,7 +27,7 @@
 <script>
 import Select from '@/components/Select/Select'
 import { deepClone } from '@/utils'
-import Notice from '@/service/notice'
+import Notice from '@/utils/notice'
 
 const SELECT_ENV = [
   {

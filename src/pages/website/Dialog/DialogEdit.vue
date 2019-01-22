@@ -17,7 +17,7 @@
 
 <script>
 import { deepClone } from '@/utils'
-import Notice from '@/service/notice'
+import Notice from '@/utils/notice'
 
 const FORM_RAW = {
   title: '',
