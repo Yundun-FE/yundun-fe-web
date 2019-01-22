@@ -5,10 +5,13 @@
   }
 
   &__toolbar {
+    width: 100%;
     margin-bottom: 12px;
+    overflow: hidden;
   }
 
   &__core {
+    width: 100%;
     background: #fff;
     border-radius: 3px;
     overflow: hidden;
@@ -16,6 +19,7 @@
   }
 
   &__body {
+    width: 100%;
     min-height: 500px;
     .el-table {
       min-height: 500px;
@@ -43,7 +47,12 @@
 </style>
 
 <template>
-  <div :class="b()">
+  <div
+    v-loading="!columns"
+    :class="b()"
+    element-loading-text="加载中"
+    element-loading-spinner="el-icon-loading"
+  >
     <!-- TOOLBAR -->
     <div :class="b('toolbar')">
       <template v-if="actions.toolbar">
@@ -66,13 +75,15 @@
           @click="handleAction({ command: item.command, mode: 'Multiple'})"
         >{{ item.label }}</el-button>
       </template>
-
       <div class="pull-right">
         <FormSearch
           size="medium"
           @submit="handleSearch"
         />
-        <el-tooltip content="布局配置" placement="top">
+        <el-tooltip
+          content="布局配置"
+          placement="top"
+        >
           <el-button
             icon="el-icon-setting"
             size="medium"
@@ -82,16 +93,22 @@
       </div>
       <slot name="toolbar" />
     </div>
-    <div :class="b('core')">
+    <div
+      :class="b('core')"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="#FFF"
+    >
       <!-- BODY -->
-      <div :class="b('body')">
+      <div
+        :class="b('body')"
+      >
         <RenderTable
-          v-loading="loading"
           v-if="columns && columns.length > 0"
-          :data="data"
           :columns="columns"
           :selection="selection"
           :actions="actions"
+          :data="data"
+
           @action="handleAction"
           @selection-change="handleSelectionChange"
         >

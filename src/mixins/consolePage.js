@@ -12,7 +12,9 @@ export default {
   },
 
   created() {
-    this.initPageLayout()
+    setTimeout(() => {
+      this.initPageLayout()
+    }, 50)
   },
 
   methods: {
@@ -33,9 +35,10 @@ export default {
       this.$refs.DmConsole.updateTotal(total)
 
       setTimeout(() => {
-        this.list = list
         this.loading = false
       }, 300)
+
+      this.list = list
     }
   }
 }

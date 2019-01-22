@@ -59,11 +59,16 @@ export default {
       }
     },
 
-    handleRowDelete(row) {
+    handleRowDelete(scope) {
+      const { row } = scope
       this.handleDelete(row.id)
     },
 
     async handleDelete(id) {
+      if (!id) {
+        console.warn('no-id')
+        return
+      }
       await this.Fetch.delete(`/${this.apiName}/${id}`)
       this.actionSuccess()
       this.init()

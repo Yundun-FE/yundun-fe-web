@@ -68,6 +68,11 @@ const asideMenuConfig = [
     icon: 'el-icon-tickets'
   },
   {
+    path: '/applications',
+    name: '应用管理',
+    icon: 'el-icon-tickets'
+  },
+  {
     path: '/appsPages',
     name: '页面管理',
     icon: 'el-icon-tickets'
