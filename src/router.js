@@ -21,276 +21,284 @@ Vue.use(Router)
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [{
-  path: '/login',
-  component: () => import('@/pages/login/index'),
-  hidden: true
-},
-{
-  path: '/404',
-  component: () => import('@/pages/404'),
-  hidden: true
-},
-
-{
-  path: '/',
-  component: Layout,
-  redirect: '/dashboard',
-  name: 'Dashboard',
-  // hidden: true,
-  children: [{
-    path: 'dashboard',
-    component: () => import('@/pages/dashboard/index'),
-    meta: {
-      title: '控制台'
-    }
-  }]
-},
-
-{
-  path: '/product',
-  component: Layout,
-  hidden: true,
-  children: [{
-    path: '',
-    name: 'Product',
-    component: () => import('@/pages/product/index'),
-    meta: {
-      title: '项目管理'
-    }
+export const constantRouterMap = [
+  {
+    path: '/login',
+    component: () => import('@/pages/login/index'),
+    hidden: true
   },
   {
-    path: 'id/:id',
-    name: 'ProductDetail',
-    component: () => import('@/pages/product/detail'),
-    meta: {
-      title: '项目详情'
-    }
+    path: '/404',
+    component: () => import('@/pages/404'),
+    hidden: true
   },
+
   {
-    path: 'id/:id/log',
-    name: 'ProductLog',
-    component: () => import('@/pages/product/log'),
-    meta: {
-      title: 'Log'
-    }
-  }
-  ]
-},
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    name: 'Dashboard',
+    // hidden: true,
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/pages/dashboard/index'),
+        meta: {
+          title: '控制台'
+        }
+      }
+    ]
+  },
 
-{
-  path: '/account',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'Account',
-    component: () => import('@/pages/account/index'),
-    meta: {
-      title: '账号管理'
-    }
-  }]
-},
-
-{
-  path: '/cmd',
-  component: Layout,
-  children: [{
-    path: 'index',
-    name: 'Cmd',
-    component: () => import('@/pages/cmd/index'),
-    meta: {
-      title: '命令管理'
-    }
-  }]
-},
-
-{
-  path: '/website',
-  component: Layout,
-  children: [{
-    path: 'index',
-    name: 'Website',
-    component: () => import('@/pages/website/index'),
-    meta: {
-      title: '网站管理'
-    }
-  }]
-},
-
-{
-  path: '/progress',
-  component: Layout,
-  hidden: true,
-  children: [{
-    path: 'index',
-    name: 'Progress',
-    component: () => import('@/pages/progress/index'),
-    meta: {
-      title: 'Progress'
-    }
-  }]
-},
-
-{
-  path: '/setting',
-  component: Layout,
-  children: [{
-    path: 'index',
-    name: 'Setting',
-    component: () => import('@/pages/setting/index'),
-    meta: {
-      title: '配置'
-    }
-  }]
-},
-
-{
-  path: '/agents',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'Agent',
-    component: () => import('@/pages/agent/index'),
-    meta: {
-      title: '代理商管理'
-    }
-  }]
-},
-
-{
-  path: '/brands',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'brand',
-    component: () => import('@/pages/brand/index'),
-    meta: {
-      title: '品牌管理'
-    }
-  }]
-},
-
-{
-  path: '/brandVersions',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'brandVersion',
-    component: () => import('@/pages/brandVersion/index'),
-    meta: {
-      title: '品牌组'
-    }
-  }]
-},
-
-{
-  path: '/menus',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'menu',
-    component: () => import('@/pages/menu/index'),
-    meta: {
-      title: '目录管理'
-    }
-  }]
-},
-
-{
-  path: '/applications',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'application',
-    component: () => import('@/pages/application/index'),
-    meta: {
-      title: '应用管理'
-    },
+  {
+    path: '/product',
+    component: Layout,
+    hidden: true,
     children: [
       {
         path: '',
-        name: 'applications__list',
-        component: () => import('@/pages/application/list'),
+        name: 'Product',
+        component: () => import('@/pages/product/index'),
         meta: {
-          title: '所有应用'
+          title: '项目管理'
         }
       },
       {
-        path: ':appId',
-        name: 'applications__detail',
-        redirect: ':appId/pages',
-        component: () => import('@/pages/application/detail'),
+        path: 'id/:id',
+        name: 'ProductDetail',
+        component: () => import('@/pages/product/detail'),
         meta: {
-          title: '应用详情'
+          title: '项目详情'
+        }
+      },
+      {
+        path: 'id/:id/log',
+        name: 'ProductLog',
+        component: () => import('@/pages/product/log'),
+        meta: {
+          title: 'Log'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/account',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Account',
+        component: () => import('@/pages/account/index'),
+        meta: {
+          title: '账号管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/cmd',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Cmd',
+        component: () => import('@/pages/cmd/index'),
+        meta: {
+          title: '命令管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/website',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Website',
+        component: () => import('@/pages/website/index'),
+        meta: {
+          title: '网站管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/progress',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'Progress',
+        component: () => import('@/pages/progress/index'),
+        meta: {
+          title: 'Progress'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/setting',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Setting',
+        component: () => import('@/pages/setting/index'),
+        meta: {
+          title: '配置'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/agents',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Agent',
+        component: () => import('@/pages/agent/index'),
+        meta: {
+          title: '代理商管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/brands',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'brand',
+        component: () => import('@/pages/brand/index'),
+        meta: {
+          title: '品牌管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/brandVersions',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'brandVersion',
+        component: () => import('@/pages/brandVersion/index'),
+        meta: {
+          title: '品牌组'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/menus',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'menu',
+        component: () => import('@/pages/menu/index'),
+        meta: {
+          title: '目录管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/applications',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/pages/application/index'),
+        meta: {
+          title: '应用管理'
         },
         children: [
           {
-            path: 'pages',
-            name: 'applications__pages',
-            component: () => import('@/pages/applicationPage/list'),
+            path: '',
+            name: 'applications',
+            component: () => import('@/pages/application/list'),
             meta: {
-              title: '页面管理'
+              title: '所有应用'
             }
           },
           {
-            path: 'pages/:pageId/edit',
-            name: 'applications__pages__id',
-            component: () => import('@/pages/applicationPage/edit'),
+            path: ':appId',
+            name: 'applications__detail',
+            redirect: ':appId/pages',
+            component: () => import('@/pages/application/detail'),
             meta: {
-              title: '修改页面'
-            }
+              title: '应用详情'
+            },
+            children: [
+              {
+                path: 'pages',
+                name: 'applications__pages',
+                component: () => import('@/pages/applicationPage/list'),
+                meta: {
+                  title: '页面管理'
+                }
+              },
+              {
+                path: 'pages/:pageId/edit',
+                name: 'applications__pages__id',
+                component: () => import('@/pages/applicationPage/edit'),
+                meta: {
+                  title: '修改页面'
+                }
+              }
+            ]
           }
         ]
       }
     ]
+  },
+
+  {
+    path: '/applicationPage',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'applicationPage',
+        component: () => import('@/pages/applicationPage/index'),
+        meta: {
+          title: '页面管理'
+        }
+      },
+      {
+        path: ':id/edit',
+        name: 'applicationPage__edit',
+        component: () => import('@/pages/applicationPage/edit')
+      },
+      {
+        path: 'create',
+        name: 'applicationPage__create',
+        component: () => import('@/pages/applicationPage/edit')
+      }
+    ]
+  },
+
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
   }
-  // {
-  //   path: ':appId/pages',
-  //   name: 'applications__pages',
-  //   component: () => import('@/pages/applicationPage/index'),
-  //   meta: {
-  //     title: '页面管理'
-  //   },
-  //   children: [
-  //     {
-  //       path: ':pageId/edit',
-  //       name: 'applications__pages__id',
-  //       component: () => import('@/pages/applicationPage/edit'),
-  //       meta: {
-  //         title: '修改页面'
-  //       }
-  //     }
-  //   ]
-  // }
-  ]
-},
-
-{
-  path: '/applicationPage',
-  component: Layout,
-  children: [{
-    path: '',
-    name: 'applicationPage',
-    component: () => import('@/pages/applicationPage/index'),
-    meta: {
-      title: '页面管理'
-    }
-  }, {
-    path: ':id/edit',
-    name: 'applicationPage__edit',
-    component: () => import('@/pages/applicationPage/edit')
-  }, {
-    path: 'create',
-    name: 'applicationPage__create',
-    component: () => import('@/pages/applicationPage/edit')
-  }]
-},
-
-{
-  path: '*',
-  redirect: '/404',
-  hidden: true
-}
 ]
 
 export default new Router({
