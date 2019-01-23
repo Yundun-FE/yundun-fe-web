@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import App from './App'
 import Fetch from '@/utils/fetch'
-import * as LABEL from '@/constants/label'
+import * as LABEL from '@/utils/constants/label'
 
 Vue.use(ElementUI)
 

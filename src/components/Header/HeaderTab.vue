@@ -2,7 +2,9 @@
 </style>
 
 <template>
-  <div :class="b()"/>
+  <div :class="b()">
+    {{ data }}
+  </div>
 </template>
 
 <script>
@@ -13,7 +15,12 @@ export default create({
 
   components: {},
 
-  props: {},
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  },
 
   data() {
     return {}

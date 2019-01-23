@@ -542,7 +542,7 @@ import { deepClone } from '@/utils'
 import { formatLabel } from '@/utils/form'
 import consoleTable from '@/mixins/consoleTable'
 import consoleEdit from '@/mixins/consoleEdit'
-import * as LABEL from '@/constants/label'
+import * as LABEL from '@/utils/constants/label'
 import { merge } from 'lodash/object'
 import RenderTable from '@/components/Dm/RenderTable'
 
