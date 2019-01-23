@@ -209,14 +209,14 @@ export const constantRouterMap = [{
   }, {
     path: ':appId/pages',
     name: 'applications__pages',
-    component: () => import('@/pages/appPage/index'),
+    component: () => import('@/pages/applicationPage/index'),
     meta: {
       title: '页面管理'
     }
   }, {
     path: ':appId/pages/:pageId/edit',
     name: 'applications__pages__id',
-    component: () => import('@/pages/appPage/edit'),
+    component: () => import('@/pages/applicationPage/edit'),
     meta: {
       title: '修改页面'
     }
@@ -224,23 +224,23 @@ export const constantRouterMap = [{
 },
 
 {
-  path: '/appsPages',
+  path: '/applicationPage',
   component: Layout,
   children: [{
     path: '',
-    name: 'appPage',
-    component: () => import('@/pages/appPage/index'),
+    name: 'applicationPage',
+    component: () => import('@/pages/applicationPage/index'),
     meta: {
       title: '页面管理'
     }
   }, {
     path: ':id/edit',
-    name: 'appPage__edit',
-    component: () => import('@/pages/appPage/edit')
+    name: 'applicationPage__edit',
+    component: () => import('@/pages/applicationPage/edit')
   }, {
     path: 'create',
-    name: 'appPage__create',
-    component: () => import('@/pages/appPage/edit')
+    name: 'applicationPage__create',
+    component: () => import('@/pages/applicationPage/edit')
   }]
 },
 

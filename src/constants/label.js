@@ -79,6 +79,12 @@ const BUTTON_TYPE = [
   }
 ]
 
+const APPLICATION_TYPE = [
+  {
+    label: ''
+  }
+]
+
 export {
   APP_PAGE_TYPE,
   MODULES_TYPE,

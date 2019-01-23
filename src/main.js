@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import App from './App'
 import Fetch from '@/utils/fetch'
+import * as LABEL from '@/constants/label'
 
 Vue.use(ElementUI)
 
@@ -21,6 +22,7 @@ import '@/permission'
 
 import Explorer from '@/api/explorer'
 Vue.prototype.Fetch = Fetch
+Vue.prototype.LABEL = LABEL
 Vue.prototype.$Api = {
   Explorer
 }

@@ -1,7 +1,6 @@
 <template>
   <page>
-    <AppPageHeader v-if="query.appId" />
-
+    <AppPageHeader v-if="bindParams.appId" />
     <el-tabs>
       <el-tab-pane
         label="目录管理"
@@ -14,7 +13,7 @@
       :data="list"
       :columns="columns"
       :actions="actions"
-      :query="query"
+      :bind-params="bindParams"
       :multiple-selection.sync="multipleSelection"
       @init="init"
       @action="handleAction"
@@ -37,8 +36,12 @@ export default createCudr({
   pageName: 'application-page',
   apiName: 'appsPages',
 
-  created() {
-    this.query.appId = this.$route.params.appId
+  data() {
+    return {
+      bindParams: {
+        appId: this.$route.params.appId
+      }
+    }
   },
 
   methods: {

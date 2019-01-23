@@ -1,7 +1,7 @@
 <template>
   <page>
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/appsPages' }">页面管理</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '../' }">所有页面</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/">编辑页面</a></el-breadcrumb-item>
     </el-breadcrumb>
     <DmEdit
@@ -274,14 +274,37 @@
                 <el-input-number v-model="scope.row.props.minWidth"/>
               </template>
             </el-table-column>
+            <el-table-column
+              label="操作"
+              width="140"
+            >
+              <template slot-scope="scope">
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowUp(form.content.columns, scope.$index)"
+                >上移</el-button>
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDown(form.content.columns, scope.$index)"
+                >下移</el-button>
+                <el-button
+                  :disabled="disabledEdit"
+                  type="text"
+                  @click="handleRowDelete(form.content.columns, scope.$index)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
           </el-table>
           <el-button
             style="margin-top: 12px"
+            type="primary"
             @click="handleRowAdd(form.content.columns, columnsRow)"
           >新增</el-button>
-
           <RenderTable
             :columns="form.content.columns"
+            style="margin-top: 12px"
             border
           />
         </el-form-item>

@@ -1,14 +1,14 @@
 <template>
   <el-radio-group
     v-model="val"
-    size="small"
+    :size="size"
     @change="handleChange"
   >
     <el-radio-button
-      v-if="defaultText"
+      v-if="defaultLabel"
       :label="defaultValue"
       :key="defaultValue"
-    >{{ defaultText }}</el-radio-button>
+    >{{ defaultLabel }}</el-radio-button>
     <el-radio-button
       v-for="item in radios"
       :key="item.value"
@@ -40,7 +40,7 @@ export default create({
         return []
       }
     },
-    defaultText: String,
+    defaultLabel: String,
     defaultValue: {
       type: String,
       default: ''

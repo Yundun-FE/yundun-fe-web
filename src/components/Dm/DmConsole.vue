@@ -53,6 +53,9 @@
     element-loading-text="加载中"
     element-loading-spinner="el-icon-loading"
   >
+    <div :class="b('query')">
+      <slot name="query"/>
+    </div>
     <!-- TOOLBAR -->
     <div :class="b('toolbar')">
       <template v-if="actions.toolbar">
@@ -151,9 +154,11 @@ export default create({
       type: Array,
       default: () => []
     },
-    query: {
+    bindParams: {
       type: Object,
-      default: () => {}
+      default: function() {
+        return {}
+      }
     },
     loading: {
       type: Boolean,
@@ -181,6 +186,16 @@ export default create({
       params: {
         name: ''
       }
+    }
+  },
+
+  watch: {
+    bindParams: {
+      handler(val) {
+        Object.assign(this.params, val)
+        this.handleEmit()
+      },
+      deep: true
     }
   },
 
@@ -214,7 +229,7 @@ export default create({
     handleEmit() {
       const { total, page, pageSize } = this
       const params = {
-        total, page, pageSize, ... this.params, ...this.query
+        total, page, pageSize, ... this.params
       }
 
       this.$emit('init', params)
