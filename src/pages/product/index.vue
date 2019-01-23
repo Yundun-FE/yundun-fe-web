@@ -37,7 +37,6 @@ import DialogAccount from './Dialog/DialogAccount'
 
 export default {
   components: { Page, CardJob, DialogAdd, DialogCmd, DialogAccount },
-  props: {},
 
   data() {
     return {

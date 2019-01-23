@@ -116,7 +116,10 @@
         </el-form-item> -->
         <!-- 消息配置 -->
         <div class="BlockForm">
-          <el-form-item label="消息提示">
+          <el-form-item
+            v-if="form.content"
+            label="消息提示"
+          >
             <el-table
               :data="form.content.notices"
               border
@@ -259,7 +262,8 @@
               prop="props.width"
             >
               <template slot-scope="scope">
-                <el-input v-model="scope.row.props.width" />
+                <!-- <yd-form-radio border v-model=""></yd-form-radio> -->
+                <el-input-number v-model="scope.row.props.width"/>
               </template>
             </el-table-column>
             <el-table-column
@@ -267,7 +271,7 @@
               prop="props.minWidth"
             >
               <template slot-scope="scope">
-                <el-input v-model="scope.row.props.minWidth" />
+                <el-input-number v-model="scope.row.props.minWidth"/>
               </template>
             </el-table-column>
           </el-table>
@@ -275,6 +279,11 @@
             style="margin-top: 12px"
             @click="handleRowAdd(form.content.columns, columnsRow)"
           >新增</el-button>
+
+          <RenderTable
+            :columns="form.content.columns"
+            border
+          />
         </el-form-item>
         <!-- ACTION-ROW -->
         <el-form-item
@@ -287,7 +296,7 @@
           >
             <el-table-column
               label="名称"
-              width="200"
+              min-width="200"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.label" />
@@ -295,7 +304,7 @@
             </el-table-column>
             <el-table-column
               label="类型"
-              width="100"
+              width="150"
             >
               <template slot-scope="scope">
                 <yd-form-select
@@ -307,22 +316,26 @@
             </el-table-column>
             <el-table-column
               label="命令"
-              width="100"
+              width="150"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.command" />
               </template>
             </el-table-column>
-            <el-table-column label="子操作">
+            <el-table-column
+              label="子操作"
+              min-width="500"
+            >
               <template slot-scope="scope">
                 <el-table
                   v-if="scope.row.items"
                   :data="scope.row.items"
+                  style="margin-bottom: 12px"
                   border
                 >
                   <el-table-column
                     label="名称"
-                    width="100"
+                    min-width="200"
                   >
                     <template slot-scope="scope">
                       <el-input v-model="scope.row.label" />
@@ -330,7 +343,7 @@
                   </el-table-column>
                   <el-table-column
                     label="类型"
-                    width="100"
+                    width="150"
                   >
                     <template slot-scope="scope">
                       <yd-form-select
@@ -342,7 +355,7 @@
                   </el-table-column>
                   <el-table-column
                     label="命令"
-                    width="100"
+                    width="150"
                   >
                     <template slot-scope="scope">
                       <el-input v-model="scope.row.command" />
@@ -355,15 +368,12 @@
                     <template slot-scope="scope">
                       <el-button
                         type="text"
-                        @click="handleActionRowChildDelete(scope.row, scope.$index)"
+                        @click="handleActionRowChildDelete(form.content.actions.row.list[scope.$index].items, scope.$index)"
                       >删除</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
-                <el-button
-                  style="margin-top: 12px"
-                  @click="handleActionRowChildAdd(scope.row)"
-                >新增</el-button>
+                <el-button @click="handleActionRowChildAdd(scope.row)">新增</el-button>
               </template>
             </el-table-column>
             <el-table-column
@@ -396,7 +406,7 @@
           >
             <el-table-column
               label="名称"
-              width="200"
+              min-width="200"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.label" />
@@ -404,7 +414,7 @@
             </el-table-column>
             <el-table-column
               label="类型"
-              width="100"
+              width="150"
             >
               <template slot-scope="scope">
                 <yd-form-select
@@ -416,7 +426,7 @@
             </el-table-column>
             <el-table-column
               label="命令"
-              width="100"
+              width="200"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.command" />
@@ -453,7 +463,7 @@
           >
             <el-table-column
               label="名称"
-              width="200"
+              min-width="200"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.label" />
@@ -461,7 +471,7 @@
             </el-table-column>
             <el-table-column
               label="类型"
-              width="100"
+              width="150"
             >
               <template slot-scope="scope">
                 <yd-form-select
@@ -473,7 +483,7 @@
             </el-table-column>
             <el-table-column
               label="命令"
-              width="100"
+              width="200"
             >
               <template slot-scope="scope">
                 <el-input v-model="scope.row.command" />
@@ -494,6 +504,7 @@
           </el-table>
           <el-button
             style="margin-top: 12px"
+            type="primary"
             @click="handleRowAdd(form.content.actions.toolbar.list, actionToolbarRow)"
           >新增</el-button>
         </el-form-item>
@@ -510,16 +521,21 @@ import consoleTable from '@/mixins/consoleTable'
 import consoleEdit from '@/mixins/consoleEdit'
 import * as LABEL from '@/constants/label'
 import { merge } from 'lodash/object'
+import RenderTable from '@/components/Dm/RenderTable'
 
 export default create({
   name: 'DialogAdd',
+
+  components: { RenderTable },
 
   mixins: [consoleTable, consoleEdit],
 
   data() {
     return {
       LABEL,
+      loading: true,
       id: '',
+      mode: '',
       apiName: 'appsPages',
       apps: [],
       agents: [],
@@ -546,7 +562,8 @@ export default create({
   },
 
   created() {
-    this.id = this.$route.params.id
+    this.id = this.$route.params.id || this.$route.params.pageId
+    this.mode = this.id ? 'Edit' : 'Create'
     this.init(this.id)
   },
 
@@ -581,7 +598,7 @@ export default create({
     },
     // 读取应用列表
     async initAppList() {
-      const data = await this.Fetch.get('/applications')
+      const data = await this.Fetch.get('/applications', { pageSize: 100 })
       this.apps = data.list
       this.selectApps = formatLabel(data.list, 'name', 'id')
     },

@@ -1,6 +1,17 @@
 /* @import './variables.css'; */
 /* @import './mixin.css'; */
 /* @import './transition.css'; */
+@import './element-adapt.css';
+
+@font-face {
+  font-family: 'iconfont';  /* project id 825055 */
+  src: url('//at.alicdn.com/t/font_825055_qjao5u9lwf.eot');
+  src: url('//at.alicdn.com/t/font_825055_qjao5u9lwf.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_825055_qjao5u9lwf.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_825055_qjao5u9lwf.woff') format('woff'),
+  url('//at.alicdn.com/t/font_825055_qjao5u9lwf.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_825055_qjao5u9lwf.svg#iconfont') format('svg');
+}
 
 label {
   font-weight: 700;

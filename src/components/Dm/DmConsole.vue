@@ -151,6 +151,10 @@ export default create({
       type: Array,
       default: () => []
     },
+    query: {
+      type: Object,
+      default: () => {}
+    },
     loading: {
       type: Boolean,
       default: true
@@ -177,7 +181,6 @@ export default create({
       params: {
         name: ''
       }
-      // multipleSelection: [],
     }
   },
 
@@ -211,7 +214,7 @@ export default create({
     handleEmit() {
       const { total, page, pageSize } = this
       const params = {
-        total, page, pageSize, ... this.params
+        total, page, pageSize, ... this.params, ...this.query
       }
 
       this.$emit('init', params)

@@ -1,0 +1,9 @@
+.el-form-item{
+  .el-table th {
+    background: rgb(249, 251, 255);
+  }
+
+  .el-table{
+    line-height: 23px;
+  }
+}

@@ -2,6 +2,7 @@ import Page from './Page/Page'
 import Form from './Form'
 import Column from './Column'
 import Card from './Card'
+import Header from './Header'
 import Dialog from './Dialog/Dialog'
 import DmConsole from './Dm/DmConsole'
 import DmEdit from './Dm/DmEdit'
@@ -15,7 +16,8 @@ function install(Vue) {
   const components = [
     Form,
     Column,
-    Card
+    Card,
+    Header
   ]
 
   components.forEach(Component => {

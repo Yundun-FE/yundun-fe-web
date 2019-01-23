@@ -7,7 +7,7 @@ export default create({
   render(createElement) {
     const columnsRender = []
 
-    if (this.actions.multiple || this.selection) {
+    if (this.actions && this.actions.multiple || this.selection) {
       columnsRender.push(
         createElement('el-table-column', {
           props: {
@@ -24,7 +24,7 @@ export default create({
       let scopedSlots = {}
       if (componentName) {
         const props = componentProps
-        if (componentName === 'ColumnAction') {
+        if (componentName === 'ColumnAction' && this.actions && this.actions.row) {
           props.list = this.actions.row.list
         }
         scopedSlots = {
@@ -58,6 +58,7 @@ export default create({
         'selection-change': val => this.$emit('selection-change', val)
       },
       props: {
+        'border': this.border,
         'data': this.data,
         'size': this.size
       }
@@ -66,6 +67,7 @@ export default create({
 
   props: {
     selection: Boolean,
+    border: Boolean,
     actions: {
       type: Object,
       default: () => { }

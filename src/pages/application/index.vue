@@ -24,6 +24,15 @@ import DialogRow from './components/DialogRow'
 export default createCudr({
   components: { DialogRow },
   pageName: 'application',
-  apiName: 'applications'
+  apiName: 'applications',
+
+  methods: {
+    handleRowDetail(scope) {
+      console.log(scope)
+      this.$router.push({
+        path: `applications/${scope.row.id}/pages`
+      })
+    }
+  }
 })
 </script>

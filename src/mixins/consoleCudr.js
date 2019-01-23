@@ -19,14 +19,15 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val
     },
-
+    // 进入编辑
     handleRowEdit(scope) {
       this.$refs.DialogRow.handleOpen(deepClone(scope.row), 'EDIT')
     },
-
+    // 跳转至页面编辑
     handleRowEditpage(scope) {
       this.$router.push({
-        path: `${this.apiName}/${scope.row.id}/edit`
+        path: `${scope.row.id}/edit`,
+        append: true
       })
     },
 

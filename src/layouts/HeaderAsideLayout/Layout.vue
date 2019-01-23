@@ -36,7 +36,7 @@ export default {
 .main-container {
   min-height: 100vh;
   transition: margin-left 0.28s;
-  margin-left: 256px;
+  margin-left: 200px;
   background-color: #f0f2f5;
 }
 </style>

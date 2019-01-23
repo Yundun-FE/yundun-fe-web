@@ -12,27 +12,55 @@
       active-text-color="#409EFF"
     >
       <template v-for="item in asideMenuConfig">
-        <router-link v-if="!item.children" :to="item.path" :key="item.name">
+        <router-link
+          v-if="!item.children"
+          :to="item.path"
+          :key="item.name"
+        >
           <el-menu-item :index="item.path">
-            <i v-if="item.icon" :class="item.icon"/>
-            <span v-if="item.name" slot="title">{{ item.name }}</span>
+            <i
+              v-if="item.icon"
+              :class="item.icon"
+            />
+            <span
+              v-if="item.name"
+              slot="title"
+            >{{ item.name }}</span>
           </el-menu-item>
         </router-link>
 
-        <el-submenu v-else :index="item.name || item.path" :key="item.name">
+        <el-submenu
+          v-else
+          :index="item.name || item.path"
+          :key="item.name"
+        >
           <template slot="title">
-            <i v-if="item && item.icon" :class="item.icon"/>
-            <span v-if="item && item.name" slot="title">{{ item.name }}</span>
+            <i
+              v-if="item && item.icon"
+              :class="item.icon"
+            />
+            <span
+              v-if="item && item.name"
+              slot="title"
+            >{{ item.name }}</span>
           </template>
-          <template v-for="child in item.children" v-if="!child.hidden">
-            <router-link :to="item.path + child.path" :key="child.name">
+          <template
+            v-for="child in item.children"
+            v-if="!child.hidden"
+          >
+            <router-link
+              :to="item.path + child.path"
+              :key="child.name"
+            >
               <el-menu-item :index="item.path + child.path">
-                <span v-if="child && child.name" slot="title">{{ child.name }}</span>
+                <span
+                  v-if="child && child.name"
+                  slot="title"
+                >{{ child.name }}</span>
               </el-menu-item>
             </router-link>
           </template>
         </el-submenu>
-
       </template>
     </el-menu>
   </scroll-bar>
@@ -72,9 +100,9 @@ export default {
   margin-left: 10px;
 }
 .sidebar-container {
-  box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   transition: width 0.28s;
-  width: 256px !important;
+  width: 200px !important;
   height: 100%;
   position: fixed;
   top: 0;
@@ -92,13 +120,22 @@ export default {
     border: none;
   }
   .el-submenu .el-menu-item {
-    min-width: 256px !important;
+    min-width: 200px !important;
     padding-left: 48px !important;
     background-color: #000c17 !important;
     &:hover {
       color: #fff !important;
     }
   }
+
+  .router-link-active .el-menu-item {
+    background-color: #188fff !important;
+    color: #fff !important;
+    i {
+      color: #fff !important;
+    }
+  }
+
   .el-menu-item,
   .el-submenu .el-menu-item {
     &.is-active {

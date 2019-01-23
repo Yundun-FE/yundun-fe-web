@@ -286,7 +286,7 @@ export default create({
     },
     // 读取应用列表
     async initAppList() {
-      const data = await Fetch.get('/applications')
+      const data = await Fetch.get('/applications', { pageSize: 100 })
       this.apps = data.list
       this.selectApps = formatLabel(data.list, 'name', 'id')
     },

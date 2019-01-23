@@ -34,7 +34,7 @@
       </el-form-item>
       <el-form-item
         v-if="form.menus"
-        label="配置"
+        label="路由"
         prop="settings"
       >
         <!-- <el-input
@@ -71,7 +71,6 @@
           <el-table-column
             prop="name"
             label="操作"
-            align="right"
             width="100"
           >
             <template slot-scope="scope">
@@ -80,7 +79,10 @@
           </el-table-column>
         </el-table>
         <div style="margin-top: 16px">
-          <el-button @click="addMenusRow(form.menus)">新增</el-button>
+          <el-button
+            type="primary"
+            @click="addMenusRow(form.menus)"
+          >新增</el-button>
         </div>
       </el-form-item>
     </el-form>

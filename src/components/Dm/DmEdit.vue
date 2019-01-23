@@ -1,8 +1,5 @@
 <style lang="postcss">
 .DmEdit {
-  .el-table th {
-    background: rgb(249, 251, 255);
-  }
 
   .BlockForm {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);

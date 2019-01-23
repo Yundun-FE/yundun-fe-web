@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       Fetch,
+      query: {},
       columns: [],
       actions: {},
       loading: true,
