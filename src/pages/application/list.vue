@@ -8,6 +8,7 @@
       :actions="actions"
       :bind-params="bindParams"
       :multiple-selection.sync="multipleSelection"
+      class="padding"
       @init="init"
       @action="handleAction"
     >
@@ -52,7 +53,7 @@ export default createCudr({
   methods: {
     handleRowDetail(scope) {
       this.$router.push({
-        path: `${scope.row.id}/pages`,
+        path: `${scope.row.id}`,
         append: true
       })
     }

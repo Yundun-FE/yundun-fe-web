@@ -1,9 +1,6 @@
 <style lang="postcss">
 .HeaderBreadcrumb{
   background: #FFF;
-  margin-left: -30px;
-  margin-right: -30px;
-  margin-top: -20px;
   padding: 20px;
 }
 </style>
@@ -26,7 +23,7 @@
           >{{ item.meta.title }}</span>
           <router-link
             v-else
-            :to="formatUrl(item.redirect || item.path)"
+            :to="formatUrl(item.path)"
           >{{ item.meta.title }}</router-link>
         </el-breadcrumb-item>
       </transition-group>
@@ -64,6 +61,7 @@ export default create({
 
   methods: {
     formatUrl(url) {
+      console.log(this.$route)
       const { params } = this.$route
       Object.keys(params).forEach(key => {
         url = url.replace(`:${key}`, params[key])

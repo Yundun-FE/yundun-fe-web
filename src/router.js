@@ -216,22 +216,24 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: ':appId/pages',
-        name: 'applications__pages',
-        component: () => import('@/pages/applicationPage/index'),
+        path: ':appId',
+        name: 'applications__detail',
+        redirect: ':appId/pages',
+        component: () => import('@/pages/application/detail'),
         meta: {
-          title: '页面管理'
+          title: '应用详情'
         },
         children: [
           {
-            path: '',
+            path: 'pages',
+            name: 'applications__pages',
             component: () => import('@/pages/applicationPage/list'),
             meta: {
               title: '页面管理'
             }
           },
           {
-            path: ':pageId/edit',
+            path: 'pages/:pageId/edit',
             name: 'applications__pages__id',
             component: () => import('@/pages/applicationPage/edit'),
             meta: {
@@ -240,30 +242,6 @@ export const constantRouterMap = [{
           }
         ]
       }
-      // {
-      //   path: ':appId/pages/:pageId/edit',
-      //   name: 'applications__pages__id',
-      //   component: () => import('@/pages/applicationPage/edit'),
-      //   meta: {
-      //     title: '修改页面'
-      //   }
-      // }
-      // {
-      //   path: ':appId/pages',
-      //   name: 'applications__pages',
-      //   component: () => import('@/pages/applicationPage/list'),
-      //   meta: {
-      //     title: '页面管理'
-      //   }
-      // },
-      // {
-      //   path: ':appId/pages/:pageId/edit',
-      //   name: 'applications__pages__id',
-      //   component: () => import('@/pages/applicationPage/edit'),
-      //   meta: {
-      //     title: '修改页面'
-      //   }
-      // }
     ]
   }
   // {

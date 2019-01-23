@@ -1,7 +1,6 @@
 <style lang="postcss">
 .Page {
   overflow: hidden;
-  padding: 20px 30px;
 
   &--form {
   }
@@ -14,11 +13,15 @@
     padding: 12px;
     border-bottom: 1px solid #eee;
   }
+
+  .padding{
+    padding: 20px 30px;
+  }
 }
 </style>
 <template>
   <div :class="b([type])">
-    <HeaderBreadcrumb v-if="$route.matched.length > 3"/>
+    <HeaderBreadcrumb v-if="breadcrumb"/>
     <!-- <el-alert
       title="成功提示的文案"
       type="success"/> -->
@@ -39,6 +42,7 @@ export default create({
   name: 'Page',
   components: {},
   props: {
+    breadcrumb: Boolean,
     type: {
       type: String,
       default: ''

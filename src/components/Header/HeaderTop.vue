@@ -4,9 +4,6 @@
   align-items: center;
   flex: 0 0 auto;
   background: #fff;
-  margin-left: -30px;
-  margin-right: -30px;
-  margin-top: -20px;
   margin-bottom: 20px;
   padding: 20px 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);

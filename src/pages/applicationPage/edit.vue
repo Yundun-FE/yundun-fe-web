@@ -1,6 +1,7 @@
 <template>
-  <page>
+  <page breadcrumb>
     <DmEdit
+      class="padding"
       @submit="handleSubmit"
       @on-back="handleBack"
     >

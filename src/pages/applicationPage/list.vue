@@ -1,6 +1,5 @@
 <template>
   <page>
-    <AppPageHeader v-if="bindParams.appId" />
     <el-tabs>
       <el-tab-pane
         label="目录管理"
@@ -15,6 +14,7 @@
       :actions="actions"
       :bind-params="bindParams"
       :multiple-selection.sync="multipleSelection"
+      class="padding"
       @init="init"
       @action="handleAction"
     />
