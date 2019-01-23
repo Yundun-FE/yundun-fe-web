@@ -97,7 +97,7 @@ export default {
       isEdit ? Notice('EDIT_SUCCESS') : Notice('CREATE_SUCCESS')
       this.$emit('init-list')
     },
-    open(form) {
+    handleOpen(form) {
       this.isEdit = !!form
       Object.assign(this.form, form)
       this.visible = true
