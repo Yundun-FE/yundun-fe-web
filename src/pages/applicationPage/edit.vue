@@ -1,9 +1,6 @@
 <template>
   <page>
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '../' }">所有页面</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">编辑页面</a></el-breadcrumb-item>
-    </el-breadcrumb>
+    <HeaderBreadcrumb/>
     <DmEdit
       @submit="handleSubmit"
       @on-back="handleBack"

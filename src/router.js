@@ -205,22 +205,86 @@ export const constantRouterMap = [{
     component: () => import('@/pages/application/index'),
     meta: {
       title: '应用管理'
-    }
-  }, {
-    path: ':appId/pages',
-    name: 'applications__pages',
-    component: () => import('@/pages/applicationPage/index'),
-    meta: {
-      title: '页面管理'
-    }
-  }, {
-    path: ':appId/pages/:pageId/edit',
-    name: 'applications__pages__id',
-    component: () => import('@/pages/applicationPage/edit'),
-    meta: {
-      title: '修改页面'
-    }
-  }]
+    },
+    children: [
+      {
+        path: '',
+        name: 'applications__list',
+        component: () => import('@/pages/application/list'),
+        meta: {
+          title: '所有应用'
+        }
+      },
+      {
+        path: ':appId/pages',
+        name: 'applications__pages',
+        component: () => import('@/pages/applicationPage/index'),
+        meta: {
+          title: '页面管理'
+        },
+        children: [
+          {
+            path: '',
+            component: () => import('@/pages/applicationPage/list'),
+            meta: {
+              title: '页面管理'
+            }
+          },
+          {
+            path: ':pageId/edit',
+            name: 'applications__pages__id',
+            component: () => import('@/pages/applicationPage/edit'),
+            meta: {
+              title: '修改页面'
+            }
+          }
+        ]
+      }
+      // {
+      //   path: ':appId/pages/:pageId/edit',
+      //   name: 'applications__pages__id',
+      //   component: () => import('@/pages/applicationPage/edit'),
+      //   meta: {
+      //     title: '修改页面'
+      //   }
+      // }
+      // {
+      //   path: ':appId/pages',
+      //   name: 'applications__pages',
+      //   component: () => import('@/pages/applicationPage/list'),
+      //   meta: {
+      //     title: '页面管理'
+      //   }
+      // },
+      // {
+      //   path: ':appId/pages/:pageId/edit',
+      //   name: 'applications__pages__id',
+      //   component: () => import('@/pages/applicationPage/edit'),
+      //   meta: {
+      //     title: '修改页面'
+      //   }
+      // }
+    ]
+  }
+  // {
+  //   path: ':appId/pages',
+  //   name: 'applications__pages',
+  //   component: () => import('@/pages/applicationPage/index'),
+  //   meta: {
+  //     title: '页面管理'
+  //   },
+  //   children: [
+  //     {
+  //       path: ':pageId/edit',
+  //       name: 'applications__pages__id',
+  //       component: () => import('@/pages/applicationPage/edit'),
+  //       meta: {
+  //         title: '修改页面'
+  //       }
+  //     }
+  //   ]
+  // }
+  ]
 },
 
 {
