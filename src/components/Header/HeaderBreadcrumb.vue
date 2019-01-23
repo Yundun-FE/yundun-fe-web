@@ -1,4 +1,11 @@
 <style lang="postcss">
+.HeaderBreadcrumb{
+  background: #FFF;
+  margin-left: -30px;
+  margin-right: -30px;
+  margin-top: -20px;
+  padding: 20px;
+}
 </style>
 
 <template>
@@ -32,6 +39,13 @@ import create from '@/utils/create-basic'
 
 export default create({
   name: 'HeaderBreadcrumb',
+
+  props: {
+    breadcrumb: {
+      type: Boolean,
+      default: true
+    }
+  },
 
   data() {
     return {

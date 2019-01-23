@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import Select from '@/components/Select/Select'
 import { deepClone } from '@/utils'
 import Notice from '@/utils/notice'
 
@@ -59,7 +58,7 @@ const FORM_RAW = {
 const FORM_KEYS = Object.keys(FORM_RAW)
 
 export default {
-  components: { Select },
+  components: { },
   data() {
     return {
       SELECT_ENV,

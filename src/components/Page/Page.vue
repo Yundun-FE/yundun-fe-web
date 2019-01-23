@@ -6,9 +6,9 @@
   &--form {
   }
 
-  .el-breadcrumb{
+  /* .el-breadcrumb{
     margin-bottom: 20px;
-  }
+  } */
 
   &-header {
     padding: 12px;
@@ -18,6 +18,7 @@
 </style>
 <template>
   <div :class="b([type])">
+    <HeaderBreadcrumb v-if="$route.matched.length > 3"/>
     <!-- <el-alert
       title="成功提示的文案"
       type="success"/> -->

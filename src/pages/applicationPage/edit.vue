@@ -1,6 +1,5 @@
 <template>
   <page>
-    <HeaderBreadcrumb/>
     <DmEdit
       @submit="handleSubmit"
       @on-back="handleBack"
