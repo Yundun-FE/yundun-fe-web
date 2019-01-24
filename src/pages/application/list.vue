@@ -1,8 +1,9 @@
 <template>
-  <page>
+  <page
+    :loading="loading"
+  >
     <DmConsole
       ref="DmConsole"
-      :loading="loading"
       :data="list"
       :columns="columns"
       :actions="actions"
@@ -11,20 +12,7 @@
       class="padding"
       @init="init"
       @action="handleAction"
-    >
-      <!-- <div slot="query">
-        <el-form>
-          <el-form-item>
-            <yd-form-radio-button
-              :radios="LABEL.MODULES_TYPE"
-              v-model="bindParams.type"
-              default-label="全部"
-              size="medium"
-            />
-          </el-form-item>
-        </el-form>
-      </div> -->
-    </DmConsole>
+    />
     <DialogRow
       ref="DialogRow"
       @init="init"

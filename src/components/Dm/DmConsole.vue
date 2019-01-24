@@ -50,13 +50,13 @@
 
 <template>
   <div
-    v-loading="!columns"
+    v-if="show"
     :class="b()"
     element-loading-text="加载中"
     element-loading-spinner="el-icon-loading"
   >
     <div :class="b('query')">
-      <slot name="query"/>
+      <slot name="query" />
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
@@ -105,16 +105,13 @@
       element-loading-background="#FFF"
     >
       <!-- BODY -->
-      <div
-        :class="b('body')"
-      >
+      <div :class="b('body')">
         <RenderTable
           v-if="columns && columns.length > 0"
           :columns="columns"
           :selection="selection"
           :actions="actions"
           :data="data"
-
           @action="handleAction"
           @selection-change="handleSelectionChange"
         >
@@ -148,14 +145,12 @@ export default create({
   components: { RenderTable },
 
   props: {
-    createText: {
-      type: String,
-      default: '新增'
-    },
     selection: Boolean,
     data: {
       type: Array,
-      default: () => []
+      default: function() {
+        return []
+      }
     },
     bindParams: {
       type: Object,
@@ -169,16 +164,17 @@ export default create({
     },
     multipleSelection: {
       type: Array,
-      default: () => []
+      default: function() {
+        return []
+      }
     },
     columns: {
       type: Array,
-      default: () => []
+      default: function() {
+        return []
+      }
     },
-    actions: {
-      type: Object,
-      default: () => { }
-    }
+    actions: Object
   },
 
   data() {
@@ -186,20 +182,10 @@ export default create({
       total: 0,
       page: 1,
       pageSize: 10,
+      show: false,
       params: {
         name: ''
       }
-    }
-  },
-
-  watch: {
-    bindParams: {
-      handler(val) {
-        console.log(val)
-        Object.assign(this.params, val)
-        this.handleEmit()
-      },
-      deep: true
     }
   },
 
@@ -208,6 +194,10 @@ export default create({
   },
 
   methods: {
+    handleShow() {
+      this.show = true
+    },
+
     handleAction(e) {
       if (!e) return
       this.$emit('action', e)
@@ -232,7 +222,6 @@ export default create({
 
     handleEmit() {
       const { total, page, pageSize } = this
-      console.log(this.bindParams)
       const params = {
         total, page, pageSize, ... this.params, ...this.bindParams
       }

@@ -8,7 +8,7 @@
       <el-form
         ref="form"
         :model="form"
-        :rules="RULES"
+        :rules="rules"
         label-width="120px"
       >
         <div class="BlockForm">

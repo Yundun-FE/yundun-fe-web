@@ -6,8 +6,10 @@ export default {
       Fetch,
       columns: [],
       actions: {},
+      list: [],
       loading: true,
-      list: []
+      layoutFinish: false,
+      dataFinish: false
     }
   },
 
@@ -22,10 +24,19 @@ export default {
       this.fetchData(`/${this.API_NAME}`, params)
     },
 
+    checkFinish() {
+      if (this.dataFinish && this.layoutFinish) {
+        this.$refs.DmConsole.handleShow()
+        this.loading = false
+      }
+    },
+
     async initPageLayout() {
       const data = await Fetch.get(`/explorer/pages/${this.pageName}`)
       this.columns = data.content.columns
       this.actions = data.content.actions
+      this.layoutFinish = true
+      this.checkFinish()
     },
 
     // 读取数据
@@ -34,11 +45,9 @@ export default {
       const { list, total } = await this.Fetch.get(url, params)
       this.$refs.DmConsole.updateTotal(total)
 
-      setTimeout(() => {
-        this.loading = false
-      }, 300)
-
       this.list = list
+      this.dataFinish = true
+      this.checkFinish()
     }
   }
 }
