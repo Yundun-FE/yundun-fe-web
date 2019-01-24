@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import formTable from '@/mixins/form-table'
+import formTable from '@/mixins/formTable'
 
 export default {
   mixins: [formTable],

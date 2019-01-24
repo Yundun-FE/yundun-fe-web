@@ -85,6 +85,5 @@ export default create({
       default: () => []
     }
   }
-
 })
 </script>

@@ -30,7 +30,6 @@ function install(Vue) {
 export function installComponents(Vue) {
   Vue.use(install)
   Vue.component(Page.name, Page)
-  // Vue.component(Dialog.name, Dialog)
   Vue.component(DmConsole.name, DmConsole)
   Vue.component(DmEdit.name, DmEdit)
 }

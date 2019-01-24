@@ -39,7 +39,7 @@
 
 <script>
 import create from 'common/utils/create-basic'
-import formTable from '@/mixins/form-table'
+import formTable from '@/mixins/formTable'
 
 export default create({
   name: 'TableForm',
