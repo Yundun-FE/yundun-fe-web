@@ -85,7 +85,7 @@
           size="medium"
           @submit="handleSearch"
         />
-        <el-tooltip
+        <!-- <el-tooltip
           content="布局配置"
           placement="top"
         >
@@ -94,7 +94,7 @@
             size="medium"
             circle
           />
-        </el-tooltip>
+        </el-tooltip> -->
       </div>
       <slot name="toolbar" />
     </div>
@@ -194,6 +194,7 @@ export default create({
   watch: {
     bindParams: {
       handler(val) {
+        console.log(val)
         Object.assign(this.params, val)
         this.handleEmit()
       },
@@ -230,8 +231,9 @@ export default create({
 
     handleEmit() {
       const { total, page, pageSize } = this
+      console.log(this.bindParams)
       const params = {
-        total, page, pageSize, ... this.params
+        total, page, pageSize, ... this.params, ...this.bindParams
       }
 
       this.$emit('init', params)

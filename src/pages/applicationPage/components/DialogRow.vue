@@ -38,7 +38,6 @@
         prop="remarks"
       >
         <el-input
-
           v-model="form.remarks"
           style="width: 220px"
         />
@@ -69,7 +68,6 @@
           >
             <template slot-scope="scope">
               <el-input
-                :disabled="disabledEdit"
                 v-model="scope.row.key"
                 placeholder="标识"
               />
@@ -101,7 +99,6 @@
           >
             <template slot-scope="scope">
               <el-button
-                :disabled="disabledEdit"
                 type="text"
                 @click="form.words.splice(scope.$index, 1)"
               >删除</el-button>
@@ -109,7 +106,6 @@
           </el-table-column>
         </el-table>
         <el-button
-          :disabled="disabledEdit"
           style="margin-top: 12px"
           @click="addWordsRow"
         >新增文案</el-button>
@@ -126,7 +122,6 @@
           >
             <template slot-scope="scope">
               <el-input
-                :disabled="disabledEdit"
                 v-model="scope.row.key"
                 placeholder="标识"
               />
@@ -138,7 +133,6 @@
           >
             <template slot-scope="scope">
               <el-input
-                :disabled="disabledEdit"
                 :rows="1"
                 v-model="scope.row.remarks"
                 placeholder="配置"
@@ -179,7 +173,6 @@
           >
             <template slot-scope="scope">
               <el-button
-                :disabled="disabledEdit"
                 type="text"
                 @click="form.settings.splice(scope.$index, 1)"
               >删除</el-button>
@@ -187,7 +180,6 @@
           </el-table-column>
         </el-table>
         <el-button
-          :disabled="disabledEdit"
           style="margin-top: 12px"
           @click="addSettingsRow"
         >新增配置</el-button>
@@ -211,7 +203,6 @@ export default create({
   data() {
     return {
       formRaw: {},
-      disabledEdit: false,
       apps: [],
       agents: [],
       selectApps: [],

@@ -32,6 +32,11 @@ function notice(name, err) {
       message = '编辑失败'
       type = 'error'
       break
+
+    case 'ACTION_SUCCESS':
+      message = '操作成功'
+      type = 'success'
+      break
   }
 
   if (err && err.message) {

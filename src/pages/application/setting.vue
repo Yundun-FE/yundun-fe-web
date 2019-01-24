@@ -1,30 +1,34 @@
 <template>
   <page>
-    <DmConsole
-      ref="DmConsole"
+    <DmEdit
       :loading="loading"
-      :data="list"
-      :columns="columns"
-      :actions="actions"
-      :multiple-selection.sync="multipleSelection"
-      @init="init"
-      @action="handleAction"
-    />
-    <DialogRow
-      ref="DialogRow"
-      @submit="handleRowSubmit"
-    />
+      v-model="form"
+      :rules="rules"
+      @submit="handleSubmit"
+    >
+      <FormRow />
+    </DmEdit>
   </page>
 </template>
 
 <script>
-import createCudr from '@/utils/create-cudr'
-import DialogRow from './components/DialogRow'
+import FormRow from './components/FormRow'
+import consoleEdit from '@/mixins/consoleEdit'
 
-export default createCudr({
-  pageName: 'fe-job',
-  apiName: 'jobs',
+export default {
+  components: { FormRow },
 
-  components: { DialogRow }
-})
+  mixins: [consoleEdit],
+
+  data() {
+    return {
+      apiName: 'applications',
+      mode: 'Edit'
+    }
+  },
+
+  created() {
+    this.init(this.$route.params.appId)
+  }
+}
 </script>

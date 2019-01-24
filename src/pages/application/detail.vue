@@ -1,11 +1,8 @@
 <template>
   <page>
-    <!-- v-if="$route.name === 'applications__pages'" -->
-    <template>
-      <Header v-if="inMenu">
-        <HeaderTab :data="pageMenus"/>
-      </Header>
-    </template>
+    <Header v-if="inMenu">
+      <HeaderTab :data="pageMenus"/>
+    </Header>
     <router-view/>
   </page>
 </template>
@@ -34,16 +31,12 @@ export default {
 
   watch: {
     $route(val) {
-      console.log(val)
+      // console.log(val)
     }
   },
 
   created() {
     this.pageMenus = this.menus['applications.appId']
-  },
-
-  methods: {
-
   }
 }
 </script>

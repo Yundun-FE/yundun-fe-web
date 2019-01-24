@@ -66,7 +66,7 @@
             >
               <template slot-scope="scope">
                 <el-input
-                  :disabled="disabledEdit"
+
                   v-model="scope.row.key"
                   placeholder="标识"
                 />
@@ -98,7 +98,7 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
+
                   type="text"
                   @click="handleRowDelete(form.words, scope.$index)"
                 >删除</el-button>
@@ -106,7 +106,7 @@
             </el-table-column>
           </el-table>
           <el-button
-            :disabled="disabledEdit"
+
             style="margin-top: 12px"
             @click="handleRowAdd(form.words, wordsRow)"
           >新增文案</el-button>
@@ -137,7 +137,6 @@
               >
                 <template slot-scope="scope">
                   <el-button
-                    :disabled="disabledEdit"
                     type="text"
                     @click="handleRowDelete(form.content.notices, scope.$index)"
                   >删除</el-button>
@@ -163,7 +162,7 @@
             >
               <template slot-scope="scope">
                 <el-input
-                  :disabled="disabledEdit"
+
                   v-model="scope.row.key"
                   placeholder="标识"
                 />
@@ -175,7 +174,7 @@
             >
               <template slot-scope="scope">
                 <el-input
-                  :disabled="disabledEdit"
+
                   :rows="1"
                   v-model="scope.row.remarks"
                   placeholder="配置"
@@ -204,7 +203,7 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
+
                   type="text"
                   @click="handleRowDelete(form.settings, scope.$index)"
                 >删除</el-button>
@@ -212,7 +211,7 @@
             </el-table-column>
           </el-table>
           <el-button
-            :disabled="disabledEdit"
+
             style="margin-top: 12px"
             @click="handleRowAdd(form.settings, settingsRow)"
           >新增配置</el-button>
@@ -260,7 +259,7 @@
             >
               <template slot-scope="scope">
                 <!-- <yd-form-radio border v-model=""></yd-form-radio> -->
-                <el-input-number v-model="scope.row.props.width"/>
+                <el-input-number v-model="scope.row.props.width" />
               </template>
             </el-table-column>
             <el-table-column
@@ -268,7 +267,7 @@
               prop="props.minWidth"
             >
               <template slot-scope="scope">
-                <el-input-number v-model="scope.row.props.minWidth"/>
+                <el-input-number v-model="scope.row.props.minWidth" />
               </template>
             </el-table-column>
             <el-table-column
@@ -277,17 +276,14 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowUp(form.content.columns, scope.$index)"
                 >上移</el-button>
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowDown(form.content.columns, scope.$index)"
                 >下移</el-button>
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowDelete(form.content.columns, scope.$index)"
                 >删除</el-button>
@@ -402,7 +398,6 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowDelete(form.content.actions.row.list, scope.$index)"
                 >删除</el-button>
@@ -458,7 +453,6 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowDelete(form.content.actions.multiple.list, scope.$index)"
                 >删除</el-button>
@@ -515,7 +509,6 @@
             >
               <template slot-scope="scope">
                 <el-button
-                  :disabled="disabledEdit"
                   type="text"
                   @click="handleRowDelete(form.content.actions.toolbar.list, scope.$index)"
                 >删除</el-button>

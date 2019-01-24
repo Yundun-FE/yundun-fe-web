@@ -1,11 +1,10 @@
 <style lang="postcss">
 .DmEdit {
-
+  padding: 20px 30px;
   .BlockForm {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
   }
-  /* padding: 30px; */
 }
 </style>
 
@@ -13,11 +12,17 @@
   <div :class="b()">
     <Card
       theme="action"
-      title="编辑页面"
     >
-      <slot />
+      <el-form
+        ref="form"
+        :model="form"
+        :rules="rules"
+        label-width="120px"
+      >
+        <slot />
+      </el-form>
       <div slot="footer">
-        <el-button @click="handleBack">返回</el-button>
+        <el-button v-if="backButton" @click="handleBack">返回</el-button>
         <div class="pull-right">
           <el-button
             type="primary"
@@ -30,14 +35,23 @@
 </template>
 
 <script>
-import create from 'common/utils/create-basic'
+import create from '@/utils/create-basic'
+import form from '@/mixins/form'
 
 export default create({
   name: 'DmEdit',
 
-  components: {},
+  mixins: [form],
 
-  props: {},
+  props: {
+    backButton: Boolean
+  },
+
+  provide() {
+    return {
+      dmForm: this
+    }
+  },
 
   data() {
     return {}
@@ -47,11 +61,17 @@ export default create({
 
   methods: {
     handleBack() {
+      this.$router.push({
+        path: '..'
+      })
       this.$emit('on-back')
     },
 
     handleSubmit() {
-      this.$emit('submit')
+      this.$refs.form.validate(valid => {
+        if (!valid) return
+        this.$emit('submit')
+      })
     }
   }
 })
