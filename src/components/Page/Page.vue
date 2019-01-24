@@ -1,14 +1,6 @@
 <style lang="postcss">
 .Page {
-  overflow: hidden;
-  min-height: 200px;
-
-  &--form {
-  }
-
-  /* .el-breadcrumb{
-    margin-bottom: 20px;
-  } */
+  min-height: calc(100vh - 64px);
 
   &-header {
     padding: 12px;
