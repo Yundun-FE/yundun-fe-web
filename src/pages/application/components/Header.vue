@@ -6,6 +6,7 @@
       <template slot="info">
         {{ info.code }}
       </template>
+      <slot/>
     </HeaderTop>
   </div>
 </template>

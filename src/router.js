@@ -37,7 +37,7 @@ export const constantRouterMap = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     // hidden: true,
     children: [
       {
@@ -224,31 +224,39 @@ export const constantRouterMap = [
     children: [
       {
         path: '',
-        component: () => import('@/pages/application/index'),
         meta: {
           title: '应用管理'
         },
+        component: () => import('@/pages/application/index'),
         children: [
           {
             path: '',
             name: 'applications',
-            component: () => import('@/pages/application/list'),
             meta: {
               title: '所有应用'
-            }
+            },
+            component: () => import('@/pages/application/list')
           },
           {
             path: ':appId',
-            name: 'applications__detail',
-            redirect: ':appId/pages',
-            component: () => import('@/pages/application/detail'),
             meta: {
               title: '应用详情'
             },
+            hidden: true,
+            component: () => import('@/pages/application/detail'),
             children: [
               {
+                path: '',
+                name: 'applications.appId',
+                redirect: 'pages',
+                meta: {
+                  title: '应用详情'
+                },
+                hidden: true
+              },
+              {
                 path: 'pages',
-                name: 'applications__pages',
+                name: 'applications.appId.pages',
                 component: () => import('@/pages/applicationPage/list'),
                 meta: {
                   title: '页面管理'
@@ -256,10 +264,19 @@ export const constantRouterMap = [
               },
               {
                 path: 'pages/:pageId/edit',
-                name: 'applications__pages__id',
+                name: 'applications.appId.pagesId.edit',
+                hidden: true,
                 component: () => import('@/pages/applicationPage/edit'),
                 meta: {
                   title: '修改页面'
+                }
+              },
+              {
+                path: 'settings',
+                name: 'applications.appId.settings',
+                component: () => import('@/pages/application/setting'),
+                meta: {
+                  title: '设置'
                 }
               }
             ]

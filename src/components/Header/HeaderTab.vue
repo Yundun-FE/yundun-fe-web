@@ -3,11 +3,16 @@
 
 <template>
   <div :class="b()">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tabs
+      v-model="activeName"
+      @tab-click="handleClick"
+    >
+      <el-tab-pane
+        v-for="(item, index) in data"
+        :key="index"
+        :name="item.name"
+        :label="item.meta.title"
+      />
     </el-tabs>
   </div>
 </template>
@@ -18,12 +23,7 @@ import create from 'common/utils/create-basic'
 export default create({
   name: 'HeaderTab',
 
-  components: {},
-
   props: {
-    value: {
-
-    },
     data: {
       type: Array,
       default: () => []
@@ -32,21 +32,18 @@ export default create({
 
   data() {
     return {
-      activeName: ''
-    }
-  },
-
-  computed: {},
-
-  watch: {
-    value(val) {
-      this.activeName = val
+      activeName: this.$route.name
     }
   },
 
   methods: {
     handleClick(val) {
-      this.$emit('input', val)
+      const data = this.data[val.index]
+      this.activeName = data.name
+      this.$router.push({
+        path: '../' + data.path,
+        append: true
+      })
     }
   }
 })

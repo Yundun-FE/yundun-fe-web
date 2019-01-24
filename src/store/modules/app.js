@@ -1,7 +1,31 @@
 import Cookies from 'js-cookie'
+import { constantRouterMap } from '@/router'
+
+function genterMenuMap(routers, menus = {}) {
+  let name = ''
+
+  routers.forEach((router, index) => {
+    if (index === 0) {
+      name = router.name
+      menus[name] = [router]
+    } else {
+      if (name) menus[name].push(router)
+    }
+
+    if (router.children) {
+      genterMenuMap(router.children, menus)
+    }
+  })
+
+  menus[name] = menus[name].filter(_ => !_.hidden)
+  return menus
+}
 
 const app = {
   state: {
+    routers: constantRouterMap,
+    menus: genterMenuMap(constantRouterMap),
+    tabs: {},
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false

@@ -2,6 +2,7 @@
  * Create a cudr component with common options
  */
 
+import app from '@/mixins/app'
 import consolePage from '@/mixins/consolePage'
 import consoleCudr from '@/mixins/consoleCudr'
 import { isDef } from './'
@@ -13,7 +14,7 @@ const install = function(Vue) {
 export default function(sfc) {
   sfc.install = sfc.install || install
   sfc.mixins = sfc.mixins || []
-  sfc.mixins.push(consolePage, consoleCudr)
+  sfc.mixins.push(app, consolePage, consoleCudr)
 
   sfc.props = {
     pageName: {
