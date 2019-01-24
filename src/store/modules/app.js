@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import { constantRouterMap } from '@/router'
+import LABEL from '@/utils/constants/label'
 
 function genterMenuMap(routers, menus = {}) {
   let name = ''
@@ -25,6 +26,7 @@ const app = {
   state: {
     routers: constantRouterMap,
     menus: genterMenuMap(constantRouterMap),
+    LABEL: LABEL,
     tabs: {},
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),

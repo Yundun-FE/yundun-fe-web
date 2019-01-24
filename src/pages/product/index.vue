@@ -12,7 +12,7 @@
     />
     <DialogRow
       ref="DialogRow"
-      @submit="handleRowSubmit"
+      @init="init"
     />
   </page>
 </template>

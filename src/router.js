@@ -301,7 +301,7 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'applicationPage',
-        component: () => import('@/pages/applicationPage/index'),
+        component: () => import('@/pages/applicationPage/list'),
         meta: {
           title: '页面管理'
         }

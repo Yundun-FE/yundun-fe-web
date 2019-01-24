@@ -67,7 +67,7 @@ export default {
         return
       }
       Notice('ACTION_SUCCESS')
-      if (this.$refs.dialog) {
+      if (this.$refs.Dialog) {
         this.$emit('init')
         this.$refs.Dialog.handleClose()
       }
