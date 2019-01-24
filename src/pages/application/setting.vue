@@ -22,7 +22,7 @@ export default {
 
   data() {
     return {
-      apiName: 'applications',
+      API_NAME: 'applications',
       mode: 'Edit'
     }
   },

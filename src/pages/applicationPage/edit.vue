@@ -549,7 +549,7 @@ export default create({
       loading: true,
       id: '',
       mode: '',
-      apiName: 'appsPages',
+      API_NAME: 'appsPages',
       apps: [],
       agents: [],
       selectApps: [],
@@ -593,7 +593,7 @@ export default create({
         const form = deepClone(this.form)
         form._mode = this.mode
         try {
-          this.Fetch.put(`/${this.apiName}/${this.id}`, form)
+          this.Fetch.put(`/${this.API_NAME}/${this.id}`, form)
         } catch (e) {
           return
         }

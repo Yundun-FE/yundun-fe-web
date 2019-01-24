@@ -25,12 +25,21 @@ export default {
 
     rules(val) {
       this.$nextTick(() => {
-        this.$refs.form.clearValidate()
+        this.$refs.form && this.$refs.form.clearValidate()
       })
     },
 
     form(val) {
       this.$emit('input', val)
+    }
+  },
+
+  methods: {
+    handleSubmit() {
+      this.$refs.form.validate(valid => {
+        if (!valid) return
+        this.$emit('submit')
+      })
     }
   }
 }

@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       loading: true,
+      mode: 'Create',
       rules: {},
       form: {},
       FORM: {}
@@ -38,30 +39,34 @@ export default {
     initData() {},
 
     async init(id) {
-      const data = await Fetch.get(`/${this.apiName}/${id}`)
+      if (id) this.mode = 'Edit'
+      const data = await Fetch.get(`/${this.API_NAME}/${id}`)
       this.form = Object.assign(deepClone(this.FORM), data)
       this.initData()
     },
     // 读取默认表单和验证规则
     async initForm() {
-      const data = await Fetch.get(`/${this.apiName}`, { resources: 'form' })
+      const data = await Fetch.get(`/${this.API_NAME}`, { resources: 'form' })
       this.FORM = formatForm(data)
       this.rules = formatRules(data)
-      this.LAYOUT = data
     },
 
     async handleSubmit() {
       const form = deepClone(this.form)
       try {
         if (this.mode === 'Edit') {
-          await Fetch.put(`/${this.apiName}/${form.id}`, form)
+          await Fetch.put(`/${this.API_NAME}/${form.id}`, form)
         } else {
-          await Fetch.post(`/${this.apiName}`, form)
+          await Fetch.post(`/${this.API_NAME}`, form)
         }
       } catch (e) {
         return
       }
       Notice('ACTION_SUCCESS')
+      if (this.$refs.dialog) {
+        this.$emit('init')
+        this.$refs.dialog.handleClose()
+      }
     }
   }
 }

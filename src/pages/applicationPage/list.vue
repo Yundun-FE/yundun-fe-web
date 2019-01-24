@@ -28,7 +28,7 @@ export default createCudr({
   components: { DialogRow, AppPageHeader },
 
   pageName: 'application-page',
-  apiName: 'appsPages',
+  API_NAME: 'appsPages',
 
   data() {
     return {
@@ -41,7 +41,7 @@ export default createCudr({
   methods: {
     handleRowDeploy(scope) {
       const id = scope.row.id
-      this.Fetch.post(`/${this.apiName}/${id}/deploy`)
+      this.Fetch.post(`/${this.API_NAME}/${id}/deploy`)
     }
   }
 })

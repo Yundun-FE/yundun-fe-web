@@ -23,7 +23,7 @@ import DialogRow from './components/DialogRow'
 
 export default createCudr({
   pageName: 'fe-job',
-  apiName: 'jobs',
+  API_NAME: 'jobs',
 
   components: { DialogRow }
 })

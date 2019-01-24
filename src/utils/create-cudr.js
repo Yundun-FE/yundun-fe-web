@@ -21,9 +21,9 @@ export default function(sfc) {
       type: String,
       default: sfc.pageName
     },
-    apiName: {
+    API_NAME: {
       type: String,
-      default: sfc.apiName
+      default: sfc.API_NAME
     }
   }
 

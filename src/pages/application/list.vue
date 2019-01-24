@@ -27,7 +27,7 @@
     </DmConsole>
     <DialogRow
       ref="DialogRow"
-      @submit="handleRowSubmit"
+      @init="init"
     />
   </page>
 </template>
@@ -38,7 +38,7 @@ import DialogRow from './components/DialogRow'
 
 export default createCudr({
   pageName: 'application',
-  apiName: 'applications',
+  API_NAME: 'applications',
 
   components: { DialogRow },
 
@@ -47,15 +47,6 @@ export default createCudr({
       bindParams: {
         type: ''
       }
-    }
-  },
-
-  methods: {
-    handleRowDetail(scope) {
-      this.$router.push({
-        path: `${scope.row.id}`,
-        append: true
-      })
     }
   }
 })

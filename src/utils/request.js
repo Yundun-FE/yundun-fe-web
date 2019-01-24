@@ -27,7 +27,7 @@ service.interceptors.response.use(
         })
       }
 
-      if (errors || code > 0) return Promise.reject(data)
+      // if (errors) return Promise.reject(data)
       return response.data
     } else {
       Message({

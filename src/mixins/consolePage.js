@@ -19,7 +19,7 @@ export default {
 
   methods: {
     init(params) {
-      this.fetchData(`/${this.apiName}`, params)
+      this.fetchData(`/${this.API_NAME}`, params)
     },
 
     async initPageLayout() {

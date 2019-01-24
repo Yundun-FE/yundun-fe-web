@@ -58,8 +58,9 @@
     <div :class="b('query')">
       <slot name="query"/>
     </div>
-    <!-- TOOLBAR -->
+    <!-- 操作条 -->
     <div :class="b('toolbar')">
+      <!-- 操作按钮 -->
       <template v-if="actions.toolbar">
         <el-button
           v-for="(item, index) in actions.toolbar.list"
@@ -69,7 +70,7 @@
           @click="handleAction(item.command)"
         >{{ item.label }}</el-button>
       </template>
-      <!-- MULTIPLE -->
+      <!-- 批量操作按钮 -->
       <template v-if="actions.multiple">
         <el-button
           v-for="(item, index) in actions.multiple.list"

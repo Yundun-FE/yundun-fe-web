@@ -53,24 +53,10 @@ export default create({
     }
   },
 
-  data() {
-    return {}
-  },
-
-  computed: {},
-
   methods: {
     handleBack() {
       this.$router.push({
         path: '..'
-      })
-      this.$emit('on-back')
-    },
-
-    handleSubmit() {
-      this.$refs.form.validate(valid => {
-        if (!valid) return
-        this.$emit('submit')
       })
     }
   }
