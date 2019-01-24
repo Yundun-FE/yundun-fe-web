@@ -60,7 +60,11 @@ const asideMenuConfig = [
       },
       {
         path: '/website',
-        name: '网站管理'
+        name: '常用网站'
+      },
+      {
+        path: '/applicationsPages',
+        name: '页面管理'
       }
     ]
   }

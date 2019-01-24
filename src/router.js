@@ -329,7 +329,7 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/applicationPage',
+    path: '/applicationsPages',
     component: Layout,
     children: [
       {
@@ -343,11 +343,6 @@ export const constantRouterMap = [
       {
         path: ':id/edit',
         name: 'applicationPage__edit',
-        component: () => import('@/pages/applicationPage/edit')
-      },
-      {
-        path: 'create',
-        name: 'applicationPage__create',
         component: () => import('@/pages/applicationPage/edit')
       }
     ]
