@@ -19,12 +19,6 @@
         style="width: 220px"
       />
     </el-form-item>
-    <el-form-item label="类型">
-      <yd-form-select
-        :selects="LABEL.APP_PAGE_TYPE"
-        v-model="form.type"
-      />
-    </el-form-item>
     <el-form-item
       label="备注"
       prop="remarks"
@@ -34,14 +28,6 @@
         style="width: 220px"
       />
     </el-form-item>
-    <!-- {{ form.appId }} -->
-    <!-- <el-form-item label="绑定应用">
-      <yd-form-select
-        v-model="form.appId"
-        :selects="selectApps"
-        filterable
-      />
-    </el-form-item> -->
   </div>
 </template>
 
