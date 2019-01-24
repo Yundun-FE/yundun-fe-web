@@ -53,31 +53,141 @@ export const constantRouterMap = [
   {
     path: '/products',
     component: Layout,
-    hidden: true,
     children: [
       {
         path: '',
-        name: 'Product',
-        component: () => import('@/pages/product/index'),
         meta: {
           title: '项目管理'
-        }
-      },
+        },
+        component: () => import('@/pages/product/index'),
+        children: [
+          {
+            path: '',
+            name: 'products',
+            meta: {
+              title: '所有应用'
+            },
+            component: () => import('@/pages/product/list')
+          },
+          {
+            path: ':id',
+            meta: {
+              title: '项目详情'
+            },
+            hidden: true,
+            component: () => import('@/pages/product/detail'),
+            children: [
+              {
+                path: '',
+                name: 'products.id',
+                meta: {
+                  title: '项目详情'
+                },
+                hidden: true
+              },
+              {
+                path: 'settings',
+                name: 'products.id.settings',
+                component: () => import('@/pages/product/setting'),
+                meta: {
+                  title: '设置'
+                }
+              }
+            ]
+          }
+        ]
+      }
+      // {
+      //   path: ':id',
+      //   name: 'ProductDetail',
+      //   component: () => import('@/pages/product/detail'),
+      //   meta: {
+      //     title: '项目详情'
+      //   }
+      // },
+      // {
+      //   path: 'id/:id/log',
+      //   name: 'ProductLog',
+      //   component: () => import('@/pages/product/log'),
+      //   meta: {
+      //     title: 'Log'
+      //   }
+      // }
+    ]
+  },
+
+  {
+    path: '/applications',
+    component: Layout,
+    children: [
       {
-        path: ':id',
-        name: 'ProductDetail',
-        component: () => import('@/pages/product/detail'),
+        path: '',
         meta: {
-          title: '项目详情'
-        }
-      },
-      {
-        path: 'id/:id/log',
-        name: 'ProductLog',
-        component: () => import('@/pages/product/log'),
-        meta: {
-          title: 'Log'
-        }
+          title: '应用管理'
+        },
+        component: () => import('@/pages/application/index'),
+        children: [
+          {
+            path: '',
+            name: 'applications',
+            meta: {
+              title: '所有应用'
+            },
+            component: () => import('@/pages/application/list')
+          },
+          {
+            path: ':appId',
+            meta: {
+              title: '应用详情'
+            },
+            hidden: true,
+            component: () => import('@/pages/application/detail'),
+            children: [
+              {
+                path: '',
+                name: 'applications.appId',
+                redirect: 'pages',
+                meta: {
+                  title: '应用详情'
+                },
+                hidden: true
+              },
+              {
+                path: 'pages',
+                name: 'applications.appId.pages',
+                component: () => import('@/pages/applicationPage/list'),
+                meta: {
+                  title: '页面管理'
+                }
+              },
+              {
+                path: 'pages/:pageId/edit',
+                name: 'applications.appId.pagesId.edit',
+                hidden: true,
+                component: () => import('@/pages/applicationPage/edit'),
+                meta: {
+                  title: '修改页面'
+                }
+              },
+              {
+                path: 'menus',
+                name: 'applications.appId.menus',
+                component: () => import('@/pages/application/menu'),
+                meta: {
+                  title: '目录管理'
+                }
+              },
+              {
+                path: 'settings',
+                name: 'applications.appId.settings',
+                component: () => import('@/pages/application/setting'),
+                meta: {
+                  title: '设置'
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -214,82 +324,6 @@ export const constantRouterMap = [
         meta: {
           title: '目录管理'
         }
-      }
-    ]
-  },
-
-  {
-    path: '/applications',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        meta: {
-          title: '应用管理'
-        },
-        component: () => import('@/pages/application/index'),
-        children: [
-          {
-            path: '',
-            name: 'applications',
-            meta: {
-              title: '所有应用'
-            },
-            component: () => import('@/pages/application/list')
-          },
-          {
-            path: ':appId',
-            meta: {
-              title: '应用详情'
-            },
-            hidden: true,
-            component: () => import('@/pages/application/detail'),
-            children: [
-              {
-                path: '',
-                name: 'applications.appId',
-                redirect: 'pages',
-                meta: {
-                  title: '应用详情'
-                },
-                hidden: true
-              },
-              {
-                path: 'pages',
-                name: 'applications.appId.pages',
-                component: () => import('@/pages/applicationPage/list'),
-                meta: {
-                  title: '页面管理'
-                }
-              },
-              {
-                path: 'pages/:pageId/edit',
-                name: 'applications.appId.pagesId.edit',
-                hidden: true,
-                component: () => import('@/pages/applicationPage/edit'),
-                meta: {
-                  title: '修改页面'
-                }
-              },
-              {
-                path: 'menus',
-                name: 'applications.appId.menus',
-                component: () => import('@/pages/application/menu'),
-                meta: {
-                  title: '目录管理'
-                }
-              },
-              {
-                path: 'settings',
-                name: 'applications.appId.settings',
-                component: () => import('@/pages/application/setting'),
-                meta: {
-                  title: '设置'
-                }
-              }
-            ]
-          }
-        ]
       }
     ]
   },
