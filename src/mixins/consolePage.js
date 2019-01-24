@@ -21,7 +21,10 @@ export default {
 
   methods: {
     init(params) {
-      this.fetchData(`/${this.API_NAME}`, params)
+      this.fetchData(`/${this.API_NAME}`, {
+        ...params,
+        ...this.$route.params
+      })
     },
 
     checkFinish() {
