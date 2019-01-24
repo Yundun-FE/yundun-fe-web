@@ -1,9 +1,9 @@
 <template>
   <DialogForm
-    ref="dialog"
+    ref="Dialog"
     v-model="form"
     :rules="rules"
-    title="新增应用"
+    title-label="应用"
     @submit="handleSubmit"
   >
     <FormRow />
@@ -11,28 +11,12 @@
 </template>
 
 <script>
-import create from '@/utils/create-basic'
+import createDialog from '@/utils/create-dialog'
 import FormRow from './FormRow'
-import consoleEdit from '@/mixins/consoleEdit'
 
-export default create({
-  name: 'DialogAdd',
-
+export default createDialog({
   components: { FormRow },
 
-  mixins: [consoleEdit],
-
-  data() {
-    return {
-      API_NAME: 'applications'
-    }
-  },
-
-  methods: {
-    handleOpen(form) {
-      if (form) this.init(form.id)
-      this.$refs.dialog.handleOpen(form)
-    }
-  }
+  API_NAME: 'applications'
 })
 </script>

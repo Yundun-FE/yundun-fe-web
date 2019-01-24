@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :class="b()"
-    :title="title"
+    :title="titleShow"
     :visible.sync="visible"
   >
     <el-form
@@ -37,7 +37,16 @@ export default create({
       type: String,
       default: ''
     },
-    backButton: Boolean
+    titleLabel: {
+      type: String,
+      default: ''
+    }
+  },
+
+  computed: {
+    titleShow() {
+      return this.mode === 'EDIT' ? `修改${this.titleLabel}` : `创建${this.titleLabel}`
+    }
   }
 })
 </script>

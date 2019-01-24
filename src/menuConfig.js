@@ -11,7 +11,7 @@ const asideMenuConfig = [
     icon: 'iconfont icon-dashboard'
   },
   {
-    path: '/product',
+    path: '/products',
     name: '项目',
     icon: 'iconfont icon-project'
   },

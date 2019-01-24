@@ -51,7 +51,7 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/product',
+    path: '/products',
     component: Layout,
     hidden: true,
     children: [
@@ -64,7 +64,7 @@ export const constantRouterMap = [
         }
       },
       {
-        path: 'id/:id',
+        path: ':id',
         name: 'ProductDetail',
         component: () => import('@/pages/product/detail'),
         meta: {
@@ -269,6 +269,14 @@ export const constantRouterMap = [
                 component: () => import('@/pages/applicationPage/edit'),
                 meta: {
                   title: '修改页面'
+                }
+              },
+              {
+                path: 'menus',
+                name: 'applications.appId.menus',
+                component: () => import('@/pages/application/menu'),
+                meta: {
+                  title: '目录管理'
                 }
               },
               {

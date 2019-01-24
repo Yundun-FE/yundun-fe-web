@@ -1,8 +1,4 @@
 export default {
-  props: {
-
-  },
-
   data() {
     return {
       visible: false
@@ -14,8 +10,7 @@ export default {
       this.visible = false
     },
 
-    handleOpen(e) {
-      console.log(e)
+    handleOpen() {
       this.visible = true
     }
   }

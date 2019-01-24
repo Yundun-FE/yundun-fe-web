@@ -1,5 +1,5 @@
 <template>
-  <page>
+  <page :loading="loading">
     <DmConsole
       ref="DmConsole"
       :loading="loading"

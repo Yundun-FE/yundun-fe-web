@@ -51,6 +51,10 @@ export default {
       this.rules = formatRules(data)
     },
 
+    handleReset() {
+      this.form = deepClone(this.FORM)
+    },
+
     async handleSubmit() {
       const form = deepClone(this.form)
       try {
@@ -65,7 +69,7 @@ export default {
       Notice('ACTION_SUCCESS')
       if (this.$refs.dialog) {
         this.$emit('init')
-        this.$refs.dialog.handleClose()
+        this.$refs.Dialog.handleClose()
       }
     }
   }
