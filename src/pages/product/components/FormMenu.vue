@@ -14,7 +14,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column label="子项目">
+        <el-table-column min-width="200" label="子项目">
           <template slot-scope="scope">
             <FormMenuChildren :form="scope.row.childrens" />
           </template>

@@ -6,17 +6,17 @@
       :rules="rules"
       @submit="handleSubmit"
     >
-      <FormAssets/>
+      <FormTableBuild/>
     </DmEdit>
   </page>
 </template>
 
 <script>
 import consoleEdit from '@/mixins/consoleEdit'
-import FormAssets from './components/FormAssets'
+import FormTableBuild from './components/FormTableBuild'
 
 export default {
-  components: { FormAssets },
+  components: { FormTableBuild },
 
   mixins: [consoleEdit],
 

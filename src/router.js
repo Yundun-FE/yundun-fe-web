@@ -1,13 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './layouts/HeaderAsideLayout'
-// in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
-// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
 
 Vue.use(Router)
-
-/* Layout */
-// import Layout from './pages/layout/Layout'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -21,12 +16,14 @@ Vue.use(Router)
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
+
 export const constantRouterMap = [
   {
     path: '/login',
     component: () => import('@/pages/login/index'),
     hidden: true
   },
+
   {
     path: '/404',
     component: () => import('@/pages/404'),
@@ -35,17 +32,29 @@ export const constantRouterMap = [
 
   {
     path: '/',
+    redirect: '/dashboard'
+  },
+
+  {
+    path: '/dashboard',
     component: Layout,
-    redirect: '/dashboard',
-    name: 'dashboard',
-    // hidden: true,
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/pages/dashboard/index'),
+        path: '',
         meta: {
           title: '控制台'
-        }
+        },
+        component: () => import('@/pages/dashboard/index'),
+        children: [
+          {
+            path: '',
+            name: 'dashboard',
+            meta: {
+              title: '所有项目'
+            },
+            component: () => import('@/pages/dashboard/list')
+          }
+        ]
       }
     ]
   },
@@ -65,7 +74,7 @@ export const constantRouterMap = [
             path: '',
             name: 'products',
             meta: {
-              title: '所有应用'
+              title: '所有项目'
             },
             component: () => import('@/pages/product/list')
           },
@@ -280,51 +289,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/agents',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'Agent',
-        component: () => import('@/pages/agent/index'),
-        meta: {
-          title: '代理商管理'
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/brands',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'brand',
-        component: () => import('@/pages/brand/index'),
-        meta: {
-          title: '品牌管理'
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/brandVersions',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'brandVersion',
-        component: () => import('@/pages/brandVersion/index'),
-        meta: {
-          title: '品牌组'
-        }
-      }
-    ]
-  },
-
-  {
     path: '/applicationsPages',
     component: Layout,
     children: [
@@ -352,7 +316,7 @@ export const constantRouterMap = [
 ]
 
 export default new Router({
-  // mode: 'history', //后端支持可开
+  mode: 'history', // 后端支持可开
   scrollBehavior: () => ({
     y: 0
   }),

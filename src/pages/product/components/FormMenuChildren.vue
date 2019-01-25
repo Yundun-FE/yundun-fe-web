@@ -5,10 +5,24 @@
     sort
   >
     <el-table-column
+      label="ID"
+      prop="id"
+      width="50"
+    />
+    <el-table-column
+      label="CODE"
+      prop="code"
+      width="70"
+    />
+    <el-table-column
       label="名称"
       prop="name"
+      min-width="180"
     />
-    <el-table-column label="别名">
+    <el-table-column
+      label="别名"
+      min-width="180"
+    >
       <template slot-scope="scope">
         <el-input
           v-model="scope.row.alias"
@@ -38,11 +52,7 @@ export default {
     return {
       apps: [],
       selectApps: [],
-      row: {
-        name: '',
-        alias: '',
-        code: ''
-      }
+      row: {}
     }
   },
 
@@ -54,8 +64,9 @@ export default {
     handleChangeApp(id) {
       this.row = this.apps.find(_ => _.id === id)
     },
+
     async initAppList() {
-      const data = await this.Fetch.get('/applications')
+      const data = await this.Fetch.get('/applications', { pageSize: 100 })
       this.apps = data.list
       this.selectApps = formatLabel(data.list, 'name', 'id')
     }

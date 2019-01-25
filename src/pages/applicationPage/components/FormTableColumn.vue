@@ -10,6 +10,14 @@
         sort
       >
         <el-table-column
+          label="名称"
+          prop="props.label"
+        >
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.props.label" />
+          </template>
+        </el-table-column>
+        <el-table-column
           label="组件"
           prop="componentName"
         >

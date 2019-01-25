@@ -4,7 +4,7 @@
       :data="data"
       border
     >
-      <slot/>
+      <slot />
       <el-table-column
         :width="actionWidth"
         prop="name"
@@ -34,21 +34,37 @@
       </el-table-column>
     </el-table>
     <div style="margin-top: 12px">
-      <slot name="add-form"/>
-      <el-button
+      <slot name="add-form" />
+
+      <el-dropdown
+        split-button
         type="primary"
         @click="handleRowAdd"
-      >新增</el-button>
+        @command="handleAddRowComand"
+      >
+        新增
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="Import">导入</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
+    <DialogFastAdd
+      ref="DialogFastAdd"
+      :handle-create-submit="handleImportSubmit"
+    />
   </div>
 </template>
 
 <script>
 import create from 'common/utils/create-basic'
 import formTable from '@/mixins/formTable'
+import Notice from '@/utils/notice'
+import DialogFastAdd from './components/DialogFastAdd'
 
 export default create({
   name: 'TableForm',
+
+  components: { DialogFastAdd },
 
   mixins: [formTable],
 
@@ -80,6 +96,25 @@ export default create({
   },
 
   methods: {
+    handleImportSubmit(form) {
+      let { content } = form
+
+      try {
+        content = JSON.parse(content)
+      } catch (e) {
+        Notice('EDIT_ERROR')
+        throw new Error()
+      }
+
+      this.data.push(...content)
+    },
+
+    handleAddRowComand(cmd) {
+      if (cmd === 'Import') {
+        this.$refs.DialogFastAdd.handleOpen()
+      }
+    },
+
     handleEditRow(scope) {
       this.$emit('on-edit-row', scope)
     }

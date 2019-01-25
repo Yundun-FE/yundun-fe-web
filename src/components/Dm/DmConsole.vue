@@ -64,6 +64,7 @@
       <template v-if="actions.toolbar">
         <el-button
           v-for="(item, index) in actions.toolbar.list"
+          v-if="item.label"
           :key="index"
           :type="item.type"
           size="medium"
@@ -74,6 +75,7 @@
       <template v-if="actions.multiple">
         <el-button
           v-for="(item, index) in actions.multiple.list"
+          v-if="item.label"
           :key="`multiple-${index}`"
           :type="item.type"
           :disabled="multipleSelection.length === 0"
