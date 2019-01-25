@@ -28,7 +28,8 @@ export default {
       mode: 'Create',
       rules: {},
       form: {},
-      FORM: {}
+      FORM: {},
+      id: ''
     }
   },
 
@@ -65,10 +66,11 @@ export default {
 
     async handleSubmit() {
       const form = deepClone(this.form)
+      console.log(this)
       try {
         if (this.mode === 'Edit') {
           if (this.API_NAME && this.id) {
-            await Fetch.put(`/${this.API_NAME}/${this.id}`, form)
+            await Fetch.patch(`/${this.API_NAME}/${this.id}`, form)
           } else {
             await this.handleEditSubmit(this.form)
           }

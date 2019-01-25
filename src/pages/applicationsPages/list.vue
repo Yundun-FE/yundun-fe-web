@@ -26,6 +26,6 @@ export default createCudr({
   components: { DialogRow, AppPageHeader },
 
   pageName: 'application-page',
-  API_NAME: 'appsPages'
+  API_NAME: 'applicationsPages'
 })
 </script>

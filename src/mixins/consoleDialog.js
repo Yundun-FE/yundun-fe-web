@@ -20,7 +20,10 @@ export default {
       if (form) {
         this.mode = 'Edit'
         this.form = form
+        if (form.id) this.id = form.id
       } else {
+        this.mode = 'Create'
+        this.id = ''
         Object.assign(this.FORM, this.bindForm)
         this.handleReset()
       }

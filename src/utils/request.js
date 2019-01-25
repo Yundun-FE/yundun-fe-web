@@ -25,13 +25,12 @@ service.interceptors.response.use(
           type: 'warning',
           duration: 5 * 1000
         })
+        return Promise.reject(data)
       }
-
-      // if (errors) return Promise.reject(data)
       return response.data
     } else {
       Message({
-        message,
+        message: message || '操作失败',
         type: 'error',
         duration: 5 * 1000
       })
@@ -79,7 +78,6 @@ const request = function(options) {
       try {
         data = await service(options)
       } catch (error) {
-        console.log(error)
         const { response } = error
         let message = error.message
         if (response && response.data) {

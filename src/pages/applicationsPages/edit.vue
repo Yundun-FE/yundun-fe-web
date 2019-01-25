@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       id: '',
-      API_NAME: 'appsPages'
+      API_NAME: 'applicationsPages'
     }
   },
 

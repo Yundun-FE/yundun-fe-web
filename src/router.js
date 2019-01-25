@@ -145,7 +145,7 @@ export const constantRouterMap = [
         meta: {
           title: '应用管理'
         },
-        component: () => import('@/pages/application/index'),
+        component: () => import('@/pages/applications/index'),
         children: [
           {
             path: '',
@@ -153,7 +153,7 @@ export const constantRouterMap = [
             meta: {
               title: '所有应用'
             },
-            component: () => import('@/pages/application/list')
+            component: () => import('@/pages/applications/list')
           },
           {
             path: ':appId',
@@ -161,7 +161,7 @@ export const constantRouterMap = [
               title: '应用详情'
             },
             hidden: true,
-            component: () => import('@/pages/application/detail'),
+            component: () => import('@/pages/applications/detail'),
             children: [
               {
                 path: '',
@@ -175,7 +175,7 @@ export const constantRouterMap = [
               {
                 path: 'pages',
                 name: 'applications.appId.pages',
-                component: () => import('@/pages/applicationPage/list'),
+                component: () => import('@/pages/applicationsPages/list'),
                 meta: {
                   title: '页面管理'
                 }
@@ -184,7 +184,7 @@ export const constantRouterMap = [
                 path: 'pages/:pageId/edit',
                 name: 'applications.appId.pagesId.edit',
                 hidden: true,
-                component: () => import('@/pages/applicationPage/edit'),
+                component: () => import('@/pages/applicationsPages/edit'),
                 meta: {
                   title: '修改页面'
                 }
@@ -192,7 +192,7 @@ export const constantRouterMap = [
               {
                 path: 'menus',
                 name: 'applications.appId.menus',
-                component: () => import('@/pages/application/menu'),
+                component: () => import('@/pages/applications/menu'),
                 meta: {
                   title: '目录管理'
                 }
@@ -200,7 +200,7 @@ export const constantRouterMap = [
               {
                 path: 'settings',
                 name: 'applications.appId.settings',
-                component: () => import('@/pages/application/setting'),
+                component: () => import('@/pages/applications/setting'),
                 meta: {
                   title: '设置'
                 }
@@ -280,7 +280,7 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'applicationPage',
-        component: () => import('@/pages/applicationPage/list'),
+        component: () => import('@/pages/applicationsPages/list'),
         meta: {
           title: '页面管理'
         }
@@ -288,7 +288,7 @@ export const constantRouterMap = [
       {
         path: ':id/edit',
         name: 'applicationPage__edit',
-        component: () => import('@/pages/applicationPage/edit')
+        component: () => import('@/pages/applicationsPages/edit')
       }
     ]
   },

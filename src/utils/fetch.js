@@ -1,4 +1,3 @@
-import qs from 'qs'
 import request from './request'
 import { SERVER_URL } from '@/utils/constants/server'
 const base = SERVER_URL['explorer']
@@ -27,7 +26,15 @@ export default {
       url: base + url,
       method: 'PUT',
       data,
-      // data: qs.stringify(data),
+      params
+    })
+  },
+
+  patch(url, data, params) {
+    return request({
+      url: base + url,
+      method: 'PATCH',
+      data,
       params
     })
   },
