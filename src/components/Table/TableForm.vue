@@ -2,6 +2,7 @@
   <div>
     <el-table
       :data="data"
+      :show-header="showHeader"
       border
     >
       <slot />
@@ -72,6 +73,10 @@ export default create({
     editRow: Boolean,
     sort: Boolean,
     customAddRow: Boolean,
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
     data: {
       type: Array,
       default: function() {

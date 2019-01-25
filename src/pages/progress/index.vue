@@ -1,5 +1,3 @@
-<style lang="postcss">
-</style>
 <template>
   <page>
     <div slot="header">

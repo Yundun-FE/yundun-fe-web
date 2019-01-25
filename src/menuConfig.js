@@ -34,10 +34,10 @@ const asideMenuConfig = [
         path: '/account',
         name: '测试账号'
       },
-      {
-        path: '/cmd',
-        name: '指令管理'
-      },
+      // {
+      //   path: '/cmd',
+      //   name: '指令管理'
+      // },
       {
         path: '/websites',
         name: '常用网站'
