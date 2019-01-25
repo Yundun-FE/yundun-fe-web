@@ -12,6 +12,7 @@
 
   &__icon {
     margin-right: 20px;
+
     .iconfont {
       display: inline-block;
       font-size: 64px;
@@ -73,6 +74,10 @@
         <div :class="b('info')">
           <slot name="info" />
         </div>
+      </div>
+
+      <div :class="b('action')">
+        <slot name="action"/>
       </div>
     </div>
     <div :class="b('tab')">

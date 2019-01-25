@@ -7,6 +7,9 @@
         {{ info.code }}
       </template>
       <slot/>
+      <template slot="action">
+        <el-button type="primary">创建副本</el-button>
+      </template>
     </HeaderTop>
   </div>
 </template>
