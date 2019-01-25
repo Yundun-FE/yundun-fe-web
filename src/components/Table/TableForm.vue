@@ -34,6 +34,7 @@
       </el-table-column>
     </el-table>
     <div style="margin-top: 12px">
+      <slot name="add-form"/>
       <el-button
         type="primary"
         @click="handleRowAdd"

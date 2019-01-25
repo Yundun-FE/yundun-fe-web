@@ -89,6 +89,22 @@ export const constantRouterMap = [
                 component: () => import('@/pages/product/info')
               },
               {
+                path: 'menus',
+                name: 'products.id.menus',
+                meta: {
+                  title: '目录配置'
+                },
+                component: () => import('@/pages/product/menu')
+              },
+              {
+                path: 'build',
+                name: 'products.id.build',
+                meta: {
+                  title: '编译配置'
+                },
+                component: () => import('@/pages/product/build')
+              },
+              {
                 path: 'assets',
                 name: 'products.id.assets',
                 meta: {
@@ -303,21 +319,6 @@ export const constantRouterMap = [
         component: () => import('@/pages/brandVersion/index'),
         meta: {
           title: '品牌组'
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/menus',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'menu',
-        component: () => import('@/pages/menu/index'),
-        meta: {
-          title: '目录管理'
         }
       }
     ]

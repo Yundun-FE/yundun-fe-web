@@ -1,6 +1,12 @@
 <style lang="postcss">
 .DmEdit {
   padding: 20px 30px;
+  min-height: 300px;
+  .Card--action {
+    .Card__body {
+      min-height: 300px;
+    }
+  }
   .BlockForm {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -10,9 +16,7 @@
 
 <template>
   <div :class="b()">
-    <Card
-      theme="action"
-    >
+    <Card theme="action">
       <el-form
         ref="form"
         :model="form"
@@ -22,7 +26,10 @@
         <slot />
       </el-form>
       <div slot="footer">
-        <el-button v-if="backButton" @click="handleBack">返回</el-button>
+        <el-button
+          v-if="backButton"
+          @click="handleBack"
+        >返回</el-button>
         <div class="pull-right">
           <el-button
             type="primary"
