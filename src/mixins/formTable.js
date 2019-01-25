@@ -9,7 +9,11 @@ export default {
 
   methods: {
     handleRowAdd() {
-      this.data.push(deepClone(this.row))
+      if (this.customAddRow) {
+        this.$emit('add-row')
+      } else {
+        this.data.push(deepClone(this.row))
+      }
     },
 
     handleRowDelete(index) {

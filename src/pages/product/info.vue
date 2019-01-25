@@ -6,16 +6,14 @@
       :rules="rules"
       @submit="handleSubmit"
     >
-      <div class="FormBlock">
-        <FormRow />
-      </div>
+      <FormRow />
     </DmEdit>
   </page>
 </template>
 
 <script>
-import consoleEdit from '@/mixins/consoleEdit'
 import FormRow from './components/FormRow'
+import consoleEdit from '@/mixins/consoleEdit'
 
 export default {
   components: { FormRow },
@@ -24,10 +22,13 @@ export default {
 
   data() {
     return {
-      API_NAME: 'jobs',
-      mode: 'Edit',
-      id: this.$route.params.id
+      API_NAME: 'applications',
+      mode: 'Edit'
     }
+  },
+
+  created() {
+    this.init(this.$route.params.appId)
   }
 }
 </script>

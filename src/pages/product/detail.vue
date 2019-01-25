@@ -1,18 +1,18 @@
 <template>
   <page>
-    <!-- <Header v-if="inMenu">
+    <HeaderDetail v-if="inMenu">
       <HeaderTab :data="pageMenus"/>
-    </Header> -->
+    </HeaderDetail>
     <router-view/>
   </page>
 </template>
 
 <script>
-import Header from './components/Header'
+import HeaderDetail from './components/HeaderDetail'
 import app from '@/mixins/app'
 
 export default {
-  components: { Header },
+  components: { HeaderDetail },
 
   mixins: [app],
 
@@ -30,7 +30,7 @@ export default {
   },
 
   created() {
-    this.pageMenus = this.menus['applications.appId']
+    this.pageMenus = this.menus['products.id']
   }
 }
 </script>

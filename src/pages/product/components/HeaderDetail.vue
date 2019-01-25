@@ -1,10 +1,10 @@
 <template>
   <div>
     <HeaderTop
-      :title="info.name"
+      :title="info.title"
     >
       <template slot="info">
-        {{ info.code }}
+        {{ info.name }}
       </template>
       <slot/>
     </HeaderTop>
@@ -25,13 +25,13 @@ export default {
   computed: {},
 
   created() {
-    this.id = this.$route.params.appId
+    this.id = this.$route.params.id
     this.init()
   },
 
   methods: {
     async init() {
-      this.info = await this.Fetch.get(`/applications/${this.id}`)
+      this.info = await this.Fetch.get(`/jobs/${this.id}`)
     }
   }
 }

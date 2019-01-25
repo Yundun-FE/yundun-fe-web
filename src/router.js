@@ -71,48 +71,43 @@ export const constantRouterMap = [
           },
           {
             path: ':id',
-            meta: {
-              title: '项目详情'
-            },
             hidden: true,
             component: () => import('@/pages/product/detail'),
             children: [
               {
                 path: '',
+                redirect: 'info',
                 name: 'products.id',
+                hidden: true
+              },
+              {
+                path: 'info',
+                name: 'products.id.info',
                 meta: {
                   title: '项目详情'
                 },
-                hidden: true
+                component: () => import('@/pages/product/info')
+              },
+              {
+                path: 'assets',
+                name: 'products.id.assets',
+                meta: {
+                  title: '资源配置'
+                },
+                component: () => import('@/pages/product/assets')
               },
               {
                 path: 'settings',
                 name: 'products.id.settings',
-                component: () => import('@/pages/product/setting'),
                 meta: {
                   title: '设置'
-                }
+                },
+                component: () => import('@/pages/product/setting')
               }
             ]
           }
         ]
       }
-      // {
-      //   path: ':id',
-      //   name: 'ProductDetail',
-      //   component: () => import('@/pages/product/detail'),
-      //   meta: {
-      //     title: '项目详情'
-      //   }
-      // },
-      // {
-      //   path: 'id/:id/log',
-      //   name: 'ProductLog',
-      //   component: () => import('@/pages/product/log'),
-      //   meta: {
-      //     title: 'Log'
-      //   }
-      // }
     ]
   },
 

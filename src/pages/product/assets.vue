@@ -6,19 +6,17 @@
       :rules="rules"
       @submit="handleSubmit"
     >
-      <div class="FormBlock">
-        <FormRow />
-      </div>
+      <FormAssets/>
     </DmEdit>
   </page>
 </template>
 
 <script>
 import consoleEdit from '@/mixins/consoleEdit'
-import FormRow from './components/FormRow'
+import FormAssets from './components/FormAssets'
 
 export default {
-  components: { FormRow },
+  components: { FormAssets },
 
   mixins: [consoleEdit],
 

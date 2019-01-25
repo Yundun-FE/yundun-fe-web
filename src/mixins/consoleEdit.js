@@ -3,6 +3,7 @@
 import Fetch from '@/utils/fetch'
 import Notice from '@/utils/notice'
 import { deepClone, isDef } from '@/utils'
+import { merge } from 'lodash/object'
 
 function formatForm(data) {
   const form = {}
@@ -32,23 +33,30 @@ export default {
   },
 
   created() {
-    this.initForm()
+    this.initFormLayout()
   },
 
   methods: {
     initData() {},
 
-    async init(id) {
-      if (id) this.mode = 'Edit'
-      const data = await Fetch.get(`/${this.API_NAME}/${id}`)
-      this.form = Object.assign(deepClone(this.FORM), data)
+    async init() {
+      if (this.API_NAME && this.id) {
+        this.mode = 'Edit'
+        const data = await Fetch.get(`/${this.API_NAME}/${this.id}`)
+        this.form = Object.assign(deepClone(this.FORM), data)
+      }
+      // if (!data.settings) data.settings = deepClone(this.FORM.settings)
+
       this.initData()
     },
     // 读取默认表单和验证规则
-    async initForm() {
-      const data = await Fetch.get(`/${this.API_NAME}`, { resources: 'form' })
-      this.FORM = formatForm(data)
-      this.rules = formatRules(data)
+    async initFormLayout() {
+      if (this.API_NAME) {
+        const data = await Fetch.get(`/${this.API_NAME}`, { resources: 'form' })
+        this.FORM = formatForm(data)
+        this.rules = formatRules(data)
+      }
+      this.init()
     },
 
     handleReset() {
@@ -59,9 +67,17 @@ export default {
       const form = deepClone(this.form)
       try {
         if (this.mode === 'Edit') {
-          await Fetch.put(`/${this.API_NAME}/${form.id}`, form)
+          if (this.API_NAME) {
+            await Fetch.put(`/${this.API_NAME}/${form.id}`, form)
+          } else {
+            await this.handleEditSubmit(this.form)
+          }
         } else {
-          await Fetch.post(`/${this.API_NAME}`, form)
+          if (this.API_NAME) {
+            await Fetch.post(`/${this.API_NAME}`, form)
+          } else {
+            await this.handleCreateSubmit(this.form)
+          }
         }
       } catch (e) {
         return

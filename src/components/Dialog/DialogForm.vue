@@ -45,7 +45,7 @@ export default create({
 
   computed: {
     titleShow() {
-      return this.mode === 'EDIT' ? `修改${this.titleLabel}` : `创建${this.titleLabel}`
+      return this.mode === 'Edit' ? `修改${this.titleLabel}` : `创建${this.titleLabel}`
     }
   }
 })

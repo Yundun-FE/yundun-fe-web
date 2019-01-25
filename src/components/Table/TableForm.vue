@@ -22,6 +22,11 @@
             >下移</el-button>
           </template>
           <el-button
+            v-if="editRow"
+            type="text"
+            @click="handleEditRow(scope)"
+          >编辑</el-button>
+          <el-button
             type="text"
             @click="handleRowDelete(scope.$index)"
           >删除</el-button>
@@ -47,7 +52,9 @@ export default create({
   mixins: [formTable],
 
   props: {
+    editRow: Boolean,
     sort: Boolean,
+    customAddRow: Boolean,
     data: {
       type: Array,
       default: function() {
@@ -64,11 +71,16 @@ export default create({
 
   computed: {
     actionWidth() {
-      if (this.sort) {
-        return '200px'
-      } else {
-        return '100px'
-      }
+      let width = 100
+      if (this.sort) width += 100
+      if (this.editRow) width += 50
+      return `${width}px`
+    }
+  },
+
+  methods: {
+    handleEditRow(scope) {
+      this.$emit('on-edit-row', scope)
     }
   }
 })

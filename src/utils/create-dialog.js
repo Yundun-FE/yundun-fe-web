@@ -17,6 +17,8 @@ export default function(sfc) {
   sfc.mixins.push(app, consoleEdit, consoleDialog)
 
   sfc.props = {
+    handleEditSubmit: Function,
+    handleCreateSubmit: Function,
     API_NAME: {
       type: String,
       default: sfc.API_NAME

@@ -1,7 +1,10 @@
+import { isDef } from '@/utils'
+
 export default {
   data() {
     return {
-      visible: false
+      visible: false,
+      mode: 'Create'
     }
   },
 
@@ -10,7 +13,8 @@ export default {
       this.visible = false
     },
 
-    handleOpen() {
+    handleOpen(form) {
+      if (form) this.mode = 'Edit'
       this.visible = true
     }
   }

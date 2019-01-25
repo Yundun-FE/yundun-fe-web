@@ -18,7 +18,8 @@ export default {
 
     handleOpen(form) {
       if (form) {
-        this.init(form.id)
+        this.mode = 'Edit'
+        this.form = form
       } else {
         Object.assign(this.FORM, this.bindForm)
         this.handleReset()
