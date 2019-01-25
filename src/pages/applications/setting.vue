@@ -28,7 +28,7 @@ export default {
   },
 
   created() {
-    this.init(this.$route.params.appId)
+    this.id = this.$route.params.appId
   }
 }
 </script>

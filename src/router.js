@@ -68,7 +68,7 @@ export const constantRouterMap = [
         meta: {
           title: '项目管理'
         },
-        component: () => import('@/pages/product/index'),
+        component: () => import('@/pages/products/index'),
         children: [
           {
             path: '',
@@ -76,12 +76,12 @@ export const constantRouterMap = [
             meta: {
               title: '所有项目'
             },
-            component: () => import('@/pages/product/list')
+            component: () => import('@/pages/products/list')
           },
           {
             path: ':id',
             hidden: true,
-            component: () => import('@/pages/product/detail'),
+            component: () => import('@/pages/products/detail'),
             children: [
               {
                 path: '',
@@ -95,7 +95,7 @@ export const constantRouterMap = [
                 meta: {
                   title: '项目详情'
                 },
-                component: () => import('@/pages/product/info')
+                component: () => import('@/pages/products/info')
               },
               {
                 path: 'menus',
@@ -103,7 +103,7 @@ export const constantRouterMap = [
                 meta: {
                   title: '目录配置'
                 },
-                component: () => import('@/pages/product/menu')
+                component: () => import('@/pages/products/menu')
               },
               {
                 path: 'build',
@@ -111,7 +111,7 @@ export const constantRouterMap = [
                 meta: {
                   title: '编译配置'
                 },
-                component: () => import('@/pages/product/build')
+                component: () => import('@/pages/products/build')
               },
               {
                 path: 'assets',
@@ -119,7 +119,7 @@ export const constantRouterMap = [
                 meta: {
                   title: '资源配置'
                 },
-                component: () => import('@/pages/product/assets')
+                component: () => import('@/pages/products/assets')
               },
               {
                 path: 'settings',
@@ -127,7 +127,7 @@ export const constantRouterMap = [
                 meta: {
                   title: '设置'
                 },
-                component: () => import('@/pages/product/setting')
+                component: () => import('@/pages/products/setting')
               }
             ]
           }
@@ -213,13 +213,13 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/account',
+    path: '/accounts',
     component: Layout,
     children: [
       {
         path: '',
-        name: 'Account',
-        component: () => import('@/pages/account/index'),
+        name: 'accounts',
+        component: () => import('@/pages/accounts/index'),
         meta: {
           title: '账号管理'
         }
@@ -234,7 +234,7 @@ export const constantRouterMap = [
       {
         path: '',
         name: 'Website',
-        component: () => import('@/pages/website/index'),
+        component: () => import('@/pages/websites/index'),
         meta: {
           title: '网站管理'
         }
@@ -265,7 +265,7 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'Setting',
-        component: () => import('@/pages/setting/index'),
+        component: () => import('@/pages/settings/index'),
         meta: {
           title: '配置'
         }

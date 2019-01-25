@@ -1,11 +1,13 @@
 {
   "name": "yundun-fe-web",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "license": "MIT",
   "description": "YundunFE Web",
-  "author": "fanbo <616@17disney.com>",
+  "keywords": ["ice-scaffold"],
+  "author": "fanbo <kongfanbo@yundun.com>",
   "scripts": {
     "dev": "cross-env APP_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "cross-env APP_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "dev:release": "cross-env APP_ENV=production webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
     "build:chrome": "cross-env APP_ENV=chrome node build/build-chrome.js",
@@ -14,7 +16,6 @@
     "test": "npm run lint",
     "release:docker": "cd ./server && npm run stop && npm run start:docker",
     "release": "cd ./server && npm run stop && npm run start",
-    "start": "cd ./server && npm run dev",
     "cypress": "cypress run",
     "cypress-gui": "cypress open"
   },
@@ -94,8 +95,13 @@
     "webpack-merge": "4.1.4",
     "webstorm-disable-index": "^1.2.0"
   },
+  "scaffoldConfig": {
+    "type": "vue",
+    "name": "yundun-fe",
+    "title": "云盾前端管理"
+  },
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">= 8.0.0",
     "npm": ">= 3.0.0"
   },
   "browserslist": [

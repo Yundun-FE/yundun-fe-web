@@ -31,7 +31,7 @@ const asideMenuConfig = [
     icon: 'iconfont icon-build',
     children: [
       {
-        path: '/account',
+        path: '/accounts',
         name: '测试账号'
       },
       // {
