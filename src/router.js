@@ -228,26 +228,11 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/cmd',
+    path: '/websites',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Cmd',
-        component: () => import('@/pages/cmd/index'),
-        meta: {
-          title: '命令管理'
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/website',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
+        path: '',
         name: 'Website',
         component: () => import('@/pages/website/index'),
         meta: {

@@ -20,26 +20,6 @@ const asideMenuConfig = [
   //   name: '配置',
   //   icon: 'el-icon-tickets'
   // },
-  // {
-  //   path: '/agents',
-  //   name: '代理商管理',
-  //   icon: 'el-icon-tickets'
-  // },
-  // {
-  //   path: '/brands',
-  //   name: '品牌管理',
-  //   icon: 'el-icon-tickets'
-  // },
-  // {
-  //   path: '/brandVersions',
-  //   name: '品牌组',
-  //   icon: 'el-icon-tickets'
-  // },
-  // {
-  //   path: '/menus',
-  //   name: '目录管理',
-  //   icon: 'el-icon-tickets'
-  // },
   {
     path: '/applications',
     name: '应用',
@@ -59,7 +39,7 @@ const asideMenuConfig = [
         name: '指令管理'
       },
       {
-        path: '/website',
+        path: '/websites',
         name: '常用网站'
       },
       {
@@ -68,11 +48,6 @@ const asideMenuConfig = [
       }
     ]
   }
-  // {
-  //   path: '/appsPages',
-  //   name: '页面管理',
-  //   icon: 'el-icon-tickets'
-  // }
 ]
 
 export { headerMenuConfig, asideMenuConfig }
