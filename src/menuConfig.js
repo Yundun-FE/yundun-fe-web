@@ -2,18 +2,18 @@
 // headerMenuConfig：头部导航配置
 // asideMenuConfig：侧边导航配置
 
-const headerMenuConfig = []
+const headerMenuConfig = [];
 
 const asideMenuConfig = [
   {
     path: '/dashboard',
     name: '控制台',
-    icon: 'iconfont icon-dashboard'
+    icon: 'iconfont icon-dashboard',
   },
   {
     path: '/products',
     name: '项目',
-    icon: 'iconfont icon-project'
+    icon: 'iconfont icon-project',
   },
   // {
   //   path: '/setting',
@@ -23,7 +23,7 @@ const asideMenuConfig = [
   {
     path: '/applications',
     name: '应用',
-    icon: 'iconfont icon-appstore'
+    icon: 'iconfont icon-appstore',
   },
   {
     path: '',
@@ -32,7 +32,7 @@ const asideMenuConfig = [
     children: [
       {
         path: '/accounts',
-        name: '测试账号'
+        name: '测试账号',
       },
       // {
       //   path: '/cmd',
@@ -40,14 +40,29 @@ const asideMenuConfig = [
       // },
       {
         path: '/websites',
-        name: '常用网站'
+        name: '常用网站',
       },
       {
         path: '/applicationsPages',
-        name: '页面管理'
-      }
-    ]
-  }
-]
+        name: '页面管理',
+      },
+    ],
+  },
+  {
+    name: 'Nav11',
+    path: '/page11',
+    icon: 'home',
+  },
+  {
+    name: 'Nav12',
+    path: '/page12',
+    icon: 'home',
+  },
+  {
+    name: 'IceworksPreviewPage',
+    path: '/IceworksPreviewPage',
+    icon: 'home',
+  },
+];
 
-export { headerMenuConfig, asideMenuConfig }
+export { headerMenuConfig, asideMenuConfig };
