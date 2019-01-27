@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './layouts/HeaderAsideLayout'
 import Login from './pages/Page12'
+import Base from './pages/Base/Base'
 Vue.use(Router)
 
 /**
@@ -68,7 +69,7 @@ export const routerConfig = [
         meta: {
           title: '项目管理'
         },
-        component: () => import('@/pages/products/index'),
+        component: Base,
         children: [
           {
             path: '',
@@ -76,12 +77,12 @@ export const routerConfig = [
             meta: {
               title: '所有项目'
             },
-            component: () => import('@/pages/products/list')
+            component: () => import('@/pages/Products/Index')
           },
           {
             path: ':id',
             hidden: true,
-            component: () => import('@/pages/products/detail'),
+            component: () => import('@/pages/Products/Show'),
             children: [
               {
                 path: '',
@@ -95,7 +96,7 @@ export const routerConfig = [
                 meta: {
                   title: '项目详情'
                 },
-                component: () => import('@/pages/products/info')
+                component: () => import('@/pages/Products/ShowInfo')
               },
               {
                 path: 'menus',
@@ -103,7 +104,7 @@ export const routerConfig = [
                 meta: {
                   title: '目录配置'
                 },
-                component: () => import('@/pages/products/menu')
+                component: () => import('@/pages/Products/ShowMenu')
               },
               {
                 path: 'build',
@@ -111,7 +112,7 @@ export const routerConfig = [
                 meta: {
                   title: '编译配置'
                 },
-                component: () => import('@/pages/products/build')
+                component: () => import('@/pages/Products/ShowBuild')
               },
               {
                 path: 'assets',
@@ -119,7 +120,7 @@ export const routerConfig = [
                 meta: {
                   title: '资源配置'
                 },
-                component: () => import('@/pages/products/assets')
+                component: () => import('@/pages/Products/ShowAssets')
               },
               {
                 path: 'settings',
@@ -127,7 +128,7 @@ export const routerConfig = [
                 meta: {
                   title: '设置'
                 },
-                component: () => import('@/pages/products/setting')
+                component: () => import('@/pages/Products/ShowSetting')
               }
             ]
           }
@@ -145,7 +146,7 @@ export const routerConfig = [
         meta: {
           title: '应用管理'
         },
-        component: () => import('@/pages/applications/index'),
+        component: Base,
         children: [
           {
             path: '',
@@ -153,7 +154,7 @@ export const routerConfig = [
             meta: {
               title: '所有应用'
             },
-            component: () => import('@/pages/applications/list')
+            component: () => import('@/pages/Applications/Index')
           },
           {
             path: ':appId',
@@ -161,7 +162,7 @@ export const routerConfig = [
               title: '应用详情'
             },
             hidden: true,
-            component: () => import('@/pages/applications/detail'),
+            component: () => import('@/pages/Applications/Show'),
             children: [
               {
                 path: '',
@@ -175,7 +176,7 @@ export const routerConfig = [
               {
                 path: 'pages',
                 name: 'applications.appId.pages',
-                component: () => import('@/pages/applicationsPages/list'),
+                component: () => import('@/pages/ApplicationsPages/Index'),
                 meta: {
                   title: '页面管理'
                 }
@@ -184,7 +185,7 @@ export const routerConfig = [
                 path: 'pages/:pageId/edit',
                 name: 'applications.appId.pagesId.edit',
                 hidden: true,
-                component: () => import('@/pages/applicationsPages/edit'),
+                component: () => import('@/pages/ApplicationsPages/Show'),
                 meta: {
                   title: '修改页面'
                 }
@@ -192,7 +193,7 @@ export const routerConfig = [
               {
                 path: 'menus',
                 name: 'applications.appId.menus',
-                component: () => import('@/pages/applications/menu'),
+                component: () => import('@/pages/Applications/ShowMenu'),
                 meta: {
                   title: '目录管理'
                 }
@@ -200,7 +201,7 @@ export const routerConfig = [
               {
                 path: 'settings',
                 name: 'applications.appId.settings',
-                component: () => import('@/pages/applications/setting'),
+                component: () => import('@/pages/Applications/ShowSetting'),
                 meta: {
                   title: '设置'
                 }
@@ -280,7 +281,7 @@ export const routerConfig = [
       {
         path: '',
         name: 'applicationPage',
-        component: () => import('@/pages/applicationsPages/list'),
+        component: () => import('@/pages/ApplicationsPages/Index'),
         meta: {
           title: '页面管理'
         }
@@ -288,7 +289,7 @@ export const routerConfig = [
       {
         path: ':id/edit',
         name: 'applicationPage__edit',
-        component: () => import('@/pages/applicationsPages/edit')
+        component: () => import('@/pages/ApplicationsPages/Show')
       }
     ]
   },

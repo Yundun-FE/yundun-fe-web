@@ -5,6 +5,7 @@
       :rules="rules"
       @submit="handleSubmit"
     >
+      <!-- 基本资料 -->
       <div class="BlockForm">
         <FormRow />
       </div>
@@ -22,7 +23,7 @@
       </div>
       <!-- 批量操作 -->
       <div class="BlockForm">
-        <FormTableActionToolbar />
+        <FormTableActionMultiple />
       </div>
       <!-- 操作 -->
       <div class="BlockForm">
