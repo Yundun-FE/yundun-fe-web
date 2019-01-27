@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './layouts/HeaderAsideLayout'
-import Login from './pages/Page12'
+import Login from './pages/Login'
 import Base from './pages/Base/Base'
 Vue.use(Router)
 
@@ -27,7 +27,7 @@ export const routerConfig = [
 
   {
     path: '/404',
-    component: () => import('@/pages/404'),
+    component: () => import('@/pages/Base/404'),
     hidden: true
   },
 
@@ -244,29 +244,13 @@ export const routerConfig = [
   },
 
   {
-    path: '/progress',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'index',
-        name: 'Progress',
-        component: () => import('@/pages/progress/index'),
-        meta: {
-          title: 'Progress'
-        }
-      }
-    ]
-  },
-
-  {
     path: '/setting',
     component: Layout,
     children: [
       {
         path: 'index',
         name: 'Setting',
-        component: () => import('@/pages/settings/index'),
+        component: () => import('@/pages/Settings/Index'),
         meta: {
           title: '配置'
         }
