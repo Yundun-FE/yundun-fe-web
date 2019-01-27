@@ -20,12 +20,8 @@ installComponents(Vue)
 
 import '@/permission'
 
-import Explorer from '@/api/explorer'
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
-Vue.prototype.$Api = {
-  Explorer
-}
 
 Vue.config.productionTip = false
 new Vue({

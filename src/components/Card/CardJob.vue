@@ -200,8 +200,6 @@
 </template>
 
 <script>
-import Explorer from '@/api/explorer'
-
 const TYPE_MAP = {
   test: {
     name: '测试',
