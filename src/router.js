@@ -38,26 +38,11 @@ export const routerConfig = [
 
   {
     path: '/dashboard',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        meta: {
-          title: '控制台'
-        },
-        component: () => import('@/pages/dashboard/index'),
-        children: [
-          {
-            path: '',
-            name: 'dashboard',
-            meta: {
-              title: '所有项目'
-            },
-            component: () => import('@/pages/dashboard/list')
-          }
-        ]
-      }
-    ]
+    meta: {
+      title: '控制台'
+    },
+    component: Layout
+    // component: () => import('@/pages/dashboard/index')
   },
 
   {
