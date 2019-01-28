@@ -50,6 +50,8 @@ export default {
         if (command === 'Delete') {
           const ids = this.multipleSelection.map(_ => _.id).join(',')
           this.handleDelete(ids)
+        } else {
+          this[`handleMultiple${command}`](this.multipleSelection)
         }
       })
     },

@@ -176,7 +176,12 @@ export default create({
         return []
       }
     },
-    actions: Object
+    actions: {
+      type: Object,
+      default: function() {
+        return {}
+      }
+    }
   },
 
   data() {

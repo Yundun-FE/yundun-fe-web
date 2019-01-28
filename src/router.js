@@ -115,6 +115,14 @@ export const routerConfig = [
                 component: () => import('@/pages/Products/ShowBuild')
               },
               {
+                path: 'commands',
+                name: 'products.id.commands',
+                meta: {
+                  title: '指令管理'
+                },
+                component: () => import('@/pages/Products/ShowCommands')
+              },
+              {
                 path: 'assets',
                 name: 'products.id.assets',
                 meta: {

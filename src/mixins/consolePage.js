@@ -27,6 +27,10 @@ export default {
       })
     },
 
+    formatResponse(data) {
+      return data
+    },
+
     checkFinish() {
       if (this.dataFinish && this.layoutFinish) {
         this.$refs.DmConsole.handleShow()
@@ -45,7 +49,8 @@ export default {
     // 读取数据
     async fetchData(url, params) {
       this.loading = true
-      const { list, total } = await this.Fetch.get(url, params)
+      const response = await this.Fetch.get(url, params)
+      const { list, total } = this.formatResponse(response)
       this.$refs.DmConsole.updateTotal(total)
 
       this.list = list
