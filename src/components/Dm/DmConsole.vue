@@ -84,6 +84,7 @@
         >{{ item.label }}</el-button>
       </template>
       <div class="pull-right">
+        <slot name="toolbar-right"/>
         <FormSearch
           size="medium"
           @submit="handleSearch"

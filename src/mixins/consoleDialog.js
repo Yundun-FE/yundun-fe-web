@@ -20,6 +20,7 @@ export default {
       if (form) {
         this.mode = 'Edit'
         this.form = form
+        console.log(form)
         if (form.id) this.id = form.id
       } else {
         this.mode = 'Create'

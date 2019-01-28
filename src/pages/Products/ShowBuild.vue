@@ -17,6 +17,16 @@
       :multiple-selection.sync="multipleSelection"
       @init="init"
       @action="handleAction"
+    >
+      <el-button
+        slot="toolbar-right"
+        size="medium"
+        @click="handleOpenSettings"
+      >配置</el-button>
+    </DmConsole>
+    <DialogSettingsBuilds
+      ref="DialogSettingsBuilds"
+      @init="init"
     />
   </page>
 </template>
@@ -41,27 +51,43 @@ export default {
       mode: 'Edit',
       id: this.$route.params.id,
       multipleSelection: [],
-      list: []
+      list: [],
+      into: {}
     }
   },
 
   methods: {
+    handleOpenSettings() {
+      this.$refs.DialogSettingsBuilds.handleOpen(this.info)
+    },
+
     async init() {
       const data = await this.Fetch.get(`/jobs/${this.id}`)
+      data.id = this.id
       this.list = data.settings.builds
+      this.info = data
 
       this.dataFinish = true
       this.checkFinish()
     },
 
-    async handleMultipleStart(list) {
+    handleMultipleStart(list) {
       const params = { config: list.map(_ => _.symbol) }
-      await this.Fetch.post('/jenkins/jobs/home-v5-frontend_node-tester/start', params)
+      this.fetchStart(params)
     },
 
-    async handleRowStart(scope) {
+    handleRowStart(scope) {
       const params = { config: [scope.row.symbol] }
-      await this.Fetch.post('/jenkins/jobs/home-v5-frontend_node-tester/start', params)
+      this.fetchStart(params)
+    },
+
+    async fetchStart(params) {
+      try {
+        await this.Fetch.post(`/jenkins/jobs/${this.info.name}/start`, params)
+      } catch (e) {
+        return
+      }
+      this.Notice('ACTION_SUCCESS')
     },
 
     formatResponse(data) {
