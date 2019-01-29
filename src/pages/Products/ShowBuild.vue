@@ -1,21 +1,25 @@
 <style lang="postcss">
-
-.toolbar__progress{
+.toolbar__progress {
   display: inline-block;
   width: 150px;
-  margin-left: 8px;;
+  margin-left: 8px;
 }
-
 </style>
 
 <template>
   <page>
     <el-alert
+      v-if="multipleSelection.length > 0"
       :closable="false"
       :title="`已选${ multipleSelection.length }个，预计耗时${ formatSeconds(buildTimes) }`"
       type="success"
     />
-
+    <el-alert
+      v-else
+      :closable="false"
+      :title="`共${ list.length }个应用`"
+      type="success"
+    />
     <DmConsole
       ref="DmConsole"
       :loading="loading"
@@ -47,7 +51,7 @@
           </el-form-item>
           <br>
           <el-form-item
-            v-if="info.settings && info.settings.commands"
+            v-if="info.settings && info.settings.commands && info.settings.commands[0]"
             label="更新指令"
           >
             <el-input v-model="info.settings.commands[0].content" />
@@ -125,6 +129,12 @@ export default {
     }
   },
 
+  watch: {
+    '$route'(val) {
+      this.init()
+    }
+  },
+
   created() {
     const filters = Lockr.get('filters')
     this.filters = Object.assign(this.filters, filters)
@@ -137,8 +147,8 @@ export default {
       const list = data.settings.builds
 
       list.forEach(item => {
-        // item.type = labelView(item.symbol.replace(/\d/g, ''), MODULES_TYPE)
         item.type = item.symbol.replace(/\d/g, '')
+        item.typeView = labelView(item.type, MODULES_TYPE)
       })
       this.list = list
       this.listRaw = list
@@ -167,7 +177,7 @@ export default {
     handleFilterList() {
       Lockr.set('filters', this.filters)
       const { type } = this.filters
-      this.list = deepClone(this.listRaw.filter(_ => _.type === type))
+      this.list = type ? deepClone(this.listRaw.filter(_ => _.type === type)) : deepClone(this.listRaw)
     },
     // 发送编译
     async fetchStart(params) {
@@ -181,10 +191,10 @@ export default {
     },
 
     handleChangeEnv(id) {
+      this.id = id
       this.$router.push({
         path: `/products/${id}/build`
       })
-      this.init()
     },
     // 编译进度
     async fetchProgress() {

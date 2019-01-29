@@ -20,11 +20,12 @@
 <script>
 import createCudr from '@/utils/create-cudr'
 import DialogRow from './components/DialogRow'
+import config from './config'
 
 export default createCudr({
-  pageName: 'fe-job',
-  API_NAME: 'jobs',
-
+  pageName: config.pageName,
+  API_NAME: config.apiName,
+  config,
   components: { DialogRow }
 })
 </script>

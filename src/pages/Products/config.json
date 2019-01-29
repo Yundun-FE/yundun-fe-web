@@ -1,0 +1,93 @@
+{
+  "name": "Products",
+  "version": "2.0",
+  "pageName": "fe-job",
+  "apiName": "jobs",
+	"content": {
+		"actions": {
+			"row": {
+				"list": [{
+					"type": "",
+					"items": [{
+						"type": "",
+						"label": "编辑",
+						"command": "Edit"
+					}, {
+						"type": "",
+						"label": "删除",
+						"command": "Delete"
+					}],
+					"label": "查看详情",
+					"command": "Detail"
+				}]
+			},
+			"search": {
+				"key": "",
+				"align": "right",
+				"label": "搜索",
+				"command": "Search"
+			},
+			"toolbar": {
+				"list": [{
+					"type": "primary",
+					"label": "添加项目",
+					"command": "Create"
+				}]
+			},
+			"multiple": {
+				"list": [{
+					"label": "删除",
+					"command": "Delete"
+				}]
+			}
+		},
+		"columns": [{
+			"props": {
+				"prop": "id",
+				"label": "ID",
+				"minWidth": 50
+			},
+			"componentName": ""
+		}, {
+			"props": {
+				"prop": "title",
+				"label": "名称",
+				"minWidth": 200
+			},
+			"componentName": ""
+		}, {
+			"props": {
+				"prop": "name",
+				"label": "项目",
+				"minWidth": 200
+			},
+			"componentName": ""
+		}, {
+			"props": {
+				"prop": "env",
+				"label": "ENV",
+				"minWidth": 100
+			},
+			"componentName": ""
+		}, {
+			"props": {
+				"prop": "created_at",
+				"label": "创建时间",
+				"minWidth": 200
+			},
+			"componentName": ""
+		}, {
+			"props": {
+				"prop": "",
+				"label": "操作",
+				"width": 200
+			},
+			"componentName": "ColumnAction"
+    }]
+  },
+  "blocks": [
+    {
+      "name": "DmCurd"
+    }
+  ]
+}

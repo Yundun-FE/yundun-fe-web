@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import { routerConfig } from '@/router'
 import LABEL from '@/utils/constants/label'
+import { FE_API } from '../../config'
 
 function genterMenuMap(routers, menus = {}) {
   let name = ''
@@ -28,6 +29,7 @@ const app = {
     menus: genterMenuMap(routerConfig),
     LABEL: LABEL,
     tabs: {},
+    FE_API,
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
