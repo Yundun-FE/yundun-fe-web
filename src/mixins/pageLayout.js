@@ -21,6 +21,7 @@ export default {
         data = await Fetch.get(`${this.FE_API}/explorer/pages/${this.pageName}`)
       } catch (e) {
         data = this.config
+        console.log(data)
         console.warn(`${this.pageName} - 未同步此页面配置`)
       }
 
