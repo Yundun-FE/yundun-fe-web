@@ -213,7 +213,7 @@ export const routerConfig = [
       {
         path: '',
         name: 'accounts',
-        component: () => import('@/pages/accounts/index'),
+        component: () => import('@/pages/Accounts/index'),
         meta: {
           title: '账号管理'
         }
@@ -228,7 +228,7 @@ export const routerConfig = [
       {
         path: '',
         name: 'Website',
-        component: () => import('@/pages/websites/index'),
+        component: () => import('@/pages/Websites/index'),
         meta: {
           title: '网站管理'
         }
