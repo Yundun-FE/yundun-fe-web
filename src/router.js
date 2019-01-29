@@ -62,7 +62,7 @@ export const routerConfig = [
             meta: {
               title: '所有项目'
             },
-            component: () => import('@/pages/Products/Index')
+            component: () => import('@/pages/Products/index')
           },
           {
             path: ':id',
@@ -147,7 +147,7 @@ export const routerConfig = [
             meta: {
               title: '所有应用'
             },
-            component: () => import('@/pages/Applications/Index')
+            component: () => import('@/pages/Applications/index')
           },
           {
             path: ':appId',
@@ -169,7 +169,7 @@ export const routerConfig = [
               {
                 path: 'pages',
                 name: 'applications.appId.pages',
-                component: () => import('@/pages/ApplicationsPages/Index'),
+                component: () => import('@/pages/ApplicationsPages/index'),
                 meta: {
                   title: '页面管理'
                 }
@@ -243,7 +243,7 @@ export const routerConfig = [
       {
         path: 'index',
         name: 'Setting',
-        component: () => import('@/pages/Settings/Index'),
+        component: () => import('@/pages/Settings/index'),
         meta: {
           title: '配置'
         }
@@ -258,7 +258,7 @@ export const routerConfig = [
       {
         path: '',
         name: 'applicationPage',
-        component: () => import('@/pages/ApplicationsPages/Index'),
+        component: () => import('@/pages/ApplicationsPages/index'),
         meta: {
           title: '页面管理'
         }
