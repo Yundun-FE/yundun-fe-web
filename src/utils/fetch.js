@@ -1,5 +1,5 @@
 import request from './request'
-const base = 'api'
+const base = 'http://127.0.0.1:7001'
 
 export default {
   post(url, data, params) {
