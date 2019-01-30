@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .Card {
   position: relative;
   background: #fff;

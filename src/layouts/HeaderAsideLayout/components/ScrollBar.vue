@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .scroll-container {
   width: 100%;
   height: 100%;

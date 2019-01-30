@@ -123,6 +123,6 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 @import "./UserLogin.scss";
 </style>

@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .Page {
   min-height: calc(100vh - 64px);
 

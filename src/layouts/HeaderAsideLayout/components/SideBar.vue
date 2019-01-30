@@ -82,7 +82,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .logo {
   display: flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .page--setting {
   padding: 12px;
 }

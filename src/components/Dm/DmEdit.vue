@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .DmEdit {
   padding: 20px 30px;
   min-height: 300px;

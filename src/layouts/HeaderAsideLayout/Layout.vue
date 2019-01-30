@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .app-wrapper {
   position: relative;
   height: 100%;

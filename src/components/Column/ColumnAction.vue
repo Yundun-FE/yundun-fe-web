@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .ColumnAction{
   &__item{
     margin-right: 8px;

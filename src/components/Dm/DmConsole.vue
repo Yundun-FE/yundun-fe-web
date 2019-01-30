@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .DmConsole {
   padding: 20px 30px;
 

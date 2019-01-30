@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .HeaderBreadcrumb{
   background: #FFF;
   padding: 20px 30px;

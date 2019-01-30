@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 </style>
 <template>
   <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">

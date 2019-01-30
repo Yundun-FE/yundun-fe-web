@@ -1,4 +1,4 @@
-<style lang="postcss">
+<style lang="scss">
 .toolbar__progress {
   display: inline-block;
   width: 150px;
