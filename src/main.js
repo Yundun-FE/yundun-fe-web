@@ -10,7 +10,7 @@ import * as LABEL from '@/utils/constants/label'
 
 Vue.use(ElementUI)
 
-// import 'normalize.css/normalize.css'
+import 'normalize.css/normalize.css'
 import '@/styles/index.css'
 import '@/styles/iconfont/iconfont.css'
 

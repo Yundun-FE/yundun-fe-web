@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { routerConfig } from '@/router'
+import routerConfig from '@/routerConfig'
 import LABEL from '@/utils/constants/label'
 import { FE_API } from '../../config'
 
