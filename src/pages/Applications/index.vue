@@ -1,7 +1,5 @@
 <template>
-  <page
-    :loading="loading"
-  >
+  <page :loading="loading">
     <DmConsole
       ref="DmConsole"
       :data="list"
@@ -21,12 +19,16 @@
 </template>
 
 <script>
-import createCudr from '@/utils/create-cudr'
+// import createCudr from '@/utils/create-cudr'
+import createPage from '@/utils/create-page'
 import DialogRow from './components/DialogRow'
 
-export default createCudr({
+export default createPage({
   pageName: 'application',
   API_NAME: 'applications',
+  options: {
+
+  },
 
   components: { DialogRow },
 
@@ -36,6 +38,9 @@ export default createCudr({
         type: ''
       }
     }
+  },
+
+  created() {
   }
 })
 </script>
