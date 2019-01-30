@@ -85,6 +85,7 @@ import { formatSeconds } from '@/utils/date'
 import { labelView } from '@/utils/filter'
 import { deepClone, listToObj } from '@/utils/util'
 import consolePage from '@/mixins/consolePage'
+import pageLayout from '@/mixins/pageLayout'
 import consoleCudr from '@/mixins/consoleCudr'
 import createCudr from '@/utils/create-cudr'
 import { MODULES_TYPE, ENV } from '@/utils/constants/label'
@@ -97,7 +98,7 @@ export default {
 
   components: { DialogSettingsBuilds },
 
-  mixins: [consolePage, consoleCudr],
+  mixins: [consolePage, pageLayout, consoleCudr],
 
   data() {
     return {

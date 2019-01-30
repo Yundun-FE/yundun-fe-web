@@ -18,7 +18,7 @@ export default {
     async initPageLayout() {
       let data = this.config
       try {
-        data = await Fetch.get(`${this.FE_API}/explorer/pages/${this.pageName}`)
+        data = await Fetch.get(`/explorer/pages/${this.pageName}`)
       } catch (e) {
         data = this.config
         console.log(data)
