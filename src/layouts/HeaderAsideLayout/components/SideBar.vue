@@ -129,7 +129,7 @@ export default {
   }
 
   .router-link-active .el-menu-item {
-    background-color: #188fff !important;
+    background-color: $--color-primary !important;
     color: #fff !important;
     i {
       color: #fff !important;
@@ -139,7 +139,7 @@ export default {
   .el-menu-item,
   .el-submenu .el-menu-item {
     &.is-active {
-      background-color: #188fff !important;
+      background-color: $--color-primary !important;
       color: #fff !important;
     }
   }
