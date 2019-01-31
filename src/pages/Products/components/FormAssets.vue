@@ -65,6 +65,10 @@ export default {
   },
 
   computed: {
+    info() {
+      console.log(this.$parent)
+      return this.$parent.$parent.info
+    },
     form() {
       return this.$parent.model
     }

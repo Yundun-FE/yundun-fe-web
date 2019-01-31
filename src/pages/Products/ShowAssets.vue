@@ -26,6 +26,12 @@ export default {
       mode: 'Edit',
       id: this.$route.params.id
     }
+  },
+
+  computed: {
+    info() {
+      return this.$parent.info
+    }
   }
 }
 </script>

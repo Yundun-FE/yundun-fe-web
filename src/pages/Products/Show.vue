@@ -1,10 +1,13 @@
 <template>
-  <page>
-    <HeaderDetail v-if="inMenu">
-      <HeaderTab :data="pageMenus"/>
+  <div>
+    <HeaderDetail
+      v-if="inMenu"
+      @init="init"
+    >
+      <HeaderTab :data="pageMenus" />
     </HeaderDetail>
-    <router-view/>
-  </page>
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -18,7 +21,9 @@ export default {
 
   data() {
     return {
-      pageMenus: []
+      pageMenus: [],
+      selectEnv: [],
+      info: {}
     }
   },
 
@@ -29,8 +34,31 @@ export default {
     }
   },
 
+  watch: {
+    '$route'(val) {
+      this.init()
+    }
+  },
+
   created() {
     this.pageMenus = this.menus['products.id']
+    this.init()
+  },
+
+  methods: {
+    async init() {
+      const { env } = this.$route.query
+      const info = await this.Fetch.get(`/jobs/${this.$route.params.id}`, { env })
+      this.info = info
+
+      const data = await this.Fetch.get(`/explorer/jobs/${info.name}`)
+      this.selectEnv = data.map(_ => {
+        return {
+          label: _.env === 'root' ? 'PRIMARY' : _.title,
+          value: _.env
+        }
+      })
+    }
   }
 }
 </script>

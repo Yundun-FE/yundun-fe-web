@@ -31,6 +31,11 @@ const asideMenuConfig = [
     icon: 'iconfont icon-appstore'
   },
   {
+    path: '/forms',
+    name: '表单',
+    icon: 'iconfont icon-appstore'
+  },
+  {
     path: '',
     name: '开发管理',
     icon: 'iconfont icon-build',

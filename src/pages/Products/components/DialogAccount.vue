@@ -1,5 +1,3 @@
-<style lang="scss">
-</style>
 <template>
   <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
@@ -25,9 +23,6 @@
 
 <script>
 export default {
-  components: {},
-  props: {},
-
   data() {
     return {
       visible: false,
@@ -42,12 +37,9 @@ export default {
     }
   },
 
-  computed: {},
-
   methods: {
     async handleSave() {
       const { form, isEdit } = this
-
       const { title, url, env, name } = form
       const data = { title, url, env, name }
 
@@ -63,6 +55,7 @@ export default {
       this.visible = false
       this.$emit('init-list')
     },
+
     open(form) {
       this.isEdit = !!form
       Object.assign(this.form, form)

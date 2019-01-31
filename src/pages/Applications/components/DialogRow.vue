@@ -15,8 +15,8 @@ import createDialog from '@/utils/create-dialog'
 import FormRow from './FormRow'
 
 export default createDialog({
-  components: { FormRow },
+  API_NAME: 'applications',
 
-  API_NAME: 'applications'
+  components: { FormRow }
 })
 </script>

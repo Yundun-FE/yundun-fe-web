@@ -26,14 +26,14 @@
         />
       </el-col>
     </el-form-item>
-    <el-form-item label="ENV">
+    <!-- <el-form-item label="ENV">
       <yd-form-radio
         id="form_env"
         v-model="form.env"
         :radios="LABEL.ENV"
         border
       />
-    </el-form-item>
+    </el-form-item> -->
   </div>
 </template>
 

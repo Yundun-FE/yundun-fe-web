@@ -96,14 +96,14 @@ export const routerConfig = [
                 },
                 component: () => import('@/pages/Products/ShowBuild')
               },
-              {
-                path: 'commands',
-                name: 'products.id.commands',
-                meta: {
-                  title: '指令管理'
-                },
-                component: () => import('@/pages/Products/ShowCommands')
-              },
+              // {
+              //   path: 'commands',
+              //   name: 'products.id.commands',
+              //   meta: {
+              //     title: '指令管理'
+              //   },
+              //   component: () => import('@/pages/Products/ShowCommands')
+              // },
               {
                 path: 'assets',
                 name: 'products.id.assets',
@@ -213,6 +213,21 @@ export const routerConfig = [
         component: () => import('@/pages/Accounts/index'),
         meta: {
           title: '账号管理'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/forms',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'forms',
+        component: () => import('@/pages/Forms/index'),
+        meta: {
+          title: '表单管理'
         }
       }
     ]

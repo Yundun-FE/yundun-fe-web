@@ -1,37 +1,51 @@
 <template>
   <div>
-    <HeaderTop
-      :title="info.title"
-    >
+    <HeaderTop :title="info.title">
       <template slot="info">
         {{ info.name }}
       </template>
-      <slot/>
+      <template slot="action">
+        <yd-form-select
+          v-model="info.env"
+          :selects="selectEnv"
+          @change="handleChangeEnv"
+        />
+      </template>
+      <slot />
     </HeaderTop>
   </div>
 </template>
 
 <script>
 export default {
-  props: {},
-
   data() {
     return {
-      id: '',
-      info: {}
+      id: ''
     }
   },
 
-  computed: {},
+  computed: {
+    info() {
+      return this.$parent.info
+    },
+    selectEnv() {
+      return this.$parent.selectEnv
+    }
+  },
 
   created() {
     this.id = this.$route.params.id
-    this.init()
   },
 
   methods: {
-    async init() {
-      this.info = await this.Fetch.get(`/jobs/${this.id}`)
+    handleChangeEnv(env) {
+      this.$router.push({
+        path: '',
+        query: {
+          env
+        },
+        append: true
+      })
     }
   }
 }

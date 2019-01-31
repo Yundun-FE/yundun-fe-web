@@ -16,7 +16,10 @@
 
 <template>
   <div :class="b()">
-    <Card theme="action">
+    <Card
+      :title="title"
+      theme="action"
+    >
       <el-form
         ref="form"
         :model="form"
@@ -51,7 +54,8 @@ export default create({
   mixins: [form],
 
   props: {
-    backButton: Boolean
+    backButton: Boolean,
+    title: ''
   },
 
   provide() {

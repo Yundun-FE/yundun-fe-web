@@ -33,6 +33,12 @@ export default {
     }
   },
 
+  watch: {
+    '$route'(val) {
+      this.init()
+    }
+  },
+
   created() {
     this.initFormLayout()
   },
@@ -43,7 +49,7 @@ export default {
     async init() {
       if (this.API_NAME && this.id) {
         this.mode = 'Edit'
-        const data = await Fetch.get(`/${this.API_NAME}/${this.id}`)
+        const data = await Fetch.get(`/${this.API_NAME}/${this.id}`, this.$route.query)
         this.form = Object.assign(deepClone(this.FORM), data)
       }
       // if (!data.settings) data.settings = deepClone(this.FORM.settings)
@@ -66,17 +72,16 @@ export default {
 
     async handleSubmit() {
       const form = deepClone(this.form)
-      console.log(this)
       try {
         if (this.mode === 'Edit') {
           if (this.API_NAME && this.id) {
-            await Fetch.patch(`/${this.API_NAME}/${this.id}`, form)
+            await Fetch.patch(`/${this.API_NAME}/${this.id}`, form, this.$route.query)
           } else {
             await this.handleEditSubmit(this.form)
           }
         } else {
           if (this.API_NAME) {
-            await Fetch.post(`/${this.API_NAME}`, form)
+            await Fetch.post(`/${this.API_NAME}`, form, this.$route.query)
           } else {
             await this.handleCreateSubmit(this.form)
           }
