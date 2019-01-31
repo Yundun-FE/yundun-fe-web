@@ -96,6 +96,23 @@ export const routerConfig = [
                 },
                 component: () => import('@/pages/Products/ShowBuild')
               },
+              {
+                path: 'pages',
+                name: 'products.id.pages',
+                component: () => import('@/pages/ApplicationsPages/index'),
+                meta: {
+                  title: '页面管理'
+                }
+              },
+              {
+                path: 'pages/:productId/edit',
+                name: 'products.id.pagesId.edit',
+                hidden: true,
+                component: () => import('@/pages/ApplicationsPages/Show'),
+                meta: {
+                  title: '修改页面'
+                }
+              },
               // {
               //   path: 'commands',
               //   name: 'products.id.commands',
