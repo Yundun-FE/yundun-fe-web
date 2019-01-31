@@ -1,7 +1,8 @@
 <style lang="scss">
 .DmConsole {
   padding: 20px 30px;
-
+  display: flex;
+  flex-flow: column;
   .el-table th {
     background: rgb(249, 251, 255);
   }
@@ -9,19 +10,17 @@
   &__toolbar {
     width: 100%;
     margin-bottom: 12px;
-    overflow: hidden;
   }
 
   &__core {
-    width: 100%;
+    display: flex;
+    flex-flow: column;
     background: #fff;
     border-radius: 3px;
-    overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &__body {
-    width: 100%;
     min-height: 500px;
     .el-table {
       min-height: 500px;
@@ -38,7 +37,6 @@
   }
 
   &__footer {
-    overflow: hidden;
     padding: 12px;
 
     .el-pagination {
