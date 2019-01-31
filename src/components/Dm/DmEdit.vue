@@ -60,7 +60,7 @@ export default create({
 
   provide() {
     return {
-      dmForm: this
+      dmEdit: this
     }
   },
 

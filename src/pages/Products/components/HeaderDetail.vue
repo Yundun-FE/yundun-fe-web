@@ -5,9 +5,10 @@
         {{ info.name }}
       </template>
       <template slot="action">
-        <yd-form-select
+        <yd-form-radio
           v-model="info.env"
-          :selects="selectEnv"
+          :radios="selectEnv"
+          border
           @change="handleChangeEnv"
         />
       </template>

@@ -14,17 +14,22 @@
           prop="props.label"
         >
           <template slot-scope="scope">
-            <el-input v-model="scope.row.props.label" />
+            <el-input
+              v-model="scope.row.props.label"
+              size="small"
+            />
           </template>
         </el-table-column>
         <el-table-column
           label="组件"
+          size="small"
           prop="componentName"
         >
           <template slot-scope="scope">
             <yd-form-select
               :selects="LABEL.COLUMN_COMPONENT_NAME"
               v-model="scope.row.componentName"
+              size="small"
               default-text="默认"
             />
           </template>
@@ -34,36 +39,48 @@
           prop="props.prop"
         >
           <template slot-scope="scope">
-            <el-input v-model="scope.row.props.prop" />
+            <el-input
+              v-model="scope.row.props.prop"
+              size="small"
+            />
           </template>
         </el-table-column>
         <el-table-column
-          label="宽度"
-          prop="props.width"
+          width="400px"
+          label="布局"
         >
           <template slot-scope="scope">
-            <el-input-number v-model="scope.row.props.width" />
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="最小宽度"
-          prop="props.minWidth"
-        >
-          <template slot-scope="scope">
-            <el-input-number v-model="scope.row.props.minWidth" />
+            <!-- <el-checkbox
+              v-model="checked"
+              style="margin-right: 10px"
+            >自适应</el-checkbox> -->
+            <el-input-number
+              v-model="scope.row.props.width"
+              size="small"
+            />
+            <el-input-number
+              v-model="scope.row.props.minWidth"
+              size="small"
+            />
           </template>
         </el-table-column>
       </TableForm>
+
+      <RenderTable
+        :columns="form.content.columns"
+        border
+        selection
+        size="small"
+        style="margin-top: 12px"
+        @header-click="handleCickHeader"
+      />
     </el-form-item>
   </div>
 </template>
 
 <script>
-import formTable from '@/mixins/formTable'
 
 export default {
-  mixins: [formTable],
-
   data() {
     return {
       row: {
@@ -77,11 +94,18 @@ export default {
     }
   },
 
+  inject: ['dmEdit'],
+
   computed: {
     form() {
-      return this.$parent.model
+      return this.dmEdit.form
+    }
+  },
+
+  methods: {
+    handleCickHeader(val) {
+      console.log(val)
     }
   }
-
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <page :loading="loading">
+    <el-input/>
     <DmConsole
       ref="DmConsole"
       :loading="loading"

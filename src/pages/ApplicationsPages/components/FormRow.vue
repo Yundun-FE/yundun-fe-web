@@ -34,22 +34,16 @@
         style="width: 220px"
       />
     </el-form-item>
-    <!-- {{ form.appId }} -->
-    <!-- <el-form-item label="绑定应用">
-      <yd-form-select
-        v-model="form.appId"
-        :selects="selectApps"
-        filterable
-      />
-    </el-form-item> -->
   </div>
 </template>
 
 <script>
 export default {
+  inject: ['dmEdit'],
+
   computed: {
     form() {
-      return this.$parent.model
+      return this.dmEdit.form
     }
   }
 }

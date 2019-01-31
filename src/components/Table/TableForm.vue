@@ -3,6 +3,7 @@
     <el-table
       :data="data"
       :show-header="showHeader"
+      :size="size"
       border
     >
       <slot />
@@ -14,20 +15,24 @@
         <template slot-scope="scope">
           <template v-if="sort">
             <el-button
+              :size="size"
               type="text"
               @click="handleRowUp(scope.$index)"
             >上移</el-button>
             <el-button
+              :size="size"
               type="text"
               @click="handleRowDown(scope.$index)"
             >下移</el-button>
           </template>
           <el-button
             v-if="editRow"
+            :size="size"
             type="text"
             @click="handleEditRow(scope)"
           >编辑</el-button>
           <el-button
+            :size="size"
             type="text"
             @click="handleRowDelete(scope.$index)"
           >删除</el-button>
@@ -36,8 +41,8 @@
     </el-table>
     <div style="margin-top: 12px">
       <slot name="add-form" />
-
       <el-dropdown
+        :size="size"
         split-button
         type="primary"
         @click="handleRowAdd"
@@ -73,6 +78,10 @@ export default create({
     editRow: Boolean,
     sort: Boolean,
     customAddRow: Boolean,
+    size: {
+      type: String,
+      default: 'small'
+    },
     showHeader: {
       type: Boolean,
       default: true

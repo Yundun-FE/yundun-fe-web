@@ -14,7 +14,10 @@
           min-width="200"
         >
           <template slot-scope="scope">
-            <el-input v-model="scope.row.label" />
+            <el-input
+              v-model="scope.row.label"
+
+            />
           </template>
         </el-table-column>
         <el-table-column
@@ -60,7 +63,7 @@ export default {
 
   computed: {
     form() {
-      return this.$parent.model
+      return this.dmEdit.form
     }
   }
 

@@ -1,35 +1,45 @@
 <template>
   <page breadcrumb>
-    el-button
+    <HeaderTop :title="form.name"/>
     <DmEdit
       v-model="form"
       :rules="rules"
+      back-button
       @submit="handleSubmit"
     >
-      <!-- 基本资料 -->
-      <div class="BlockForm">
-        <FormRow />
-      </div>
+
+      <el-tabs tab-position="left">
+        <el-tab-pane label="基本资料">
+          <!-- 基本资料 -->
+          <div class="BlockForm">
+            <FormRow />
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+      </el-tabs>
+
       <!-- NOTICE -->
-      <div class="BlockForm">
+      <!-- <div class="BlockForm">
         <FormTableNotice />
-      </div>
+      </div> -->
       <!-- COLUMNS -->
       <div class="BlockForm">
         <FormTableColumn sort />
       </div>
       <!-- ACTION-ROW -->
-      <div class="BlockForm">
+      <!-- <div class="BlockForm">
         <FormTableActionRow sort />
-      </div>
+      </div> -->
       <!-- 批量操作 -->
-      <div class="BlockForm">
+      <!-- <div class="BlockForm">
         <FormTableActionMultiple />
-      </div>
+      </div> -->
       <!-- 操作 -->
-      <div class="BlockForm">
+      <!-- <div class="BlockForm">
         <FormTableActionToolbar />
-      </div>
+      </div> -->
     </DmEdit>
   </page>
 </template>
