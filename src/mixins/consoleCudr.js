@@ -25,6 +25,7 @@ export default {
     handleRowDetail(scope) {
       this.$router.push({
         path: `${scope.row.id}`,
+        query: this.$route.query,
         append: true
       })
     },
@@ -32,6 +33,7 @@ export default {
     handleRowEditpage(scope) {
       this.$router.push({
         path: `${scope.row.id}/edit`,
+        query: this.$route.query,
         append: true
       })
     },

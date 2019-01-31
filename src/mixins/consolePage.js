@@ -27,7 +27,6 @@ export default {
         this.loading = false
       }
     },
-
     // 读取数据
     async fetchData(url, params) {
       this.loading = true
