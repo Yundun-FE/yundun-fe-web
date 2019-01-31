@@ -19,7 +19,7 @@ export default create({
     }
 
     this.columns.forEach(column => {
-      const { tag = 'el-table-column', props = {}, componentName, componentProps = {}} = column
+      const { props = {}, componentName, componentProps = {}} = column
 
       let scopedSlots = {}
       if (componentName) {
