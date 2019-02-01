@@ -61,15 +61,17 @@ export default {
     },
 
     handleAction(e) {
-      if (typeof e === 'string') {
-        this[`handle${e}`]()
+      const command = e.command.split('.')
+      if (command.length === 1) command.unshift('Toolbar')
+      const [mode, cmd] = command
+
+      if (mode === 'Toolbar') {
+        this[`handle${cmd}`]()
+      } else if (mode === 'Row') {
+        this[`handleRow${cmd}`](e.scope)
       } else {
-        const { mode = 'Row', command, scope } = e
-        if (mode === 'Row') {
-          this[`handleRow${command}`](scope)
-        } else {
-          this.handleMultipleAction(e)
-        }
+        e.command = cmd
+        this.handleMultipleAction(e)
       }
     },
     // 行删除

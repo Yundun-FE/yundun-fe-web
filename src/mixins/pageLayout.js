@@ -4,7 +4,8 @@ export default {
   data() {
     return {
       columns: [],
-      actions: {},
+      actionsRow: [],
+      actionsToolbar: [],
       settings: {},
       layoutFinish: false
     }
@@ -21,12 +22,12 @@ export default {
         data = await Fetch.get(`/explorer/pages/${this.pageName}`)
       } catch (e) {
         data = this.config
-        console.log(data)
         console.warn(`${this.pageName} - 未同步此页面配置`)
       }
 
-      this.columns = data.content.columns
-      this.actions = data.content.actions
+      this.columns = data.blocks.DmConsole.props.columns
+      this.actionsRow = data.blocks.DmConsole.props.actionsRow
+      this.actionsToolbar = data.blocks.DmConsole.props.actionsToolbar
       this.layoutFinish = true
       this.checkFinish()
     }

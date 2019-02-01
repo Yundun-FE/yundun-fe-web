@@ -25,6 +25,7 @@ export default create({
         const props = componentProps
         if (componentName === 'ColumnAction' && this.actionsRow) {
           props.list = this.actionsRow
+          props.commandPrefix = 'Row'
         }
         scopedSlots = {
           default: scope => createElement(componentName, {

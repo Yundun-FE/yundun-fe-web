@@ -5,7 +5,8 @@
       :loading="loading"
       :data="list"
       :columns="columns"
-      :actions="actions"
+      :actions-row="actionsRow"
+      :actions-toolbar="actionsToolbar"
       :multiple-selection.sync="multipleSelection"
       @init="init"
       @action="handleAction"
@@ -25,7 +26,7 @@ import config from './config'
 export default createCudr({
   pageName: config.pageName,
   API_NAME: config.apiName,
-  config,
+
   components: { DialogRow }
 })
 </script>

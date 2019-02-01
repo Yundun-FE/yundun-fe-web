@@ -57,9 +57,12 @@
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
-      <ColumnAction :list="actionsToolbar"/>
+      <ColumnAction
+        :list="actionsToolbar"
+        @action="handleAction"
+      />
       <div class="pull-right">
-        <slot name="toolbar-right"/>
+        <slot name="toolbar-right" />
         <!-- <FormSearch
           size="medium"
           @submit="handleSearch"
@@ -121,7 +124,6 @@ export default create({
   components: { RenderTable },
 
   props: {
-    selection: Boolean,
     data: {
       type: Array,
       default: function() {
@@ -172,7 +174,17 @@ export default create({
       show: false,
       params: {
         name: ''
-      }
+      },
+      selection: false
+    }
+  },
+
+  watch: {
+    actionsToolbar(val) {
+      this.selection = false
+      val.forEach(item => {
+        if (item.command.includes('Multiple')) this.selection = true
+      })
     }
   },
 

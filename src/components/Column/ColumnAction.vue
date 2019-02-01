@@ -55,6 +55,7 @@ export default create({
       type: String,
       default: 'medium'
     },
+    commandPrefix: String,
     list: {
       type: Array,
       default: () => []
@@ -67,7 +68,7 @@ export default create({
 
   methods: {
     handleClick(e) {
-      e.mode = 'Row'
+      e.command = this.commandPrefix ? `${this.commandPrefix}.${e.command}` : e.command
       this.$emit('action', e)
     }
   }
