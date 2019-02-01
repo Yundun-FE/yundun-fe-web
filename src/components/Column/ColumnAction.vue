@@ -11,7 +11,7 @@
 </style>
 
 <template>
-  <div :class="b()">
+  <span :class="b()">
     <span
       v-for="(item, index) in list"
       :class="b('item')"
@@ -41,7 +41,7 @@
         @click="handleClick({command: item.command, scope, settings: item})"
       >{{ item.label }}</el-button>
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -62,11 +62,6 @@ export default create({
     scope: {
       type: Object,
       default: () => { }
-    }
-  },
-
-  data() {
-    return {
     }
   },
 

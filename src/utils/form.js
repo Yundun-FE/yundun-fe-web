@@ -1,3 +1,4 @@
+import { isDef } from './'
 // 选择器排除器
 export const selectExclude = function(list, exclude = []) {
   list.forEach(item => {
@@ -109,11 +110,11 @@ export function selectLabelToObj(list) {
   return obj
 }
 
-export function formatLabel(list, labelName, valueName) {
+export function formatLabel(list, labelName, valueName = labelName) {
   return list.map(_ => {
     return {
       label: _[labelName] || _,
-      value: _[valueName] || _[labelName] || _
+      value: isDef(_[valueName]) ? _[valueName] : _
     }
   })
 }

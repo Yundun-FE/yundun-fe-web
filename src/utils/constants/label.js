@@ -40,7 +40,7 @@ const APP_PAGE_TYPE = [
     value: 0
   },
   {
-    label: '列表页',
+    label: '控制列表',
     value: 1
   },
   {

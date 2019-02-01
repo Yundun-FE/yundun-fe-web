@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-form-item
-      v-if="form.content"
+      v-if="data"
       label="表格配置"
     >
       <TableForm
-        :data="form.content.columns"
+        :data="data"
         :row="row"
         sort
       >
@@ -66,14 +66,14 @@
         </el-table-column>
       </TableForm>
 
-      <RenderTable
-        :columns="form.content.columns"
+      <!-- <RenderTable
+        :columns="form.columns"
         border
         selection
         size="small"
         style="margin-top: 12px"
         @header-click="handleCickHeader"
-      />
+      /> -->
     </el-form-item>
   </div>
 </template>
@@ -81,6 +81,10 @@
 <script>
 
 export default {
+  props: {
+    data: Array
+  },
+
   data() {
     return {
       row: {
@@ -95,12 +99,6 @@ export default {
   },
 
   inject: ['dmEdit'],
-
-  computed: {
-    form() {
-      return this.dmEdit.form
-    }
-  },
 
   methods: {
     handleCickHeader(val) {

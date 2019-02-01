@@ -48,7 +48,6 @@
 
 <template>
   <div
-    v-if="show"
     :class="b()"
     element-loading-text="加载中"
     element-loading-spinner="el-icon-loading"
@@ -58,35 +57,13 @@
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
-      <!-- 操作按钮 -->
-      <template v-if="actions.toolbar">
-        <el-button
-          v-for="(item, index) in actions.toolbar.list"
-          v-if="item.label"
-          :key="index"
-          :type="item.type"
-          size="medium"
-          @click="handleAction(item.command)"
-        >{{ item.label }}</el-button>
-      </template>
-      <!-- 批量操作按钮 -->
-      <template v-if="actions.multiple">
-        <el-button
-          v-for="(item, index) in actions.multiple.list"
-          v-if="item.label"
-          :key="`multiple-${index}`"
-          :type="item.type"
-          :disabled="multipleSelection.length === 0"
-          size="medium"
-          @click="handleAction({ command: item.command, mode: 'Multiple'})"
-        >{{ item.label }}</el-button>
-      </template>
+      <ColumnAction :list="actionsToolbar"/>
       <div class="pull-right">
         <slot name="toolbar-right"/>
-        <FormSearch
+        <!-- <FormSearch
           size="medium"
           @submit="handleSearch"
-        />
+        /> -->
         <!-- <el-tooltip
           content="布局配置"
           placement="top"
@@ -111,13 +88,11 @@
           v-if="columns && columns.length > 0"
           :columns="columns"
           :selection="selection"
-          :actions="actions"
+          :actions-row="actionsRow"
           :data="data"
           @action="handleAction"
           @selection-change="handleSelectionChange"
-        >
-          <slot />
-        </RenderTable>
+        />
       </div>
       <!-- FOOTER -->
       <div :class="b('footer')">
@@ -175,10 +150,16 @@ export default create({
         return []
       }
     },
-    actions: {
-      type: Object,
+    actionsRow: {
+      type: Array,
       default: function() {
-        return {}
+        return []
+      }
+    },
+    actionsToolbar: {
+      type: Array,
+      default: function() {
+        return []
       }
     }
   },
@@ -203,7 +184,6 @@ export default create({
     handleShow() {
       this.show = true
     },
-
     handleAction(e) {
       if (!e) return
       this.$emit('action', e)

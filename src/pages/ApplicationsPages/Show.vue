@@ -1,45 +1,43 @@
 <template>
   <page breadcrumb>
-    <HeaderTop :title="form.name"/>
+    <HeaderTop :title="form.name" />
     <DmEdit
       v-model="form"
       :rules="rules"
       back-button
       @submit="handleSubmit"
     >
-
-      <el-tabs tab-position="left">
+      <el-tabs>
+        <el-tab-pane label="区块管理">
+          <el-dropdown @command="handleAddBlock">
+            <el-button type="primary">
+              添加区块<i class="el-icon-arrow-down el-icon--right" />
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item
+                v-for="(item, index) in selectBlocks"
+                :command="item.value"
+                :key="index"
+              >{{ item.label }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          <div
+            v-for="(item, index) in form.blocks"
+            :key="index"
+            style="margin-top: 12px"
+          >
+            <template v-if="item.name === 'DmConsole'">
+              <BlockDmConsole :data="item"/>
+            </template>
+          </div>
+        </el-tab-pane>
         <el-tab-pane label="基本资料">
           <!-- 基本资料 -->
           <div class="BlockForm">
-            <FormRow />
+            <FormRow :data="form"/>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
       </el-tabs>
-
-      <!-- NOTICE -->
-      <!-- <div class="BlockForm">
-        <FormTableNotice />
-      </div> -->
-      <!-- COLUMNS -->
-      <div class="BlockForm">
-        <FormTableColumn sort />
-      </div>
-      <!-- ACTION-ROW -->
-      <!-- <div class="BlockForm">
-        <FormTableActionRow sort />
-      </div> -->
-      <!-- 批量操作 -->
-      <!-- <div class="BlockForm">
-        <FormTableActionMultiple />
-      </div> -->
-      <!-- 操作 -->
-      <!-- <div class="BlockForm">
-        <FormTableActionToolbar />
-      </div> -->
     </DmEdit>
   </page>
 </template>
@@ -47,89 +45,54 @@
 <script>
 import { deepClone } from '@/utils'
 import app from '@/mixins/app'
-import consoleTable from '@/mixins/consoleTable'
 import consoleEdit from '@/mixins/consoleEdit'
-import { merge } from 'lodash/object'
-import RenderTable from '@/components/Dm/RenderTable'
+import { BLOCKS } from './blocks'
+import { formatLabel } from '@/utils/form'
+import BlockDmConsole from './components/BlockDmConsole'
 import FormRow from './components/FormRow'
-import FormTableNotice from './components/FormTableNotice'
-import FormTableColumn from './components/FormTableColumn'
-import FormTableActionRow from './components/FormTableActionRow'
-import FormTableActionToolbar from './components/FormTableActionToolbar'
-import FormTableActionMultiple from './components/FormTableActionMultiple'
 
 export default {
-  components: { RenderTable, FormRow, FormTableNotice, FormTableColumn, FormTableActionRow, FormTableActionToolbar, FormTableActionMultiple },
+  components: { BlockDmConsole, FormRow },
 
-  mixins: [app, consoleTable, consoleEdit],
+  mixins: [app, consoleEdit],
 
   data() {
     return {
       id: '',
-      API_NAME: 'applicationsPages'
+      API_NAME: 'applicationsPages',
+      selectBlocks: []
     }
   },
 
-  created() {
+  async created() {
     this.id = this.$route.params.id || this.$route.params.pageId
-    this.init(this.id)
+    this.initBlocks()
   },
 
   methods: {
-    initData() {
-      const content = {
-        columns: [
-          {
-            componentName: '',
-            props: {
-              prop: '',
-              label: '',
-              minWidth: 100
-            }
-          }
-        ],
-        notices: [
-          {
-            content: '',
-            settings: {}
-          }
-        ],
-        actions: {
-          row: {
-            list: [
-              {
-                label: '',
-                type: '',
-                command: ''
-              }
-            ]
-          },
-          multiple: {
-            list: [
-              {
-                label: '',
-                command: ''
-              }
-            ]
-          },
-          toolbar: {
-            list: [
-              {
-                label: '',
-                command: '',
-                type: ''
-              }
-            ]
-          },
-          search: {
-            label: '搜索',
-            command: 'Search',
-            align: 'right',
-            key: ''
+    initBlocks() {
+      this.selectBlocks = formatLabel(BLOCKS, 'title', 'name')
+    },
+
+    afterInit() {
+      const { form } = this
+      if (form.type === 1) {
+        const block = {
+          title: 'DmConsole',
+          name: 'DmConsole',
+          props: {
+            columns: form.content.columns,
+            actionsRow: form.content.actions.row.list,
+            actionsToolbar: form.content.actions.toolbar.list.concat(form.content.actions.multiple.list)
           }
         }
+        form.blocks = [block]
       }
-      this.form.content = merge(content, this.form.content)
+    },
+
+    handleAddBlock(name) {
+      const item = BLOCKS.find(_ => _.name === name)
+      this.form.blocks.push(item)
     }
   }
 }

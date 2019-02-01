@@ -39,23 +39,12 @@
         />
       </template>
     </el-table-column>
-    <el-table-column
-      label="子操作"
-      min-width="500"
-    >
-      <template slot-scope="scope">
-        <FormTableActionChildren :data="scope.row.childrens"/>
-      </template>
-    </el-table-column>
   </TableForm>
 </template>
 
 <script>
-import FormTableActionChildren from './FormTableActionChildren'
 
 export default {
-  components: { FormTableActionChildren },
-
   props: {
     data: Array
   },

@@ -44,6 +44,7 @@ export default {
   },
 
   methods: {
+    afterInit() {},
     initData() {},
 
     async init() {
@@ -55,6 +56,7 @@ export default {
       // if (!data.settings) data.settings = deepClone(this.FORM.settings)
 
       this.initData()
+      this.afterInit()
     },
     // 读取默认表单和验证规则
     async initFormLayout() {
