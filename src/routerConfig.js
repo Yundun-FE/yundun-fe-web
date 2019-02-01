@@ -105,7 +105,7 @@ export const routerConfig = [
                 }
               },
               {
-                path: 'pages/:productId/edit',
+                path: 'pages/:pageId/edit',
                 name: 'products.id.pagesId.edit',
                 hidden: true,
                 component: () => import('@/pages/ApplicationsPages/Show'),

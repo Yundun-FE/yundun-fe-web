@@ -8,9 +8,12 @@
       @submit="handleSubmit"
     >
       <FormRow />
-      <FormApp/>
+      <FormApp />
       <el-form-item>
-        <el-button type="primary" @click="handleCreateEnv">新建环境</el-button>
+        <el-button
+          type="primary"
+          @click="handleCreateEnv"
+        >新建环境</el-button>
       </el-form-item>
     </DmEdit>
 
@@ -21,9 +24,9 @@
       title="指令管理"
       @submit="handleSubmit"
     >
-      <FormTableCommands/>
+      <FormTableCommands />
     </DmEdit>
-    <DialogEnv ref="DialogEnv"/>
+    <DialogEnv ref="DialogEnv" />
   </page>
 </template>
 

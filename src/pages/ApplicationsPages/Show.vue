@@ -27,18 +27,25 @@
             style="margin-top: 12px"
           >
             <template v-if="item.name === 'DmConsole'">
-              <BlockDmConsole :data="item"/>
+              <BlockDmConsole :data="item" />
             </template>
           </div>
         </el-tab-pane>
         <el-tab-pane label="基本资料">
           <!-- 基本资料 -->
+          <el-form-item label="环境">
+            <el-button
+              type="primary"
+              @click="handleCreateEnv"
+            >新建环境</el-button>
+          </el-form-item>
           <div class="BlockForm">
-            <FormRow :data="form"/>
+            <FormRow :data="form" />
           </div>
         </el-tab-pane>
       </el-tabs>
     </DmEdit>
+    <DialogEnv ref="DialogEnv" />
   </page>
 </template>
 
@@ -50,9 +57,10 @@ import { BLOCKS } from './blocks'
 import { formatLabel } from '@/utils/form'
 import BlockDmConsole from './components/BlockDmConsole'
 import FormRow from './components/FormRow'
+import DialogEnv from './components/DialogEnv'
 
 export default {
-  components: { BlockDmConsole, FormRow },
+  components: { BlockDmConsole, FormRow, DialogEnv },
 
   mixins: [app, consoleEdit],
 
@@ -65,7 +73,8 @@ export default {
   },
 
   async created() {
-    this.id = this.$route.params.id || this.$route.params.pageId
+    console.log(this.$route.params)
+    this.id = this.$route.params.pageId || this.$route.params.id
     this.initBlocks()
   },
 
@@ -77,6 +86,22 @@ export default {
     handleAddBlock(name) {
       const item = BLOCKS.find(_ => _.name === name)
       this.form.blocks.push(item)
+    },
+
+    handleCreateEnv() {
+      this.$refs.DialogEnv.handleOpen({
+        code: this.form.code
+      })
+    },
+
+    handleChangeEnv(env) {
+      this.$router.push({
+        path: '',
+        query: {
+          env
+        },
+        append: true
+      })
     }
   }
 }
