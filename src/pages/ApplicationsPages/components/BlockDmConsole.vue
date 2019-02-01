@@ -1,14 +1,18 @@
 <template>
   <div>
     <el-form-item label="名称">
-      <el-input v-model="data.title"/>
+      <el-input v-model="data.title" />
     </el-form-item>
-    <FormTableColumn :data="data.props.columns"/>
+    <FormTableColumn
+      :env="env"
+      :data="data"
+      :settings="settings"
+    />
     <el-form-item label="行操作">
-      <FormTableActionRow :data="data.props.actionsRow"/>
+      <FormTableActionRow :data="data.props.actionsRow" />
     </el-form-item>
     <el-form-item label="工具栏操作">
-      <FormTableActionRow :data="data.props.actionsToolbar"/>
+      <FormTableActionRow :data="data.props.actionsToolbar" />
     </el-form-item>
     <DmConsole
       :loading="false"
@@ -28,7 +32,9 @@ export default {
   components: { FormTableColumn, FormTableActionRow },
 
   props: {
-    data: Object
+    data: Object,
+    settings: Object,
+    env: String
   }
 }
 </script>

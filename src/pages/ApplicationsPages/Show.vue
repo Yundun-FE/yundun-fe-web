@@ -1,6 +1,15 @@
 <template>
   <page breadcrumb>
-    <HeaderTop :title="form.name" />
+    <HeaderTop :title="form.name">
+      <template slot="action">
+        <yd-form-radio
+          v-model="form.env"
+          :radios="selectEnv"
+          border
+          @change="handleChangeEnv"
+        />
+      </template>
+    </HeaderTop>
     <DmEdit
       v-model="form"
       :rules="rules"
@@ -9,6 +18,20 @@
     >
       <el-tabs>
         <el-tab-pane label="区块管理">
+          <div
+            v-for="(item, index) in form.blocks"
+            :key="index"
+            style="margin-top: 12px"
+          >
+            <!-- Block.DmConsole -->
+            <template v-if="item.name === 'DmConsole'">
+              <BlockDmConsole
+                :env="form.env"
+                :data="item"
+                :settings="form.settings"
+              />
+            </template>
+          </div>
           <el-dropdown @command="handleAddBlock">
             <el-button type="primary">
               添加区块<i class="el-icon-arrow-down el-icon--right" />
@@ -21,15 +44,6 @@
               >{{ item.label }}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <div
-            v-for="(item, index) in form.blocks"
-            :key="index"
-            style="margin-top: 12px"
-          >
-            <template v-if="item.name === 'DmConsole'">
-              <BlockDmConsole :data="item" />
-            </template>
-          </div>
         </el-tab-pane>
         <el-tab-pane label="基本资料">
           <!-- 基本资料 -->
@@ -58,6 +72,7 @@ import { formatLabel } from '@/utils/form'
 import BlockDmConsole from './components/BlockDmConsole'
 import FormRow from './components/FormRow'
 import DialogEnv from './components/DialogEnv'
+import { dataToObj } from '@/utils/blocks'
 
 export default {
   components: { BlockDmConsole, FormRow, DialogEnv },
@@ -68,19 +83,34 @@ export default {
     return {
       id: '',
       API_NAME: 'applicationsPages',
-      selectBlocks: []
+      selectBlocks: [],
+      selectEnv: [],
+      settings: {}
     }
   },
 
   async created() {
-    console.log(this.$route.params)
     this.id = this.$route.params.pageId || this.$route.params.id
     this.initBlocks()
   },
 
   methods: {
     initBlocks() {
-      this.selectBlocks = formatLabel(BLOCKS, 'title', 'name')
+      // this.selectBlocks = formatLabel(BLOCKS, 'title', 'name')
+    },
+
+    afterInit() {
+      const { blocks } = this.form
+      const item = blocks[0]
+      // console.log(item)
+      // Object.keys(item).forEach(key => {
+
+      //   if (typeof item[key] === 'object')
+      //   settings[`blocks.DmConsole.${key}`] = item[key]
+      // })
+
+      this.form.settings = dataToObj(blocks)
+      this.initEnv()
     },
 
     handleAddBlock(name) {
@@ -91,6 +121,16 @@ export default {
     handleCreateEnv() {
       this.$refs.DialogEnv.handleOpen({
         code: this.form.code
+      })
+    },
+
+    async initEnv() {
+      const data = await this.Fetch.get('/applicationsPages', { code: this.form.code })
+      this.selectEnv = data.list.map(_ => {
+        return {
+          label: _.env === 'root' ? 'Primay' : _.name,
+          value: _.env
+        }
       })
     },
 
