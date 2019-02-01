@@ -74,22 +74,6 @@ export default {
       this.selectBlocks = formatLabel(BLOCKS, 'title', 'name')
     },
 
-    afterInit() {
-      const { form } = this
-      if (form.type === 1) {
-        const block = {
-          title: 'DmConsole',
-          name: 'DmConsole',
-          props: {
-            columns: form.content.columns,
-            actionsRow: form.content.actions.row.list,
-            actionsToolbar: form.content.actions.toolbar.list.concat(form.content.actions.multiple.list)
-          }
-        }
-        form.blocks = [block]
-      }
-    },
-
     handleAddBlock(name) {
       const item = BLOCKS.find(_ => _.name === name)
       this.form.blocks.push(item)
