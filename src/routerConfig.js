@@ -236,19 +236,34 @@ export const routerConfig = [
   },
 
   {
-    path: '/forms',
+    path: '/blocks',
     component: Layout,
     children: [
       {
         path: '',
-        name: 'forms',
-        component: () => import('@/pages/Forms/index'),
+        name: 'blocks',
+        component: () => import('@/pages/Blocks/index'),
         meta: {
-          title: '表单管理'
+          title: '区块管理'
         }
       }
     ]
   },
+
+  // {
+  //   path: '/forms',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'forms',
+  //       component: () => import('@/pages/Forms/index'),
+  //       meta: {
+  //         title: '表单管理'
+  //       }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/websites',
