@@ -52,7 +52,7 @@ export default create({
         })
       )
     })
-
+    
     columnsRender.push(
       this.$slots.default
     )

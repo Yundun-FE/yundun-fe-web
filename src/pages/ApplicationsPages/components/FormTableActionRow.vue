@@ -11,6 +11,7 @@
       <template slot-scope="scope">
         <el-input
           v-model="scope.row.label"
+          :disabled="env !== 'root'"
           size="small"
         />
       </template>
@@ -25,6 +26,7 @@
           v-model="scope.row.type"
           size="small"
           default-text="默认"
+          :disabled="env !== 'root'"
         />
       </template>
     </el-table-column>
@@ -36,6 +38,7 @@
         <el-input
           v-model="scope.row.command"
           size="small"
+          :disabled="env !== 'root'"
         />
       </template>
     </el-table-column>
@@ -57,7 +60,8 @@ export default {
   components: { FormTableActionChildren },
 
   props: {
-    data: Array
+    data: Array,
+    env: String
   },
 
   data() {

@@ -17,6 +17,7 @@
             <!-- {{ scope.row.props.prop }} -->
             <!-- {{ settings[data.name].props.columns[scope.row.props.prop].props.label }} -->
             <el-input
+              :disabled="env !== 'root'"
               v-model="scope.row.props.label"
               size="small"
             />
@@ -95,7 +96,6 @@
 export default {
   props: {
     data: Object,
-    settings: Object,
     env: String
   },
 

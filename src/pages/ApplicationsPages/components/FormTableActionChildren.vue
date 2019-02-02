@@ -46,7 +46,8 @@
 
 export default {
   props: {
-    data: Array
+    data: Array,
+    env: String
   },
 
   data() {

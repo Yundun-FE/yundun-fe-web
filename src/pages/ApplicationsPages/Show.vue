@@ -11,6 +11,7 @@
       </template>
     </HeaderTop>
     <DmEdit
+      fixed
       v-model="form"
       :rules="rules"
       back-button
@@ -100,7 +101,6 @@ export default {
     },
 
     afterInit() {
-      console.log(this.form)
       this.initEnv()
     },
 
