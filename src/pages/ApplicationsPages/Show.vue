@@ -19,7 +19,7 @@
       <el-tabs>
         <el-tab-pane label="区块管理">
           <div
-            v-for="(item, index) in form.blocks"
+            v-for="(item, index) in form.content"
             :key="index"
             style="margin-top: 12px"
           >
@@ -100,16 +100,7 @@ export default {
     },
 
     afterInit() {
-      const { blocks } = this.form
-      const item = blocks[0]
-      // console.log(item)
-      // Object.keys(item).forEach(key => {
-
-      //   if (typeof item[key] === 'object')
-      //   settings[`blocks.DmConsole.${key}`] = item[key]
-      // })
-
-      this.form.settings = dataToObj(blocks)
+      console.log(this.form)
       this.initEnv()
     },
 
@@ -126,12 +117,22 @@ export default {
 
     async initEnv() {
       const data = await this.Fetch.get('/applicationsPages', { code: this.form.code })
-      this.selectEnv = data.list.map(_ => {
+      const selectEnv = data.list.map(_ => {
         return {
-          label: _.env === 'root' ? 'Primay' : _.name,
+          label: _.env === 'root' ? 'Primay' : _.name || _.env,
           value: _.env
         }
       })
+      // 如没有该 ENV 则临时创建
+      const { env } = this.$route.query
+      if (env && !selectEnv.map(_ => _.value).includes(env)) {
+        selectEnv.push({
+          label: env,
+          value: env
+        })
+      }
+
+      this.selectEnv = selectEnv
     },
 
     handleChangeEnv(env) {

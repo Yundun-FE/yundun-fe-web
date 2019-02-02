@@ -1,7 +1,13 @@
 <template>
   <div>
+    <el-form-item label="Name">
+      <el-input v-model="data.name" />
+    </el-form-item>
     <el-form-item label="名称">
       <el-input v-model="data.title" />
+    </el-form-item>
+    <el-form-item label="区块名">
+      <el-input v-model="data.blockName" />
     </el-form-item>
     <FormTableColumn
       :env="env"

@@ -17,13 +17,8 @@
             <!-- {{ scope.row.props.prop }} -->
             <!-- {{ settings[data.name].props.columns[scope.row.props.prop].props.label }} -->
             <el-input
-              v-if="env === 'root'"
               v-model="scope.row.props.label"
               size="small"
-            />
-            <el-input
-              v-else
-              v-model="settings[data.name].props.columns[scope.row.props.prop].props.label"
             />
           </template>
         </el-table-column>
@@ -72,12 +67,10 @@
               style="margin-right: 10px"
             >自适应</el-checkbox> -->
             <el-input-number
-              :disabled="env !== 'root'"
               v-model="scope.row.props.width"
               size="small"
             />
             <el-input-number
-              :disabled="env !== 'root'"
               v-model="scope.row.props.minWidth"
               size="small"
             />

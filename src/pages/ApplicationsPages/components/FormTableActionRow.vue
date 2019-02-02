@@ -44,7 +44,7 @@
       min-width="500"
     >
       <template slot-scope="scope">
-        <FormTableActionChildren :data="scope.row.childrens"/>
+        <FormTableActionChildren :data="scope.row.items"/>
       </template>
     </el-table-column>
   </TableForm>
