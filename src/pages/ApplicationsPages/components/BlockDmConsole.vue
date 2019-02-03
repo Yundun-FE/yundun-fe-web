@@ -9,6 +9,9 @@
     <el-form-item label="区块名称">
       <el-input disabled v-model="data.blockName" />
     </el-form-item>
+    <el-form-item label="显示">
+      <el-checkbox v-model="data.show" />
+    </el-form-item>
     <FormTableColumn
       :env="env"
       :data="data"
