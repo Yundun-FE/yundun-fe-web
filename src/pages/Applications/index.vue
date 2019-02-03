@@ -20,7 +20,6 @@
 </template>
 
 <script>
-// import createCudr from '@/utils/create-cudr'
 import createPage from '@/utils/create-page'
 import DialogRow from './components/DialogRow'
 

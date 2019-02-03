@@ -7,7 +7,7 @@
       <el-input v-model="data.title" />
     </el-form-item>
     <el-form-item label="区块名称">
-      <el-input disabled v-model="data.blockName" />
+      <el-input v-model="data.blockName" />
     </el-form-item>
     <el-form-item label="显示">
       <el-checkbox v-model="data.show" />

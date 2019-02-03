@@ -1,5 +1,3 @@
-import Fetch from '../utils/fetch'
-
 export default {
   data() {
     return {

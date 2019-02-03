@@ -17,17 +17,12 @@ export default {
 
   methods: {
     async initPageLayout() {
-      let data = this.config
-      try {
-        data = await Fetch.get(`/explorer/pages/${this.pageName}`)
-      } catch (e) {
-        data = this.config
-        console.warn(`${this.pageName} - 未同步此页面配置`)
-      }
+      const data = await Fetch.get(`/explorer/pages/${this.pageName}`)
+      const block = data.content.find(_ => _.blockName === 'DmConsole')
 
-      this.columns = data.blocks.DmConsole.props.columns
-      this.actionsRow = data.blocks.DmConsole.props.actionsRow
-      this.actionsToolbar = data.blocks.DmConsole.props.actionsToolbar
+      this.columns = block.props.columns
+      this.actionsRow = block.props.actionsRow
+      this.actionsToolbar = block.props.actionsToolbar
       this.layoutFinish = true
       this.checkFinish()
     }
