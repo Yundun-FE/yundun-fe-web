@@ -14,8 +14,6 @@
           prop="props.label"
         >
           <template slot-scope="scope">
-            <!-- {{ scope.row.props.prop }} -->
-            <!-- {{ settings[data.name].props.columns[scope.row.props.prop].props.label }} -->
             <el-input
               :disabled="env !== 'root'"
               v-model="scope.row.props.label"
@@ -43,7 +41,7 @@
           width="80"
         >
           <template slot-scope="scope">
-            <!-- <el-checkbox v-model="checked1">显示</el-checkbox> -->
+            <el-checkbox v-model="scope.row.show">显示</el-checkbox>
           </template>
         </el-table-column>
         <el-table-column
@@ -92,6 +90,7 @@
 </template>
 
 <script>
+import { isDef } from '@/utils'
 
 export default {
   props: {
@@ -103,6 +102,7 @@ export default {
     return {
       row: {
         componentName: '',
+        show: true,
         props: {
           prop: '',
           label: '',
@@ -115,6 +115,11 @@ export default {
   inject: ['dmEdit'],
 
   methods: {
+    formatShow(val) {
+      console.log(isDef(val));
+      return isDef(val) ? val : true
+    },
+
     handleCickHeader(val) {
       console.log(val)
     }
