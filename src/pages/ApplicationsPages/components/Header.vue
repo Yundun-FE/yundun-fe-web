@@ -6,22 +6,22 @@
       <template slot="info">
         {{ info.code }}
       </template>
+      <slot/>
+      <template slot="action">
+        <slot name="action"/>
+      </template>
     </HeaderTop>
   </div>
 </template>
 
 <script>
 export default {
-  props: {},
-
   data() {
     return {
       id: '',
       info: {}
     }
   },
-
-  computed: {},
 
   created() {
     this.id = this.$route.params.appId

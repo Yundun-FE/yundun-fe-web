@@ -21,10 +21,9 @@
 <script>
 import createCudr from '@/utils/create-cudr'
 import DialogRow from './components/DialogRow'
-import AppPageHeader from './components/AppPageHeader'
 
 export default createCudr({
-  components: { DialogRow, AppPageHeader },
+  components: { DialogRow },
 
   pageName: 'application-page',
   API_NAME: 'applicationsPages'

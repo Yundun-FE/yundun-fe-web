@@ -1,6 +1,6 @@
 <template>
   <page breadcrumb>
-    <HeaderTop :title="form.name">
+    <Header :title="form.name">
       <template slot="action">
         <yd-form-radio
           v-model="form.env"
@@ -9,11 +9,11 @@
           @change="handleChangeEnv"
         />
       </template>
-    </HeaderTop>
+    </Header>
     <DmEdit
-      fixed
       v-model="form"
       :rules="rules"
+      fixed
       back-button
       @submit="handleSubmit"
     >
@@ -65,18 +65,19 @@
 </template>
 
 <script>
-import { deepClone } from '@/utils'
 import app from '@/mixins/app'
 import consoleEdit from '@/mixins/consoleEdit'
-import { BLOCKS } from './blocks'
+import { deepClone } from '@/utils'
 import { formatLabel } from '@/utils/form'
+import { BLOCKS } from './blocks'
 import BlockDmConsole from './components/BlockDmConsole'
+import Header from './components/Header'
 import FormRow from './components/FormRow'
 import DialogEnv from './components/DialogEnv'
 import { dataToObj } from '@/utils/blocks'
 
 export default {
-  components: { BlockDmConsole, FormRow, DialogEnv },
+  components: { BlockDmConsole, Header, FormRow, DialogEnv },
 
   mixins: [app, consoleEdit],
 
