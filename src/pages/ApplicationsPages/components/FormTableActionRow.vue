@@ -2,6 +2,7 @@
   <TableForm
     :data="data"
     :row="row"
+    :row-template="rowTemplate"
     sort
   >
     <el-table-column
@@ -24,9 +25,9 @@
         <yd-form-select
           :selects="LABEL.BUTTON_TYPE"
           v-model="scope.row.type"
+          :disabled="env !== 'root'"
           size="small"
           default-text="默认"
-          :disabled="env !== 'root'"
         />
       </template>
     </el-table-column>
@@ -37,8 +38,8 @@
       <template slot-scope="scope">
         <el-input
           v-model="scope.row.command"
-          size="small"
           :disabled="env !== 'root'"
+          size="small"
         />
       </template>
     </el-table-column>
@@ -61,7 +62,8 @@ export default {
 
   props: {
     data: Array,
-    env: String
+    env: String,
+    rowTemplate: Array
   },
 
   data() {

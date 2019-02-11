@@ -13,6 +13,7 @@
           label="组件"
           size="small"
           prop="componentName"
+          width="180"
         >
           <template slot-scope="scope">
             <yd-form-select
@@ -21,12 +22,14 @@
               :disabled="env !== 'root'"
               size="small"
               default-text="默认"
+              @change="value => handleChangeComponent(value, scope.row)"
             />
           </template>
         </el-table-column>
         <el-table-column
           label="名称"
           prop="props.label"
+          width="150"
         >
           <template slot-scope="scope">
             <el-input
@@ -38,7 +41,8 @@
         </el-table-column>
 
         <el-table-column
-          label="PROP"
+          label="PROP (NAME)"
+          width="150"
           prop="props.prop"
         >
           <template slot-scope="scope">
@@ -50,7 +54,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          width="400px"
+          min-width="400px"
           label="布局"
         >
           <template slot-scope="scope">
@@ -60,19 +64,16 @@
             >自适应</el-checkbox> -->
             <el-input-number
               v-model="scope.row.props.width"
+              :step="5"
               size="small"
+              style="margin-right: 10px"
             />
             <el-input-number
               v-model="scope.row.props.minWidth"
+              :step="5"
               size="small"
+              style="margin-right: 10px"
             />
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="显示"
-          width="80"
-        >
-          <template slot-scope="scope">
             <el-checkbox
               v-model="scope.row.show"
               size="small"
@@ -119,8 +120,15 @@ export default {
   inject: ['dmEdit'],
 
   methods: {
+    handleChangeComponent(value, item) {
+      if (value === 'ColumnAction') {
+        item.props.label = '操作'
+        item.props.minWidth = 200
+        item.props.prop = 'ColumnAction'
+      }
+    },
+
     formatShow(val) {
-      console.log(isDef(val))
       return isDef(val) ? val : true
     },
 

@@ -23,10 +23,12 @@
       <FormTableActionRow
         :env="env"
         :data="data.props.actionsRow"
+        :row-template="rowRowTemplate"
       />
     </el-form-item>
     <el-form-item label="工具栏操作">
       <FormTableActionRow
+        :row-template="toolbarRowTemplate"
         :env="env"
         :data="data.props.actionsToolbar"
       />
@@ -52,6 +54,47 @@ export default {
     data: Object,
     settings: Object,
     env: String
+  },
+
+  data() {
+    return {
+      rowRowTemplate: [
+        {
+          label: '删除',
+          row: {
+            label: '删除',
+            type: 'danger',
+            command: 'Delete'
+          }
+        },
+        {
+          label: '编辑',
+          row: {
+            label: '编辑',
+            type: 'primary',
+            command: 'Edit'
+          }
+        }
+      ],
+      toolbarRowTemplate: [
+        {
+          label: '创建',
+          row: {
+            label: '创建',
+            type: 'primary',
+            command: 'Create'
+          }
+        },
+        {
+          label: '删除',
+          row: {
+            label: '删除',
+            type: '',
+            command: 'Multiple.Delete'
+          }
+        }
+      ]
+    }
   }
 }
 </script>

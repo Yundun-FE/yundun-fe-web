@@ -45,12 +45,21 @@
         :size="size"
         split-button
         type="primary"
+        trigger="click"
         @click="handleRowAdd"
         @command="handleAddRowComand"
       >
         新增
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="Import">导入</el-dropdown-item>
+          <el-dropdown-item
+            v-for="(item, index) in rowTemplate"
+            :key="index"
+            :command="item"
+          >{{ item.label }}</el-dropdown-item>
+          <el-dropdown-item
+            divided
+            command="Import"
+          >导入</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -76,7 +85,10 @@ export default create({
 
   props: {
     editRow: Boolean,
+    // 启用排序按钮
     sort: Boolean,
+    // 快捷添加行
+    rowTemplate: Array,
     customAddRow: Boolean,
     size: {
       type: String,
@@ -124,8 +136,12 @@ export default create({
     },
 
     handleAddRowComand(cmd) {
-      if (cmd === 'Import') {
-        this.$refs.DialogFastAdd.handleOpen()
+      if (typeof cmd === 'string') {
+        if (cmd === 'Import') {
+          this.$refs.DialogFastAdd.handleOpen()
+        }
+      } else {
+        this.data.push(cmd.row)
       }
     },
 
