@@ -34,6 +34,7 @@
     <template slot="add-form">
       <yd-form-select
         :selects="selectApps"
+        size="small"
         @change="handleChangeApp"
       />
     </template>
