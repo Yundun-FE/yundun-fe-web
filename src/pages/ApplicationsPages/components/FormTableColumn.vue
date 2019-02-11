@@ -10,18 +10,6 @@
         sort
       >
         <el-table-column
-          label="名称"
-          prop="props.label"
-        >
-          <template slot-scope="scope">
-            <el-input
-              :disabled="env !== 'root'"
-              v-model="scope.row.props.label"
-              size="small"
-            />
-          </template>
-        </el-table-column>
-        <el-table-column
           label="组件"
           size="small"
           prop="componentName"
@@ -37,13 +25,18 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="显示"
-          width="80"
+          label="名称"
+          prop="props.label"
         >
           <template slot-scope="scope">
-            <el-checkbox v-model="scope.row.show">显示</el-checkbox>
+            <el-input
+              :disabled="env !== 'root'"
+              v-model="scope.row.props.label"
+              size="small"
+            />
           </template>
         </el-table-column>
+
         <el-table-column
           label="PROP"
           prop="props.prop"
@@ -73,6 +66,17 @@
               v-model="scope.row.props.minWidth"
               size="small"
             />
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="显示"
+          width="80"
+        >
+          <template slot-scope="scope">
+            <el-checkbox
+              v-model="scope.row.show"
+              size="small"
+            >显示</el-checkbox>
           </template>
         </el-table-column>
       </TableForm>
@@ -116,7 +120,7 @@ export default {
 
   methods: {
     formatShow(val) {
-      console.log(isDef(val));
+      console.log(isDef(val))
       return isDef(val) ? val : true
     },
 

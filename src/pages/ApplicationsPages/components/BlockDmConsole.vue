@@ -1,7 +1,10 @@
 <template>
   <div>
     <el-form-item label="Name">
-      <el-input disabled v-model="data.name" />
+      <el-input
+        v-model="data.name"
+        disabled
+      />
     </el-form-item>
     <el-form-item label="名称">
       <el-input v-model="data.title" />
@@ -17,10 +20,16 @@
       :data="data"
     />
     <el-form-item label="行操作">
-      <FormTableActionRow :env="env" :data="data.props.actionsRow" />
+      <FormTableActionRow
+        :env="env"
+        :data="data.props.actionsRow"
+      />
     </el-form-item>
     <el-form-item label="工具栏操作">
-      <FormTableActionRow :env="env" :data="data.props.actionsToolbar" />
+      <FormTableActionRow
+        :env="env"
+        :data="data.props.actionsToolbar"
+      />
     </el-form-item>
     <!-- <DmConsole
       :loading="false"

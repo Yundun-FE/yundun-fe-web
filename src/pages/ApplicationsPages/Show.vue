@@ -40,9 +40,9 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 v-for="(item, index) in selectBlocks"
-                :command="item.value"
+                :command="item.name"
                 :key="index"
-              >{{ item.label }}</el-dropdown-item>
+              >{{ item.title }}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-tab-pane>
@@ -85,7 +85,7 @@ export default {
     return {
       id: '',
       API_NAME: 'applicationsPages',
-      selectBlocks: [],
+      selectBlocks: BLOCKS,
       selectEnv: [],
       settings: {}
     }
@@ -93,21 +93,19 @@ export default {
 
   async created() {
     this.id = this.$route.params.pageId || this.$route.params.id
-    this.initBlocks()
   },
 
   methods: {
-    initBlocks() {
-      // this.selectBlocks = formatLabel(BLOCKS, 'title', 'name')
-    },
-
     afterInit() {
       this.initEnv()
     },
 
     handleAddBlock(name) {
       const item = BLOCKS.find(_ => _.name === name)
-      this.form.blocks.push(item)
+      item.blockName = item.name
+      item.show = true
+
+      this.form.content.push(item)
     },
 
     handleCreateEnv() {
@@ -120,7 +118,7 @@ export default {
       const data = await this.Fetch.get('/applicationsPages', { code: this.form.code })
       const selectEnv = data.list.map(_ => {
         return {
-          label: _.env === 'root' ? 'Primay' : _.name || _.env,
+          label: _.env,
           value: _.env
         }
       })
@@ -132,7 +130,6 @@ export default {
           value: env
         })
       }
-
       this.selectEnv = selectEnv
     },
 

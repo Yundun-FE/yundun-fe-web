@@ -15,6 +15,7 @@ export default {
     },
 
     handleOpen(form = {}) {
+      this.initFormLayout && this.initFormLayout()
       Object.assign(this.FORM, this.bindForm)
 
       if (form.id) {

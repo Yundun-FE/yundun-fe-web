@@ -24,13 +24,13 @@ export default {
   },
 
   created() {
-    this.id = this.$route.params.appId
+    this.id = this.$route.params.pageId || this.$route.params.id
     this.init()
   },
 
   methods: {
     async init() {
-      this.info = await this.Fetch.get(`/applications/${this.id}`)
+      this.info = await this.Fetch.get(`/applicationsPages/${this.id}`)
     }
   }
 }
