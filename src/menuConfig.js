@@ -25,16 +25,21 @@ const asideMenuConfig = [
     name: '应用',
     icon: 'iconfont icon-appstore'
   },
-  {
-    path: '/blocks',
-    name: '区块',
-    icon: 'iconfont icon-appstore'
-  },
+  // {
+  //   path: '/blocks',
+  //   name: '区块',
+  //   icon: 'iconfont icon-appstore'
+  // },
   // {
   //   path: '/forms',
   //   name: '表单',
   //   icon: 'iconfont icon-appstore'
   // },
+  {
+    path: '/applicationsPages',
+    name: '页面',
+    icon: 'iconfont icon-appstore'
+  },
   {
     path: '',
     name: '开发管理',
@@ -47,10 +52,6 @@ const asideMenuConfig = [
       {
         path: '/websites',
         name: '常用网站'
-      },
-      {
-        path: '/applicationsPages',
-        name: '页面管理'
       }
     ]
   }

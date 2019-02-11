@@ -43,6 +43,7 @@
       <slot name="add-form" />
       <el-dropdown
         :size="size"
+        v-if="showAddRow"
         split-button
         type="primary"
         trigger="click"
@@ -84,6 +85,10 @@ export default create({
   mixins: [formTable],
 
   props: {
+    showAddRow: {
+      type: Boolean,
+      default: true
+    },
     editRow: Boolean,
     // 启用排序按钮
     sort: Boolean,

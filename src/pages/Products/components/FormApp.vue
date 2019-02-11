@@ -1,6 +1,7 @@
 <template>
   <el-form-item label="绑定应用">
     <TableForm
+      v-if="form.settings"
       :data="form.settings.apps"
       :row="row"
       sort
@@ -71,7 +72,7 @@ export default {
 
     async initAppList() {
       const data = await this.Fetch.get('/applications', { pageSize: 100 })
-      this.apps = data.list
+      this.apps = data.list || []
       this.selectApps = formatLabel(data.list, 'name', 'id')
     }
   }

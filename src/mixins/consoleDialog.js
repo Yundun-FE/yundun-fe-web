@@ -1,3 +1,5 @@
+import { isDef } from '../utils'
+
 export default {
   props: {
     beforeOpen: Function
@@ -18,11 +20,11 @@ export default {
       this.initFormLayout && this.initFormLayout()
       Object.assign(this.FORM, this.bindForm)
 
-      if (form.id) {
+      this.handleReset()
+      if (isDef(form.id)) {
         this.mode = 'Edit'
       } else {
         this.mode = 'Create'
-        this.handleReset()
       }
 
       Object.assign(this.form, form)

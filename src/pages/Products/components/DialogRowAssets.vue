@@ -3,6 +3,7 @@
     ref="Dialog"
     v-model="form"
     :rules="rules"
+    :mode="mode"
     title-label="资源"
     @submit="handleSubmit"
   >

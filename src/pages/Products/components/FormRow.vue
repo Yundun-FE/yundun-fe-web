@@ -5,7 +5,7 @@
         <el-input
           id="form_title"
           v-model="form.title"
-          placeholder="项目名称"
+          placeholder="名称"
         />
       </el-col>
     </el-form-item>
@@ -26,14 +26,15 @@
         />
       </el-col>
     </el-form-item>
-    <!-- <el-form-item label="ENV">
-      <yd-form-radio
-        id="form_env"
-        v-model="form.env"
-        :radios="LABEL.ENV"
-        border
-      />
-    </el-form-item> -->
+    <el-form-item label="ENV">
+      <el-col :span="12">
+        <el-input
+          id="form_env"
+          v-model="form.env"
+          disabled
+        />
+      </el-col>
+    </el-form-item>
   </div>
 </template>
 

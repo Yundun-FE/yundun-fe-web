@@ -1,7 +1,14 @@
 <template>
   <div v-if="form.settings">
+    <el-alert
+      size="small"
+      type="warning"
+      style="margin-bottom: 12px"
+      title="如需新增配置，请切换至 PRIMARY"
+    />
     <TableForm
       :data="form.settings.assets"
+      :show-add-row="form.env === 'root'"
       custom-add-row
       edit-row
       @on-edit-row="handleEditRow"
@@ -10,12 +17,14 @@
       <el-table-column
         label="KEY"
         prop="key"
+        width="150"
       />
       <el-table-column
         label="备注"
         prop="remarks"
+        width="150"
       />
-      <el-table-column label="预览">
+      <el-table-column label="预览" min-width="500">
         <template slot-scope="scope">
           <img
             v-if="form.assets[scope.row.key]"
@@ -25,7 +34,7 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" width="120">
         <template slot-scope="scope">
           <el-upload
             :data="{token}"
@@ -34,7 +43,6 @@
           >
             <el-button
               size="small"
-              type="primary"
             >点击上传</el-button>
           </el-upload>
         </template>
@@ -66,7 +74,6 @@ export default {
 
   computed: {
     info() {
-      console.log(this.$parent)
       return this.$parent.$parent.info
     },
     form() {
@@ -88,7 +95,6 @@ export default {
         ...scope.row,
         id: scope.$index
       }
-      console.log(form)
       this.$refs.DialogRowAssets.handleOpen(form)
     },
 

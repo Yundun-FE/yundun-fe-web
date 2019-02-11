@@ -1,6 +1,9 @@
 <template>
   <page breadcrumb>
-    <Header :title="form.name">
+    <Header
+      ref="Header"
+      :title="form.name"
+    >
       <template slot="action">
         <yd-form-radio
           v-model="form.env"
@@ -49,10 +52,7 @@
         <el-tab-pane label="基本资料">
           <!-- 基本资料 -->
           <el-form-item label="环境">
-            <el-button
-              type="primary"
-              @click="handleCreateEnv"
-            >新建环境</el-button>
+            <el-button @click="handleCreateEnv">新建环境</el-button>
           </el-form-item>
           <div class="BlockForm">
             <FormRow :data="form" />
@@ -60,7 +60,10 @@
         </el-tab-pane>
       </el-tabs>
     </DmEdit>
-    <DialogEnv ref="DialogEnv" />
+    <DialogEnv
+      ref="DialogEnv"
+      @init="initEnv"
+    />
   </page>
 </template>
 
@@ -99,7 +102,7 @@ export default {
     afterInit() {
       this.initEnv()
     },
-
+    // 新增区块
     handleAddBlock(name) {
       const item = BLOCKS.find(_ => _.name === name)
       item.blockName = item.name
@@ -107,7 +110,7 @@ export default {
 
       this.form.content.push(item)
     },
-
+    // 新建环境
     handleCreateEnv() {
       this.$refs.DialogEnv.handleOpen({
         code: this.form.code
@@ -132,7 +135,7 @@ export default {
       }
       this.selectEnv = selectEnv
     },
-
+    // 切换环境
     handleChangeEnv(env) {
       this.$router.push({
         path: '',

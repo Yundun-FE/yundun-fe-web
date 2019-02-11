@@ -145,6 +145,7 @@ export default {
   methods: {
     async init() {
       const data = await this.Fetch.get(`/jobs/${this.id}`)
+      console.log(data)
       data.id = this.id
       const list = data.settings.builds
 
