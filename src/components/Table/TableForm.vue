@@ -42,8 +42,8 @@
     <div style="margin-top: 12px">
       <slot name="add-form" />
       <el-dropdown
-        :size="size"
         v-if="showAddRow"
+        :size="size"
         split-button
         type="primary"
         trigger="click"

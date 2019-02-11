@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderTop :title="info.title">
+    <HeaderTop :title="`${info.rootTitle ? info.rootTitle + ' - ' : ''}${info.title}`">
       <template slot="info">
         {{ info.name }}
       </template>
