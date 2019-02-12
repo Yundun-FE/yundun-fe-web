@@ -1,6 +1,13 @@
+<style lang="scss" scoped>
+.assets-img{
+  background: $--color-primary;
+}
+</style>
+
 <template>
   <div v-if="form.settings">
     <el-alert
+      v-show="form.env !== 'root'"
       size="small"
       type="warning"
       style="margin-bottom: 12px"
@@ -11,6 +18,7 @@
       :show-add-row="form.env === 'root'"
       custom-add-row
       edit-row
+      sort
       @on-edit-row="handleEditRow"
       @add-row="handleAddRow"
     >
@@ -31,6 +39,7 @@
             :width="scope.row.width"
             :height="scope.row.height"
             :src="form.assets[scope.row.key]"
+            class="assets-img"
           >
         </template>
       </el-table-column>
