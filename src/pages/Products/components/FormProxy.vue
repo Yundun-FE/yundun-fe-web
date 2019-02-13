@@ -9,7 +9,7 @@
       <el-table-column
         label="名称"
         prop="name"
-        width="100"
+        min-width="150"
       >
         <template slot-scope="scope">
           <el-input
@@ -33,7 +33,7 @@
       <el-table-column
         label="Url"
         prop="url"
-        width="120"
+        width="150"
       >
         <template slot-scope="scope">
           <el-input

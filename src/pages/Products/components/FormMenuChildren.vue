@@ -4,24 +4,14 @@
     :row="row"
     sort
   >
-    <!-- <el-table-column
-      label="ID"
-      prop="id"
-      width="50"
-    /> -->
-    <!-- <el-table-column
-      label="CODE"
-      prop="code"
-      width="70"
-    /> -->
     <el-table-column
       label="名称"
       prop="name"
-      min-width="80"
+      min-width="120"
     />
     <el-table-column
       label="Index"
-      min-width="60"
+      min-width="90"
     >
       <template slot-scope="scope">
         <el-input

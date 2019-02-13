@@ -20,23 +20,11 @@
       :loading="loading"
       v-model="form"
       :rules="rules"
-      title="指令管理"
-      @submit="handleSubmit"
-    >
-      <FormTableCommands />
-    </DmEdit>
-
-    <DmEdit
-      :loading="loading"
-      v-model="form"
-      :rules="rules"
       title="代理配置"
       @submit="handleSubmit"
     >
       <FormProxy />
     </DmEdit>
-
-    
     <DmEdit
       :loading="loading"
       v-model="form"
@@ -46,6 +34,17 @@
     >
       <FormOptions />
     </DmEdit>
+
+    <DmEdit
+      :loading="loading"
+      v-model="form"
+      :rules="rules"
+      title="指令管理"
+      @submit="handleSubmit"
+    >
+      <FormTableCommands />
+    </DmEdit>
+
     <DialogEnv ref="DialogEnv" />
   </page>
 </template>
