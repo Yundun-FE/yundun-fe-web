@@ -35,6 +35,17 @@
     >
       <FormProxy />
     </DmEdit>
+
+    
+    <DmEdit
+      :loading="loading"
+      v-model="form"
+      :rules="rules"
+      title="其他配置"
+      @submit="handleSubmit"
+    >
+      <FormOptions />
+    </DmEdit>
     <DialogEnv ref="DialogEnv" />
   </page>
 </template>
@@ -44,11 +55,12 @@ import consoleEdit from '@/mixins/consoleEdit'
 import FormRow from './components/FormRow'
 import FormApp from './components/FormApp'
 import FormProxy from './components/FormProxy'
+import FormOptions from './components/FormOptions'
 import FormTableCommands from './components/FormTableCommands'
 import DialogEnv from './components/DialogEnv'
 
 export default {
-  components: { FormRow, FormApp, DialogEnv, FormTableCommands, FormProxy },
+  components: { FormRow, FormApp, DialogEnv, FormTableCommands, FormProxy, FormOptions },
 
   mixins: [consoleEdit],
 
