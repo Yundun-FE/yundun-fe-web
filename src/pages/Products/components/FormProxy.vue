@@ -19,6 +19,18 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="备注"
+        prop="remarks"
+        width="200"
+      >
+        <template slot-scope="scope">
+          <el-input
+            v-model="scope.row.remarks"
+            placeholder="备注"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column
         label="Url"
         prop="url"
         width="120"
@@ -54,6 +66,7 @@ export default {
     return {
       row: {
         name: '',
+        remarks: '',
         url: '',
         target: ''
       }
