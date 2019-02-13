@@ -3,6 +3,7 @@
   padding: 12px;
 }
 </style>
+
 <template>
   <page class="page--setting">
     <el-form ref="form" :model="form" label-width="120px">

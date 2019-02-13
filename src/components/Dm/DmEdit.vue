@@ -2,11 +2,8 @@
 .DmEdit {
   padding: 20px 30px;
   min-height: 300px;
-  
+
   .Card--action {
-    .Card__body {
-      min-height: 300px;
-    }
   }
 
   .BlockForm {

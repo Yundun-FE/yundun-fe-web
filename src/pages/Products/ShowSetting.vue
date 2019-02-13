@@ -11,7 +11,6 @@
       <FormApp />
       <el-form-item>
         <el-button
-          type="primary"
           @click="handleCreateEnv"
         >新建环境</el-button>
       </el-form-item>
@@ -26,6 +25,16 @@
     >
       <FormTableCommands />
     </DmEdit>
+
+    <DmEdit
+      :loading="loading"
+      v-model="form"
+      :rules="rules"
+      title="代理配置"
+      @submit="handleSubmit"
+    >
+      <FormProxy />
+    </DmEdit>
     <DialogEnv ref="DialogEnv" />
   </page>
 </template>
@@ -34,11 +43,12 @@
 import consoleEdit from '@/mixins/consoleEdit'
 import FormRow from './components/FormRow'
 import FormApp from './components/FormApp'
+import FormProxy from './components/FormProxy'
 import FormTableCommands from './components/FormTableCommands'
 import DialogEnv from './components/DialogEnv'
 
 export default {
-  components: { FormRow, FormApp, DialogEnv, FormTableCommands },
+  components: { FormRow, FormApp, DialogEnv, FormTableCommands, FormProxy },
 
   mixins: [consoleEdit],
 
