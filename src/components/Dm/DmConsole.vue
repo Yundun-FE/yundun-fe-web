@@ -90,7 +90,7 @@
         <RenderTable
           v-if="columns && columns.length > 0"
           :columns="columns"
-          :selection="selection"
+          :selection="tableSelection"
           :actions-row="actionsRow"
           :data="data"
           @action="handleAction"
@@ -146,6 +146,10 @@ export default create({
         return []
       }
     },
+    selection: {
+      type: Boolean,
+      default: false
+    },
     columns: {
       type: Array,
       default: function() {
@@ -174,19 +178,29 @@ export default create({
       show: false,
       params: {
         name: ''
-      },
-      selection: false
+      }
     }
   },
 
-  watch: {
-    actionsToolbar(val) {
-      this.selection = false
-      val.forEach(item => {
-        if (item.command.includes('Multiple')) this.selection = true
-      })
+  computed: {
+    tableSelection() {
+      let op = false
+      if (this.selection) {
+        op = true
+      } else {
+        this.actionsToolbar.forEach(item => {
+          if (item.command.includes('Multiple')) op = true
+        })
+      }
+      return op
     }
   },
+
+  // watch: {
+  //   actionsToolbar(val) {
+  //     this.selection = false
+  //   }
+  // },
 
   mounted() {
     this.handleEmit()

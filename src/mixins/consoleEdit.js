@@ -76,8 +76,10 @@ export default {
       const form = deepClone(this.form)
       try {
         if (this.mode === 'Edit') {
-          if (this.API_NAME && this.id) {
-            await Fetch.patch(`/${this.API_NAME}/${this.id}`, form, this.$route.query)
+          const id = this.id || this.form.id
+          // console.log(this.form)
+          if (this.API_NAME && id) {
+            await Fetch.patch(`/${this.API_NAME}/${id}`, form, this.$route.query)
           } else {
             await this.handleEditSubmit(this.form)
           }

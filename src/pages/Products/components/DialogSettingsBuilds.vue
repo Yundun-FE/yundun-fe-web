@@ -3,7 +3,7 @@
     ref="Dialog"
     v-model="form"
     :rules="rules"
-    title-label="应用"
+    title-label="编辑配置"
     @submit="handleSubmit"
   >
     <FormTableBuild />

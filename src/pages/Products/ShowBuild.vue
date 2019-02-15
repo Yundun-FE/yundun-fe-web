@@ -28,6 +28,7 @@
       :actions-row="actionsRow"
       :actions-toolbar="actionsToolbar"
       :multiple-selection.sync="multipleSelection"
+      selection
       @init="init"
       @action="handleAction"
     >
@@ -221,7 +222,7 @@ export default {
       envList.forEach(item => {
         const dItem = envMap[item.value]
         item.show = envs.includes(item.value)
-        item.value = dItem.id
+        item.value = dItem ? dItem.id : 0
       })
       this.selectEnv = envList.filter(_ => _.show)
     }
