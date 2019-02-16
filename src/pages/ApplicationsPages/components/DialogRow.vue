@@ -6,16 +6,16 @@
     title-label="页面"
     @submit="handleSubmit"
   >
-    <FormRow />
+    <FormBase />
   </DialogForm>
 </template>
 
 <script>
 import createDialog from '@/utils/create-dialog'
-import FormRow from './FormRow'
+import FormBase from './FormBase'
 
 export default createDialog({
-  components: { FormRow },
+  components: { FormBase },
 
   API_NAME: 'applicationsPages',
 
