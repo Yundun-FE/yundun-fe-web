@@ -2,9 +2,12 @@
   <el-select
     v-model="val"
     :size="size"
+    :multiple="multiple"
+    :filterable="filterable"
+    :allow-create="allowCreate"
+    :default-first-option="defaultFirstOption"
     :placeholder="placeholder"
     :disabled="disabled"
-    :filterable="filterable"
     @change="handleChange"
   >
     <el-option
@@ -34,6 +37,10 @@ export default create({
     placeholder: String,
     disabled: Boolean,
     defaultText: String,
+    multiple: Boolean,
+    filterable: Boolean,
+    allowCreate: Boolean,
+    defaultFirstOption: Boolean,
     size: {
       type: String,
       default: ''
@@ -44,7 +51,6 @@ export default create({
         return []
       }
     },
-    filterable: Boolean,
     value: [String, Number]
   },
 

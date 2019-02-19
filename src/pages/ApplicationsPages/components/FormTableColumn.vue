@@ -20,6 +20,9 @@
               :selects="LABEL.COLUMN_COMPONENT_NAME"
               v-model="scope.row.componentName"
               :disabled="env !== 'root'"
+              filterable
+              allow-create
+              default-first-option
               size="small"
               default-text="默认"
               @change="value => handleChangeComponent(value, scope.row)"
@@ -78,6 +81,12 @@
               v-model="scope.row.show"
               size="small"
             >显示</el-checkbox>
+            <yd-form-select
+              :selects="LABEL.ALIGN_TYPE"
+              v-model="scope.row.props.align"
+              style="width: 100px; margin-left: 8px;"
+              size="small"
+            />
           </template>
         </el-table-column>
       </TableForm>
