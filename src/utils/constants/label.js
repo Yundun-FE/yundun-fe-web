@@ -76,10 +76,6 @@ const BUTTON_TYPE = [
   {
     label: 'DANGER',
     value: 'danger'
-  },
-  {
-    label: 'TEXT',
-    value: 'text'
   }
 ]
 
@@ -89,28 +85,12 @@ const APPLICATION_TYPE = [
   }
 ]
 
-const ALIGN_TYPE = [
-  {
-    label: '默认',
-    value: ''
-  },
-  {
-    label: '右对齐',
-    value: 'right'
-  },
-  {
-    label: '居中',
-    value: 'center'
-  }
-]
-
 export {
   APP_PAGE_TYPE,
   MODULES_TYPE,
   ENV,
   COLUMN_COMPONENT_NAME,
-  BUTTON_TYPE,
-  ALIGN_TYPE
+  BUTTON_TYPE
 }
 
 export default{
@@ -118,6 +98,5 @@ export default{
   MODULES_TYPE,
   ENV,
   COLUMN_COMPONENT_NAME,
-  BUTTON_TYPE,
-  ALIGN_TYPE
+  BUTTON_TYPE
 }

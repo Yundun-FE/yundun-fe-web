@@ -19,13 +19,17 @@ export default create({
     }
 
     this.columns.forEach(column => {
-      const { props = {}, componentName, componentProps = {}} = column
+      const { props = {}, componentProps = {}} = column
+      let { componentName } = column
       let scopedSlots = {}
       if (componentName) {
         const props = componentProps
-        if (componentName === 'ColumnAction' && this.actionsRow) {
+        // TODO
+        if (componentName === 'ColumnAction') componentName = 'ColumnActionButton'
+        if (componentName === 'ColumnActionButton' && this.actionsRow) {
           props.list = this.actionsRow
           props.commandPrefix = 'Row'
+          props.size = this.size
         }
         scopedSlots = {
           default: scope => createElement(componentName, {
@@ -52,7 +56,7 @@ export default create({
         })
       )
     })
-    
+
     columnsRender.push(
       this.$slots.default
     )

@@ -1,10 +1,17 @@
 <style lang="scss">
 .DmConsole {
-  padding: 20px 30px;
+  // padding: 20px 30px;
   display: flex;
   flex-flow: column;
-  .el-table th {
-    background: rgb(249, 251, 255);
+
+  .el-table {
+    th {
+      color: #FFF;
+      background: $--color-primary;
+    }
+    td{
+      padding: 12px 0;
+    }
   }
 
   &__toolbar {
@@ -196,12 +203,6 @@ export default create({
     }
   },
 
-  // watch: {
-  //   actionsToolbar(val) {
-  //     this.selection = false
-  //   }
-  // },
-
   mounted() {
     this.handleEmit()
   },
@@ -235,7 +236,7 @@ export default create({
     handleEmit() {
       const { total, page, pageSize } = this
       const params = {
-        total, page, pageSize, ... this.params, ...this.bindParams
+        total, page, pageSize, ... this.params, ...this.bindParams, per_page: pageSize
       }
 
       this.$emit('init', params)
