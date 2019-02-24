@@ -2,16 +2,16 @@
   <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
       <el-form-item label="标题">
-        <el-input v-model="form.title" />
+        <d-input v-model="form.title" />
       </el-form-item>
       <el-form-item label="URL">
-        <el-input v-model="form.url" />
+        <d-input v-model="form.url" />
       </el-form-item>
       <el-form-item label="ENV">
-        <el-input v-model="form.env" />
+        <d-input v-model="form.env" />
       </el-form-item>
       <el-form-item label="项目名称">
-        <el-input v-model="form.name" />
+        <d-input v-model="form.name" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">

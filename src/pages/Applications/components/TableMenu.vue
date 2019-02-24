@@ -11,7 +11,7 @@
           min-width="100px"
         >
           <template slot-scope="scope">
-            <el-input
+            <d-input
               v-model="scope.row.name"
               placeholder="名称"
             />
@@ -22,7 +22,7 @@
           min-width="150px"
         >
           <template slot-scope="scope">
-            <el-input
+            <d-input
               v-model="scope.row.path"
               placeholder="路径"
             />

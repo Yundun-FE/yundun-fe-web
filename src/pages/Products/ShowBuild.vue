@@ -56,10 +56,10 @@
             v-if="info.settings && info.settings.commands && info.settings.commands[0]"
             label="更新指令"
           >
-            <el-input v-model="info.settings.commands[0].content" />
+            <d-input v-model="info.settings.commands[0].content" />
           </el-form-item>
           <el-form-item label="编译指令">
-            <el-input v-model="buildCommand" />
+            <d-input v-model="buildCommand" />
           </el-form-item>
         </el-form>
       </template>

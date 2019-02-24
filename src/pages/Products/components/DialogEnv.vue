@@ -7,13 +7,13 @@
     @submit="handleSubmit"
   >
     <el-form-item label="名称">
-      <el-input v-model="form.name" disabled placeholder="标题"/>
+      <d-input v-model="form.name" disabled placeholder="标题"/>
     </el-form-item>
     <el-form-item label="标题">
-      <el-input v-model="form.title" placeholder="标题"/>
+      <d-input v-model="form.title" placeholder="标题"/>
     </el-form-item>
     <el-form-item label="环境">
-      <el-input v-model="form.env" placeholder="ENV"/>
+      <d-input v-model="form.env" placeholder="ENV"/>
     </el-form-item>
   </DialogForm>
 </template>

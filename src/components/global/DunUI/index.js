@@ -1,4 +1,6 @@
-import Button from './Button'
+import Button from './Button/antd'
+import Dialog from './Dialog/antd'
+import Input from './Input/element'
 
 function install(Vue) {
   if (install.installed) {
@@ -7,7 +9,9 @@ function install(Vue) {
   install.installed = true
 
   const components = [
-    Button
+    Button,
+    Dialog,
+    Input
   ]
 
   components.forEach(Component => {

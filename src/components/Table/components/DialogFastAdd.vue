@@ -6,7 +6,7 @@
     title-label="快速导入"
     @submit="handleSubmit"
   >
-    <el-input
+    <d-input
       v-model="form.content"
       :rows="5"
       type="textarea"

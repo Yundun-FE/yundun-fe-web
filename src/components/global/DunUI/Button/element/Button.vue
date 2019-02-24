@@ -2,6 +2,7 @@
   <el-button
     :type="type"
     :size="size"
+    :loading="loading"
     @click="handleClick"
   >
     <slot />
@@ -16,7 +17,8 @@ export default create({
 
   props: {
     type: String,
-    size: String
+    size: String,
+    loading: Boolean
   },
 
   methods: {

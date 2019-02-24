@@ -4,13 +4,13 @@
       label="名称"
       prop="name"
     >
-      <el-input
+      <d-input
         v-if="form.rootName"
         v-model="form.rootName"
         disabled
         style="width: 220px"
       />
-      <el-input
+      <d-input
         v-model="form.name"
         placeholder="名称"
         style="width: 220px"
@@ -20,7 +20,7 @@
       label="CODE"
       prop="code"
     >
-      <el-input
+      <d-input
         v-model="form.code"
         style="width: 220px"
       />
@@ -35,7 +35,7 @@
       label="备注"
       prop="remarks"
     >
-      <el-input
+      <d-input
         v-model="form.remarks"
         style="width: 220px"
       />

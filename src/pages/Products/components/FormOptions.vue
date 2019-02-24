@@ -12,7 +12,7 @@
         min-width="200"
       >
         <template slot-scope="scope">
-          <el-input
+          <d-input
             v-model="scope.row.name"
             placeholder="Name"
           />
@@ -24,7 +24,7 @@
         min-width="200"
       >
         <template slot-scope="scope">
-          <el-input
+          <d-input
             v-model="scope.row.value"
             placeholder="Value"
           />

@@ -1,5 +1,4 @@
-// import Button from './element/Button'
-import Button from './antd/Button'
+import Button from './Button'
 
 Button.install = Vue => {
   Vue.component(Button.name, Button)

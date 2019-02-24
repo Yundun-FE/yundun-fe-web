@@ -35,7 +35,7 @@
           width="150"
         >
           <template slot-scope="scope">
-            <el-input
+            <d-input
               :disabled="env !== 'root'"
               v-model="scope.row.props.label"
               size="small"
@@ -49,7 +49,7 @@
           prop="props.prop"
         >
           <template slot-scope="scope">
-            <el-input
+            <d-input
               v-model="scope.row.props.prop"
               :disabled="env !== 'root'"
               size="small"
@@ -65,13 +65,13 @@
               v-model="checked"
               style="margin-right: 10px"
             >自适应</el-checkbox> -->
-            <el-input-number
+            <d-input-number
               v-model="scope.row.props.width"
               :step="5"
               size="small"
               style="margin-right: 10px"
             />
-            <el-input-number
+            <d-input-number
               v-model="scope.row.props.minWidth"
               :step="5"
               size="small"

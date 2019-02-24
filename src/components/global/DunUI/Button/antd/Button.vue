@@ -2,6 +2,7 @@
   <a-button
     :type="type"
     :size="useSize"
+    :loading="loading"
     @click="handleClick"
   >
     <slot />
@@ -13,7 +14,6 @@ import create from '@/utils/create-basic'
 
 const SIZE_MAP = {
   large: 'large',
-  medium: 'default',
   default: 'default',
   small: 'small',
   mini: 'small'
@@ -26,7 +26,8 @@ export default create({
     size: {
       type: String,
       default: 'default'
-    }
+    },
+    loading: Boolean
   },
 
   computed: {

@@ -11,7 +11,7 @@
       >
         <el-table-column label="内容">
           <template slot-scope="scope">
-            <el-input
+            <d-input
               :rows="3"
               v-model="scope.row.content"
               type="textarea"

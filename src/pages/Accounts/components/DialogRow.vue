@@ -7,13 +7,13 @@
     @submit="handleSubmit"
   >
     <el-form-item label="标题">
-      <el-input v-model="form.title"/>
+      <d-input v-model="form.title"/>
     </el-form-item>
     <el-form-item label="账号">
-      <el-input v-model="form.name"/>
+      <d-input v-model="form.name"/>
     </el-form-item>
     <el-form-item label="密码">
-      <el-input v-model="form.password"/>
+      <d-input v-model="form.password"/>
     </el-form-item>
   </DialogForm>
 </template>

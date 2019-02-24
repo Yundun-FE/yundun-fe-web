@@ -14,7 +14,7 @@
       min-width="90"
     >
       <template slot-scope="scope">
-        <el-input
+        <d-input
           v-model="scope.row.index"
           placeholder="Index"
         />
@@ -25,7 +25,7 @@
       min-width="120"
     >
       <template slot-scope="scope">
-        <el-input
+        <d-input
           v-model="scope.row.icon"
           placeholder="Icon"
         />
@@ -36,7 +36,7 @@
       min-width="100"
     >
       <template slot-scope="scope">
-        <el-input
+        <d-input
           v-model="scope.row.alias"
           placeholder="别名"
         />
@@ -47,7 +47,7 @@
       min-width="150"
     >
       <template slot-scope="scope">
-        <el-input
+        <d-input
           v-model="scope.row.url"
           placeholder="路径"
         />

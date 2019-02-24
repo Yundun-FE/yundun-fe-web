@@ -8,6 +8,7 @@
       :actions-row="actionsRow"
       :actions-toolbar="actionsToolbar"
       :multiple-selection.sync="multipleSelection"
+      class="padding"
       @init="init"
       @action="handleAction"
     />

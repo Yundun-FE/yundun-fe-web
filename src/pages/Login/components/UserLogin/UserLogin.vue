@@ -24,7 +24,7 @@
                 >
                   <div class="form-line">
                     <i class="el-icon-edit-outline input-icon" />
-                    <el-input
+                    <d-input
                       v-model="user.username"
                       placeholder="会员名/邮箱/手机号"
                     />
@@ -40,7 +40,7 @@
                 >
                   <div class="form-line">
                     <i class="el-icon-service input-icon" />
-                    <el-input
+                    <d-input
                       v-model="user.password"
                       type="password"
                       placeholder="密码"
