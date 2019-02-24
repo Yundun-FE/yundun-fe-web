@@ -2,10 +2,10 @@
   <el-popover v-model="visible" placement="top" width="160">
     <p>确定删除？</p>
     <div style="text-align: right; margin: 0">
-      <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-      <el-button type="primary" size="mini" @click="handleClick">确定</el-button>
+      <d-button size="mini" type="text" @click="visible = false">取消</d-button>
+      <d-button type="primary" size="mini" @click="handleClick">确定</d-button>
     </div>
-    <el-button slot="reference" type="text" size="small">删除</el-button>
+    <d-button slot="reference" type="text" size="small">删除</d-button>
   </el-popover>
 </template>
 

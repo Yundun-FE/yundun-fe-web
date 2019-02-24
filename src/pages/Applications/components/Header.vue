@@ -8,7 +8,7 @@
       </template>
       <slot/>
       <template slot="action">
-        <el-button type="primary">创建副本</el-button>
+        <d-button type="primary">创建副本</d-button>
       </template>
     </HeaderTop>
   </div>

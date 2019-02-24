@@ -42,15 +42,15 @@
         <slot />
       </el-form>
       <div slot="footer">
-        <el-button
+        <d-button
           v-if="backButton"
           @click="handleBack"
-        >返回</el-button>
+        >返回</d-button>
         <div class="pull-right">
-          <el-button
+          <d-button
             type="primary"
             @click="handleSubmit"
-          >保存</el-button>
+          >保存</d-button>
         </div>
       </div>
     </Card>

@@ -37,9 +37,9 @@
             </template>
           </div>
           <el-dropdown @command="handleAddBlock">
-            <el-button type="primary">
+            <d-button type="primary">
               添加区块<i class="el-icon-arrow-down el-icon--right" />
-            </el-button>
+            </d-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 v-for="(item, index) in selectBlocks"
@@ -52,7 +52,7 @@
         <el-tab-pane label="基本资料">
           <!-- 基本资料 -->
           <el-form-item label="环境">
-            <el-button @click="handleCreateEnv">新建环境</el-button>
+            <d-button @click="handleCreateEnv">新建环境</d-button>
           </el-form-item>
           <div class="BlockForm">
             <FormRow :data="form" />

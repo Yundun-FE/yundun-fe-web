@@ -17,7 +17,7 @@
         <el-input v-model="form.serverIp" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">保存</el-button>
+        <d-button type="primary" @click="onSubmit">保存</d-button>
       </el-form-item>
     </el-form>
   </page>

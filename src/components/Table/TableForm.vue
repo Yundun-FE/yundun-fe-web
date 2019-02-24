@@ -14,28 +14,28 @@
       >
         <template slot-scope="scope">
           <template v-if="sort">
-            <el-button
+            <d-button
               :size="size"
               type="text"
               @click="handleRowUp(scope.$index)"
-            >上移</el-button>
-            <el-button
+            >上移</d-button>
+            <d-button
               :size="size"
               type="text"
               @click="handleRowDown(scope.$index)"
-            >下移</el-button>
+            >下移</d-button>
           </template>
-          <el-button
+          <d-button
             v-if="editRow"
             :size="size"
             type="text"
             @click="handleEditRow(scope)"
-          >编辑</el-button>
-          <el-button
+          >编辑</d-button>
+          <d-button
             :size="size"
             type="text"
             @click="handleRowDelete(scope.$index)"
-          >删除</el-button>
+          >删除</d-button>
         </template>
       </el-table-column>
     </el-table>

@@ -91,7 +91,7 @@
     display: inline-block;
   }
 
-  .el-button--mini.is-circle {
+  .d-button--mini.is-circle {
     padding: 5px;
     font-size: 10px;
   }
@@ -135,7 +135,7 @@
       <div class="action-list">
         <ul>
           <!-- <li class="action-item">
-          <el-button type="info" size="mini" icon="yundun-fe yicon-user" circle/>
+          <d-button type="info" size="mini" icon="yundun-fe yicon-user" circle/>
         </li> -->
           <li
             v-if="data.cmds && data.cmds.length > 0"
@@ -161,7 +161,7 @@
                   </el-tooltip>
                 </li>
               </ul>
-              <el-button
+              <d-button
                 slot="reference"
                 type="default"
                 size="mini"
@@ -172,7 +172,7 @@
           </li>
           <!-- <li v-if="data.name" class="action-item">
             <el-tooltip content="立即构建" placement="top">
-              <el-button :disabled="progressing" type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
+              <d-button :disabled="progressing" type="success" size="mini" icon="yundun-fe yicon-reload" circle @click="handleBuild(data.name)" />
             </el-tooltip>
           </li> -->
           <li
@@ -184,7 +184,7 @@
               :id="`product_${data.id}`"
               class="inlineBlock"
             >
-              <el-button
+              <d-button
                 type="primary"
                 size="mini"
                 icon="yundun-fe yicon-arrowright"

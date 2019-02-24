@@ -13,7 +13,7 @@
         >
           <span>{{ item.name }}</span>
         </div>
-        <el-button type="primary">进入管理</el-button>
+        <d-button type="primary">进入管理</d-button>
       </el-card>
     </el-col>
   </el-row>

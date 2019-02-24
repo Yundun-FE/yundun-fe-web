@@ -78,7 +78,7 @@
           content="布局配置"
           placement="top"
         >
-          <el-button
+          <d-button
             icon="el-icon-setting"
             size="medium"
             circle

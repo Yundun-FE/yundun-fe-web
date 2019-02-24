@@ -34,12 +34,12 @@
           >{{ item.label }}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-button
+      <d-button
         v-else
         :size="size"
         :type="item.type"
         @click="handleClick({command: item.command, scope, settings: item})"
-      >{{ item.label }}</el-button>
+      >{{ item.label }}</d-button>
     </span>
   </span>
 </template>

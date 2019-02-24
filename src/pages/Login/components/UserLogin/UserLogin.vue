@@ -57,14 +57,14 @@
               </el-col>
             </el-row>
             <el-row class="form-item">
-              <el-button
+              <d-button
                 type="primary"
                 class="submit-btn"
                 size="small"
                 @click="submitBtn"
               >
                 登 录
-              </el-button>
+              </d-button>
             </el-row>
           </div>
           <el-row class="tips">

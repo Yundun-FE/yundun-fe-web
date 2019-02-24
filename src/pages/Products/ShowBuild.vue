@@ -69,11 +69,11 @@
         :percentage="infoProgress.progress || 0"
         class="toolbar__progress"
       />
-      <el-button
+      <d-button
         slot="toolbar-right"
         size="medium"
         @click="handleOpenSettings"
-      >配置</el-button>
+      >配置</d-button>
     </DmConsole>
     <DialogSettingsBuilds
       ref="DialogSettingsBuilds"

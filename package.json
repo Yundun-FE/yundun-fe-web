@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@vue-materials/basic-container": "^1.0.0",
+    "ant-design-vue": "^1.3.5",
     "axios": "0.18.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
@@ -33,7 +34,6 @@
     "vuex": "3.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
     "@babel/core": "7.0.0-beta.54",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.54",
     "@babel/plugin-proposal-decorators": "7.0.0-beta.54",
@@ -41,6 +41,7 @@
     "@babel/plugin-proposal-function-sent": "7.0.0-beta.54",
     "@babel/plugin-proposal-json-strings": "7.0.0-beta.54",
     "@babel/plugin-proposal-numeric-separator": "7.0.0-beta.54",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
     "@babel/plugin-proposal-throw-expressions": "7.0.0-beta.54",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "7.0.0-beta.54",
@@ -49,8 +50,10 @@
     "@vue/cli-plugin-eslint": "^3.0.0-beta.6",
     "@vue/cli-service": "^3.0.0-beta.6",
     "@vue/eslint-config-airbnb": "^3.0.0-beta.6",
-    "babel-preset-stage-2": "^6.24.1",
+    "babel-plugin-component": "^1.1.1",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",

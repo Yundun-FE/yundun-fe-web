@@ -41,13 +41,13 @@
     <slot/>
     <div slot="footer">
       <!-- <slot name="footer"/> -->
-      <el-button
+      <d-button
         @click="handleClose"
-      >取消</el-button>
-      <el-button
+      >取消</d-button>
+      <d-button
         type="primary"
         @click="handleSubmit"
-      >保存</el-button>
+      >保存</d-button>
     </div>
   </el-dialog>
 </template>

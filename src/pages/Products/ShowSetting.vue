@@ -10,9 +10,9 @@
       <FormRow />
       <FormApp />
       <el-form-item>
-        <el-button
+        <d-button
           @click="handleCreateEnv"
-        >新建环境</el-button>
+        >新建环境</d-button>
       </el-form-item>
     </DmEdit>
 

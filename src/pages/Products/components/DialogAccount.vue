@@ -15,8 +15,8 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="visible = false">取 消</el-button>
-      <el-button :loading="loadingSubmit" type="primary" @click="handleSave">确 定</el-button>
+      <d-button @click="visible = false">取 消</d-button>
+      <d-button :loading="loadingSubmit" type="primary" @click="handleSave">确 定</d-button>
     </span>
   </el-dialog>
 </template>

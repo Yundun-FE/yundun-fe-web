@@ -13,11 +13,11 @@
       <slot />
     </el-form>
     <div slot="footer">
-      <el-button @click="handleClose">取消</el-button>
-      <el-button
+      <d-button @click="handleClose">取消</d-button>
+      <d-button
         type="primary"
         @click="handleSubmit"
-      >保存</el-button>
+      >保存</d-button>
     </div>
   </el-dialog>
 </template>
