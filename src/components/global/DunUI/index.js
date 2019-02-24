@@ -1,6 +1,6 @@
 import Button from './Button/antd'
 import Dialog from './Dialog/antd'
-import Input from './Input/element'
+import Input from './Input/antd'
 
 function install(Vue) {
   if (install.installed) {

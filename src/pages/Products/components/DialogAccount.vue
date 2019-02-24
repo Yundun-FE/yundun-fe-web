@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
+  <d-dialog :visible.sync="visible" :title="isEdit ? '编辑项目' : '新增项目'">
     <el-form label-width="80px">
       <el-form-item label="标题">
         <d-input v-model="form.title" />
@@ -18,7 +18,7 @@
       <d-button @click="visible = false">取 消</d-button>
       <d-button :loading="loadingSubmit" type="primary" @click="handleSave">确 定</d-button>
     </span>
-  </el-dialog>
+  </d-dialog>
 </template>
 
 <script>

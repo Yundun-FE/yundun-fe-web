@@ -36,7 +36,7 @@ it('product page', () => {
   cy.get('#btn-cancel').click()
 
   cy.get('#btnAdd').click()
-  // cy.get('.el-dialog').contains('取 消').click()
+  // cy.get('.d-dialog').contains('取 消').click()
 
   cy.get('#form_title').should('have.value', 'title')
 })

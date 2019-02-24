@@ -1,6 +1,6 @@
 <style lang="scss">
 .Dialog {
-  .el-dialog {
+  .d-dialog {
     border-radius: 0px !important;
 
     &__header {
@@ -29,7 +29,7 @@
 </style>
 
 <template>
-  <el-dialog
+  <d-dialog
     :width="width"
     :close-on-click-modal="closeOnClickModal"
     :title="title"
@@ -49,7 +49,7 @@
         @click="handleSubmit"
       >保存</d-button>
     </div>
-  </el-dialog>
+  </d-dialog>
 </template>
 
 <script>

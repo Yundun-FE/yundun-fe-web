@@ -53,7 +53,7 @@ export default create({
   props: {
     size: {
       type: String,
-      default: ''
+      default: 'medium'
     },
     commandPrefix: String,
     list: {

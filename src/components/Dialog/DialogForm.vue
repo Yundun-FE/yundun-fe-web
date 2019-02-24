@@ -1,5 +1,5 @@
 <template>
-  <el-dialog
+  <d-dialog
     :class="b()"
     :title="titleShow"
     :visible.sync="visible"
@@ -19,7 +19,7 @@
         @click="handleSubmit"
       >保存</d-button>
     </div>
-  </el-dialog>
+  </d-dialog>
 </template>
 
 <script>
