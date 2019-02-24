@@ -1,5 +1,5 @@
 <template>
-  <el-select
+  <d-select
     v-model="val"
     :size="size"
     :placeholder="placeholder"
@@ -7,22 +7,24 @@
     :filterable="filterable"
     @change="handleChange"
   >
-    <el-option
+    <!-- <d-select-option
       v-if="defaultText"
       :size="size"
       :label="defaultText"
       value=""
-    >{{ defaultText }}</el-option>
-    <el-option
+    >{{ defaultText }}</d-select-option> -->
+    <d-select-option
       v-for="item in selects"
       :size="size"
       :key="item.value"
       :disabled="item.disabled"
       :value="item.value"
       :label="item.label"
-    />
-  </el-select>
-</template>
+    >
+      {{ item.label }}
+    </d-select-option>
+  </d-select>
+</d-select></template>
 
 <script>
 import create from '../../utils/create-basic'
