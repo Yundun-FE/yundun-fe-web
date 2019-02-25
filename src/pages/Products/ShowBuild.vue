@@ -43,11 +43,10 @@
             />
           </el-form-item>
           <el-form-item label="应用类型">
-            <yd-form-radio-button
+            <yd-form-radio
               v-model="filters.type"
               :radios="MODULES_TYPE"
-              default-label="全部"
-              default-value=""
+              default-value="全部"
               @change="handleFilterList"
             />
           </el-form-item>

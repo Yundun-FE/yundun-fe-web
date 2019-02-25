@@ -27,7 +27,7 @@
           v-model="scope.row.type"
           :disabled="env !== 'root'"
           size="small"
-          default-text="默认"
+          default-value="默认"
         />
       </template>
     </el-table-column>

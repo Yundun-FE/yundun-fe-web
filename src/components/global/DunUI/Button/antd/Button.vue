@@ -1,6 +1,19 @@
+<style lang="scss">
+.d-button {
+  &--text {
+    border-color: transparent;
+    color: $--color-primary;
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+</style>
+
 <template>
   <a-button
-    :type="type"
+    :class="b([type])"
+    :type="useType"
     :size="useSize"
     :loading="loading"
     @click="handleClick"
@@ -18,6 +31,11 @@ const SIZE_MAP = {
   small: 'small',
   mini: 'small'
 }
+
+const TYPE_MAP = {
+  text: 'default'
+}
+
 export default create({
   name: 'd-button',
 
@@ -33,6 +51,10 @@ export default create({
   computed: {
     useSize() {
       return SIZE_MAP[this.size]
+    },
+
+    useType() {
+      return TYPE_MAP[this.type] ? TYPE_MAP[this.type] : this.type
     }
   },
 

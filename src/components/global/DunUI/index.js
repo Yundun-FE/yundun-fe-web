@@ -1,6 +1,8 @@
 import Button from './Button/antd'
+import Checkbox from './Checkbox/antd'
 import Dialog from './Dialog/antd'
 import Input from './Input/antd'
+import Radio from './Radio/antd'
 import Select from './Select/antd'
 
 function install(Vue) {
@@ -11,8 +13,10 @@ function install(Vue) {
 
   const components = [
     Button,
+    Checkbox,
     Dialog,
     Input,
+    Radio,
     Select
   ]
 

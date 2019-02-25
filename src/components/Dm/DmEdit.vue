@@ -21,6 +21,7 @@
       left: 200px;
       z-index: 100;
       border-top: 1px solid #EEE;
+      background: #FFF;
       padding: 12px 30px;
     }
   }

@@ -7,12 +7,12 @@
     :filterable="filterable"
     @change="handleChange"
   >
-    <!-- <d-select-option
-      v-if="defaultText"
+    <d-select-option
+      v-if="defaultValue"
       :size="size"
-      :label="defaultText"
+      :label="defaultValue"
       value=""
-    >{{ defaultText }}</d-select-option> -->
+    >{{ defaultValue }}</d-select-option>
     <d-select-option
       v-for="item in selects"
       :size="size"
@@ -24,7 +24,7 @@
       {{ item.label }}
     </d-select-option>
   </d-select>
-</d-select></template>
+</template>
 
 <script>
 import create from '../../utils/create-basic'
@@ -35,7 +35,7 @@ export default create({
   props: {
     placeholder: String,
     disabled: Boolean,
-    defaultText: String,
+    defaultValue: String,
     size: {
       type: String,
       default: ''

@@ -1,7 +1,10 @@
 
 <template>
-  <a-select v-model="viewValue">
-    <slot/>
+  <a-select
+    v-model="viewValue"
+    :size="size"
+  >
+    <slot />
   </a-select>
 </template>
 
@@ -12,6 +15,7 @@ export default create({
   name: 'd-select',
 
   props: {
+    size: String,
     value: [String, Number]
   },
 

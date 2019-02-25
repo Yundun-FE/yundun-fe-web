@@ -24,7 +24,7 @@
           :selects="LABEL.BUTTON_TYPE"
           v-model="scope.row.type"
           size="small"
-          default-text="默认"
+          default-value="默认"
         />
       </template>
     </el-table-column>

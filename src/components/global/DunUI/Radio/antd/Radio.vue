@@ -1,21 +1,19 @@
-
 <template>
-  <a-select-option
+  <a-radio
     :value="value"
-  />
+  >
+    <slot />
+  </a-radio>
 </template>
 
 <script>
 import create from '@/utils/create-basic'
 
 export default create({
-  name: 'd-select-option',
+  name: 'd-radio',
 
   props: {
-    label: [String, Number],
-    value: {
-      required: true
-    }
+    value: [String, Number]
   }
 })
 </script>

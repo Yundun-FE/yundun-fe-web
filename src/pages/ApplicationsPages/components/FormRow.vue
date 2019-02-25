@@ -29,6 +29,7 @@
       <yd-form-select
         :selects="LABEL.APP_PAGE_TYPE"
         v-model="form.type"
+        style="width: 220px"
       />
     </el-form-item>
     <el-form-item

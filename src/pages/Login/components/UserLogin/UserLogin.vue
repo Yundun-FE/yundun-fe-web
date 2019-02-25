@@ -52,7 +52,7 @@
             <el-row class="form-item">
               <el-col>
                 <el-form-item>
-                  <el-checkbox class="checkbox">记住账号</el-checkbox>
+                  <d-checkbox class="checkbox">记住账号</d-checkbox>
                 </el-form-item>
               </el-col>
             </el-row>

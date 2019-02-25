@@ -13,7 +13,7 @@
       <d-input v-model="data.blockName" />
     </el-form-item>
     <el-form-item label="显示">
-      <el-checkbox v-model="data.show" />
+      <d-checkbox v-model="data.show" />
     </el-form-item>
     <FormTableColumn
       :env="env"

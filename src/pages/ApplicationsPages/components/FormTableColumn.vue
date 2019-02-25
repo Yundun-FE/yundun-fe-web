@@ -24,7 +24,7 @@
               allow-create
               default-first-option
               size="small"
-              default-text="默认"
+              default-value="默认"
               @change="value => handleChangeComponent(value, scope.row)"
             />
           </template>
@@ -61,10 +61,10 @@
           label="布局"
         >
           <template slot-scope="scope">
-            <!-- <el-checkbox
+            <!-- <d-checkbox
               v-model="checked"
               style="margin-right: 10px"
-            >自适应</el-checkbox> -->
+            >自适应</d-checkbox> -->
             <d-input-number
               v-model="scope.row.props.width"
               :step="5"
@@ -77,10 +77,10 @@
               size="small"
               style="margin-right: 10px"
             />
-            <el-checkbox
+            <d-checkbox
               v-model="scope.row.show"
               size="small"
-            >显示</el-checkbox>
+            >显示</d-checkbox>
             <yd-form-select
               :selects="LABEL.ALIGN_TYPE"
               v-model="scope.row.props.align"
