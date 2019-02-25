@@ -2,6 +2,7 @@
   <a-input
     :size="size"
     :type="type"
+    :disabled="disabled"
     :class="b()"
   />
 </template>
@@ -14,7 +15,8 @@ export default create({
 
   props: {
     size: String,
-    type: String
+    type: String,
+    disabled: Boolean
   }
 })
 </script>
