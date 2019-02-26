@@ -1,7 +1,7 @@
 <template>
-  <d-checkbox-group v-model="val">
-    <d-checkbox v-for="item in checks" :key="item.value" :disabled="item.disabled" :label="item.value">{{ item.label }}</d-checkbox>
-  </d-checkbox-group>
+  <el-checkbox-group v-model="val">
+    <el-checkbox v-for="item in checks" :key="item.value" :disabled="item.disabled" :label="item.value">{{ item.label }}</el-checkbox>
+  </el-checkbox-group>
 </template>
 
 <script>

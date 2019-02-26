@@ -1,13 +1,13 @@
 <template>
-  <d-radio-group v-model="val">
-    <d-radio
+  <el-radio-group v-model="val">
+    <el-radio
       v-for="item in radios"
       :key="item.value"
       :disabled="item.disabled || disabled"
       :label="item.value"
       :border="border"
-    >{{ item.label }}</d-radio>
-  </d-radio-group>
+    >{{ item.label }}</el-radio>
+  </el-radio-group>
 </template>
 
 <script>

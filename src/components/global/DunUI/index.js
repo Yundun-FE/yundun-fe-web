@@ -1,7 +1,7 @@
-import Button from './Button/antd'
+import Button from './Button/element'
 import Checkbox from './Checkbox/antd'
-import Dialog from './Dialog/antd'
-import Input from './Input/antd'
+import Dialog from './Dialog/element'
+import Input from './Input/element'
 import Radio from './Radio/antd'
 import Select from './Select/antd'
 

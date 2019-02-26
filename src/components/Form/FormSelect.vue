@@ -1,5 +1,5 @@
 <template>
-  <d-select
+  <el-select
     v-model="val"
     :size="size"
     :placeholder="placeholder"
@@ -7,13 +7,13 @@
     :filterable="filterable"
     @change="handleChange"
   >
-    <d-select-option
+    <el-option
       v-if="defaultValue"
       :size="size"
       :label="defaultValue"
       value=""
-    >{{ defaultValue }}</d-select-option>
-    <d-select-option
+    >{{ defaultValue }}</el-option>
+    <el-option
       v-for="item in selects"
       :size="size"
       :key="item.value"
@@ -22,8 +22,8 @@
       :label="item.label"
     >
       {{ item.label }}
-    </d-select-option>
-  </d-select>
+    </el-option>
+  </el-select>
 </template>
 
 <script>

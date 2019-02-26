@@ -1,9 +1,10 @@
 <template>
   <el-input
-    :value="value"
+    v-model="useValue"
     :size="size"
     :type="type"
     :class="b()"
+    @change="handleChange"
   />
 </template>
 
@@ -17,6 +18,28 @@ export default create({
     value: [String, Number],
     size: String,
     type: String
+  },
+
+  data() {
+    return {
+      useValue: this.value
+    }
+  },
+
+  watch: {
+    value(val) {
+      this.useValue = val
+    },
+
+    useValue(val) {
+      this.$emit('input', val)
+    }
+  },
+
+  methods: {
+    handleChange(val) {
+      this.$emit('change', val)
+    }
   }
 })
 </script>
