@@ -6,10 +6,10 @@
 
   .el-table {
     th {
-      color: #FFF;
+      color: #fff;
       background: $--color-primary;
     }
-    td{
+    td {
       padding: 12px 0;
     }
   }
@@ -23,14 +23,37 @@
   &__core {
     display: flex;
     flex-flow: column;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);
+    position: relative;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.1);
 
-    .el-loading-mask{
-      top: 42px;
-      bottom: 58px;
+    &:before {
+      position: absolute;
+      content: "";
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: $--color-primary;
+    }
+
+    .el-loading-mask {
+      top: 41px;
+      bottom: 57px;
+      background: #fff;
+
+      .el-loading-spinner {
+        top: 16px;
+        margin-top: 0px;
+        font-size: 12px;
+        color: #666;
+
+        .el-icon-loading {
+          font-size: 15px;
+          margin-right: 6px;
+        }
+      }
     }
   }
 
@@ -38,15 +61,6 @@
     min-height: 500px;
     .el-table {
       min-height: 500px;
-    }
-
-    .el-loading-mask {
-      top: 47px;
-
-      .el-loading-spinner {
-        top: 30px;
-        margin-top: 0px;
-      }
     }
   }
 
@@ -61,15 +75,16 @@
 </style>
 
 <template>
-  <div
-    :class="b()"
-  >
+  <div :class="b()">
     <div :class="b('query')">
       <slot name="query" />
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
-      <div v-if="loadingLayout" class="skeleton"/>
+      <div
+        v-if="loadingLayout"
+        class="skeleton"
+      />
       <ColumnActionButton
         :multiple-action-disable="multipleSelection.length === 0"
         :list="actionsToolbar"
@@ -80,11 +95,13 @@
         <slot name="toolbar-right" />
       </div>
     </div>
-    <div
-      v-loading="loading"
-      :class="b('core')"
-      element-loading-spinner="el-icon-loading"
-    >
+    <div :class="b('core')">
+      <div
+        v-if="loadingData"
+        class="el-loading-mask"
+      >
+        <div class="el-loading-spinner"><i class="el-icon-loading" />加载中</div>
+      </div>
       <!-- BODY -->
       <div :class="b('body')">
         <RenderTable
@@ -188,6 +205,7 @@ export default create({
   },
 
   computed: {
+    // 是否显示多选框
     tableSelection() {
       let op = false
       if (this.selection) {
@@ -201,7 +219,7 @@ export default create({
     }
   },
 
-  mounted() {
+  created() {
     this.handleEmit()
   },
 

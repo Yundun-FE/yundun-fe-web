@@ -12,12 +12,6 @@
 import FormRow from './components/FormRow'
 
 export default {
-  components: { FormRow },
-
-  methods: {
-    init() {
-      this.$refs.PageTable.init()
-    }
-  }
+  components: { FormRow }
 }
 </script>

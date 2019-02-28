@@ -1,32 +1,33 @@
 <template>
-  <page :loading="loading">
-    <DmConsole
-      ref="DmConsole"
-      :loading="loading"
-      :data="list"
-      :columns="columns"
-      :actions-row="actionsRow"
-      :actions-toolbar="actionsToolbar"
-      :multiple-selection.sync="multipleSelection"
-      class="padding"
-      @init="init"
-      @action="handleAction"
-    />
-    <DialogRow
-      ref="DialogRow"
-      @init="init"
-    />
-  </page>
+  <PageTable
+    ref="PageTable"
+    :bind-params="bindParams"
+    page-name="application-page"
+    api-name="applicationsPages"
+  >
+    <FormRow slot="FormRow" />
+
+    <template slot="toolbar-right">
+      <FormSearch
+        v-model="bindParams.name"
+        @submit="$refs.PageTable.emit()"
+      />
+    </template>
+  </PageTable>
 </template>
 
 <script>
-import createCudr from '@/utils/create-cudr'
-import DialogRow from './components/DialogRow'
+import FormRow from './components/FormRow'
 
-export default createCudr({
-  components: { DialogRow },
+export default {
+  components: { FormRow },
 
-  pageName: 'application-page',
-  apiName: 'applicationsPages'
-})
+  data() {
+    return {
+      bindParams: {
+        name: ''
+      }
+    }
+  }
+}
 </script>

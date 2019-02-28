@@ -8,10 +8,15 @@ export default {
   },
 
   methods: {
+    emit() {
+      this.$refs.DmConsole.handleEmit()
+    },
+
     init(params) {
       this.fetchData(`/${this.apiName}`, {
         ...params,
-        ...this.$route.params
+        ...this.$route.params,
+        ...this.$route.query
       })
     },
 
@@ -27,7 +32,7 @@ export default {
     },
     // 读取数据
     async fetchData(url, params) {
-      this.loading = true
+      this.loadingData = true
       const response = await this.Fetch.get(url, params)
       const { list, total } = this.formatResponse(response)
       this.$refs.DmConsole.updateTotal(total)

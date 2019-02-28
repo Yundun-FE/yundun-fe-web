@@ -3,7 +3,7 @@
     <DmConsole
       ref="DmConsole"
       :data="list"
-      :loading="loadingData"
+      :loading-data="loadingData"
       :loading-layout="loadingLayout"
       :columns="columns"
       :actions-row="actionsRow"
@@ -13,8 +13,11 @@
       class="padding"
       @init="init"
       @action="handleAction"
-    />
-
+    >
+      <template slot="toolbar-right">
+        <slot name="toolbar-right"/>
+      </template>
+    </DmConsole>
     <DialogRow
       ref="DialogRow"
       :api-name="apiName"
