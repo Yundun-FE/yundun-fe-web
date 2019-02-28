@@ -19,6 +19,6 @@
 import createDialog from '@/utils/create-dialog'
 
 export default createDialog({
-  API_NAME: 'websites'
+  apiName: 'websites'
 })
 </script>

@@ -8,9 +8,9 @@ import { getToken } from '@/utils/auth' // 验权
 // NProgress.configure({ trickle: false })
 const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
-  NProgress.start()
+  // NProgress.start()
   next()
-  NProgress.done()
+  // NProgress.done()
   // if (getToken()) {
   //   if (to.path === '/login') {
   //     next({ path: '/' })
@@ -40,5 +40,5 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  NProgress.done() // 结束Progress
+  // NProgress.done() // 结束Progress
 })

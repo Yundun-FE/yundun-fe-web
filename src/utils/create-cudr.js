@@ -30,9 +30,9 @@ export default function(sfc) {
       type: String,
       default: sfc.pageName
     },
-    API_NAME: {
+    apiName: {
       type: String,
-      default: sfc.API_NAME
+      default: sfc.apiName
     }
   }
 

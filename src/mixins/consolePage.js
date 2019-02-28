@@ -3,13 +3,13 @@ export default {
     return {
       list: [],
       loading: true,
-      dataFinish: false
+      loadingData: true
     }
   },
 
   methods: {
     init(params) {
-      this.fetchData(`/${this.API_NAME}`, {
+      this.fetchData(`/${this.apiName}`, {
         ...params,
         ...this.$route.params
       })
@@ -18,10 +18,10 @@ export default {
     formatResponse(data) {
       return data
     },
-
+    // 检查是否加载完成
     checkFinish() {
-      if (this.dataFinish && this.layoutFinish) {
-        this.$refs.DmConsole.handleShow()
+      if (this.dataFinish && !this.loadingLayout) {
+        // this.$refs.DmConsole.handleShow()
         this.loading = false
       }
     },
@@ -33,7 +33,7 @@ export default {
       this.$refs.DmConsole.updateTotal(total)
 
       this.list = list
-      this.dataFinish = true
+      this.loadingData = false
       this.checkFinish()
     }
   }

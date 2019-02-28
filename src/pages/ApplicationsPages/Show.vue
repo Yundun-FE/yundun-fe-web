@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       id: '',
-      API_NAME: 'applicationsPages',
+      apiName: 'applicationsPages',
       selectBlocks: BLOCKS,
       selectEnv: [],
       settings: {}

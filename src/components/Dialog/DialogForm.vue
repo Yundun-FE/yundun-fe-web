@@ -1,25 +1,45 @@
+<style lang="scss">
+.DialogForm{
+  .el-dialog__header{
+    text-align: left;
+    .el-dialog__title{
+      font-size: 16px;
+    }
+  }
+
+  .el-form-item{
+    &__label{
+      font-size: 13px;
+    }
+  }
+}
+</style>
+
 <template>
-  <d-dialog
+  <el-dialog
     :class="b()"
     :title="titleShow"
+    :width="width"
     :visible.sync="visible"
+    center
   >
     <el-form
       ref="form"
       :model="form"
       :rules="rules"
+      label-position="left"
       label-width="120px"
     >
       <slot />
     </el-form>
     <div slot="footer">
-      <d-button @click="handleClose">取消</d-button>
       <d-button
         type="primary"
         @click="handleSubmit"
-      >保存</d-button>
+      >确定</d-button>
+      <d-button @click="handleClose">取消</d-button>
     </div>
-  </d-dialog>
+  </el-dialog>
 </template>
 
 <script>
@@ -40,6 +60,10 @@ export default create({
     titleLabel: {
       type: String,
       default: ''
+    },
+    width: {
+      type: String,
+      default: '680px'
     },
     mode: {
       type: String,

@@ -13,28 +13,9 @@ const install = function(Vue) {
 }
 
 export default function(sfc) {
-  const { config } = sfc
-
   sfc.install = sfc.install || install
   sfc.mixins = sfc.mixins || []
   sfc.mixins.push(app, consolePage, pageLayout, consoleCudr)
-
-  sfc.props = {
-    config: {
-      type: Object,
-      default: function() {
-        return config
-      }
-    },
-    pageName: {
-      type: String,
-      default: sfc.pageName
-    },
-    API_NAME: {
-      type: String,
-      default: sfc.API_NAME
-    }
-  }
 
   sfc.methods = sfc.methods || {}
   sfc.methods.isDef = isDef

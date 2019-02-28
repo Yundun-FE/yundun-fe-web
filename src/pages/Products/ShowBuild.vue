@@ -81,7 +81,7 @@ import consoleCudr from '@/mixins/consoleCudr'
 import DialogSettingsBuilds from './components/DialogSettingsBuilds'
 
 export default {
-  API_NAME: 'jobs',
+  apiName: 'jobs',
 
   components: { DialogSettingsBuilds },
 

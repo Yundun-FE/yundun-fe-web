@@ -39,9 +39,9 @@ export default {
     },
 
     handleUpdate(form) {
-      return this.updateApi(`/${this.API_NAME}`, form)
+      return this.updateApi(`/${this.apiName}`, form)
     },
-
+    // 批量操作
     handleMultipleAction(e) {
       const { command } = e
       this.$confirm('确认执行?', '提示', {
@@ -89,7 +89,7 @@ export default {
         console.warn('no-id')
         return
       }
-      await this.Fetch.delete(`/${this.API_NAME}/${id}`)
+      await this.Fetch.delete(`/${this.apiName}/${id}`)
       this.actionSuccess()
       this.init()
     },
@@ -121,10 +121,7 @@ export default {
     },
 
     actionSuccess() {
-      this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
+      this.message.success('操作成功')
     }
   }
 }

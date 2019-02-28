@@ -1,46 +1,23 @@
 <template>
-  <page :loading="loading">
-    <DmConsole
-      ref="DmConsole"
-      :data="list"
-      :columns="columns"
-      :actions-row="actionsRow"
-      :actions-toolbar="actionsToolbar"
-      :bind-params="bindParams"
-      :multiple-selection.sync="multipleSelection"
-      class="padding"
-      @init="init"
-      @action="handleAction"
-    />
-    <DialogRow
-      ref="DialogRow"
-      @init="init"
-    />
-  </page>
+  <PageTable
+    ref="PageTable"
+    page-name="application"
+    api-name="applications"
+  >
+    <FormRow slot="FormRow"/>
+  </PageTable>
 </template>
 
 <script>
-import createPage from '@/utils/create-page'
-import DialogRow from './components/DialogRow'
+import FormRow from './components/FormRow'
 
-export default createPage({
-  pageName: 'application',
-  API_NAME: 'applications',
-  options: {
+export default {
+  components: { FormRow },
 
-  },
-
-  components: { DialogRow },
-
-  data() {
-    return {
-      bindParams: {
-        type: ''
-      }
+  methods: {
+    init() {
+      this.$refs.PageTable.init()
     }
-  },
-
-  created() {
   }
-})
+}
 </script>

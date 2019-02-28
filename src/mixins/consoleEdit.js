@@ -48,9 +48,9 @@ export default {
     initData() {},
 
     async init() {
-      if (this.API_NAME && this.id) {
+      if (this.apiName && this.id) {
         this.mode = 'Edit'
-        const data = await Fetch.get(`/${this.API_NAME}/${this.id}`, this.$route.query)
+        const data = await Fetch.get(`/${this.apiName}/${this.id}`, this.$route.query)
         this.form = Object.assign(deepClone(this.FORM), data)
       }
       // if (!data.settings) data.settings = deepClone(this.FORM.settings)
@@ -60,8 +60,8 @@ export default {
     },
     // 读取默认表单和验证规则
     async initFormLayout() {
-      if (this.API_NAME) {
-        const data = await Fetch.get(`/${this.API_NAME}`, { resources: 'form' })
+      if (this.apiName) {
+        const data = await Fetch.get(`/${this.apiName}`, { resources: 'form' })
         this.FORM = formatForm(data)
         this.rules = formatRules(data)
       }
@@ -78,14 +78,14 @@ export default {
         if (this.mode === 'Edit') {
           const id = this.id || this.form.id
           // console.log(this.form)
-          if (this.API_NAME && id) {
-            await Fetch.patch(`/${this.API_NAME}/${id}`, form, this.$route.query)
+          if (this.apiName && id) {
+            await Fetch.patch(`/${this.apiName}/${id}`, form, this.$route.query)
           } else {
             await this.handleEditSubmit(this.form)
           }
         } else {
-          if (this.API_NAME) {
-            await Fetch.post(`/${this.API_NAME}`, form, this.$route.query)
+          if (this.apiName) {
+            await Fetch.post(`/${this.apiName}`, form, this.$route.query)
           } else {
             await this.handleCreateSubmit(this.form)
           }

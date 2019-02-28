@@ -17,6 +17,6 @@ import FormTableBuild from './FormTableBuild'
 export default createDialog({
   components: { FormTableBuild },
 
-  API_NAME: 'jobs'
+  apiName: 'jobs'
 })
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import { MessageBox } from 'element-ui'
+import Message from 'ant-design-vue/lib/message'
 import Retry from './retry.js'
 
 let networkError = false
@@ -25,15 +26,12 @@ service.interceptors.response.use(
           type: 'warning',
           duration: 5 * 1000
         })
+        Message.warning(message)
         return Promise.reject(data)
       }
       return response.data
     } else {
-      Message({
-        message: message || '操作失败',
-        type: 'error',
-        duration: 5 * 1000
-      })
+      Message.error(message || '操作失败')
       return Promise.reject(data)
     }
   },
@@ -97,11 +95,7 @@ const request = function(options) {
         if (message === 'Network Error') {
           retry()
         } else {
-          Message({
-            message,
-            type: 'error',
-            duration: 5 * 1000
-          })
+          Message.error(message)
           reject(error)
         }
       }

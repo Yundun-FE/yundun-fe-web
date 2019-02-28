@@ -26,7 +26,7 @@ import config from './config'
 
 export default createCudr({
   pageName: config.pageName,
-  API_NAME: config.apiName,
+  apiName: config.apiName,
 
   components: { DialogRow }
 })

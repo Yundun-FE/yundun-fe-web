@@ -1,6 +1,6 @@
 <style lang="scss">
 .DmConsole {
-  // padding: 20px 30px;
+  min-height: 200px;
   display: flex;
   flex-flow: column;
 
@@ -16,15 +16,22 @@
 
   &__toolbar {
     width: 100%;
+    height: 32px;
     margin-bottom: 12px;
   }
 
   &__core {
     display: flex;
     flex-flow: column;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);
     background: #fff;
     border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.1);
+
+    .el-loading-mask{
+      top: 42px;
+      bottom: 58px;
+    }
   }
 
   &__body {
@@ -56,14 +63,13 @@
 <template>
   <div
     :class="b()"
-    element-loading-text="加载中"
-    element-loading-spinner="el-icon-loading"
   >
     <div :class="b('query')">
       <slot name="query" />
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
+      <div v-if="loadingLayout" class="skeleton"/>
       <ColumnActionButton
         :multiple-action-disable="multipleSelection.length === 0"
         :list="actionsToolbar"
@@ -75,9 +81,9 @@
       </div>
     </div>
     <div
+      v-loading="loading"
       :class="b('core')"
       element-loading-spinner="el-icon-loading"
-      element-loading-background="#FFF"
     >
       <!-- BODY -->
       <div :class="b('body')">
@@ -134,6 +140,14 @@ export default create({
       type: Boolean,
       default: true
     },
+    loadingLayout: {
+      type: Boolean,
+      default: true
+    },
+    loadingData: {
+      type: Boolean,
+      default: true
+    },
     multipleSelection: {
       type: Array,
       default: function() {
@@ -169,10 +183,7 @@ export default create({
       total: 0,
       page: 1,
       pageSize: 10,
-      show: false,
-      params: {
-        name: ''
-      }
+      show: true
     }
   },
 
@@ -208,7 +219,7 @@ export default create({
     },
 
     updateTotal(total) {
-      this.total = total
+      this.total = Number(total)
     },
 
     handleSearch() {
@@ -223,7 +234,7 @@ export default create({
     handleEmit() {
       const { total, page, pageSize } = this
       const params = {
-        total, page, pageSize, ... this.params, ...this.bindParams, per_page: pageSize
+        total, page, pageSize, ...this.bindParams, per_page: pageSize
       }
 
       this.$emit('init', params)

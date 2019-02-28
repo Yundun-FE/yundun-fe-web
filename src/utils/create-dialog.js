@@ -19,9 +19,9 @@ export default function(sfc) {
   sfc.props = {
     handleEditSubmit: Function,
     handleCreateSubmit: Function,
-    API_NAME: {
+    apiName: {
       type: String,
-      default: sfc.API_NAME
+      default: sfc.apiName
     }
   }
 

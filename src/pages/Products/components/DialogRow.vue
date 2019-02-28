@@ -17,6 +17,6 @@ import FormRow from './FormRow'
 export default createDialog({
   components: { FormRow },
 
-  API_NAME: 'jobs'
+  apiName: 'jobs'
 })
 </script>

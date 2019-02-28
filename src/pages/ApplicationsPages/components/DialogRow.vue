@@ -17,7 +17,7 @@ import FormBase from './FormBase'
 export default createDialog({
   components: { FormBase },
 
-  API_NAME: 'applicationsPages',
+  apiName: 'applicationsPages',
 
   data() {
     return {

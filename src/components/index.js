@@ -1,4 +1,4 @@
-import Page from './Page/Page'
+import Page from './Page'
 import Form from './Form'
 import Column from './Column'
 import Dm from './Dm'
@@ -14,6 +14,7 @@ function install(Vue) {
   install.installed = true
 
   const components = [
+    Page,
     Form,
     Dialog,
     Column,
@@ -29,5 +30,4 @@ function install(Vue) {
 }
 export function installComponents(Vue) {
   Vue.use(install)
-  Vue.component(Page.name, Page)
 }

@@ -24,7 +24,7 @@ import createPage from '@/utils/create-page'
 
 export default createPage({
   pageName: 'form',
-  API_NAME: 'forms',
+  apiName: 'forms',
 
   options: {
 

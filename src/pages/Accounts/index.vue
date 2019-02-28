@@ -23,7 +23,7 @@ import DialogRow from './components/DialogRow'
 
 export default createCudr({
   pageName: 'test-account',
-  API_NAME: 'accounts',
+  apiName: 'accounts',
 
   components: { DialogRow }
 })

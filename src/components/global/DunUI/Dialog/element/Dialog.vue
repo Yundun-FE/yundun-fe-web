@@ -3,6 +3,7 @@
     :visible="useVisible"
     :title="title"
     :class="b()"
+    :width="width"
     @close="handleClose"
   >
     <slot />
@@ -20,6 +21,7 @@ export default create({
 
   props: {
     title: [String, Number],
+    width: [String, Number],
     visible: Boolean
   },
 
@@ -41,6 +43,5 @@ export default create({
       this.$emit('update:visible', false)
     }
   }
-
 })
 </script>

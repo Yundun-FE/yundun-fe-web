@@ -22,6 +22,6 @@
 import createDialog from '@/utils/create-dialog'
 
 export default createDialog({
-  API_NAME: 'jobs'
+  apiName: 'jobs'
 })
 </script>

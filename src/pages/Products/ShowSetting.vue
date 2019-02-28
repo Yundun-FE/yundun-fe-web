@@ -64,7 +64,7 @@ export default {
 
   data() {
     return {
-      API_NAME: 'jobs',
+      apiName: 'jobs',
       mode: 'Edit',
       id: this.$route.params.id
     }
