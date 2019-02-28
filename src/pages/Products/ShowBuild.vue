@@ -29,34 +29,20 @@
       :actions-toolbar="actionsToolbar"
       :multiple-selection.sync="multipleSelection"
       selection
+      class="padding"
       @init="init"
       @action="handleAction"
     >
       <template slot="query">
         <el-form inline>
-          <!-- TODO -->
-          <el-form-item label="切换环境">
+          <el-form-item label="应用类型：">
             <yd-form-radio-button
-              v-model="info.id"
-              :radios="selectEnv"
-              @change="handleChangeEnv"
-            />
-          </el-form-item>
-          <el-form-item label="应用类型">
-            <yd-form-radio
               v-model="filters.type"
               :radios="MODULES_TYPE"
               default-value="全部"
-              @change="handleFilterList"
             />
           </el-form-item>
           <br>
-          <el-form-item
-            v-if="info.settings && info.settings.commands && info.settings.commands[0]"
-            label="更新指令"
-          >
-            <d-input v-model="info.settings.commands[0].content" />
-          </el-form-item>
           <el-form-item label="编译指令">
             <d-input v-model="buildCommand" />
           </el-form-item>
@@ -134,18 +120,20 @@ export default {
   watch: {
     '$route'(val) {
       this.init()
+    },
+    'filters.type'() {
+      this.handleFilterList()
     }
   },
 
-  created() {
-    const filters = Lockr.get('filters')
+  async created() {
+    const filters = await Lockr.get('filters')
     this.filters = Object.assign(this.filters, filters)
   },
 
   methods: {
     async init() {
       const data = await this.Fetch.get(`/jobs/${this.id}`)
-      console.log(data)
       data.id = this.id
       const list = data.settings.builds
 
@@ -159,6 +147,7 @@ export default {
       this.dataFinish = true
       this.checkFinish()
       this.fetchMoreJobs()
+      this.handleFilterList()
 
       this.interval = setInterval(this.fetchProgress, 5000)
     },

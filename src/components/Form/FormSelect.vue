@@ -5,14 +5,16 @@
     :placeholder="placeholder"
     :disabled="disabled"
     :filterable="filterable"
+    :multiple="multiple"
+    :collapse-tags="collapseTags"
     @change="handleChange"
   >
     <el-option
-      v-if="defaultValue"
+      v-if="defaultText"
       :size="size"
-      :label="defaultValue"
+      :label="defaultText"
       value=""
-    >{{ defaultValue }}</el-option>
+    >{{ defaultText }}</el-option>
     <el-option
       v-for="item in selects"
       :size="size"
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-import create from '../../utils/create-basic'
+import create from '@/utils/create-basic'
 
 export default create({
   name: 'yd-form-select',
@@ -35,7 +37,9 @@ export default create({
   props: {
     placeholder: String,
     disabled: Boolean,
-    defaultValue: String,
+    multiple: Boolean,
+    collapseTags: Boolean,
+    defaultText: String,
     size: {
       type: String,
       default: ''
@@ -47,7 +51,7 @@ export default create({
       }
     },
     filterable: Boolean,
-    value: [String, Number]
+    value: [String, Number, Array]
   },
 
   data() {

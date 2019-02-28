@@ -50,9 +50,11 @@
             :on-success="res => handleUploadSuccess(res, scope.row.key)"
             action="https://upload.qiniup.com"
           >
-            <d-button
+            <el-button
+              type="primary"
+              plain
               size="small"
-            >点击上传</d-button>
+            >点击上传</el-button>
           </el-upload>
         </template>
       </el-table-column>

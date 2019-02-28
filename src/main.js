@@ -18,7 +18,7 @@ import '@/permission'
 installFilter(Vue)
 installComponents(Vue)
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'small' })
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
 Vue.prototype.Notice = Notice

@@ -64,28 +64,15 @@
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
-      <ColumnAction
+      <ColumnActionButton
+        :multiple-action-disable="multipleSelection.length === 0"
         :list="actionsToolbar"
         @action="handleAction"
       />
+      <slot name="toolbar" />
       <div class="pull-right">
         <slot name="toolbar-right" />
-        <!-- <FormSearch
-          size="medium"
-          @submit="handleSearch"
-        /> -->
-        <!-- <el-tooltip
-          content="布局配置"
-          placement="top"
-        >
-          <d-button
-            icon="el-icon-setting"
-            size="medium"
-            circle
-          />
-        </el-tooltip> -->
       </div>
-      <slot name="toolbar" />
     </div>
     <div
       :class="b('core')"

@@ -19,7 +19,7 @@
     >
       <el-dropdown
         v-if="item.items"
-        :size="size"
+        :size="buttonSize"
         split-button
         trigger="click"
         @click="handleClick({command: item.command, scope, settings: item})"
@@ -36,8 +36,9 @@
       </el-dropdown>
       <el-button
         v-else
-        :size="size"
+        :size="buttonSize"
         :type="item.type"
+        :disabled="item.command.includes('Multiple') && multipleActionDisable"
         @click="handleClick({command: item.command, scope, settings: item})"
       >{{ item.label }}</el-button>
     </span>
@@ -51,11 +52,9 @@ export default create({
   name: 'ColumnActionButton',
 
   props: {
-    size: {
-      type: String,
-      default: 'medium'
-    },
+    size: String,
     commandPrefix: String,
+    multipleActionDisable: Boolean,
     list: {
       type: Array,
       default: () => []
@@ -63,6 +62,12 @@ export default create({
     scope: {
       type: Object,
       default: () => { }
+    }
+  },
+
+  computed: {
+    buttonSize() {
+      return this.size || (this.$ELEMENT || {}).size
     }
   },
 

@@ -24,7 +24,6 @@ export default create({
       let scopedSlots = {}
       if (componentName) {
         const props = componentProps
-        // TODO
         if (componentName === 'ColumnAction') componentName = 'ColumnActionButton'
         if (componentName === 'ColumnActionButton' && this.actionsRow) {
           props.list = this.actionsRow
@@ -89,10 +88,7 @@ export default create({
         return []
       }
     },
-    size: {
-      type: String,
-      default: ''
-    },
+    size: String,
     data: {
       type: Array,
       default: function() {
