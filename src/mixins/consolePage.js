@@ -25,9 +25,10 @@ export default {
     },
     // 检查是否加载完成
     checkFinish() {
-      if (this.dataFinish && !this.loadingLayout) {
+      if (!this.loadingData && !this.loadingLayout) {
         // this.$refs.DmConsole.handleShow()
         this.loading = false
+        this.FINISH_PAGE_LOADING()
       }
     },
     // 读取数据

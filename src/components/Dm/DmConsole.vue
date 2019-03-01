@@ -18,6 +18,12 @@
     width: 100%;
     height: 32px;
     margin-bottom: 12px;
+
+    .skeleton {
+      background: #ddd;
+      width: 80px;
+      height: 100%;
+    }
   }
 
   &__core {
@@ -42,6 +48,7 @@
       top: 41px;
       bottom: 57px;
       background: #fff;
+      z-index: 999;
 
       .el-loading-spinner {
         top: 16px;
@@ -81,11 +88,11 @@
     </div>
     <!-- 操作条 -->
     <div :class="b('toolbar')">
-      <div
-        v-if="loadingLayout"
-        class="skeleton"
-      />
+      <template v-if="loadingLayout && loadingData">
+        <div class="skeleton" />
+      </template>
       <ColumnActionButton
+        v-else
         :multiple-action-disable="multipleSelection.length === 0"
         :list="actionsToolbar"
         @action="handleAction"
@@ -97,7 +104,7 @@
     </div>
     <div :class="b('core')">
       <div
-        v-if="loadingData"
+        v-if="loadingLayout && loadingData"
         class="el-loading-mask"
       >
         <div class="el-loading-spinner"><i class="el-icon-loading" />加载中</div>
@@ -227,6 +234,7 @@ export default create({
     handleShow() {
       this.show = true
     },
+
     handleAction(e) {
       if (!e) return
       this.$emit('action', e)
@@ -254,7 +262,6 @@ export default create({
       const params = {
         total, page, pageSize, ...this.bindParams, per_page: pageSize
       }
-
       this.$emit('init', params)
     },
 

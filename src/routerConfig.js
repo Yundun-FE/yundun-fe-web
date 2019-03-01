@@ -57,7 +57,8 @@ export const routerConfig = [
             path: '',
             name: 'products',
             meta: {
-              title: '所有项目'
+              title: '所有项目',
+              skeleton: 'table'
             },
             component: () => import('@/pages/Products/index')
           },
@@ -159,7 +160,8 @@ export const routerConfig = [
             path: '',
             name: 'applications',
             meta: {
-              title: '所有应用'
+              title: '所有应用',
+              skeleton: 'table'
             },
             component: () => import('@/pages/Applications/index')
           },
@@ -229,7 +231,8 @@ export const routerConfig = [
         name: 'accounts',
         component: () => import('@/pages/Accounts/index'),
         meta: {
-          title: '账号管理'
+          title: '账号管理',
+          skeleton: 'table'
         }
       }
     ]
@@ -244,7 +247,8 @@ export const routerConfig = [
         name: 'blocks',
         component: () => import('@/pages/Blocks/index'),
         meta: {
-          title: '区块管理'
+          title: '区块管理',
+          skeleton: 'table'
         }
       }
     ]
@@ -274,7 +278,8 @@ export const routerConfig = [
         name: 'Website',
         component: () => import('@/pages/Websites/index'),
         meta: {
-          title: '网站管理'
+          title: '网站管理',
+          skeleton: 'table'
         }
       }
     ]
@@ -304,7 +309,8 @@ export const routerConfig = [
         name: 'applicationPage',
         component: () => import('@/pages/ApplicationsPages/index'),
         meta: {
-          title: '页面管理'
+          title: '页面管理',
+          skeleton: 'table'
         }
       },
       {

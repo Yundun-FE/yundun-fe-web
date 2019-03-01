@@ -1,14 +1,25 @@
+<style lang="scss">
+.app-main {
+  position: relative;
+}
+</style>
+
 <template>
   <section class="app-main">
-    <transition name="fade" mode="out-in">
-      <!-- <router-view :key="key"></router-view> -->
-      <router-view/>
-    </transition>
+    <PageSkeleton
+      v-if="pageLoading && pageSkeleton"
+      :type="pageSkeleton"
+    />
+    <router-view />
   </section>
 </template>
 
 <script>
+import PageSkeleton from '@/components/Page/PageSkeleton'
+
 export default {
-  name: 'AppMain'
+  name: 'AppMain',
+
+  components: { PageSkeleton }
 }
 </script>

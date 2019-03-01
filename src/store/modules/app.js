@@ -26,6 +26,8 @@ function genterMenuMap(routers, menus = {}) {
 const app = {
   state: {
     routers: routerConfig,
+    pageLoading: true,
+    pageSkeleton: '',
     menus: genterMenuMap(routerConfig),
     LABEL: LABEL,
     tabs: {},
@@ -37,6 +39,18 @@ const app = {
     device: 'desktop'
   },
   mutations: {
+    SET_PAGE_SKELETON: (state, data) => {
+      state.pageSkeleton = data
+    },
+
+    START_PAGE_LOADING: state => {
+      state.pageLoading = true
+    },
+
+    FINISH_PAGE_LOADING: state => {
+      state.pageLoading = false
+    },
+
     TOGGLE_SIDEBAR: state => {
       if (state.sidebar.opened) {
         Cookies.set('sidebarStatus', 1)

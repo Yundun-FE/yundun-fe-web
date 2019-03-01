@@ -8,8 +8,9 @@ import Notice from '@/utils/notice'
 import * as LABEL from '@/utils/constants/label'
 import { installFilter } from '@/utils/filter'
 import { installComponents } from '@/components'
-
+import message from 'ant-design-vue/lib/message'
 import skeleton from 'ant-design-vue/lib/skeleton'
+import appMixins from '@/mixins/app'
 
 Vue.use(skeleton)
 import 'ant-design-vue/dist/antd.less'
@@ -22,9 +23,7 @@ installFilter(Vue)
 installComponents(Vue)
 
 Vue.use(ElementUI, { size: 'small' })
-
-import message from 'ant-design-vue/lib/message'
-
+Vue.mixin(appMixins)
 Vue.prototype.message = message
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
