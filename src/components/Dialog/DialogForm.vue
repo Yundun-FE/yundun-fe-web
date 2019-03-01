@@ -36,8 +36,8 @@
       <d-button
         type="primary"
         @click="handleSubmit"
-      >确定</d-button>
-      <d-button @click="handleClose">取消</d-button>
+      >{{ $t('el.messagebox.confirm') }}</d-button>
+      <d-button @click="handleClose">{{ $t('el.messagebox.cancel') }}</d-button>
     </div>
   </el-dialog>
 </template>

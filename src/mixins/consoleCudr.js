@@ -81,6 +81,8 @@ export default {
         type: 'warning'
       }).then(() => {
         this.handleDelete(row.id)
+      }).catch(() => {
+        return
       })
     },
 

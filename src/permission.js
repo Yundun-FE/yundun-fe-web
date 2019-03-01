@@ -1,24 +1,17 @@
 import router from './router'
 import store from './store'
-import NProgress from 'nprogress' // Progress 进度条
-import 'nprogress/nprogress.css'// Progress 进度条样式
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth' // 验权
 
-// NProgress.configure({ trickle: false })
 const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
-  // NProgress.start()
-  console.log(to)
   store.commit('SET_PAGE_SKELETON', to.meta.skeleton)
   store.commit('START_PAGE_LOADING')
   next()
   // store.commit('FINISH_PAGE_LOADING')
-  // NProgress.done()
   // if (getToken()) {
   //   if (to.path === '/login') {
   //     next({ path: '/' })
-  //     NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
   //   } else {
   //     if (store.getters.roles.length === 0) {
   //       store.dispatch('GetInfo').then(res => { // 拉取用户信息
@@ -38,11 +31,10 @@ router.beforeEach((to, from, next) => {
   //     next()
   //   } else {
   //     next('/login')
-  //     NProgress.done()
   //   }
   // }
 })
 
 router.afterEach(() => {
-  // NProgress.done() // 结束Progress
+  // store.commit('FINISH_PAGE_LOADING')
 })
