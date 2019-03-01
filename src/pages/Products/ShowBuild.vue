@@ -22,7 +22,8 @@
     />
     <DmConsole
       ref="DmConsole"
-      :loading="loading"
+      :loading-data="loadingData"
+      :loading-layout="loadingLayout"
       :data="list"
       :columns="columns"
       :actions-row="actionsRow"
