@@ -38,19 +38,22 @@ import '@/permission'
 import VueI18n from 'vue-i18n'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+import twLocale from 'element-ui/lib/locale/lang/zh-TW'
+
 const iMessages = {
-  en: {
-    message: 'hello',
+  'en-US': {
     ...enLocale
   },
-  zh: {
-    message: '你好',
+  'zh-CN': {
     ...zhLocale
+  },
+  'zh-TW': {
+    ...twLocale
   }
 }
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: 'en-US',
   messages: iMessages
 })
 
