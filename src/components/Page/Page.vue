@@ -47,12 +47,8 @@ export default create({
     }
   },
 
-  data() {
-    return {}
-  },
-
-  computed: {},
-
-  methods: {}
+  created() {
+    console.log(this.$route)
+  }
 })
 </script>

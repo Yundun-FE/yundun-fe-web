@@ -1,6 +1,6 @@
 <template>
   <a-checkbox
-    v-model="value"
+    v-model="val"
   >
     <slot />
   </a-checkbox>
@@ -13,7 +13,19 @@ export default create({
   name: 'd-checkbox',
 
   props: {
-    value: [String, Number]
+    value: [Number, Array, Boolean]
+  },
+
+  data() {
+    return {
+      val: this.value
+    }
+  },
+
+  watch: {
+    val(val) {
+      this.$emit('input', val)
+    }
   }
 })
 </script>

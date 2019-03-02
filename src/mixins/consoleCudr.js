@@ -23,19 +23,34 @@ export default {
     },
 
     handleRowDetail(scope) {
-      this.$router.push({
-        path: `${scope.row.id}`,
+      const route = {
         query: this.$route.query,
         append: true
-      })
+      }
+      if (this.pageRowName) {
+        route.name = this.pageRowName
+        route.data = scope.row
+      } else {
+        route.path = scope.row.id
+      }
+      this.$router.push(route)
     },
     // 跳转至页面编辑
     handleRowEditpage(scope) {
-      this.$router.push({
-        path: `${scope.row.id}/edit`,
-        query: this.$route.query,
-        append: true
-      })
+      let route
+      if (this.pageRowName) {
+        route = {
+          name: this.pageRowName,
+          params: scope.row,
+          data: scope.row
+        }
+      } else {
+        route = {
+          append: true,
+          path: `${scope.row.id}/edit`
+        }
+      }
+      this.$router.push(route)
     },
 
     handleUpdate(form) {

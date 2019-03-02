@@ -2,6 +2,7 @@
   <PageTable
     ref="PageTable"
     :bind-params="bindParams"
+    page-row-name="applicationPage__edit"
     page-name="application-page"
     api-name="applicationsPages"
   >

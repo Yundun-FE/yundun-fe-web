@@ -39,6 +39,7 @@ export default createPage({
 
   props: {
     pageName: String,
+    pageRowName: String,
     apiName: String,
     bindParams: {
       type: Object,

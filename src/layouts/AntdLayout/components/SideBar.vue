@@ -137,7 +137,6 @@ export default {
       routes.forEach(item => {
         this.openKeys.push(item.path)
       })
-      console.log(this.openKeys)
     }
   }
 }

@@ -77,16 +77,16 @@
               size="small"
               style="margin-right: 10px"
             />
-            <d-checkbox
+            <el-checkbox
               v-model="scope.row.show"
               size="small"
-            >显示</d-checkbox>
-            <yd-form-select
+            >显示</el-checkbox>
+            <!-- <yd-form-select
               :selects="LABEL.ALIGN_TYPE"
               v-model="scope.row.props.align"
               style="width: 100px; margin-left: 8px;"
               size="small"
-            />
+            /> -->
           </template>
         </el-table-column>
       </TableForm>
