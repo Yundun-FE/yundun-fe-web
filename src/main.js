@@ -22,8 +22,12 @@ Vue.prototype.Notice = Notice
 import { installComponents } from '@/components'
 import ElementUI from 'element-ui'
 import message from 'ant-design-vue/lib/message'
+import menu from 'ant-design-vue/lib/menu'
+import icon from 'ant-design-vue/lib/icon'
 import skeleton from 'ant-design-vue/lib/skeleton'
 
+Vue.use(icon)
+Vue.use(menu)
 Vue.use(skeleton)
 Vue.prototype.message = message
 

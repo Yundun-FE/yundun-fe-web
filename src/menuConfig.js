@@ -41,7 +41,7 @@ const asideMenuConfig = [
     icon: 'iconfont icon-appstore'
   },
   {
-    path: '',
+    path: 'dev',
     name: '开发管理',
     icon: 'iconfont icon-build',
     children: [

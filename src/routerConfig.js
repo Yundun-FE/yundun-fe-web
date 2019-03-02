@@ -1,4 +1,4 @@
-import Layout from './layouts/HeaderAsideLayout'
+import Layout from './layouts/AntdLayout'
 import Login from './pages/Login'
 import Base from './pages/Base/Base'
 
