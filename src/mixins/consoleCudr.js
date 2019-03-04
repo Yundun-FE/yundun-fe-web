@@ -22,21 +22,7 @@ export default {
       this.$refs.DialogRow.handleOpen(deepClone(scope.row), 'EDIT')
     },
 
-    handleRowDetail(scope) {
-      const route = {
-        query: this.$route.query,
-        append: true
-      }
-      if (this.pageRowName) {
-        route.name = this.pageRowName
-        route.data = scope.row
-      } else {
-        route.path = scope.row.id
-      }
-      this.$router.push(route)
-    },
-    // 跳转至页面编辑
-    handleRowEditpage(scope) {
+    handleRowDetail(scope, appendPath) {
       let route
       if (this.pageRowName) {
         route = {
@@ -46,8 +32,8 @@ export default {
         }
       } else {
         route = {
-          append: true,
-          path: `${scope.row.id}/edit`
+          path: `${scope.row.id}`,
+          append: true
         }
       }
       this.$router.push(route)

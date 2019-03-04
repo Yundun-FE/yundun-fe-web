@@ -4,7 +4,6 @@
       :data="data"
       :show-header="showHeader"
       :size="size"
-      border
     >
       <slot />
       <el-table-column

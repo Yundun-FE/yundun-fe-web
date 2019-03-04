@@ -30,8 +30,11 @@ export default {
     }
   },
 
-  created() {
-    console.log('create')
+  methods: {
+    // 跳转至页面编辑
+    handleRowEditpage(scope) {
+      this.handleRowDetail(scope, '/edit')
+    }
   }
 }
 </script>

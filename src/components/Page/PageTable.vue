@@ -29,6 +29,7 @@
 </template>
 
 <script>
+// 标准表格页面
 import createPage from '@/utils/create-page'
 import DialogRow from './DialogRow'
 

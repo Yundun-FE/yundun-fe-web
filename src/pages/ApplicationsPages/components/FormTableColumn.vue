@@ -1,7 +1,15 @@
 <template>
   <div>
+    {{ remderColumns }}
+    <DmTable
+      :columns="remderColumns"
+      selection
+      style="margin-top: 12px"
+      @header-click="handleCickHeader"
+    />
     <el-form-item
       v-if="data.props"
+      style="margin-top: 12px"
       label="表格配置"
     >
       <TableForm
@@ -23,7 +31,6 @@
               filterable
               allow-create
               default-first-option
-              size="small"
               default-value="默认"
               @change="value => handleChangeComponent(value, scope.row)"
             />
@@ -35,11 +42,16 @@
           width="150"
         >
           <template slot-scope="scope">
-            <d-input
+            <el-input
               :disabled="env !== 'root'"
               v-model="scope.row.props.label"
               size="small"
             />
+          </template>
+        </el-table-column>
+        <el-table-column label="显示">
+          <template slot-scope="scope">
+            <el-checkbox v-model="scope.row.show" />
           </template>
         </el-table-column>
 
@@ -57,7 +69,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          min-width="400px"
+          min-width="200px"
           label="布局"
         >
           <template slot-scope="scope">
@@ -77,28 +89,16 @@
               size="small"
               style="margin-right: 10px"
             />
-            <el-checkbox
-              v-model="scope.row.show"
-              size="small"
-            >显示</el-checkbox>
-            <!-- <yd-form-select
+
+            <yd-form-select
               :selects="LABEL.ALIGN_TYPE"
               v-model="scope.row.props.align"
               style="width: 100px; margin-left: 8px;"
               size="small"
-            /> -->
+            />
           </template>
         </el-table-column>
       </TableForm>
-
-      <!-- <RenderTable
-        :columns="form.columns"
-        border
-        selection
-        size="small"
-        style="margin-top: 12px"
-        @header-click="handleCickHeader"
-      /> -->
     </el-form-item>
   </div>
 </template>
@@ -111,6 +111,8 @@ export default {
     data: Object,
     env: String
   },
+
+  inject: ['dmEdit'],
 
   data() {
     return {
@@ -126,7 +128,11 @@ export default {
     }
   },
 
-  inject: ['dmEdit'],
+  computed: {
+    remderColumns() {
+      return this.form && this.form.props && this.form.props.columns
+    }
+  },
 
   methods: {
     handleChangeComponent(value, item) {

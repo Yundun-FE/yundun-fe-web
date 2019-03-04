@@ -10,11 +10,11 @@
     @change="handleChange"
   >
     <el-option
-      v-if="defaultText"
+      v-if="defaultValue"
       :size="size"
-      :label="defaultText"
+      :label="defaultValue"
       value=""
-    >{{ defaultText }}</el-option>
+    >{{ defaultValue }}</el-option>
     <el-option
       v-for="item in selects"
       :size="size"
@@ -39,7 +39,7 @@ export default create({
     disabled: Boolean,
     multiple: Boolean,
     collapseTags: Boolean,
-    defaultText: String,
+    defaultValue: String,
     size: {
       type: String,
       default: ''
