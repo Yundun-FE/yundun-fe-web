@@ -1,24 +1,22 @@
 <template>
-  <div class="app-wrapper" >
-    <side-bar class="sidebar-container"/>
-    <div class="main-container">
-      <nav-bar/>
-      <RouteView/>
+  <page-layout :desc="description" :title="getTitle" :link-list="linkList" :search="search" :tabs="tabs">
+    <div slot="extra" class="extra-img">
+      <img v-if="typeof extraImage !== 'undefined'" :src="extraImage">
     </div>
-  </div>
+    <!-- keep-alive  -->
+    <route-view ref="content"/>
+  </page-layout>
 </template>
 
 <script>
-import { NavBar, SideBar, AppMain } from './components'
+import PageLayout from './PageLayout'
 import RouteView from './RouteView'
 
 export default {
-  name: 'Layout',
+  name: 'PageContent',
   components: {
-    NavBar,
-    SideBar,
-    AppMain,
-    RouteView
+    RouteView,
+    PageLayout
   },
   data() {
     return {
@@ -31,6 +29,7 @@ export default {
     }
   },
   computed: {
+
     getTitle() {
       return this.$route.meta.title
     }
@@ -61,22 +60,26 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.app-wrapper {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
+<style lang="less" scoped>
+  .extra-img {
+    margin-top: -60px;
+    text-align: center;
+    width: 195px;
 
-.main-container {
-  min-height: 100vh;
-  transition: margin-left 0.28s;
-  margin-left: 200px;
-  background-color: #f0f2f5;
-}
+    img {
+      width: 100%;
+    }
+  }
+
+  .mobile {
+    .extra-img{
+      margin-top: 0;
+      text-align: center;
+      width: 96px;
+
+      img{
+        width: 100%;
+      }
+    }
+  }
 </style>

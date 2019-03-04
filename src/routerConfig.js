@@ -1,6 +1,8 @@
 import Layout from './layouts/AntdLayout'
 import Login from './pages/Login'
 import Base from './pages/Base/Base'
+import PageLayout from '@/layouts/Page/PageLayout'
+import RouteView from '@/layouts/Page/RouteView'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -161,6 +163,7 @@ export const routerConfig = [
             name: 'applications',
             meta: {
               title: '所有应用',
+              keepAlive: true,
               skeleton: 'table'
             },
             component: () => import('@/pages/Applications/index')
@@ -302,21 +305,26 @@ export const routerConfig = [
 
   {
     path: '/applicationsPages',
+    name: 'applicationPage',
     component: Layout,
     children: [
       {
-        path: '',
-        name: 'applicationPage',
+        path: '/applicationsPages',
+        name: 'applicationPage__index',
         component: () => import('@/pages/ApplicationsPages/index'),
         meta: {
           title: '页面管理',
+          keepAlive: true,
           skeleton: 'table'
         }
       },
       {
-        path: ':id/edit',
+        path: '/applicationsPages/:id/edit',
         name: 'applicationPage__edit',
-        component: () => import('@/pages/ApplicationsPages/Show')
+        component: () => import('@/pages/ApplicationsPages/Show'),
+        meta: {
+          keepAlive: true
+        }
       }
     ]
   },

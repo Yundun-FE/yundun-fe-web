@@ -21,15 +21,17 @@ Vue.prototype.Notice = Notice
 // ui
 import { installComponents } from '@/components'
 import ElementUI from 'element-ui'
-import message from 'ant-design-vue/lib/message'
-import menu from 'ant-design-vue/lib/menu'
-import icon from 'ant-design-vue/lib/icon'
-import skeleton from 'ant-design-vue/lib/skeleton'
+import Antd from 'ant-design-vue'
+// import message from 'ant-design-vue/lib/message'
+// import menu from 'ant-design-vue/lib/menu'
+// import icon from 'ant-design-vue/lib/icon'
+// import skeleton from 'ant-design-vue/lib/skeleton'
 
-Vue.use(icon)
-Vue.use(menu)
-Vue.use(skeleton)
-Vue.prototype.message = message
+Vue.use(Antd)
+// Vue.use(icon)
+// Vue.use(menu)
+// Vue.use(skeleton)
+// Vue.prototype.message = message
 
 // css
 import 'normalize.css/normalize.css'

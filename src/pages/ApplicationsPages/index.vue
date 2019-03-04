@@ -7,7 +7,6 @@
     api-name="applicationsPages"
   >
     <FormRow slot="FormRow" />
-
     <template slot="toolbar-right">
       <FormSearch
         v-model="bindParams.name"
@@ -29,6 +28,10 @@ export default {
         name: ''
       }
     }
+  },
+
+  created() {
+    console.log('create')
   }
 }
 </script>

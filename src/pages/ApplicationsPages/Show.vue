@@ -95,7 +95,8 @@ export default {
   },
 
   async created() {
-    this.form = this.$route.params
+    // this.form = this.$route.params
+    this.form.name = this.$route.params.name
     this.id = this.$route.params.pageId || this.$route.params.id
   },
 
