@@ -62,17 +62,37 @@ export default {
     },
 
     handleAction(e) {
-      const command = e.command.split('.')
-      if (command.length === 1) command.unshift('Toolbar')
-      const [mode, cmd] = command
+      const { scope, command } = e
+      const mode = command.includes('.') ? command.split('.')[0] : 'Toolbar'
+      const cmd = command.includes('.') ? command.split('.')[1] : command
+
+      console.log(command)
 
       if (mode === 'Toolbar') {
         this[`handle${cmd}`]()
       } else if (mode === 'Row') {
-        this[`handleRow${cmd}`](e.scope)
+        // 行操作
+        console.log(cmd)
+        this.handleRowAction(cmd, scope)
       } else {
         e.command = cmd
         this.handleMultipleAction(e)
+      }
+    },
+
+    handleRowAction(cmd, scope) {
+      const { row } = scope
+      if (cmd === 'Delete') {
+        this.$confirm('确认操作?', '提示', {
+          type: 'warning'
+        }).then(() => {
+          this.handleDelete(row.id)
+        }).catch(() => {
+          return
+        })
+      } else {
+        // 未知操作
+        this.$emit('row-action', { cmd, scope })
       }
     },
     // 行删除
@@ -124,7 +144,7 @@ export default {
     },
 
     actionSuccess() {
-      this.message.success('操作成功')
+      this.Notice('ACTION_SUCCESS')
     }
   }
 }

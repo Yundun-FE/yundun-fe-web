@@ -73,8 +73,13 @@ export default create({
 
   methods: {
     handleClick(e) {
-      e.command = this.commandPrefix ? `${this.commandPrefix}.${e.command}` : e.command
-      this.$emit('action', e)
+      const { command, scope, settings } = e
+      const data = {
+        command: this.commandPrefix ? `${this.commandPrefix}.${command}` : command,
+        scope,
+        settings
+      }
+      this.$emit('action', data)
     }
   }
 })

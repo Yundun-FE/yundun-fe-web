@@ -226,7 +226,6 @@ export default create({
     },
 
     handleAction(e) {
-      if (!e) return
       this.$emit('action', e)
     },
 
