@@ -4,16 +4,6 @@
   display: flex;
   flex-flow: column;
 
-  .el-table {
-    th {
-      color: #fff;
-      background: $--color-primary;
-    }
-    td {
-      padding: 12px 0;
-    }
-  }
-
   &__toolbar {
     width: 100%;
     height: 32px;
@@ -111,7 +101,7 @@
       </div>
       <!-- BODY -->
       <div :class="b('body')">
-        <RenderTable
+        <DmTable
           v-if="columns && columns.length > 0"
           :columns="columns"
           :selection="tableSelection"
@@ -140,12 +130,12 @@
 
 <script>
 import create from '../../utils/create-basic'
-import RenderTable from './RenderTable'
+import DmTable from './DmTable'
 
 export default create({
   name: 'DmConsole',
 
-  components: { RenderTable },
+  components: { DmTable },
 
   props: {
     data: {
@@ -236,7 +226,6 @@ export default create({
     },
 
     handleAction(e) {
-      if (!e) return
       this.$emit('action', e)
     },
 

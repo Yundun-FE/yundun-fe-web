@@ -85,12 +85,28 @@ const APPLICATION_TYPE = [
   }
 ]
 
+const ALIGN_TYPE = [
+  {
+    label: '默认',
+    value: ''
+  },
+  {
+    label: '居中',
+    value: 'center'
+  },
+  {
+    label: '右对齐',
+    value: 'right'
+  }
+]
+
 export {
   APP_PAGE_TYPE,
   MODULES_TYPE,
   ENV,
   COLUMN_COMPONENT_NAME,
-  BUTTON_TYPE
+  BUTTON_TYPE,
+  ALIGN_TYPE
 }
 
 export default{
@@ -98,5 +114,6 @@ export default{
   MODULES_TYPE,
   ENV,
   COLUMN_COMPONENT_NAME,
-  BUTTON_TYPE
+  BUTTON_TYPE,
+  ALIGN_TYPE
 }

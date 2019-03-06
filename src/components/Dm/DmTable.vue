@@ -1,8 +1,23 @@
+<style lang="scss">
+.DmTable{
+  &--primary{
+    th {
+      color: #fff;
+      background: $--color-primary !important;
+    }
+    td {
+      padding: 12px 0;
+    }
+  }
+}
+
+</style>
+
 <script>
 import create from '../../utils/create-basic'
 
 export default create({
-  name: 'RenderTable',
+  name: 'DmTable',
 
   render(createElement) {
     const columnsRender = []
@@ -61,6 +76,7 @@ export default create({
     )
 
     return createElement('el-table', {
+      class: [this.b([this.theme])],
       on: {
         'selection-change': val => this.$emit('selection-change', val),
         'header-click': val => this.$emit('header-click', val)
@@ -76,6 +92,10 @@ export default create({
   },
 
   props: {
+    theme: {
+      type: String,
+      default: 'primary'
+    },
     selection: Boolean,
     showHeader: {
       type: Boolean,
