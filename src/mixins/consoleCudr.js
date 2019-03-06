@@ -31,7 +31,7 @@ export default {
         route.name = this.pageRowName
         route.data = scope.row
       } else {
-        route.path = scope.row.id
+        route.path = String(scope.row.id)
       }
       this.$router.push(route)
     },
