@@ -66,13 +66,10 @@ export default {
       const mode = command.includes('.') ? command.split('.')[0] : 'Toolbar'
       const cmd = command.includes('.') ? command.split('.')[1] : command
 
-      console.log(command)
-
       if (mode === 'Toolbar') {
         this[`handle${cmd}`]()
       } else if (mode === 'Row') {
         // 行操作
-        console.log(cmd)
         this.handleRowAction(cmd, scope)
       } else {
         e.command = cmd
@@ -91,8 +88,12 @@ export default {
           return
         })
       } else {
-        // 未知操作
-        this.$emit('row-action', { cmd, scope })
+        const fn = `handleRow${cmd}`
+        if (this[fn]) {
+          this[fn](scope)
+        } else {
+          console.warn(`未定义操作：${fn}`)
+        }
       }
     },
     // 行删除

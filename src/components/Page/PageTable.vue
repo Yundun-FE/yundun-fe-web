@@ -1,5 +1,6 @@
 <template>
   <page>
+    <!-- CORE -->
     <DmConsole
       ref="DmConsole"
       :data="list"
@@ -18,6 +19,7 @@
         <slot name="toolbar-right"/>
       </template>
     </DmConsole>
+    <!-- 编辑框 -->
     <DialogRow
       ref="DialogRow"
       :api-name="apiName"

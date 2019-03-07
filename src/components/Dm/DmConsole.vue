@@ -68,6 +68,13 @@
       float: right;
     }
   }
+
+  &__footerText{
+    line-height: 30px;
+    font-size: 13px;
+    padding-left: 2px;
+    color: #999;
+  }
 }
 </style>
 
@@ -113,6 +120,12 @@
       </div>
       <!-- FOOTER -->
       <div :class="b('footer')">
+        <span :class="b('footerText')">
+          <template v-if="tableSelection">
+            已选 {{ multipleSelection.length }} 项，
+          </template>
+          共 {{ total }} 项
+        </span>
         <el-pagination
           :current-page="page"
           :page-sizes="[10, 20, 50, 100]"
@@ -196,8 +209,7 @@ export default create({
     return {
       total: 0,
       page: 1,
-      pageSize: 10,
-      show: true
+      pageSize: 10
     }
   },
 
@@ -221,24 +233,17 @@ export default create({
   },
 
   methods: {
-    handleShow() {
-      this.show = true
-    },
-
+    // 按钮操作
     handleAction(e) {
       this.$emit('action', e)
     },
-
+    // 多选
     handleSelectionChange(val) {
       this.$emit('update:multipleSelection', val)
     },
-
+    // 更新总页数
     updateTotal(total) {
       this.total = Number(total)
-    },
-
-    handleSearch() {
-      this.handleInit()
     },
 
     handleInit() {
@@ -253,13 +258,13 @@ export default create({
       }
       this.$emit('init', params)
     },
-
+    // 每页数量操作
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
       this.page = 1
       this.handleEmit()
     },
-
+    // 页码操作
     handleCurrentChange(page) {
       this.page = page
       this.handleEmit()
