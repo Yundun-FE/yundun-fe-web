@@ -1,38 +1,46 @@
-import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import Vue from 'vue'
+import { login, getInfo, logout } from '@/api/login'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { welcome } from '@/utils/util'
 
 const user = {
   state: {
-    token: getToken(),
+    token: '',
     name: '',
+    welcome: '',
     avatar: '',
-    roles: []
+    roles: [],
+    info: {}
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
+    SET_NAME: (state, { name, welcome }) => {
       state.name = name
+      state.welcome = welcome
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_INFO: (state, info) => {
+      state.info = info
     }
   },
 
   actions: {
     // 登录
     Login({ commit }, userInfo) {
-      const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          const data = response.data
-          setToken(data.token)
-          commit('SET_TOKEN', data.token)
+        login(userInfo).then(response => {
+          console.log(response)
+          const result = response.result
+          Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
+          commit('SET_TOKEN', result.token)
           resolve()
         }).catch(error => {
           reject(error)
@@ -41,17 +49,30 @@ const user = {
     },
 
     // 获取用户信息
-    GetInfo({ commit, state }) {
+    GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+        getInfo().then(response => {
+          const result = response.result
+
+          if (result.role && result.role.permissions.length > 0) {
+            const role = result.role
+            role.permissions = result.role.permissions
+            role.permissions.map(per => {
+              if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
+                const action = per.actionEntitySet.map(action => { return action.action })
+                per.actionList = action
+              }
+            })
+            role.permissionList = role.permissions.map(permission => { return permission.permissionId })
+            commit('SET_ROLES', result.role)
+            commit('SET_INFO', result)
           } else {
-            reject('getInfo: roles must be a non-null array !')
+            reject(new Error('getInfo: roles must be a non-null array !'))
           }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
+
+          commit('SET_NAME', { name: result.name, welcome: welcome() })
+          commit('SET_AVATAR', result.avatar)
+
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -60,27 +81,20 @@ const user = {
     },
 
     // 登出
-    LogOut({ commit, state }) {
-      return new Promise((resolve, reject) => {
+    Logout({ commit, state }) {
+      return new Promise((resolve) => {
+        commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
+        Vue.ls.remove(ACCESS_TOKEN)
+
         logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          removeToken()
           resolve()
-        }).catch(error => {
-          reject(error)
+        }).catch(() => {
+          resolve()
         })
       })
-    },
-
-    // 前端 登出
-    FedLogOut({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resolve()
-      })
     }
+
   }
 }
 

@@ -12,8 +12,8 @@ module.exports = {
       },
       less: {
         modifyVars: {
-          'primary-color': '#2991fa',
-          'border-radius-base': '2px'
+          // 'primary-color': '#2991fa',
+          // 'border-radius-base': '2px'
         },
         javascriptEnabled: true
       }

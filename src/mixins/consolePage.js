@@ -28,7 +28,7 @@ export default {
       if (!this.loadingData && !this.loadingLayout) {
         // this.$refs.DmConsole.handleShow()
         this.loading = false
-        this.FINISH_PAGE_LOADING()
+        // this.FINISH_PAGE_LOADING()
       }
     },
     // 读取数据

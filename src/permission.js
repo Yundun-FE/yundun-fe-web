@@ -6,7 +6,7 @@ import { getToken } from '@/utils/auth' // 验权
 const whiteList = ['/login'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
   store.commit('SET_PAGE_SKELETON', to.meta.skeleton)
-  store.commit('START_PAGE_LOADING')
+  // store.commit('START_PAGE_LOADING')
   next()
   // store.commit('FINISH_PAGE_LOADING')
   // if (getToken()) {

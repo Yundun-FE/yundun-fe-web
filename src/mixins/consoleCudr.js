@@ -91,6 +91,9 @@ export default {
         const fn = `handleRow${cmd}`
         if (this[fn]) {
           this[fn](scope)
+        } else if (this.$parent[fn]) {
+          console.log(this.$parent[fn]())
+          this.$parent[fn](scope)
         } else {
           console.warn(`未定义操作：${fn}`)
         }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,14 +24,14 @@
     }
 
     body:after{
-      position: absolute;
+      /* position: absolute;
       z-index: 1;
       content: '';
       left: 0px;
       top: 0px;
       width: 200px;
       bottom: 0px;
-      background-color: #00142a;
+      background-color: #00142a; */
     }
   </style>
   <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_825055_qjao5u9lwf.css" />
@@ -41,7 +41,11 @@
   <noscript>
     <strong>We're sorry but app2 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
   </noscript>
-  <div id="app"></div>
+  <!-- <div id="app"></div> -->
+
+  <div id="app">
+    <div id="preloadingAnimation"><div class=lds-roller><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><div class=load-tips>Loading</div></div>
+  </div>
   <!-- built files will be auto injected -->
 </body>
 

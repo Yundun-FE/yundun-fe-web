@@ -1,80 +1,41 @@
-// core
+import '@babel/polyfill'
 import Vue from 'vue'
-window.Vue = Vue
-import appMixins from '@/mixins/app'
 import App from '@/App'
 import store from '@/store'
 import router from '@/router'
-import Fetch from '@/utils/fetch'
-import Notice from '@/utils/notice'
-import * as LABEL from '@/utils/constants/label'
-import { installFilter } from '@/utils/filter'
+import bootstrap from './core/bootstrap'
+import i18n from '@/core/i18n'
+import './core/use'
 
-Vue.mixin(appMixins)
-installFilter(Vue)
-installComponents(Vue)
-
-Vue.prototype.Fetch = Fetch
-Vue.prototype.LABEL = LABEL
-Vue.prototype.Notice = Notice
-
-// ui
-import { installComponents } from '@/components'
+Vue.config.productionTip = false
 import ElementUI from 'element-ui'
-import Antd from 'ant-design-vue'
-// import message from 'ant-design-vue/lib/message'
-// import menu from 'ant-design-vue/lib/menu'
-// import icon from 'ant-design-vue/lib/icon'
-// import skeleton from 'ant-design-vue/lib/skeleton'
 
-Vue.use(Antd)
-// Vue.use(icon)
-// Vue.use(menu)
-// Vue.use(skeleton)
-// Vue.prototype.message = message
+import VueAxios from '@/utils/request'
 
-// css
-import 'normalize.css/normalize.css'
-import 'ant-design-vue/dist/antd.less'
-import '@/components/global'
-import '@/styles/index.scss'
-import '@/permission'
-
-// i18n
-import VueI18n from 'vue-i18n'
-import enLocale from 'element-ui/lib/locale/lang/en'
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
-import twLocale from 'element-ui/lib/locale/lang/zh-TW'
-
-const iMessages = {
-  'en-US': {
-    ...enLocale
-  },
-  'zh-CN': {
-    ...zhLocale
-  },
-  'zh-TW': {
-    ...twLocale
-  }
-}
-
-const i18n = new VueI18n({
-  locale: 'en-US',
-  messages: iMessages
-})
+Vue.use(VueAxios, router)
 
 Vue.use(ElementUI, {
   size: 'small',
   i18n: (key, value) => i18n.t(key, value)
 })
 
-Vue.config.productionTip = false
+// new Vue({
+//   el: '#app',
+//   // router,
+//   i18n,
+//   store,
+//   created() {
+//     bootstrap()
+//   },
+//   template: '<App/>',
+//   render: h => h(App)
+// })
 
 new Vue({
-  el: '#app',
   router,
-  i18n,
   store,
-  template: '<App/>',
+  created() {
+    bootstrap()
+  },
   render: h => h(App)
-})
+}).$mount('#app')
