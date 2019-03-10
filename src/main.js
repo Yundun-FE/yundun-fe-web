@@ -6,6 +6,7 @@ import router from '@/router'
 import bootstrap from './core/bootstrap'
 import i18n from '@/core/i18n'
 import './core/use'
+import '@/permission'
 
 Vue.config.productionTip = false
 import ElementUI from 'element-ui'
