@@ -1,8 +1,6 @@
 <template>
   <a-locale-provider :locale="locale">
-    <div>
-      <router-view/>
-    </div>
+    <router-view/>
   </a-locale-provider>
 </template>
 
@@ -17,7 +15,6 @@ export default {
     }
   },
   mounted() {
-    console.log(1)
     const { $store } = this
     deviceEnquire(deviceType => {
       switch (deviceType) {

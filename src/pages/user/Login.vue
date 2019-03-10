@@ -233,25 +233,53 @@ export default {
 
       const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
 
-      validateFields(validateFieldsKey, { force: true }, (err, values) => {
-        if (!err) {
-          console.log('login form', values)
-          const loginParams = { ...values }
-          delete loginParams.username
-          loginParams[!state.loginType ? 'email' : 'username'] = values.username
-          loginParams.password = md5(values.password)
-          Login(loginParams)
-            .then((res) => this.loginSuccess(res))
-            .catch(err => this.requestFailed(err))
-            .finally(() => {
-              state.loginBtn = false
-            })
-        } else {
-          setTimeout(() => {
-            state.loginBtn = false
-          }, 600)
+      const res = {
+        'message': '',
+        'status': 200,
+        'timestamp': 1534844188679,
+        'body': {
+          'password': '21232f297a57a5a743894a0e4a801fc3',
+          'username': 'admin'
+        },
+        'result': {
+          'id': '4291d7da9005377ec9aec4a71ea837f',
+          'name': 'Robert Anderson',
+          'username': 'admin',
+          'password': '',
+          'avatar': 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
+          'status': 1,
+          'telephone': '',
+          'lastLoginIp': '27.154.74.117',
+          'lastLoginTime': 1534837621348,
+          'creatorId': 'admin',
+          'createTime': 1497160610259,
+          'deleted': 0,
+          'roleId': 'admin',
+          'token': '4291d7da9005377ec9aec4a71ea837f'
         }
-      })
+      }
+
+      this.loginSuccess(res)
+
+      // validateFields(validateFieldsKey, { force: true }, (err, values) => {
+      //   if (!err) {
+      //     console.log('login form', values)
+      //     const loginParams = { ...values }
+      //     delete loginParams.username
+      //     loginParams[!state.loginType ? 'email' : 'username'] = values.username
+      //     loginParams.password = md5(values.password)
+      //     Login(loginParams)
+      //       .then((res) => this.loginSuccess(res))
+      //       .catch(err => this.requestFailed(err))
+      //       .finally(() => {
+      //         state.loginBtn = false
+      //       })
+      //   } else {
+      //     setTimeout(() => {
+      //       state.loginBtn = false
+      //     }, 600)
+      //   }
+      // })
     },
     getCaptcha(e) {
       e.preventDefault()
@@ -297,7 +325,6 @@ export default {
       })
     },
     loginSuccess(res) {
-      console.log(res)
       this.$router.push({ name: 'dashboard' })
       // 延迟 1 秒显示欢迎信息
       setTimeout(() => {
