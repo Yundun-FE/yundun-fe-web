@@ -88,6 +88,7 @@ export default {
 
     // render
     renderItem(menu) {
+      console.log(menu)
       if (!menu.hidden) {
         return menu.children && !menu.hideChildrenInMenu ? this.renderSubMenu(menu) : this.renderMenuItem(menu)
       }

@@ -38,85 +38,139 @@ export const asyncRouterMap = [
           //   meta: { title: '工作台', keepAlive: true, permission: ['dashboard'] }
           // }
         ]
+      },
+      // forms
+      {
+        path: '/applications',
+        redirect: '/applications',
+        component: PageView,
+        meta: { title: '开发管理', icon: 'form', permission: ['form'] },
+        children: [
+          {
+            path: '/applications',
+            name: 'applications',
+            component: () => import('@/pages/Applications/index'),
+            meta: { title: '所有应用', keepAlive: true, permission: ['dashboard'] }
+          },
+          {
+            path: '/applications/:id',
+            name: 'applications.appId',
+            redirect: '/applications/:id/settings',
+            component: () => import('@/pages/Applications/ShowLayout'),
+            hidden: true,
+            meta: { title: '应用详情', keepAlive: true, permission: ['dashboard'] },
+            children: [
+              {
+                path: '/applications/:id/settings',
+                name: 'applications.appId.settings',
+                component: () => import('@/pages/Applications/ShowSetting'),
+                hidden: true,
+                search: false,
+                meta: { title: '应用设置', keepAlive: true, permission: ['dashboard'] }
+              }
+            ]
+          },
+          {
+            path: '/pages',
+            name: 'applicationsPages',
+            component: () => import('@/pages/ApplicationsPages/index'),
+            meta: { title: '页面管理' }
+          },
+          {
+            path: '/pages/:pageId/edit',
+            name: 'applicationsPages.Id',
+            hidden: true,
+            component: () => import('@/pages/ApplicationsPages/Show'),
+            meta: { title: '修改页面' }
+          },
+          {
+            path: '/products',
+            component: PageView,
+            children: [
+              {
+                path: '/products',
+                name: 'products',
+                meta: {
+                  title: '所有项目',
+                  skeleton: 'table',
+                  icon: 'form'
+                },
+                component: () => import('@/pages/Products/index')
+              },
+              {
+                path: '/products/:id',
+                hidden: true,
+                component: () => import('@/pages/Products/Show'),
+                children: [
+                  {
+                    path: '',
+                    redirect: 'info',
+                    name: 'products.id',
+                    hidden: true
+                  }
+                  // {
+                  //   path: 'info',
+                  //   name: 'products.id.info',
+                  //   meta: {
+                  //     title: '项目详情'
+                  //   },
+                  //   component: () => import('@/pages/Products/ShowInfo')
+                  // },
+                  // {
+                  //   path: 'menus',
+                  //   name: 'products.id.menus',
+                  //   meta: {
+                  //     title: '目录配置'
+                  //   },
+                  //   component: () => import('@/pages/Products/ShowMenu')
+                  // },
+                  // {
+                  //   path: 'build',
+                  //   name: 'products.id.build',
+                  //   meta: {
+                  //     title: '编译配置'
+                  //   },
+                  //   component: () => import('@/pages/Products/ShowBuild')
+                  // },
+                  // {
+                  //   path: 'pages',
+                  //   name: 'products.id.pages',
+                  //   component: () => import('@/pages/ApplicationsPages/index'),
+                  //   meta: {
+                  //     title: '页面管理'
+                  //   }
+                  // },
+                  // {
+                  //   path: 'pages/:pageId/edit',
+                  //   name: 'products.id.pagesId.edit',
+                  //   hidden: true,
+                  //   component: () => import('@/pages/ApplicationsPages/Show'),
+                  //   meta: {
+                  //     title: '修改页面'
+                  //   }
+                  // },
+                  // {
+                  //   path: 'assets',
+                  //   name: 'products.id.assets',
+                  //   meta: {
+                  //     title: '资源配置'
+                  //   },
+                  //   component: () => import('@/pages/Products/ShowAssets')
+                  // },
+                  // {
+                  //   path: 'settings',
+                  //   name: 'products.id.settings',
+                  //   meta: {
+                  //     title: '设置'
+                  //   },
+                  //   component: () => import('@/pages/Products/ShowSetting')
+                  // }
+                ]
+              }
+            ]
+          }
+        ]
       }
-
-      // {
-      //   path: '/applications',
-      //   component: RouteView,
-      //   children: [
-      //     {
-      //       path: '',
-      //       meta: {
-      //         title: '应用管理'
-      //       },
-      //       component: RouteView,
-      //       children: [
-      //         {
-      //           path: '',
-      //           name: 'applications',
-      //           meta: {
-      //             title: '所有应用',
-      //             keepAlive: true,
-      //             skeleton: 'table'
-      //           },
-      //           component: () => import('@/pages/Applications/index')
-      //         },
-      //         {
-      //           path: ':appId',
-      //           meta: {
-      //             title: '应用详情'
-      //           },
-      //           hidden: true,
-      //           component: () => import('@/pages/Applications/Show'),
-      //           children: [
-      //             {
-      //               path: '',
-      //               name: 'applications.appId',
-      //               redirect: 'pages',
-      //               meta: {
-      //                 title: '应用详情'
-      //               },
-      //               hidden: true
-      //             },
-      //             {
-      //               path: 'pages',
-      //               name: 'applications.appId.pages',
-      //               component: () => import('@/pages/ApplicationsPages/index'),
-      //               meta: {
-      //                 title: '页面管理'
-      //               }
-      //             },
-      //             {
-      //               path: 'pages/:pageId/edit',
-      //               name: 'applications.appId.pagesId.edit',
-      //               hidden: true,
-      //               component: () => import('@/pages/ApplicationsPages/Show'),
-      //               meta: {
-      //                 title: '修改页面'
-      //               }
-      //             },
-      //             {
-      //               path: 'menus',
-      //               name: 'applications.appId.menus',
-      //               component: () => import('@/pages/Applications/ShowMenu'),
-      //               meta: {
-      //                 title: '目录管理'
-      //               }
-      //             },
-      //             {
-      //               path: 'settings',
-      //               name: 'applications.appId.settings',
-      //               component: () => import('@/pages/Applications/ShowSetting'),
-      //               meta: {
-      //                 title: '设置'
-      //               }
-      //             }
-      //           ]
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // }
     ]
   },
   {

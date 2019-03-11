@@ -33,6 +33,7 @@ Vue.use(ElementUI, {
 // })
 
 new Vue({
+  i18n,
   router,
   store,
   created() {

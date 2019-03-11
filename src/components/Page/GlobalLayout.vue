@@ -1,5 +1,6 @@
 <template>
   <a-layout :class="[device]" class="layout">
+
     <template v-if="isSideMenu()">
       <a-drawer
         v-if="isMobile()"
@@ -118,7 +119,6 @@ export default {
   },
   created() {
     this.menus = this.mainMenu.find((item) => item.path === '/').children
-    console.log(3333, this.menus)
     this.collapsed = !this.sidebarOpened
   },
   mounted() {
@@ -161,7 +161,7 @@ export default {
 <style lang="less">
   body {
     // 打开滚动条固定显示
-    overflow-y: scroll;
+    // overflow-y: scroll;
 
     &.colorWeak {
       filter: invert(80%);

@@ -12,7 +12,6 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         class="trigger"
         @click="toggle"/>
-
       <user-menu/>
     </div>
     <div v-else :class="['top-nav-header-index', theme]">
@@ -34,7 +33,6 @@
         <user-menu class="header-index-right"/>
       </div>
     </div>
-
   </a-layout-header>
 </template>
 

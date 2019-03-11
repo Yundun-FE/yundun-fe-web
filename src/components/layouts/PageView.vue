@@ -1,11 +1,11 @@
 <template>
-  <page-layout :desc="description" :title="getTitle" :link-list="linkList" :search="search" :tabs="tabs">
+  <PageLayout :desc="description" :title="getTitle" :link-list="linkList" :search="search" :tabs="tabs">
     <div slot="extra" class="extra-img">
       <img v-if="typeof extraImage !== 'undefined'" :src="extraImage">
     </div>
     <!-- keep-alive  -->
-    <route-view ref="content"/>
-  </page-layout>
+    <RouteView ref="content"/>
+  </PageLayout>
 </template>
 
 <script>
@@ -29,11 +29,9 @@ export default {
     }
   },
   computed: {
-
     getTitle() {
       return this.$route.meta.title
     }
-
   },
   mounted() {
     this.getPageHeaderInfo()

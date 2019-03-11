@@ -76,7 +76,7 @@ export default {
         this.handleMultipleAction(e)
       }
     },
-
+    // 行操作
     handleRowAction(cmd, scope) {
       const { row } = scope
       if (cmd === 'Delete') {
@@ -92,8 +92,9 @@ export default {
         if (this[fn]) {
           this[fn](scope)
         } else if (this.$parent[fn]) {
-          console.log(this.$parent[fn]())
-          this.$parent[fn](scope)
+          console.log(this.$parent.handleRowEditpage(scope))
+          // console.log(this.$parent[fn]())
+          // this.$parent[fn](scope)
         } else {
           console.warn(`未定义操作：${fn}`)
         }
