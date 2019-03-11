@@ -259,27 +259,29 @@ export default {
         }
       }
 
-      this.loginSuccess(res)
+      // this.loginSuccess(res)
 
-      // validateFields(validateFieldsKey, { force: true }, (err, values) => {
-      //   if (!err) {
-      //     console.log('login form', values)
-      //     const loginParams = { ...values }
-      //     delete loginParams.username
-      //     loginParams[!state.loginType ? 'email' : 'username'] = values.username
-      //     loginParams.password = md5(values.password)
-      //     Login(loginParams)
-      //       .then((res) => this.loginSuccess(res))
-      //       .catch(err => this.requestFailed(err))
-      //       .finally(() => {
-      //         state.loginBtn = false
-      //       })
-      //   } else {
-      //     setTimeout(() => {
-      //       state.loginBtn = false
-      //     }, 600)
-      //   }
-      // })
+      validateFields(validateFieldsKey, { force: true }, (err, values) => {
+        if (!err) {
+          console.log('login form', values)
+          const loginParams = { ...values }
+          delete loginParams.username
+          loginParams[!state.loginType ? 'email' : 'username'] = values.username
+          loginParams.password = md5(values.password)
+
+          console.log(loginParams)
+          Login(loginParams)
+            .then((res) => this.loginSuccess(res))
+            .catch(err => this.requestFailed(err))
+            .finally(() => {
+              state.loginBtn = false
+            })
+        } else {
+          setTimeout(() => {
+            state.loginBtn = false
+          }, 600)
+        }
+      })
     },
     getCaptcha(e) {
       e.preventDefault()

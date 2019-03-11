@@ -15,6 +15,7 @@ router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
 
   if (Vue.ls.get(ACCESS_TOKEN)) {
+    console.log(Vue.ls.get(ACCESS_TOKEN))
     /* has token */
     if (to.path === '/user/login') {
       next({ path: '/dashboard/workplace' })
@@ -26,6 +27,7 @@ router.beforeEach((to, from, next) => {
           .then(res => {
             const roles = res.result && res.result.role
             store.dispatch('GenerateRoutes', { roles }).then(() => {
+              console.log(roles)
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
               router.addRoutes(store.getters.addRouters)

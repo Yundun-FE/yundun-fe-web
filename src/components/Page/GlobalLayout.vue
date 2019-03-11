@@ -1,6 +1,5 @@
 <template>
   <a-layout :class="[device]" class="layout">
-
     <template v-if="isSideMenu()">
       <a-drawer
         v-if="isMobile()"
@@ -8,7 +7,7 @@
         :closable="false"
         :visible="collapsed"
         placement="left"
-        @close="() => collapsed = false"
+        @close="() => this.collapsed = false"
       >
         <side-menu
           :menus="menus"
@@ -35,7 +34,7 @@
         :closable="false"
         :visible="collapsed"
         placement="left"
-        @close="() => collapsed = false"
+        @close="() => this.collapsed = false"
       >
         <side-menu
           :menus="menus"
@@ -119,6 +118,7 @@ export default {
   },
   created() {
     this.menus = this.mainMenu.find((item) => item.path === '/').children
+    console.log(3333, this.menus)
     this.collapsed = !this.sidebarOpened
   },
   mounted() {
@@ -299,6 +299,7 @@ export default {
           display: inline-block;
           transition: all .3s;
           height: 100%;
+          color: rgba(0, 0, 0, 0.65);
 
           &:hover {
             background: rgba(0, 0, 0, 0.025);
@@ -323,6 +324,9 @@ export default {
 
           .action {
             color: rgba(255, 255, 255, 0.85);
+            a {
+              color: rgba(255, 255, 255, 0.85);
+            }
 
             &:hover {
               background: rgba(255, 255, 255, 0.16);
@@ -345,9 +349,12 @@ export default {
             }
 
             .logo.top-nav-header {
+              flex: 0 0 56px;
               text-align: center;
-              width: 56px;
               line-height: 58px;
+              h1 {
+                display: none;
+              }
             }
           }
         }
@@ -379,6 +386,10 @@ export default {
               text-overflow:ellipsis;
               white-space: nowrap;
             }
+          }
+          .ant-menu.ant-menu-horizontal {
+            flex: 1 1;
+            white-space: normal;
           }
         }
       }
@@ -434,7 +445,7 @@ export default {
         }
 
         .header-index-right {
-          float: right;
+          flex: 0 0 198px;
           height: 64px;
           overflow: hidden;
         }

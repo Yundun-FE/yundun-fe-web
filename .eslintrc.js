@@ -21,6 +21,7 @@ module.exports = {
         'allowFirstLine': false
       }
     }],
+    'vue/this-in-template': 0,
     'vue/require-default-prop': 0,
     'vue/no-unused-vars': 0,
     'vue/name-property-casing': ['error', 'PascalCase'],
