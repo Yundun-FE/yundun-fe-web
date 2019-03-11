@@ -1,6 +1,5 @@
 <template>
   <a-layout :class="[device]" class="layout">
-
     <template v-if="isSideMenu()">
       <a-drawer
         v-if="isMobile()"

@@ -20,7 +20,7 @@ const iMessages = {
 }
 
 const i18n = new VueI18n({
-  locale: 'en-US',
+  locale: 'zh-CN',
   messages: iMessages
 })
 

@@ -14,6 +14,7 @@ export default {
       locale: zhCN
     }
   },
+
   mounted() {
     const { $store } = this
     deviceEnquire(deviceType => {
@@ -32,11 +33,11 @@ export default {
           $store.dispatch('setSidebar', true)
           break
       }
-      console.log('deviceType', deviceType)
     })
   }
 }
 </script>
+
 <style>
   #app {
     height: 100%;

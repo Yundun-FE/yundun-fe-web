@@ -12,9 +12,7 @@
           云盾前端
         </div>
       </div>
-
       <route-view/>
-
       <div class="footer">
         <div class="links">
           <a href="_self">帮助</a>

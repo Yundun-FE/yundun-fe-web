@@ -1,10 +1,22 @@
 <template>
-  <PageLayout :desc="description" :title="getTitle" :link-list="linkList" :search="search" :tabs="tabs">
-    <div slot="extra" class="extra-img">
-      <img v-if="typeof extraImage !== 'undefined'" :src="extraImage">
+  <PageLayout
+    :desc="description"
+    :title="getTitle"
+    :link-list="linkList"
+    :search="search"
+    :tabs="tabs"
+  >
+    <div
+      slot="extra"
+      class="extra-img"
+    >
+      <img
+        v-if="typeof extraImage !== 'undefined'"
+        :src="extraImage"
+      >
     </div>
     <!-- keep-alive  -->
-    <RouteView ref="content"/>
+    <RouteView ref="content" />
   </PageLayout>
 </template>
 
@@ -42,9 +54,10 @@ export default {
   methods: {
     getPageHeaderInfo() {
       // eslint-disable-next-line
-        this.title = this.$route.meta.title
+      this.title = this.$route.meta.title
       // 因为套用了一层 route-view 所以要取 ref 对象下的子节点的第一个对象
       const content = this.$refs.content && this.$refs.content.$children[0]
+      console.log(content)
 
       if (content) {
         this.description = content.description
@@ -59,25 +72,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.extra-img {
+  margin-top: -60px;
+  text-align: center;
+  width: 195px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.mobile {
   .extra-img {
-    margin-top: -60px;
+    margin-top: 0;
     text-align: center;
-    width: 195px;
+    width: 96px;
 
     img {
       width: 100%;
     }
   }
-
-  .mobile {
-    .extra-img{
-      margin-top: 0;
-      text-align: center;
-      width: 96px;
-
-      img{
-        width: 100%;
-      }
-    }
-  }
+}
 </style>

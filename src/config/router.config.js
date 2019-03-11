@@ -85,89 +85,29 @@ export const asyncRouterMap = [
           },
           {
             path: '/products',
-            component: PageView,
-            children: [
-              {
-                path: '/products',
-                name: 'products',
-                meta: {
-                  title: '所有项目',
-                  skeleton: 'table',
-                  icon: 'form'
-                },
-                component: () => import('@/pages/Products/index')
-              },
-              {
-                path: '/products/:id',
-                hidden: true,
-                component: () => import('@/pages/Products/Show'),
-                children: [
-                  {
-                    path: '',
-                    redirect: 'info',
-                    name: 'products.id',
-                    hidden: true
-                  }
-                  // {
-                  //   path: 'info',
-                  //   name: 'products.id.info',
-                  //   meta: {
-                  //     title: '项目详情'
-                  //   },
-                  //   component: () => import('@/pages/Products/ShowInfo')
-                  // },
-                  // {
-                  //   path: 'menus',
-                  //   name: 'products.id.menus',
-                  //   meta: {
-                  //     title: '目录配置'
-                  //   },
-                  //   component: () => import('@/pages/Products/ShowMenu')
-                  // },
-                  // {
-                  //   path: 'build',
-                  //   name: 'products.id.build',
-                  //   meta: {
-                  //     title: '编译配置'
-                  //   },
-                  //   component: () => import('@/pages/Products/ShowBuild')
-                  // },
-                  // {
-                  //   path: 'pages',
-                  //   name: 'products.id.pages',
-                  //   component: () => import('@/pages/ApplicationsPages/index'),
-                  //   meta: {
-                  //     title: '页面管理'
-                  //   }
-                  // },
-                  // {
-                  //   path: 'pages/:pageId/edit',
-                  //   name: 'products.id.pagesId.edit',
-                  //   hidden: true,
-                  //   component: () => import('@/pages/ApplicationsPages/Show'),
-                  //   meta: {
-                  //     title: '修改页面'
-                  //   }
-                  // },
-                  // {
-                  //   path: 'assets',
-                  //   name: 'products.id.assets',
-                  //   meta: {
-                  //     title: '资源配置'
-                  //   },
-                  //   component: () => import('@/pages/Products/ShowAssets')
-                  // },
-                  // {
-                  //   path: 'settings',
-                  //   name: 'products.id.settings',
-                  //   meta: {
-                  //     title: '设置'
-                  //   },
-                  //   component: () => import('@/pages/Products/ShowSetting')
-                  // }
-                ]
-              }
-            ]
+            name: 'products',
+            meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+            component: () => import('@/pages/Products/index')
+            // children: [
+            //   {
+            //     path: '/products',
+            //     name: 'products',
+            //     meta: { title: '所有项目' },
+            //   },
+            //   {
+            //     path: '/products/:id',
+            //     hidden: true,
+            //     component: () => import('@/pages/Products/Show'),
+            //     children: [
+            //       {
+            //         path: '',
+            //         redirect: 'info',
+            //         name: 'products.id',
+            //         hidden: true
+            //       }
+            //     ]
+            //   }
+            // ]
           }
         ]
       }

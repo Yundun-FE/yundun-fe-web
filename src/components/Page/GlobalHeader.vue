@@ -41,7 +41,7 @@ import UserMenu from '../tools/UserMenu'
 import SMenu from '../menu/'
 import Logo from '../tools/Logo'
 
-import { mixin } from '@/utils/mixin.js'
+import { mixin } from '@/utils/mixin'
 
 export default {
   name: 'GlobalHeader',

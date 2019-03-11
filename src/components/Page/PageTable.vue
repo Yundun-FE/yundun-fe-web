@@ -11,7 +11,6 @@
       :actions-toolbar="actionsToolbar"
       :bind-params="bindParams"
       :multiple-selection.sync="multipleSelection"
-      class="padding"
       @init="init"
       @action="handleAction"
     >

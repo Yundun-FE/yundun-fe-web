@@ -1,10 +1,10 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a
+      <!-- <a
         href="https://pro.ant.design"
         target="_blank"
-      >YUNDUN</a>
+      >YUNDUN</a> -->
       <a
         href="https://github.com/Yundun-FE"
         target="_blank"
