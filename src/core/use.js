@@ -7,6 +7,7 @@ import Fetch from '@/utils/fetch'
 import Notice from '@/utils/notice'
 import * as LABEL from '@/utils/constants/label'
 import VueStorage from 'vue-ls'
+import PermissionHelper from '@/utils/helper/permission'
 
 import 'normalize.css/normalize.css'
 import 'ant-design-vue/dist/antd.less'
@@ -18,7 +19,7 @@ import { installFilter } from '@/utils/filter'
 import { installComponents } from '@/components'
 
 Vue.use(VueStorage, config.storageOptions)
-
+Vue.use(PermissionHelper)
 Vue.use(Antd)
 Vue.mixin(appMixins)
 installFilter(Vue)

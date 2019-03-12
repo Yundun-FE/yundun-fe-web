@@ -50,6 +50,7 @@ export const asyncRouterMap = [
             path: '/applications',
             name: 'applications',
             component: () => import('@/pages/Applications/index'),
+            hideChildrenInMenu: true,
             meta: { title: '所有应用', keepAlive: true, permission: ['dashboard'] }
           },
           {
@@ -88,26 +89,6 @@ export const asyncRouterMap = [
             name: 'products',
             meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
             component: () => import('@/pages/Products/index')
-            // children: [
-            //   {
-            //     path: '/products',
-            //     name: 'products',
-            //     meta: { title: '所有项目' },
-            //   },
-            //   {
-            //     path: '/products/:id',
-            //     hidden: true,
-            //     component: () => import('@/pages/Products/Show'),
-            //     children: [
-            //       {
-            //         path: '',
-            //         redirect: 'info',
-            //         name: 'products.id',
-            //         hidden: true
-            //       }
-            //     ]
-            //   }
-            // ]
           }
         ]
       }
