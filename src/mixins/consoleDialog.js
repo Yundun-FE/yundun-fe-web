@@ -1,34 +1,28 @@
-import { isDef } from '../utils'
+import { deepClone } from '../utils'
 
 export default {
-  props: {
-    beforeOpen: Function
-  },
-
   data() {
     return {
-      bindForm: {}
+      bindForm: {},
+      formDefault: {}
     }
   },
 
   methods: {
+    beforeOpen() {},
+
     handleClose() {
       this.$refs.Dialog.handleClose()
     },
 
+    resetSubmitLoading() {
+      this.$refs.Dialog.resetSubmitLoading()
+    },
+
     handleOpen(form = {}) {
-      this.initFormLayout && this.initFormLayout()
-      Object.assign(this.FORM, this.bindForm)
-
-      this.handleReset()
-      if (isDef(form.id)) {
-        this.mode = 'Edit'
-      } else {
-        this.mode = 'Create'
-      }
-
-      Object.assign(this.form, form)
-      this.$refs.Dialog.handleOpen(form)
+      this.beforeOpen()
+      this.form = Object.assign(deepClone(this.formDefault), form)
+      this.$refs.Dialog.handleOpen()
     }
   }
 }

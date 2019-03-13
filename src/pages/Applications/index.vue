@@ -4,70 +4,58 @@
       <a-button
         type="primary"
         icon="plus"
-        @click="$router.push({ name: 'QueryListEdit' })"
-      >新建</a-button>
-      {{ selectedRowKeys }}
-      <a-dropdown
-        v-action:edit
-        v-if="selectedRowKeys.length > 0"
-      >
+        @click="handleCreate"
+      >{{$t('du.toolbar.create')}}</a-button>
+      <a-dropdown>
         <a-menu slot="overlay">
           <a-menu-item key="1">
-          <a-icon type="delete" />删除</a-menu-item>
-          <!-- lock | unlock -->
-          <a-menu-item key="2">
-          <a-icon type="lock" />锁定</a-menu-item>
+          <a-icon type="delete" />{{$t('du.toolbar.delete')}}</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
-          批量操作
+          {{$t('du.toolbar.bulkAction')}}
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
     </div>
-
     <s-table
-      ref="table"
+      ref="Table"
       :columns="columns"
       :data="loadData"
       :alert="options.alert"
       :row-selection="options.rowSelection"
-      size="default"
-      row-key="key"
     >
       <span
         slot="action"
         slot-scope="text, record"
       >
-        <template>
-          <el-button
-            type="text"
+        <ColumnAction>
+          <a
             @click="handleEdit(record)"
-          >编辑</el-button>
-        </template>
+          >{{$t('du.toolbar.edit')}}</a>
+          <a
+            @click="handleDelete(record)"
+          >{{$t('du.toolbar.delete')}}</a>
+        </ColumnAction>
       </span>
     </s-table>
+    <DialogRow ref="DialogRow"  @init="handleRefresh"/>
   </a-card>
 </template>
 
 <script>
-import moment from 'moment'
 import STable from './table'
+import DialogRow from './components/DialogRow'
 
 export default {
   name: '',
 
   components: {
-    STable
+    STable, DialogRow
   },
 
   data() {
     return {
-      mdl: {},
-      // 高级搜索 展开/关闭
-      advanced: false,
-      // 查询参数
       queryParam: {},
-      // 表头
       columns: [
         {
           title: 'ID',
@@ -83,16 +71,15 @@ export default {
         },
         {
           title: '更新时间',
-          dataIndex: 'updated_at'
+          dataIndex: 'updatedAt'
         },
         {
-          table: '操作',
+          title: '操作',
           dataIndex: 'action',
           width: '150px',
           scopedSlots: { customRender: 'action' }
         }
       ],
-      // 加载数据方法 必须为 Promise 对象
       loadData: parameter => {
         return this.Fetch.get('/applications', Object.assign(parameter, this.queryParam))
           .then(res => res)
@@ -100,9 +87,8 @@ export default {
       selectedRowKeys: [],
       selectedRows: [],
 
-      // custom table alert & rowSelection
       options: {
-        alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
+        alert: { show: false, clear: () => { this.selectedRowKeys = [] } },
         rowSelection: {
           selectedRowKeys: this.selectedRowKeys,
           onChange: this.onSelectChange
@@ -112,10 +98,50 @@ export default {
     }
   },
 
+  created() {
+    this.tableOption()
+  },
+
   methods: {
-    handleEdit(record) {
-      console.log(record)
-      this.$emit('onEdit', record)
+    tableOption () {
+      if (!this.optionAlertShow) {
+        this.options = {
+          alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
+          rowSelection: {
+            selectedRowKeys: this.selectedRowKeys,
+            onChange: this.onSelectChange
+          }
+        }
+        this.optionAlertShow = true
+      } else {
+        this.options = {
+          alert: false,
+          rowSelection: null
+        }
+        this.optionAlertShow = false
+      }
+    },
+
+    handleRefresh() {
+      this.$refs.Table.refresh()
+    },
+
+    handleCreate() {
+      this.$refs.DialogRow.handleOpen()
+    },
+
+    async handleDelete(row) {
+      await this.Fetch.delete(`/applications/${row.id}`)
+      this.handleRefresh()
+    },
+
+    handleEdit(row) {
+      this.$refs.DialogRow.handleOpen(row)
+    },
+
+    onSelectChange(selectedRowKeys, selectedRows) {
+      this.selectedRowKeys = selectedRowKeys
+      this.selectedRows = selectedRows
     }
   }
 }

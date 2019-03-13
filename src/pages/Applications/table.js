@@ -1,6 +1,9 @@
 import T from 'ant-design-vue/es/table/Table'
 import get from 'lodash.get'
 
+const FIELD_TOTAL = 'total' // 总数字段名称
+const FIELD_PAGE = 'page'
+
 export default {
   data() {
     return {
@@ -59,7 +62,7 @@ export default {
       default: false
     },
     showPagination: {
-      type: String,
+      type: [String, Boolean],
       default: 'auto'
     }
   }),
@@ -68,7 +71,7 @@ export default {
       this.$router.push({
         name: this.$route.name,
         params: Object.assign({}, this.$route.params, {
-          pageNo: val
+          [FIELD_PAGE]: val
         })
       })
     },
@@ -118,7 +121,7 @@ export default {
     loadData(pagination, filters, sorter) {
       this.localLoading = true
       const parameter = Object.assign({
-        pageNo: (pagination && pagination.current) ||
+        [FIELD_PAGE]: (pagination && pagination.current) ||
             this.localPagination.current,
         pageSize: (pagination && pagination.pageSize) ||
             this.localPagination.pageSize
@@ -138,22 +141,21 @@ export default {
       if (result instanceof Promise || '[object Promise]' === result.toString()) {
         result.then(r => {
           this.localPagination = Object.assign({}, this.localPagination, {
-            // current: r.pageNo, // 返回结果中的当前分页数
-            total: r.total, // 返回结果中的总记录数
+            current: parameter[FIELD_PAGE],
+            total: r[FIELD_TOTAL], // 返回结果中的总记录数
             showSizeChanger: this.showSizeChanger,
             pageSize: (pagination && pagination.pageSize) ||
               this.localPagination.pageSize
           })
-          // 为防止删除数据后导致页面当前页面数据长度为 0 ,自动翻页到上一页
+          // 如删除后当前页无数据则跳至上一页
           if (r.data.length === 0 && this.localPagination.current !== 1) {
             this.localPagination.current--
             this.loadData()
             return
           }
-
-          // 这里用于判断接口是否有返回 r.totalCount 或 this.showPagination = false
+          // 判断接口是否有返回 r.total 或 this.showPagination = false
           // 当情况满足时，表示数据不满足分页大小，关闭 table 分页功能
-          !r.totalCount && ['auto', false].includes(this.showPagination) && (this.localPagination = false)
+          !r[FIELD_TOTAL] && ['auto', false].includes(this.showPagination) && (this.localPagination = false)
           this.localDataSource = r.data // 返回结果中的数组数据
           this.localLoading = false
         })
@@ -213,6 +215,7 @@ export default {
         }}>清空</a>
       )
     },
+
     renderAlert() {
       // 绘制统计列数据
       const needTotalItems = this.needTotalList.map((item) => {

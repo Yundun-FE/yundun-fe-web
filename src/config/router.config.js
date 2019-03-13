@@ -16,13 +16,13 @@ export const asyncRouterMap = [
         name: 'dashboard',
         redirect: '/dashboard/workplace',
         component: RouteView,
-        meta: { title: '仪表盘', keepAlive: true },
+        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse },
         children: [
           {
             path: '/dashboard/workplace',
             name: 'Analysis',
             component: () => import('@/pages/dashboard/index'),
-            meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] }
+            meta: { title: '仪表盘', keepAlive: true, permission: ['dashboard'] }
           }
           // {
           //   path: '/dashboard/monitor',

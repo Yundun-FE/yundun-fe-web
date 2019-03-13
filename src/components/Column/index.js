@@ -1,11 +1,11 @@
-import ColumnActionButton from './ColumnActionButton'
-// import ColumnStatus from './ColumnStatus'
+import ColumnAction from './_ColumnAction'
+import ColumnActionButton from './_ColumnActionButton'
 
 const Column = {}
 
 Column.install = Vue => {
+  Vue.component(ColumnAction.name, ColumnAction)
   Vue.component(ColumnActionButton.name, ColumnActionButton)
-  // Vue.component(ColumnStatus.name, ColumnStatus)
 }
 
 export default Column

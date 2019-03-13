@@ -1,5 +1,3 @@
-import { isDef } from '../utils'
-
 export default {
   data() {
     return {
@@ -8,11 +6,14 @@ export default {
   },
 
   methods: {
+    beforeOpen() {},
+
     handleClose() {
       this.visible = false
     },
 
     handleOpen(form) {
+      this.beforeOpen()
       this.visible = true
     }
   }
