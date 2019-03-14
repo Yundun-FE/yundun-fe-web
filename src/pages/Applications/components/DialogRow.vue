@@ -3,6 +3,7 @@
     ref="Dialog"
     v-model="form"
     :rules="rules"
+    :modify="modify"
     title-label="应用"
     @submit="handleSubmit"
   >

@@ -1,5 +1,7 @@
 <style lang="scss">
 .ColumnAction {
+  margin: 0 -8px;
+
   a{
     color: $--color-primary;
   }

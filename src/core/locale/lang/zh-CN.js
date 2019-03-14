@@ -16,6 +16,13 @@ exports.default = {
       modify: '修改',
       restart: '重启'
     },
+    dialog: {
+      ok: '确定',
+      cancel: '取消'
+    },
+    message: {
+      confirmAction: '确认操作？'
+    },
     columnTitle: {
       name: '名称',
       actions: '操作',

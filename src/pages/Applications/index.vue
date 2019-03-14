@@ -5,14 +5,14 @@
         type="primary"
         icon="plus"
         @click="handleCreate"
-      >{{$t('du.toolbar.create')}}</a-button>
+      >{{ $t('du.toolbar.create') }}</a-button>
       <a-dropdown>
         <a-menu slot="overlay">
           <a-menu-item key="1">
-          <a-icon type="delete" />{{$t('du.toolbar.delete')}}</a-menu-item>
+          <a-icon type="delete" />{{ $t('du.toolbar.delete') }}</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
-          {{$t('du.toolbar.bulkAction')}}
+          {{ $t('du.toolbar.bulkAction') }}
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
@@ -24,21 +24,21 @@
       :alert="options.alert"
       :row-selection="options.rowSelection"
     >
-      <span
+      <template
         slot="action"
         slot-scope="text, record"
       >
         <ColumnAction>
           <a
             @click="handleEdit(record)"
-          >{{$t('du.toolbar.edit')}}</a>
-          <a
-            @click="handleDelete(record)"
-          >{{$t('du.toolbar.delete')}}</a>
+          >{{ $t('du.toolbar.edit') }}</a>
+          <PopoverConfirm @confirm="handleDelete(record)">
+            <a>{{ $t('du.toolbar.delete') }}</a>
+          </PopoverConfirm>
         </ColumnAction>
-      </span>
+      </template>
     </s-table>
-    <DialogRow ref="DialogRow"  @init="handleRefresh"/>
+    <DialogRow ref="DialogRow" @init="handleRefresh"/>
   </a-card>
 </template>
 
@@ -103,7 +103,7 @@ export default {
   },
 
   methods: {
-    tableOption () {
+    tableOption() {
       if (!this.optionAlertShow) {
         this.options = {
           alert: { show: true, clear: () => { this.selectedRowKeys = [] } },

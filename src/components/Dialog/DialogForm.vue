@@ -24,9 +24,7 @@
     :class="b()"
     :title="titleShow"
     :width="width"
-    :loading="loading"
     v-model="visible"
-    center
   >
     <a-skeleton
       v-if="loading"
@@ -62,7 +60,7 @@
 //  YUNDUN
 //  ----------------------------
 //  Name: DialogForm
-//  i18n: false
+//  i18n: true
 //  Author：kongfanbo@yundun.com
 //
 import create from '../../utils/create-basic'
@@ -75,14 +73,8 @@ export default create({
   mixins: [dialogBase, form],
 
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
-    titleLabel: {
-      type: String,
-      default: ''
-    },
+    title: String,
+    titleLabel: String,
     width: {
       type: [String, Number],
       default: 580
@@ -92,10 +84,7 @@ export default create({
       default: '120px'
     },
     loading: Boolean,
-    mode: {
-      type: String,
-      default: 'Create'
-    }
+    modify: Boolean
   },
 
   data() {
@@ -106,11 +95,7 @@ export default create({
 
   computed: {
     titleShow() {
-      if (this.title) {
-        return this.title
-      } else {
-        return this.mode === 'Edit' ? `修改${this.titleLabel}` : `创建${this.titleLabel}`
-      }
+      return this.title || this.modify ? `${this.$t('du.toolbar.modify')}${this.titleLabel}` : `${this.$t('du.toolbar.create')}${this.titleLabel}`
     }
   },
 

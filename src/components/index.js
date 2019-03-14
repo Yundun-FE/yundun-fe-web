@@ -1,6 +1,7 @@
 import Page from './Page'
 import Form from './Form'
 import Column from './Column'
+import Popover from './Popover'
 import Dm from './Dm'
 import Card from './Card'
 import Dialog from './Dialog'
@@ -18,6 +19,7 @@ function install(Vue) {
     Form,
     Dialog,
     Column,
+    Popover,
     Dm,
     Card,
     Header,

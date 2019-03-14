@@ -1,10 +1,12 @@
 import { deepClone } from '../utils'
+import { format } from 'url'
 
 export default {
   data() {
     return {
       bindForm: {},
-      formDefault: {}
+      formDefault: {},
+      modify: false
     }
   },
 
@@ -21,6 +23,7 @@ export default {
 
     handleOpen(form = {}) {
       this.beforeOpen()
+      this.modify = !!form.id
       this.form = Object.assign(deepClone(this.formDefault), form)
       this.$refs.Dialog.handleOpen()
     }
