@@ -50,10 +50,37 @@ function filterAsyncRouter(routerMap, roles) {
   return accessedRouters
 }
 
+function faltRouter(routers, map = {}) {
+  routers.forEach(item => {
+    map[item.name] = item
+    if (item.children) {
+      faltRouter(item.children, map)
+    }
+  })
+  return map
+}
+
 const permission = {
   state: {
     routers: constantRouterMap,
     addRouters: []
+  },
+  getters: {
+    getMenuTabs: (state) => (name) => {
+      const indexRouters = state.routers.find(_ => _.name === 'index').children
+      const tabMap = faltRouter(indexRouters)[name].children.filter(_ => !_.redirect)
+
+      const tabs = tabMap.map(item => {
+        return {
+          title: item.meta.title,
+          key: item.name,
+          path: item.path
+        }
+      })
+
+      console.log(tabs)
+      return tabs
+    }
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {

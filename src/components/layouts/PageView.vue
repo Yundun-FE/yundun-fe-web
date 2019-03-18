@@ -57,7 +57,6 @@ export default {
       this.title = this.$route.meta.title
       // 因为套用了一层 route-view 所以要取 ref 对象下的子节点的第一个对象
       const content = this.$refs.content && this.$refs.content.$children[0]
-      console.log(content)
 
       if (content) {
         this.description = content.description

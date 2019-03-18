@@ -29,16 +29,17 @@
         slot-scope="text, record"
       >
         <ColumnAction>
-          <a
-            @click="handleEdit(record)"
-          >{{ $t('du.toolbar.edit') }}</a>
+          <a @click="handleEdit(record)">{{ $t('du.toolbar.edit') }}</a>
           <PopoverConfirm @confirm="handleDelete(record)">
             <a>{{ $t('du.toolbar.delete') }}</a>
           </PopoverConfirm>
         </ColumnAction>
       </template>
     </s-table>
-    <DialogRow ref="DialogRow" @init="handleRefresh"/>
+    <DialogRow
+      ref="DialogRow"
+      @init="handleRefresh"
+    />
   </a-card>
 </template>
 
@@ -47,8 +48,6 @@ import STable from './table'
 import DialogRow from './components/DialogRow'
 
 export default {
-  name: '',
-
   components: {
     STable, DialogRow
   },
@@ -88,7 +87,10 @@ export default {
       selectedRows: [],
 
       options: {
-        alert: { show: false, clear: () => { this.selectedRowKeys = [] } },
+        alert: {
+          show: false,
+          clear: () => { this.selectedRowKeys = [] }
+        },
         rowSelection: {
           selectedRowKeys: this.selectedRowKeys,
           onChange: this.onSelectChange

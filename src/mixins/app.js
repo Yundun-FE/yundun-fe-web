@@ -5,6 +5,7 @@ export default {
     // FE_API: state => state.app.FE_API,
     // router: state => state.app.router,
     // menus: state => state.app.menus,
+    mainMenu: state => state.permission.addRouters,
     pageSkeleton: state => state.app.pageSkeleton,
     pageLoading: state => state.app.pageLoading
   }),

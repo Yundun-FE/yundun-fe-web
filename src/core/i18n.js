@@ -23,8 +23,6 @@ const iMessages = {
   }
 }
 
-console.log(iMessages)
-
 const i18n = new VueI18n({
   locale: 'zh-CN',
   messages: iMessages
