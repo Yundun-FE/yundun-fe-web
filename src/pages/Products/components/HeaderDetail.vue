@@ -5,12 +5,16 @@
         {{ info.name }}
       </template>
       <template slot="action">
-        <yd-form-radio
-          v-model="info.env"
-          :radios="selectEnv"
-          border
-          @change="handleChangeEnv"
-        />
+        <a-form>
+          <a-form-item label="切换环境">
+            <yd-form-select
+              v-model="info.env"
+              :selects="selectEnv"
+              border
+              @change="handleChangeEnv"
+            />
+          </a-form-item>
+        </a-form>
       </template>
       <slot />
     </HeaderTop>

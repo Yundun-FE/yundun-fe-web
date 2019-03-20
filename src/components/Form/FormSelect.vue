@@ -1,5 +1,5 @@
 <template>
-  <el-select
+  <a-select
     v-model="val"
     :size="size"
     :placeholder="placeholder"
@@ -9,23 +9,21 @@
     :collapse-tags="collapseTags"
     @change="handleChange"
   >
-    <el-option
+    <a-select-option
       v-if="defaultValue"
-      :size="size"
       :label="defaultValue"
       value=""
-    >{{ defaultValue }}</el-option>
-    <el-option
+    >{{ defaultValue }}</a-select-option>
+    <a-select-option
       v-for="item in selects"
-      :size="size"
       :key="item.value"
       :disabled="item.disabled"
       :value="item.value"
       :label="item.label"
     >
       {{ item.label }}
-    </el-option>
-  </el-select>
+    </a-select-option>
+  </a-select>
 </template>
 
 <script>
