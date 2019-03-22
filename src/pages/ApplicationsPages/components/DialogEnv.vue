@@ -7,20 +7,20 @@
     @submit="handleSubmit"
   >
     <el-form-item label="CODE">
-      <d-input
+      <el-input
         v-model="form.code"
         disabled
         placeholder="Code"
       />
     </el-form-item>
     <el-form-item label="名称">
-      <d-input
+      <el-input
         v-model="form.name"
         placeholder="标题"
       />
     </el-form-item>
     <el-form-item label="环境">
-      <d-input
+      <el-input
         v-model="form.env"
         placeholder="ENV"
       />

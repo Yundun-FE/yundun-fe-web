@@ -26,7 +26,7 @@
         min-width="180"
       >
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.alias"
             placeholder="别名"
           />

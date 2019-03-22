@@ -8,13 +8,13 @@
   <page class="page--setting">
     <el-form ref="form" :model="form" label-width="120px">
       <el-form-item label="用户名">
-        <d-input v-model="form.name" />
+        <el-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="消息开关">
         <el-switch v-model="form.noticeSwitch.progress" />
       </el-form-item>
       <el-form-item label="服务器地址">
-        <d-input v-model="form.serverIp" />
+        <el-input v-model="form.serverIp" />
       </el-form-item>
       <el-form-item>
         <d-button type="primary" @click="onSubmit">保存</d-button>

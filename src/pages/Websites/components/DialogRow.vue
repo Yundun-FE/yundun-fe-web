@@ -7,10 +7,10 @@
     @submit="handleSubmit"
   >
     <el-form-item label="标题">
-      <d-input v-model="form.title" />
+      <el-input v-model="form.title" />
     </el-form-item>
     <el-form-item label="URL">
-      <d-input v-model="form.url" />
+      <el-input v-model="form.url" />
     </el-form-item>
   </DialogForm>
 </template>

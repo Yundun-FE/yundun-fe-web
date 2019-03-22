@@ -7,7 +7,7 @@
     >
       <el-table-column label="名称">
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.name"
             placeholder="名称"
           />
@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column label="备注">
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.title"
             placeholder="备注"
           />
@@ -23,7 +23,7 @@
       </el-table-column>
       <el-table-column label="内容">
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.content"
             placeholder="内容"
           />

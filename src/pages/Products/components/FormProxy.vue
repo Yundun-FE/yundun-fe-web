@@ -12,7 +12,7 @@
         min-width="150"
       >
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.name"
             placeholder="名称"
           />
@@ -24,7 +24,7 @@
         width="200"
       >
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.remarks"
             placeholder="备注"
           />
@@ -36,7 +36,7 @@
         width="150"
       >
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.url"
             placeholder="Url"
           />
@@ -48,7 +48,7 @@
         min-width="180"
       >
         <template slot-scope="scope">
-          <d-input
+          <el-input
             v-model="scope.row.target"
             placeholder="目标"
           />

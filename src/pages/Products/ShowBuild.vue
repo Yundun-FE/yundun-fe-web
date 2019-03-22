@@ -45,7 +45,7 @@
           </el-form-item>
           <br>
           <el-form-item label="编译指令">
-            <d-input v-model="buildCommand" />
+            <el-input v-model="buildCommand" />
           </el-form-item>
         </el-form>
       </template>

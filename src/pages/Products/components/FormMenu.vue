@@ -8,9 +8,13 @@
       >
         <el-table-column label="名称">
           <template slot-scope="scope">
-            <d-input
+            <el-input
               v-model="scope.row.name"
               placeholder="名称"
+            />
+            <el-input
+              v-model="scope.row.icon"
+              placeholder="icon"
             />
           </template>
         </el-table-column>

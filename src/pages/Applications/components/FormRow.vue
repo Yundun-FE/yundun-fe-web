@@ -4,7 +4,7 @@
       label="应用名称"
       prop="name"
     >
-      <d-input
+      <el-input
         v-model="form.name"
         style="width: 320px"
         placeholder="名称"
@@ -14,7 +14,7 @@
       label="CODE"
       prop="code"
     >
-      <d-input
+      <el-input
         v-model="form.code"
         style="width: 320px"
       />

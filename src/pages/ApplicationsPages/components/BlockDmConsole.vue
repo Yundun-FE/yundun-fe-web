@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-form-item label="Name">
-      <d-input
+      <el-input
         v-model="data.name"
         disabled
       />
     </el-form-item>
     <el-form-item label="名称">
-      <d-input v-model="data.title" />
+      <el-input v-model="data.title" />
     </el-form-item>
     <el-form-item label="区块名称">
-      <d-input v-model="data.blockName" />
+      <el-input v-model="data.blockName" />
     </el-form-item>
     <el-form-item label="显示">
       <d-checkbox v-model="data.show" />

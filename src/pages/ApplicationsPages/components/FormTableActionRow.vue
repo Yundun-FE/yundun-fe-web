@@ -10,7 +10,7 @@
       min-width="200"
     >
       <template slot-scope="scope">
-        <d-input
+        <el-input
           v-model="scope.row.label"
           :disabled="env !== 'root'"
           size="small"
@@ -36,7 +36,7 @@
       width="150"
     >
       <template slot-scope="scope">
-        <d-input
+        <el-input
           v-model="scope.row.command"
           :disabled="env !== 'root'"
           size="small"
