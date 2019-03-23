@@ -34,6 +34,7 @@ module.exports = {
   },
 
   css: {
+    extract: true,
     loaderOptions: {
       // pass options to sass-loader
       sass: {
