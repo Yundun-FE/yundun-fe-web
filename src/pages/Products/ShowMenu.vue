@@ -1,13 +1,17 @@
 <template>
   <page>
-    <DmEdit
-      :loading="loading"
-      v-model="form"
-      :rules="rules"
-      @submit="handleSubmit"
-    >
-      <FormMenu/>
-    </DmEdit>
+
+    <a-card title="目录管理">
+      <DmEdit
+        :loading="loading"
+        v-model="form"
+        :rules="rules"
+        @submit="handleSubmit"
+      >
+        <FormMenu/>
+      </DmEdit>
+    </a-card>
+
   </page>
 </template>
 

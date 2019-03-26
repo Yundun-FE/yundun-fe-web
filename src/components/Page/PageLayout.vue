@@ -36,7 +36,7 @@
         slot="extra"
         name="extra"
       />
-      <div slot="pageMenu">
+      <!-- <div slot="pageMenu">
         <div
           v-if="search"
           class="page-menu-search"
@@ -52,7 +52,6 @@
           v-if="tabs && tabs.items"
           class="page-menu-tabs"
         >
-          <!-- @change="callback" :activeKey="activeKey" -->
           <a-tabs
             :tab-bar-style="{margin: 0}"
             :active-key="tabs.active()"
@@ -65,7 +64,7 @@
             />
           </a-tabs>
         </div>
-      </div>
+      </div> -->
     </page-header>
     <div class="content">
       <div :class="['page-header-index-wide']">

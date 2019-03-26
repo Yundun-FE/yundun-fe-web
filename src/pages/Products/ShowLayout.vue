@@ -1,11 +1,6 @@
 <template>
-  <div class="search-content">
-
-    <HeaderDetail>
-      <HeaderTab :data="pageMenus" />
-    </HeaderDetail>
-
-    <!-- {{ getMenuTabs('products.id') }} -->
+  <div>
+    <HeaderDetail style="margin-bottom: 24px"/>
     <router-view />
   </div>
 </template>
@@ -23,70 +18,18 @@ export default {
     return {
       pageMenus: [],
       selectEnv: [],
-      info: {},
-      tabs: {
-        items: [
-          {
-            key: '1',
-            title: '设置'
-          },
-          {
-            key: '2',
-            title: '项目'
-          },
-          {
-            key: '3',
-            title: '应用'
-          }
-        ],
-        active: () => {
-          switch (this.$route.name) {
-            case '/list/search/article':
-              return '1'
-            case '/list/search/project':
-              return '2'
-            case '/list/search/application':
-              return '3'
-            default:
-              return '1'
-          }
-        },
-        callback: (key) => {
-          switch (key) {
-            case '1':
-              this.$router.push({
-                path: '../settings',
-                append: true
-              })
-              break
-            case '2':
-              this.$router.push('/list/search/project')
-              break
-            case '3':
-              this.$router.push('/list/search/application')
-              break
-            default:
-              this.$router.push('/workplace')
-          }
-        }
-      },
-      search: false
+      info: {}
     }
   },
-  computed: {
-    ...mapGetters({
-      // tabs: 'getMenuTabs'
-    })
-  },
+
   created() {
     this.init()
   },
+
   methods: {
     async init() {
-      console.log(4334)
       const { env } = this.$route.query
       const info = await this.Fetch.get(`/jobs/${this.$route.params.id}`, { env })
-      console.log(info)
       this.info = info
 
       const data = await this.Fetch.get(`/jobs`, { code: info.name })
