@@ -13,8 +13,9 @@ export default {
     },
 
     handleOpen(form) {
-      this.beforeOpen()
+      this.beforeOpen(form)
       this.visible = true
+      this.afterOpen(form)
     }
   }
 }

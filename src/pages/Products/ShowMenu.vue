@@ -1,6 +1,5 @@
 <template>
   <page>
-
     <a-card title="目录管理">
       <DmEdit
         :loading="loading"
@@ -11,7 +10,6 @@
         <FormMenu/>
       </DmEdit>
     </a-card>
-
   </page>
 </template>
 

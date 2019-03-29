@@ -32,8 +32,8 @@ export default {
       const info = await this.Fetch.get(`/jobs/${this.$route.params.id}`, { env })
       this.info = info
 
-      const data = await this.Fetch.get(`/jobs`, { code: info.name })
-      this.selectEnv = data.map(_ => {
+      const data = await this.Fetch.get(`/api/v1/jobs`, { name: info.name })
+      this.selectEnv = data.list.map(_ => {
         return {
           label: _.env === 'root' ? 'PRIMARY' : _.title,
           value: _.env

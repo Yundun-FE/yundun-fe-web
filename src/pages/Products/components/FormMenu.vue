@@ -87,7 +87,7 @@ export default {
   },
   beforeCreate() {
     this.form = this.$form.createForm(this)
-    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true })
+    // this.form.getFieldDecorator('keys', { initialValue: [], preserve: true })
   },
   methods: {
     remove(k) {

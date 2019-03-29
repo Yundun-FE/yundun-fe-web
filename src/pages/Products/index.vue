@@ -24,12 +24,34 @@
             class="ant-card-actions"
           >
             <a-icon type="setting" />
-            <a-icon type="edit" />
+            <a-icon type="edit" @click="handleRowEdit(item)" />
             <a-icon type="ellipsis" />
           </template>
         </a-card>
       </a-col>
     </a-row>
+    <ModalForm ref="ModalRow">
+      <template slot-scope="form">
+        <a-form-item label="名称">
+          <a-input
+            v-decorator="['name']"
+            placeholder="Name"
+          />
+        </a-form-item>
+        <a-form-item label="标题">
+          <a-input
+            v-decorator="['title']"
+            placeholder="标题"
+          />
+        </a-form-item>
+        <a-form-item label="Jenkins Name">
+          <a-input
+            v-decorator="['jenkinsName']"
+            placeholder="Jenkins Name"
+          />
+        </a-form-item>
+      </template>
+    </ModalForm>
   </div>
 </template>
 
@@ -45,6 +67,12 @@ export default {
   data() {
     return {
       apiUri: 'get /api/v1/jobs?name=console-v5-web'
+    }
+  },
+
+  methods: {
+    handleRowEdit(row) {
+      this.$refs.ModalRow.handleOpen(row)
     }
   }
 }

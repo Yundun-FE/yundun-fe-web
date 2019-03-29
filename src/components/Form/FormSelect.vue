@@ -1,7 +1,6 @@
 <template>
   <a-select
     v-model="val"
-    :size="size"
     :placeholder="placeholder"
     :disabled="disabled"
     :filterable="filterable"
