@@ -56,12 +56,10 @@
         :device="device"
         @toggle="toggle"
       />
-
       <!-- layout content -->
       <a-layout-content :style="{ margin: $store.getters.multiTab ? '24px 24px 0' : '24px 24px 0', height: '100%', paddingTop: fixedHeader ? '64px' : '0' }">
         <slot/>
       </a-layout-content>
-
       <!-- layout footer -->
       <a-layout-footer style="padding: 0">
         <global-footer />
@@ -511,7 +509,17 @@ export default {
     position: relative;
     z-index: 10;
     height: auto;
-
+    &.ant-layout-sider-collapsed{
+      .ant-layout-sider-children{
+        width: 80px;
+        transition: .15s
+      }
+    }
+    .ant-layout-sider-children{
+      position: fixed;
+      overflow: hidden;
+      width: 256px;
+    }
     .ant-layout-sider-children:hover {
       overflow-y: auto;
     }

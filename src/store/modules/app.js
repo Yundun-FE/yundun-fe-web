@@ -9,8 +9,10 @@ import {
   DEFAULT_FIXED_SIDEMENU,
   DEFAULT_FIXED_HEADER_HIDDEN,
   DEFAULT_CONTENT_WIDTH_TYPE,
-  DEFAULT_MULTI_TAB
+  DEFAULT_MULTI_TAB,
+  SET_PRODUCT_INFO
 } from '@/store/mutation-types'
+import Fetch from '@/utils/fetch'
 
 const app = {
   state: {
@@ -22,11 +24,16 @@ const app = {
     fixedHeader: false,
     fixSiderbar: false,
     autoHideHeader: false,
+    productCode: 'console-v5-web',
+    productInfo: '',
     color: null,
     weak: false,
     multiTab: true
   },
   mutations: {
+    SET_PRODUCT_INFO: (state, data) => {
+      state.productInfo = data
+    },
     SET_SIDEBAR_TYPE: (state, type) => {
       state.sidebar = type
       Vue.ls.set(SIDEBAR_TYPE, type)
@@ -77,6 +84,10 @@ const app = {
     }
   },
   actions: {
+    FetchProductInfo({ commit }, id) {
+      // const data = await Fetch('')
+      // commit('SET_PRODUCT_INFO', data)
+    },
     setSidebar({ commit }, type) {
       commit('SET_SIDEBAR_TYPE', type)
     },
