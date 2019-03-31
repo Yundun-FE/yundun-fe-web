@@ -24,27 +24,46 @@
             class="ant-card-actions"
           >
             <a-icon type="setting" />
-            <a-icon type="edit" @click="handleRowEdit(item)" />
+            <a-tooltip
+              title="编辑"
+              placement="top"
+            >
+              <a-icon
+                type="edit"
+                @click="handleRowEdit(item)"
+              />
+            </a-tooltip>
             <a-icon type="ellipsis" />
           </template>
         </a-card>
       </a-col>
     </a-row>
-    <ModalForm ref="ModalRow">
-      <template slot-scope="form">
-        <a-form-item label="名称">
+    <ModalForm ref="ModalRow" @submit="handleRowEditSubmit">
+      <template slot-scope="scope">
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          label="名称"
+        >
           <a-input
             v-decorator="['name']"
+            disabled
             placeholder="Name"
           />
         </a-form-item>
-        <a-form-item label="标题">
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          label="标题">
           <a-input
             v-decorator="['title']"
             placeholder="标题"
           />
         </a-form-item>
-        <a-form-item label="Jenkins Name">
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          label="Jenkins Name">
           <a-input
             v-decorator="['jenkinsName']"
             placeholder="Jenkins Name"
@@ -58,6 +77,7 @@
 <script>
 import FormRow from './components/FormRow'
 import consoleData from '@/mixins/consoleData'
+import { close } from 'fs'
 
 export default {
   components: { FormRow },
@@ -66,6 +86,7 @@ export default {
 
   data() {
     return {
+      api: '/api/v1/jobs',
       apiUri: 'get /api/v1/jobs?name=console-v5-web'
     }
   },
@@ -73,6 +94,17 @@ export default {
   methods: {
     handleRowEdit(row) {
       this.$refs.ModalRow.handleOpen(row)
+    },
+
+    async handleRowEditSubmit(form) {
+      console.log(form)
+      try {
+        await this.Fetch.put(`/api/v1/jobs/${form.id}`, form)
+      } catch (e) {
+        return
+      }
+      this.message.success('修改成功')
+      console.log(form)
     }
   }
 }

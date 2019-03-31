@@ -29,24 +29,16 @@ const mainMap = [
         path: '/develop/applications',
         name: 'applications',
         hideChildrenInMenu: true,
-        meta: { title: '所有应用', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Applications/index')
       },
       {
-        path: '/develop/applications/:id',
-        name: 'applications.appId',
-        redirect: '/develop/applications/:id/settings',
+        path: '/develop/项目管理/:id',
+        name: '项目管理.appId',
+        redirect: '/develop/项目管理/:id/settings',
         hideChildrenInMenu: false,
         meta: { title: '应用详情', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Applications/ShowLayout')
-      },
-      {
-        path: '/develop/applications/:id/settings',
-        name: 'applications.appId.settings',
-        hidden: true,
-        search: false,
-        meta: { title: '应用设置', keepAlive: true, permission: ['dashboard'] },
-        component: () => import('@/pages/Applications/ShowSetting')
       },
       {
         path: '/develop/pages',
@@ -64,13 +56,13 @@ const mainMap = [
       {
         path: '/develop/products',
         name: 'products',
-        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Products/index')
       },
       {
         path: '/develop/products',
         name: 'products.id',
-        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Products/ShowLayout'),
         hidden: true,
         children: [

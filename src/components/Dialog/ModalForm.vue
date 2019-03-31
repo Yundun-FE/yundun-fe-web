@@ -61,12 +61,11 @@
 //
 import create from '../../utils/create-basic'
 import dialogBase from '../../mixins/dialogBase'
-import form from '../../mixins/form'
 
 export default create({
   name: 'ModalForm',
 
-  mixins: [dialogBase, form],
+  mixins: [dialogBase],
 
   props: {
     title: String,
@@ -85,7 +84,9 @@ export default create({
 
   data() {
     return {
-      submitLoading: false
+      submitLoading: false,
+      form: '',
+      formRaw: {}
     }
   },
 
@@ -106,7 +107,7 @@ export default create({
     // hook: 打开前
     beforeOpen(form) {
       this.form = this.$form.createForm(this)
-
+      this.formRaw = form
       this.resetSubmitLoading()
     },
 
@@ -116,7 +117,6 @@ export default create({
         this.form.setFieldsValue({ name, title, jenkinsName })
       })
     },
-
     // hook: 提交前
     beforeSubmit() {
       this.submitLoading = true
@@ -125,6 +125,12 @@ export default create({
     afterValidate(valid) {
       // 验证不通过
       if (!valid) this.resetSubmitLoading()
+    },
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) this.$emit('submit', { ...this.formRaw, ...values })
+      })
     }
   }
 })
