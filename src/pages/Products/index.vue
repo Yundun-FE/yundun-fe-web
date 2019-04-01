@@ -7,7 +7,14 @@
     <FormRow slot="FormRow"/>
   </PageTable> -->
   <div>
-    <a-row :gutter="16">
+    <a-button
+      type="primary"
+      @click="handleCreate"
+    >新增应用</a-button>
+    <a-row
+      :gutter="16"
+      class="margin-top"
+    >
       <a-col
         v-for="(item, index) in list"
         :span="8"
@@ -38,7 +45,13 @@
         </a-card>
       </a-col>
     </a-row>
-    <ModalForm ref="ModalRow" @submit="handleRowEditSubmit">
+    <ModalForm
+      ref="ModalRow"
+      :fields="[ 'name', 'title', 'jenkinsName', 'env']"
+      :fetch-update="fetchUpdate"
+      :fetch-create="fetchCreate"
+      title-label="应用"
+    >
       <template slot-scope="scope">
         <a-form-item
           :label-col="{ span: 5 }"
@@ -54,7 +67,8 @@
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="标题">
+          label="标题"
+        >
           <a-input
             v-decorator="['title']"
             placeholder="标题"
@@ -63,7 +77,18 @@
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="Jenkins Name">
+          label="ENV"
+        >
+          <a-input
+            v-decorator="['env']"
+            placeholder="Env"
+          />
+        </a-form-item>
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          label="Jenkins Name"
+        >
           <a-input
             v-decorator="['jenkinsName']"
             placeholder="Jenkins Name"
@@ -77,7 +102,6 @@
 <script>
 import FormRow from './components/FormRow'
 import consoleData from '@/mixins/consoleData'
-import { close } from 'fs'
 
 export default {
   components: { FormRow },
@@ -86,7 +110,6 @@ export default {
 
   data() {
     return {
-      api: '/api/v1/jobs',
       apiUri: 'get /api/v1/jobs?name=console-v5-web'
     }
   },
@@ -96,16 +119,31 @@ export default {
       this.$refs.ModalRow.handleOpen(row)
     },
 
-    async handleRowEditSubmit(form) {
-      console.log(form)
-      try {
-        await this.Fetch.put(`/api/v1/jobs/${form.id}`, form)
-      } catch (e) {
-        return
-      }
-      this.message.success('修改成功')
-      console.log(form)
+    fetchUpdate(form) {
+      return this.Fetch.put(`/api/v1/jobs/${form.id}`, form)
+    },
+
+    fetchCreate(form) {
+      return this.Fetch.post(`/api/v1/jobs`, form)
+    },
+
+    handleCreate() {
+      this.$refs.ModalRow.handleOpen({ name: 'console-v5-web' })
     }
+
+    // async handleRowEditSubmit(form) {
+    //   try {
+    //   } catch (e) {
+    //     return
+    //   } finally {
+    //     this.$refs.ModalRow.resetSubmitLoading()
+    //   }
+    //   this.message.success('修改成功')
+    //   setTimeout(() => {
+    //     this.$refs.ModalRow.handleClose()
+    //   }, 150)
+    //   this.fetchList()
+    // }
   }
 }
 </script>

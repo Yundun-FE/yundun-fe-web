@@ -1,6 +1,9 @@
 <template>
   <div>
-    <HeaderDetail style="margin-bottom: 24px"/>
+    <HeaderDetail
+      style="margin-bottom: 24px"
+      @init="init"
+    />
     <router-view />
   </div>
 </template>
@@ -28,15 +31,15 @@ export default {
 
   methods: {
     async init() {
-      const { env } = this.$route.query
-      const info = await this.Fetch.get(`/jobs/${this.$route.params.id}`, { env })
+      console.log(this.$route.params.id)
+      const info = await this.Fetch.get(`/api/v1/jobs/${this.$route.params.id}`)
       this.info = info
 
       const data = await this.Fetch.get(`/api/v1/jobs`, { name: info.name })
       this.selectEnv = data.list.map(_ => {
         return {
           label: _.env === 'root' ? 'PRIMARY' : _.title,
-          value: _.env
+          value: _.id
         }
       })
     }
@@ -45,15 +48,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .search-head{
-    background-color: #fff;
-    margin: -25px -24px -24px;
-    .search-input{
-      text-align: center;
-      margin-bottom: 16px;
-    }
+.search-head {
+  background-color: #fff;
+  margin: -25px -24px -24px;
+  .search-input {
+    text-align: center;
+    margin-bottom: 16px;
   }
-  .search-content{
-    margin-top: 48px;
-  }
+}
+.search-content {
+  margin-top: 48px;
+}
 </style>

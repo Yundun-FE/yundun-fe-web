@@ -40,7 +40,6 @@ export default {
       this.loading = true
       try {
         const response = await this.Fetch[API_METHOD](API_INDEX, params)
-        console.log(response)
         const { list, total } = response
         this.list = list
         this.total = total

@@ -35,7 +35,9 @@ export default {
 
   watch: {
     '$route'(val) {
-      this.init()
+      this.$nextTick(() => {
+        this.init()
+      })
     }
   },
 

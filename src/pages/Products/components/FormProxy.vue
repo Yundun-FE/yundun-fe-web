@@ -1,67 +1,35 @@
 <template>
-  <el-form-item label="代理配置">
-    <TableForm
-      v-if="form.settings"
-      :data="form.settings.proxy"
-      :row="row"
-      sort
+  <div>
+    <a-list
+      :data-source="form.settings.proxy"
+      item-layout="horizontal"
     >
-      <el-table-column
-        label="名称"
-        prop="name"
-        min-width="150"
-      >
-        <template slot-scope="scope">
-          <el-input
-            v-model="scope.row.name"
-            placeholder="名称"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="备注"
-        prop="remarks"
-        width="200"
-      >
-        <template slot-scope="scope">
-          <el-input
-            v-model="scope.row.remarks"
-            placeholder="备注"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="Url"
-        prop="url"
-        width="150"
-      >
-        <template slot-scope="scope">
-          <el-input
-            v-model="scope.row.url"
-            placeholder="Url"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="目标"
-        prop="target"
-        min-width="180"
-      >
-        <template slot-scope="scope">
-          <el-input
-            v-model="scope.row.target"
-            placeholder="目标"
-          />
-        </template>
-      </el-table-column>
-    </TableForm>
-  </el-form-item>
+      <a-list-item
+        slot="renderItem"
+        slot-scope="item">
+        <a-list-item-meta>
+          <span slot="title">{{ item.name }}</span>
+          <span slot="description">{{ item.remarks }}</span>
+        </a-list-item-meta>
+        <a-input
+          v-model="item.target"
+          placeholder="Target"
+        >
+          <a-icon slot="addonAfter" type="ellipsis" @click="handleShowMore(item.name)"/>
+        </a-input>
+      </a-list-item>
+    </a-list>
+    <ModalAttrEnvs ref="ModalAttrEnvs"/>
+  </div>
 </template>
 
 <script>
 import { formatLabel } from '@/utils/form'
+import ModalAttrEnvs from './ModalAttrEnvs'
 
 export default {
+  components: { ModalAttrEnvs },
+
   data() {
     return {
       row: {
@@ -69,13 +37,22 @@ export default {
         remarks: '',
         url: '',
         target: ''
-      }
+      },
+      visible: false,
+      data: []
     }
   },
 
   computed: {
     form() {
-      return this.$parent.model
+      return this.$parent.$parent.$parent.form
+    }
+
+  },
+
+  methods: {
+    async handleShowMore(key) {
+      this.$refs.ModalAttrEnvs.handleOpen({ attr: 'proxy', key })
     }
   }
 }

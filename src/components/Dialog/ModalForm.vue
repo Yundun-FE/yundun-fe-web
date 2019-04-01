@@ -69,7 +69,10 @@ export default create({
 
   props: {
     title: String,
-    titleLabel: String,
+    titleLabel: {
+      type: String,
+      default: ''
+    },
     width: {
       type: [String, Number],
       default: 580
@@ -79,11 +82,19 @@ export default create({
       default: '120px'
     },
     loading: Boolean,
-    modify: Boolean
+    fields: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    },
+    fetchUpdate: Function,
+    fetchCreate: Function
   },
 
   data() {
     return {
+      modify: false,
       submitLoading: false,
       form: '',
       formRaw: {}
@@ -96,40 +107,64 @@ export default create({
     }
   },
 
-  beforeCreate() {
-  },
-
   methods: {
     // 重置提交 Loading
     resetSubmitLoading() {
       this.submitLoading = false
     },
     // hook: 打开前
-    beforeOpen(form) {
+    beforeOpen(form = {}) {
       this.form = this.$form.createForm(this)
+      this.modify = form && form.id
       this.formRaw = form
       this.resetSubmitLoading()
     },
 
-    afterOpen(form) {
-      const { name, title, jenkinsName } = form
-      this.$nextTick(() => {
-        this.form.setFieldsValue({ name, title, jenkinsName })
+    afterOpen(form = {}) {
+      const data = {}
+      Object.keys(form).forEach(key => {
+        if (this.fields.includes(key)) data[key] = form[key]
       })
-    },
-    // hook: 提交前
-    beforeSubmit() {
-      this.submitLoading = true
+
+      this.$nextTick(() => {
+        this.form.setFieldsValue(data)
+      })
     },
     // hook: 验证后
     afterValidate(valid) {
       // 验证不通过
       if (!valid) this.resetSubmitLoading()
     },
+
+    async handleSubmitData(form, fn) {
+      try {
+        await fn(form)
+      } catch (e) {
+        return
+      } finally {
+        this.resetSubmitLoading()
+      }
+      this.$emit('submit-success')
+      this.message.success('保存成功')
+      setTimeout(() => {
+        this.handleClose()
+      }, 150)
+    },
+
     handleSubmit(e) {
+      this.submitLoading = true
       e.preventDefault()
       this.form.validateFields((err, values) => {
-        if (!err) this.$emit('submit', { ...this.formRaw, ...values })
+        if (!err) {
+          const form = {
+            ...this.formRaw, ...values
+          }
+          if (this.modify) {
+            if (this.fetchUpdate) this.handleSubmitData(form, this.fetchUpdate)
+          } else {
+            if (this.fetchCreate) this.handleSubmitData(form, this.fetchCreate)
+          }
+        }
       })
     }
   }

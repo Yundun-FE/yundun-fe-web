@@ -8,6 +8,7 @@ import Notice from '@/utils/notice'
 import * as LABEL from '@/utils/constants/label'
 import VueStorage from 'vue-ls'
 import PermissionHelper from '@/utils/helper/permission'
+import message from 'ant-design-vue/lib/message'
 
 import 'normalize.css/normalize.css'
 import 'ant-design-vue/dist/antd.less'
@@ -25,6 +26,7 @@ Vue.mixin(appMixins)
 installFilter(Vue)
 installComponents(Vue)
 
+Vue.prototype.message = message
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
 Vue.prototype.Notice = Notice

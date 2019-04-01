@@ -16,10 +16,9 @@
     </template>
     <a-form layout="inline">
       <a-form-item label="切换环境">
-        <yd-form-select
-          v-model="info.env"
-          :selects="selectEnv"
-          style="width: 200px"
+        <yd-form-radio-button
+          v-model="id"
+          :radios="selectEnv"
           border
           @change="handleChangeEnv"
         />
@@ -51,7 +50,7 @@ export default create({
   data() {
     return {
       id: this.$route.params.id,
-      current: 'menu',
+      current: ['menu'],
       tabs: [
         {
           label: '目录管理',
@@ -87,14 +86,11 @@ export default create({
 
     },
 
-    handleChangeEnv(env) {
+    handleChangeEnv(id) {
       this.$router.push({
-        path: '',
-        query: {
-          env
-        },
-        append: true
+        path: `/develop/products/${id}/setting`
       })
+      this.$emit('init')
     }
   }
 })

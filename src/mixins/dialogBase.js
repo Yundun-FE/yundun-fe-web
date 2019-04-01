@@ -6,7 +6,9 @@ export default {
   },
 
   methods: {
-    beforeOpen() {},
+    beforeOpen(form) {},
+
+    afterOpen(form) {},
 
     handleClose() {
       this.visible = false

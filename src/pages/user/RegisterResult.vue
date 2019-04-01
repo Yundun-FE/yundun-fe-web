@@ -1,6 +1,6 @@
 <template>
   <result
-    :isSuccess="true"
+    :is-success="true"
     :content="false"
     :title="email"
     :description="description">
@@ -14,31 +14,31 @@
 </template>
 
 <script>
-import { Result } from '@/components'
+// import { Result } from '@/components'
 
 export default {
   name: 'RegisterResult',
-  components: {
-    Result
-  },
-  data () {
+  // components: {
+  //   Result
+  // },
+  data() {
     return {
       description: '激活邮件已发送到你的邮箱中，邮件有效期为24小时。请及时登录邮箱，点击邮件中的链接激活帐户。',
       form: {}
     }
   },
   computed: {
-    email () {
+    email() {
       const v = this.form && this.form.email || 'xxx'
       const title = `你的账户：${v} 注册成功`
       return title
     }
   },
-  created () {
+  created() {
     this.form = this.$route.params
   },
   methods: {
-    goHomeHandle () {
+    goHomeHandle() {
       this.$router.push({ name: 'login' })
     }
   }
