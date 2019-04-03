@@ -148,7 +148,7 @@ export default {
               this.localPagination.pageSize
           })
           // 如删除后当前页无数据则跳至上一页
-          if (r.data.length === 0 && this.localPagination.current !== 1) {
+          if (r.list.length === 0 && this.localPagination.current !== 1) {
             this.localPagination.current--
             this.loadData()
             return
@@ -156,7 +156,7 @@ export default {
           // 判断接口是否有返回 r.total 或 this.showPagination = false
           // 当情况满足时，表示数据不满足分页大小，关闭 table 分页功能
           !r[FIELD_TOTAL] && ['auto', false].includes(this.showPagination) && (this.localPagination = false)
-          this.localDataSource = r.data // 返回结果中的数组数据
+          this.localDataSource = r.list // 返回结果中的数组数据
           this.localLoading = false
         })
       }

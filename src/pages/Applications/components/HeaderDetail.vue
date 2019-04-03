@@ -12,10 +12,11 @@
 <template>
   <a-card :class="b()">
     <template slot="title">
-      {{ info.rootTitle }}（{{ info.name }}）
+      {{ data.title }}
+      <!-- <a href="">所属项目：{{ data.name }}</a> -->
     </template>
     <a-form layout="inline">
-      <a-form-item label="切换环境">
+      <a-form-item>
         <yd-form-radio-button
           v-model="id"
           :radios="selectEnv"
@@ -24,7 +25,6 @@
         />
       </a-form-item>
     </a-form>
-
     <div :class="b('footer')">
       <a-menu
         v-model="current"
@@ -43,13 +43,15 @@
 
 <script>
 import create from '@/utils/create-basic'
+import jobsMixins from '@/mixins/jobs'
 
 export default create({
   name: 'HeaderDetail',
 
+  mixins: [jobsMixins],
+
   data() {
     return {
-      id: this.$route.params.id,
       current: ['menu'],
       tabs: [
         {
@@ -72,25 +74,11 @@ export default create({
     }
   },
 
-  computed: {
-    info() {
-      return this.$parent.info
-    },
-    selectEnv() {
-      return this.$parent.selectEnv
-    }
-  },
-
   methods: {
-    handleClickTab() {
-
-    },
-
     handleChangeEnv(id) {
       this.$router.push({
         path: `/develop/products/${id}/setting`
       })
-      this.$emit('init')
     }
   }
 })

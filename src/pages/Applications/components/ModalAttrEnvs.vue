@@ -38,7 +38,7 @@
           </a-list-item-meta>
 
           <div style="width: 400px">
-            <template v-if="item.id===id">
+            <template v-if="item.id === id">
               <a-input
                 v-if="item[attr][key]"
                 v-model="item[attr][key].target"

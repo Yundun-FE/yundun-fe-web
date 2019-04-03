@@ -1,149 +1,147 @@
 <template>
-  <!-- <PageTable
-    ref="PageTable"
-    page-name="fe-job"
-    api-name="jobs"
-  >
-    <FormRow slot="FormRow"/>
-  </PageTable> -->
-  <div>
-    <a-button
-      type="primary"
-      @click="handleCreate"
-    >新增应用</a-button>
-    <a-row
-      :gutter="16"
-      class="margin-top"
+  <a-card>
+    <div class="table-operator">
+      <a-button
+        type="primary"
+        icon="plus"
+        @click="handleCreate"
+      >{{ $t('du.toolbar.create') }}</a-button>
+      <a-dropdown>
+        <a-menu slot="overlay">
+          <a-menu-item key="1">
+          <a-icon type="delete" />{{ $t('du.toolbar.delete') }}</a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          {{ $t('du.toolbar.bulkAction') }}
+          <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
+    </div>
+
+    <s-table
+      ref="Table"
+      :columns="columns"
+      :data="loadData"
+      :alert="options.alert"
+      :row-selection="options.rowSelection"
     >
-      <a-col
-        v-for="(item, index) in list"
-        :span="8"
-        :key="index"
-        style="margin-bottom: 16px"
+      <template
+        slot="action"
+        slot-scope="text, record"
       >
-        <a-card :bordered="false">
-          <template slot="title">
-            <router-link :to="`/develop/products/${item.id}`">{{ item.title }}</router-link>
-          </template>
-          <p>{{ item.env }}</p>
-          <template
-            slot="actions"
-            class="ant-card-actions"
-          >
-            <a-icon type="setting" />
-            <a-tooltip
-              title="编辑"
-              placement="top"
-            >
-              <a-icon
-                type="edit"
-                @click="handleRowEdit(item)"
-              />
-            </a-tooltip>
-            <a-icon type="ellipsis" />
-          </template>
-        </a-card>
-      </a-col>
-    </a-row>
+        <ColumnAction>
+          <a @click="handleRowEdit(record)">{{ $t('du.toolbar.edit') }}</a>
+          <PopoverConfirm @confirm="handleRowDelete(record)">
+            <a>{{ $t('du.toolbar.delete') }}</a>
+          </PopoverConfirm>
+        </ColumnAction>
+      </template>
+    </s-table>
+
     <ModalForm
       ref="ModalRow"
-      :fields="[ 'name', 'title', 'jenkinsName', 'env']"
+      :fields="[ 'name', 'title', 'description']"
       :fetch-update="fetchUpdate"
       :fetch-create="fetchCreate"
-      title-label="应用"
+      title-label="项目"
+      @submit-success="handleRefresh"
     >
       <template slot-scope="scope">
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="名称"
+          label="Name"
+          help="唯一标识，不可修改"
         >
           <a-input
             v-decorator="['name']"
-            disabled
             placeholder="Name"
           />
         </a-form-item>
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="标题"
+          label="别名"
         >
           <a-input
             v-decorator="['title']"
-            placeholder="标题"
+            placeholder="Title"
           />
         </a-form-item>
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="ENV"
+          label="简介"
         >
-          <a-input
-            v-decorator="['env']"
-            placeholder="Env"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="Jenkins Name"
-        >
-          <a-input
-            v-decorator="['jenkinsName']"
-            placeholder="Jenkins Name"
+          <a-textarea
+            v-decorator="['description']"
+            placeholder="简介"
           />
         </a-form-item>
       </template>
     </ModalForm>
-  </div>
+  </a-card>
 </template>
 
 <script>
-import FormRow from './components/FormRow'
-import consoleData from '@/mixins/consoleData'
+import STable from './table'
+import ModalRow from './components/ModalRow'
+import tableData from '@/mixins/tableData'
 
 export default {
-  components: { FormRow },
+  components: {
+    STable, ModalRow
+  },
 
-  mixins: [consoleData],
+  mixins: [tableData],
 
   data() {
     return {
-      apiUri: 'get /api/v1/jobs?name=console-v5-web'
+      queryParam: {},
+      columns: [
+        {
+          title: 'ID',
+          dataIndex: 'id'
+        },
+        {
+          title: 'Name',
+          dataIndex: 'name'
+        },
+        {
+          title: '别名',
+          dataIndex: 'title'
+        },
+        {
+          title: '创建时间',
+          dataIndex: 'created_at'
+        },
+        {
+          title: '操作',
+          dataIndex: 'action',
+          width: '150px',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+      loadData: parameter => {
+        return this.Fetch.get('/v1/products', Object.assign(parameter, this.queryParam))
+          .then(res => res)
+      }
     }
   },
 
   methods: {
-    handleRowEdit(row) {
-      this.$refs.ModalRow.handleOpen(row)
+    async handleRowDelete(row) {
+      await this.Fetch.delete(`/v1/products/${row.id}`)
+      this.handleRefresh()
     },
 
     fetchUpdate(form) {
-      return this.Fetch.put(`/api/v1/jobs/${form.id}`, form)
+      return this.Fetch.put(`/v1/products/${form.id}`, form)
     },
 
     fetchCreate(form) {
-      return this.Fetch.post(`/api/v1/jobs`, form)
-    },
-
-    handleCreate() {
-      this.$refs.ModalRow.handleOpen({ name: 'console-v5-web' })
+      return this.Fetch.post(`/v1/products`, form)
     }
-
-    // async handleRowEditSubmit(form) {
-    //   try {
-    //   } catch (e) {
-    //     return
-    //   } finally {
-    //     this.$refs.ModalRow.resetSubmitLoading()
-    //   }
-    //   this.message.success('修改成功')
-    //   setTimeout(() => {
-    //     this.$refs.ModalRow.handleClose()
-    //   }, 150)
-    //   this.fetchList()
-    // }
   }
 }
 </script>

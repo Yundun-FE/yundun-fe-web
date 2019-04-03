@@ -1,34 +1,33 @@
 <template>
   <page>
-    <DmEdit
-      :loading="loading"
-      v-model="form"
-      :rules="rules"
-      @submit="handleSubmit"
-    >
-      <TableMenu />
-    </DmEdit>
+    <a-card title="目录管理">
+      <DmEdit
+        :loading="loading"
+        v-model="form"
+        :rules="rules"
+        @submit="handleSubmit"
+      >
+        <FormMenu/>
+      </DmEdit>
+    </a-card>
   </page>
 </template>
 
 <script>
-import TableMenu from './components/TableMenu'
 import consoleEdit from '@/mixins/consoleEdit'
+import FormMenu from './components/FormMenu'
 
 export default {
-  components: { TableMenu },
+  components: { FormMenu },
 
   mixins: [consoleEdit],
 
   data() {
     return {
-      apiName: 'applications',
-      mode: 'Edit'
+      apiName: 'jobs',
+      mode: 'Edit',
+      id: this.$route.params.id
     }
-  },
-
-  created() {
-    this.init(this.$route.params.appId)
   }
 }
 </script>

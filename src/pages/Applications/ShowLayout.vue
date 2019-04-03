@@ -1,79 +1,38 @@
 <template>
-  <div class="search-content">
+  <div>
+    <HeaderDetail style="margin-bottom: 24px" />
     <router-view />
   </div>
 </template>
 
 <script>
+import jobsMixins from '@/mixins/jobs'
+import HeaderDetail from './components/HeaderDetail'
+
 export default {
-  name: 'SearchLayout',
-  data() {
-    return {
-      tabs: {
-        items: [
-          {
-            key: '1',
-            title: '设置'
-          },
-          {
-            key: '2',
-            title: '项目'
-          },
-          {
-            key: '3',
-            title: '应用'
-          }
-        ],
-        active: () => {
-          switch (this.$route.name) {
-            case '/list/search/article':
-              return '1'
-            case '/list/search/project':
-              return '2'
-            case '/list/search/application':
-              return '3'
-            default:
-              return '1'
-          }
-        },
-        callback: (key) => {
-          switch (key) {
-            case '1':
-              this.$router.push({
-                path: '../settings',
-                append: true
-              })
-              break
-            case '2':
-              this.$router.push('/list/search/project')
-              break
-            case '3':
-              this.$router.push('/list/search/application')
-              break
-            default:
-              this.$router.push('/workplace')
-          }
-        }
-      },
-      search: false
+  name: 'ShowLayout',
+
+  components: { HeaderDetail },
+
+  mixins: [jobsMixins],
+
+  watch: {
+    $route(val) {
+      this.init()
     }
   },
+
   created() {
-    console.log(this.$route.name)
+    this.getByName('console-v5-web')
+    this.init()
+  },
+
+  methods: {
+    init() {
+      const id = this.$route.params.id
+      this.SET_ID(id)
+      this.getById()
+    }
   }
 }
 </script>
-
-<style lang="less" scoped>
-  .search-head{
-    background-color: #fff;
-    margin: -25px -24px -24px;
-    .search-input{
-      text-align: center;
-      margin-bottom: 16px;
-    }
-  }
-  .search-content{
-    margin-top: 48px;
-  }
-</style>

@@ -3,11 +3,10 @@
     ref="Dialog"
     v-model="form"
     :rules="rules"
-    :modify="modify"
-    title-label="应用"
+    title-label="项目"
     @submit="handleSubmit"
   >
-    <FormRow />
+    <FormRow/>
   </DialogForm>
 </template>
 
@@ -16,8 +15,8 @@ import createDialog from '@/utils/create-dialog'
 import FormRow from './FormRow'
 
 export default createDialog({
-  apiName: 'applications',
+  components: { FormRow },
 
-  components: { FormRow }
+  apiName: 'jobs'
 })
 </script>

@@ -29,71 +29,63 @@ const mainMap = [
         path: '/develop/applications',
         name: 'applications',
         hideChildrenInMenu: true,
-        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Applications/index')
       },
-      {
-        path: '/develop/项目管理/:id',
-        name: '项目管理.appId',
-        redirect: '/develop/项目管理/:id/settings',
-        hideChildrenInMenu: false,
-        meta: { title: '应用详情', keepAlive: true, permission: ['dashboard'] },
-        component: () => import('@/pages/Applications/ShowLayout')
-      },
-      {
-        path: '/develop/pages',
-        name: 'applicationsPages',
-        meta: { title: '页面管理' },
-        component: () => import('@/pages/ApplicationsPages/index')
-      },
-      {
-        path: '/develop/pages/:pageId/edit',
-        name: 'applicationsPages.Id',
-        hidden: true,
-        meta: { title: '修改页面' },
-        component: () => import('@/pages/ApplicationsPages/Show')
-      },
+      // {
+      //   path: '/develop/pages',
+      //   name: 'applicationsPages',
+      //   meta: { title: '页面管理' },
+      //   component: () => import('@/pages/ApplicationsPages/index')
+      // },
+      // {
+      //   path: '/develop/pages/:pageId/edit',
+      //   name: 'applicationsPages.Id',
+      //   hidden: true,
+      //   meta: { title: '修改页面' },
+      //   component: () => import('@/pages/ApplicationsPages/Show')
+      // },
       {
         path: '/develop/products',
         name: 'products',
-        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Products/index')
       },
       {
-        path: '/develop/products',
-        name: 'products.id',
-        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
-        component: () => import('@/pages/Products/ShowLayout'),
+        path: '/develop/applications',
+        name: 'applications.id',
+        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        component: () => import('@/pages/Applications/ShowLayout'),
         hidden: true,
         children: [
           {
-            path: '/develop/products/:id',
-            redirect: '/develop/products/:id/menu',
+            path: '/develop/applications/:id',
+            redirect: '/develop/applications/:id/menu',
             meta: { title: '目录管理', keepAlive: true, permission: ['dashboard'] }
           },
           {
-            path: '/develop/products/:id/menu',
-            name: 'products.id.menu',
+            path: '/develop/applications/:id/menu',
+            name: 'applications.id.menu',
             meta: { title: '目录管理', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Products/ShowMenu')
+            component: () => import('@/pages/Applications/ShowMenu')
           },
           {
-            path: '/develop/products/:id/build',
-            name: 'products.id.build',
+            path: '/develop/applications/:id/build',
+            name: 'applications.id.build',
             meta: { title: '编译管理', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Products/ShowBuild')
+            component: () => import('@/pages/Applications/ShowBuild')
           },
           {
-            path: '/develop/products/:id/setting',
-            name: 'products.id.setting',
+            path: '/develop/applications/:id/setting',
+            name: 'applications.id.setting',
             meta: { title: '项目配置', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Products/ShowSetting')
+            component: () => import('@/pages/Applications/ShowSetting')
           },
           {
-            path: '/develop/products/:id/assets',
-            name: 'products.id.assets',
+            path: '/develop/applications/:id/assets',
+            name: 'applications.id.assets',
             meta: { title: '资源配置', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Products/ShowAssets')
+            component: () => import('@/pages/Applications/ShowAssets')
           }
         ]
       }

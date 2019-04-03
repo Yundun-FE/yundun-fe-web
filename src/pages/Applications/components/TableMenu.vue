@@ -1,58 +1,33 @@
 <template>
   <div>
-    <el-form-item label="目录">
-      <TableForm
-        :data="form.menus"
-        :row="row"
-        sort
-      >
-        <el-table-column
-          label="名称"
-          min-width="100px"
-        >
-          <template slot-scope="scope">
-            <el-input
-              v-model="scope.row.name"
-              placeholder="名称"
-            />
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="路径"
-          min-width="150px"
-        >
-          <template slot-scope="scope">
-            <el-input
-              v-model="scope.row.path"
-              placeholder="路径"
-            />
-          </template>
-        </el-table-column>
-      </TableForm>
-    </el-form-item>
+    <div
+      v-for="(item, index) in form.menus"
+      :key="index"
+    >
+      <p>{{ item.name }}</p>
+      <TableApplication :data="item.childrens"/>
+    </div>
   </div>
 </template>
 
 <script>
-import formTable from '@/mixins/formTable'
+import TableApplication from './TableApplication'
 
 export default {
-  mixins: [formTable],
+  components: { TableApplication },
 
   data() {
     return {
       row: {
         name: '',
-        path: '/'
+        childrens: []
       }
     }
   },
-
   computed: {
     form() {
       return this.$parent.model
     }
   }
-
 }
 </script>
