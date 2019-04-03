@@ -23,7 +23,7 @@ export default {
   },
 
   created() {
-    this.getByName('console-v5-web')
+    this.getByName('console-v6-web')
     this.init()
   },
 

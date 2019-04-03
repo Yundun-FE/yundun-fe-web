@@ -5,6 +5,8 @@ const FIELD_TOTAL = 'total' // 总数字段名称
 const FIELD_PAGE = 'page'
 
 export default {
+  name: 'ConsoleTable',
+
   data() {
     return {
       needTotalList: [],

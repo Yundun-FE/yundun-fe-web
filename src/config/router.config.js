@@ -21,17 +21,10 @@ const mainMap = [
   },
   {
     path: '/develop',
-    redirect: '/develop/applications',
+    redirect: '/develop/products',
     meta: { title: '开发管理', icon: 'form', permission: ['form'] },
     component: PageView,
     children: [
-      {
-        path: '/develop/applications',
-        name: 'applications',
-        hideChildrenInMenu: true,
-        meta: { title: '应用管理', keepAlive: true, permission: ['dashboard'] },
-        component: () => import('@/pages/Applications/index')
-      },
       // {
       //   path: '/develop/pages',
       //   name: 'applicationsPages',
@@ -48,8 +41,15 @@ const mainMap = [
       {
         path: '/develop/products',
         name: 'products',
-        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '项目', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Products/index')
+      },
+      {
+        path: '/develop/applications',
+        name: 'applications',
+        hideChildrenInMenu: true,
+        meta: { title: '应用', keepAlive: true, permission: ['dashboard'] },
+        component: () => import('@/pages/Applications/index')
       },
       {
         path: '/develop/applications',

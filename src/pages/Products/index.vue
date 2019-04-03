@@ -18,7 +18,7 @@
       </a-dropdown>
     </div>
 
-    <s-table
+    <ConsoleTable
       ref="Table"
       :columns="columns"
       :data="loadData"
@@ -36,7 +36,7 @@
           </PopoverConfirm>
         </ColumnAction>
       </template>
-    </s-table>
+    </ConsoleTable>
 
     <ModalForm
       ref="ModalRow"
@@ -84,15 +84,9 @@
 </template>
 
 <script>
-import STable from './table'
-import ModalRow from './components/ModalRow'
 import tableData from '@/mixins/tableData'
 
 export default {
-  components: {
-    STable, ModalRow
-  },
-
   mixins: [tableData],
 
   data() {

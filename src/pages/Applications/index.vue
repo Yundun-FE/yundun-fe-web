@@ -1,149 +1,164 @@
 <template>
-  <!-- <PageTable
-    ref="PageTable"
-    page-name="fe-job"
-    api-name="jobs"
-  >
-    <FormRow slot="FormRow"/>
-  </PageTable> -->
-  <div>
-    <a-button
-      type="primary"
-      @click="handleCreate"
-    >新增应用</a-button>
-    <a-row
-      :gutter="16"
-      class="margin-top"
+  <a-card>
+    <div class="table-operator">
+      <a-button
+        type="primary"
+        icon="plus"
+        @click="handleCreate"
+      >{{ $t('du.toolbar.create') }}</a-button>
+      <a-dropdown>
+        <a-menu slot="overlay">
+          <a-menu-item key="1">
+          <a-icon type="delete" />{{ $t('du.toolbar.delete') }}</a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          {{ $t('du.toolbar.bulkAction') }}
+          <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
+    </div>
+
+    <ConsoleTable
+      ref="Table"
+      :columns="columns"
+      :data="loadData"
+      :alert="options.alert"
+      :row-selection="options.rowSelection"
     >
-      <a-col
-        v-for="(item, index) in list"
-        :span="8"
-        :key="index"
-        style="margin-bottom: 16px"
+      <template
+        slot="action"
+        slot-scope="text, record"
       >
-        <a-card :bordered="false">
-          <template slot="title">
-            <router-link :to="`/develop/products/${item.id}`">{{ item.title }}</router-link>
-          </template>
-          <p>{{ item.env }}</p>
-          <template
-            slot="actions"
-            class="ant-card-actions"
-          >
-            <a-icon type="setting" />
-            <a-tooltip
-              title="编辑"
-              placement="top"
-            >
-              <a-icon
-                type="edit"
-                @click="handleRowEdit(item)"
-              />
-            </a-tooltip>
-            <a-icon type="ellipsis" />
-          </template>
-        </a-card>
-      </a-col>
-    </a-row>
+        <a-dropdown-button @click="handleRowClick(record)">
+          查看详情
+          <a-menu slot="overlay" @click="handleRowClick">
+            <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
+            <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
+            <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
+          </a-menu>
+        </a-dropdown-button>
+      </template>
+    </ConsoleTable>
+
     <ModalForm
       ref="ModalRow"
-      :fields="[ 'name', 'title', 'jenkinsName', 'env']"
+      :fields="[ 'name', 'title', 'description', 'productId']"
       :fetch-update="fetchUpdate"
       :fetch-create="fetchCreate"
       title-label="应用"
+      @submit-success="handleRefresh"
     >
       <template slot-scope="scope">
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="名称"
+          label="项目"
+        >
+          <a-select
+            v-decorator="['productId']"
+            :options="selectsProducts"
+          />
+        </a-form-item>
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          label="Name"
+          help="唯一标识，不可修改"
         >
           <a-input
             v-decorator="['name']"
-            disabled
             placeholder="Name"
           />
         </a-form-item>
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="标题"
+          label="别名"
         >
           <a-input
             v-decorator="['title']"
-            placeholder="标题"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="ENV"
-        >
-          <a-input
-            v-decorator="['env']"
-            placeholder="Env"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="Jenkins Name"
-        >
-          <a-input
-            v-decorator="['jenkinsName']"
-            placeholder="Jenkins Name"
+            placeholder="Title"
           />
         </a-form-item>
       </template>
     </ModalForm>
-  </div>
+  </a-card>
 </template>
 
 <script>
-import FormRow from './components/FormRow'
-import consoleData from '@/mixins/consoleData'
+import tableData from '@/mixins/tableData'
 
 export default {
-  components: { FormRow },
-
-  mixins: [consoleData],
+  mixins: [tableData],
 
   data() {
     return {
-      apiUri: 'get /api/v1/jobs?name=console-v5-web'
+      selectsProducts: [],
+      queryParam: {},
+      columns: [
+        {
+          title: 'Name',
+          dataIndex: 'name'
+        },
+        {
+          title: '别名',
+          dataIndex: 'title'
+        },
+        {
+          title: '所属项目',
+          dataIndex: 'productName'
+        },
+        {
+          title: '创建时间',
+          dataIndex: 'created_at'
+        },
+        {
+          title: '操作',
+          dataIndex: 'action',
+          width: '150px',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+      loadData: parameter => {
+        return this.Fetch.get('/v2/jobs', Object.assign(parameter, this.queryParam))
+          .then(res => res)
+      }
     }
   },
 
+  created() {
+    this.init()
+  },
+
   methods: {
-    handleRowEdit(row) {
-      this.$refs.ModalRow.handleOpen(row)
+    async init() {
+      const productData = await this.Fetch.get('/v1/products')
+      this.selectsProducts = productData.list.map(_ => {
+        return {
+          label: _.name,
+          value: _.id
+        }
+      })
+    },
+
+    handleRowClick(row) {
+      this.$router.push({
+        path: `/develop/applications/${row.id}`
+      })
+    },
+
+    async handleRowDelete(row) {
+      await this.Fetch.delete(`/v2/jobs/${row.id}`)
+      this.handleRefresh()
     },
 
     fetchUpdate(form) {
-      return this.Fetch.put(`/api/v1/jobs/${form.id}`, form)
+      return this.Fetch.put(`/v2/jobs/${form.id}`, form)
     },
 
     fetchCreate(form) {
-      return this.Fetch.post(`/api/v1/jobs`, form)
-    },
-
-    handleCreate() {
-      this.$refs.ModalRow.handleOpen({ name: 'console-v5-web' })
+      return this.Fetch.post(`/v2/jobs`, form)
     }
-
-    // async handleRowEditSubmit(form) {
-    //   try {
-    //   } catch (e) {
-    //     return
-    //   } finally {
-    //     this.$refs.ModalRow.resetSubmitLoading()
-    //   }
-    //   this.message.success('修改成功')
-    //   setTimeout(() => {
-    //     this.$refs.ModalRow.handleClose()
-    //   }, 150)
-    //   this.fetchList()
-    // }
   }
 }
 </script>

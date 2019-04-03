@@ -12,7 +12,7 @@
 <template>
   <a-card :class="b()">
     <template slot="title">
-      {{ data.title }}
+      <!-- {{ data.title }} -->
       <!-- <a href="">所属项目：{{ data.name }}</a> -->
     </template>
     <a-form layout="inline">

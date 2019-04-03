@@ -31,18 +31,18 @@ const jobs = {
 
   actions: {
     async getById({ commit, state }, id) {
-      const data = await Fetch.get(`/api/v1/jobs/${id || state.id}`)
+      const data = await Fetch.get(`/v2/jobs/${id || state.id}`)
       commit('SET_DATA', data)
     },
 
-    async getByName({ commit }, name) {
-      const data = await Fetch.get(`/api/v1/jobs`, { name })
+    async getByName({ commit }, productName) {
+      const data = await Fetch.get(`/v2/jobs`, { productName })
       commit(`SET_SELECT_ENV`, data)
     },
 
     async saveById({ commit, state }) {
       try {
-        await Fetch.put(`/api/v1/jobs/${state.id}`, state.data)
+        await Fetch.put(`/v2/jobs/${state.id}`, state.data)
       } catch (e) {
         return
       }

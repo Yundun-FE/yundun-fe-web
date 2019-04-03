@@ -1,6 +1,7 @@
 import Page from './Page'
 import Form from './Form'
 import Column from './Column'
+import Console from './Console'
 import Popover from './Popover'
 import Dm from './Dm'
 import Card from './Card'
@@ -19,6 +20,7 @@ function install(Vue) {
     Form,
     Dialog,
     Column,
+    Console,
     Popover,
     Dm,
     Card,
