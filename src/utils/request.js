@@ -21,11 +21,6 @@ service.interceptors.response.use(
     // 正常返回
     if (status === 200) {
       if (message) {
-        Message({
-          message,
-          type: 'warning',
-          duration: 5 * 1000
-        })
         Message.warning(message)
         return Promise.reject(data)
       }
