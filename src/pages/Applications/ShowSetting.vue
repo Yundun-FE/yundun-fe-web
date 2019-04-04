@@ -5,19 +5,30 @@
       @click="handleAdd"
     >新增配置组</a-button>
 
-    {{ data.settings }}
     <a-row
       v-if="data.settings"
       :gutter="20"
+      class="margin-top"
     >
-      <a-col :span="12">
+      <a-col
+        v-for="(item, index) in data.settings"
+        :span="12"
+        :key="index"
+        class="margin-bottom"
+      >
+        <CardSettingsGroup
+          :title="item.title"
+          :content="item.content"
+        />
         <!-- <CardProxy /> -->
       </a-col>
     </a-row>
     <ModalForm
       ref="ModalRow"
-      :fields="[ 'name', 'title', 'description', 'type']"
+      :fields="[ 'name', 'title', 'description']"
+      :fetch-create="fetchCreate"
       title-label="配置组"
+      @submit-success="handleRefresh"
     >
       <template slot-scope="scope">
         <a-form-item
@@ -44,6 +55,16 @@
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
+          label="类型"
+        >
+          <a-select
+            v-decorator="['type']"
+            :options="GROUP_TYPE"
+          />
+        </a-form-item>
+        <a-form-item
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
           label="介绍"
         >
           <a-input
@@ -58,6 +79,7 @@
 
 <script>
 import jobsMixins from '@/mixins/jobs'
+import CardSettingsGroup from './components/CardSettingsGroup'
 
 const GROUP_TYPE = [
   {
@@ -79,6 +101,8 @@ const GROUP_TYPE = [
 ]
 
 export default {
+  components: { CardSettingsGroup },
+
   mixins: [jobsMixins],
 
   data() {
@@ -89,6 +113,10 @@ export default {
   },
 
   methods: {
+    handleRefresh() {
+      this.getById()
+    },
+
     handleAdd() {
       this.$refs.ModalRow.handleOpen()
     },
@@ -98,7 +126,7 @@ export default {
     },
 
     fetchCreate(form) {
-      return this.Fetch.post(`/v2/jobs`, form)
+      return this.Fetch.post(`/v1/products/${this.data.productId}/settings`, form)
     }
   }
 }

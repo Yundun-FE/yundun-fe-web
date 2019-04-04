@@ -197,23 +197,23 @@ export default {
     },
 
     async fetchMoreJobs() {
-      const { title } = this.info
-      const data = await this.Fetch.get('/jobs', { title: this.info.title })
+      // const { title } = this.info
+      // const data = await this.Fetch.get('/jobs', { title: this.info.title })
 
-      const { list } = data
-      list.forEach(_ => {
-        _.label = labelView(_.env, ENV)
-      })
+      // const { list } = data
+      // list.forEach(_ => {
+      //   _.label = labelView(_.env, ENV)
+      // })
 
-      const envs = list.map(_ => _.env)
-      const envList = deepClone(ENV)
-      const envMap = listToObj(list, 'env')
-      envList.forEach(item => {
-        const dItem = envMap[item.value]
-        item.show = envs.includes(item.value)
-        item.value = dItem ? dItem.id : 0
-      })
-      this.selectEnv = envList.filter(_ => _.show)
+      // const envs = list.map(_ => _.env)
+      // const envList = deepClone(ENV)
+      // const envMap = listToObj(list, 'env')
+      // envList.forEach(item => {
+      //   const dItem = envMap[item.value]
+      //   item.show = envs.includes(item.value)
+      //   item.value = dItem ? dItem.id : 0
+      // })
+      // this.selectEnv = envList.filter(_ => _.show)
     }
   }
 }
