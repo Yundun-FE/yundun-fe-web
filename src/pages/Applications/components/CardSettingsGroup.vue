@@ -2,7 +2,7 @@
   <CardSettings
     :title="title"
     height="400"
-    @edit="$refs.ModalForm.handleOpen()"
+    @edit="$refs.ModalCardSetting.handleOpen()"
   >
     <a-table
       :columns="columns"
@@ -11,30 +11,7 @@
       row-key="name"
       size="small"
     />
-    <ModalForm ref="ModalForm" :fields="[ 'name', 'title', 'description']" title-label="配置">
-      <template slot-scope="scope">
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="Name"
-        >
-          <a-input
-            v-decorator="['name']"
-            placeholder="Name"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="别名"
-        >
-          <a-input
-            v-decorator="['title']"
-            placeholder="别名"
-          />
-        </a-form-item>
-      </template>
-    </ModalForm>
+    <ModalCardSetting ref="ModalCardSetting"/>
   </CardSettings>
 </template>
 
@@ -42,9 +19,11 @@
 import ModalProxy from './ModalProxy'
 import jobsMixins from '@/mixins/jobs'
 import CardSettings from '@/components/Card/CardSettings'
+import FormColumn from './components/FormColumn'
+import ModalCardSetting from './components/ModalCardSetting'
 
 export default {
-  components: { ModalProxy, CardSettings },
+  components: { ModalProxy, CardSettings, FormColumn, ModalCardSetting },
 
   mixins: [jobsMixins],
 
