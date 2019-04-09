@@ -18,7 +18,7 @@
       >
         <CardSettingsGroup
           :title="item.title"
-          :content="item.content"
+          :content="item"
         />
         <!-- <CardProxy /> -->
       </a-col>

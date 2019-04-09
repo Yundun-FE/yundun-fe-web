@@ -10,6 +10,14 @@ export default {
         this.SET_ID(value)
       }
     },
+    jobsId: {
+      get() {
+        return this.$store.state.jobs.id
+      },
+      set(value) {
+        this.SET_ID(value)
+      }
+    },
     ...mapState({
       data: state => state.jobs.data,
       selectEnv: state => state.jobs.selectEnv

@@ -2,15 +2,15 @@
   <CardSettings
     :title="title"
     height="400"
-    @edit="$refs.ModalCardSetting.handleOpen()"
+    @edit="$refs.ModalCardSetting.handleOpen(content)"
   >
-    <a-table
+    <!-- <a-table
       :columns="columns"
       :pagination="false"
       :data-source="content"
       row-key="name"
       size="small"
-    />
+    /> -->
     <ModalCardSetting ref="ModalCardSetting"/>
   </CardSettings>
 </template>
@@ -30,9 +30,9 @@ export default {
   props: {
     title: String,
     content: {
-      type: Array,
+      type: Object,
       default: function() {
-        return []
+        return {}
       }
     }
   },

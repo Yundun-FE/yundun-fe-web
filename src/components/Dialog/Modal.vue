@@ -73,7 +73,8 @@ export default create({
       }
     },
     fetchUpdate: Function,
-    fetchCreate: Function
+    fetchCreate: Function,
+    fetchSubmit: Function
   },
 
   data() {
@@ -135,21 +136,30 @@ export default create({
       }, 150)
     },
 
-    handleSubmit(e) {
-      this.submitLoading = true
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          const form = {
-            ...this.formRaw, ...values
-          }
-          if (this.modify) {
-            if (this.fetchUpdate) this.handleSubmitData(form, this.fetchUpdate)
-          } else {
-            if (this.fetchCreate) this.handleSubmitData(form, this.fetchCreate)
-          }
-        }
-      })
+    async handleSubmit(e) {
+      this.$emit('submit')
+      // this.submitLoading = true
+      // e.preventDefault()
+
+      // try {
+      //   await this.fetchSubmit()
+      // } catch (e) {
+      //   return
+      // } finally {
+      //   this.submitLoading = false
+      // }
+      // this.form.validateFields((err, values) => {
+      //   if (!err) {
+      //     const form = {
+      //       ...this.formRaw, ...values
+      //     }
+      //     if (this.modify) {
+      //       if (this.fetchUpdate) this.handleSubmitData(form, this.fetchUpdate)
+      //     } else {
+      //       if (this.fetchCreate) this.handleSubmitData(form, this.fetchCreate)
+      //     }
+      //   }
+      // })
     }
   }
 })
