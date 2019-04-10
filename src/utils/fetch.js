@@ -1,10 +1,9 @@
 import request from './request'
-const base = 'api'
 
 export default {
   post(url, data, params) {
     return request({
-      url: base + url,
+      url,
       method: 'POST',
       data,
       params
@@ -13,7 +12,7 @@ export default {
 
   delete(url, data, params) {
     return request({
-      url: base + url,
+      url,
       method: 'DELETE',
       data,
       params
@@ -22,7 +21,7 @@ export default {
 
   put(url, data, params) {
     return request({
-      url: base + url,
+      url,
       method: 'PUT',
       data,
       params
@@ -31,7 +30,7 @@ export default {
 
   patch(url, data, params) {
     return request({
-      url: base + url,
+      url,
       method: 'PATCH',
       data,
       params
@@ -40,7 +39,7 @@ export default {
 
   get(url, params) {
     return request({
-      url: base + url,
+      url,
       method: 'GET',
       params
     })

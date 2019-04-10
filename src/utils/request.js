@@ -6,7 +6,7 @@ import Retry from './retry.js'
 let networkError = false
 
 const service = axios.create({
-  baseURL: '/',
+  baseURL: 'api',
   timeout: 15000
   // headers: {
   //   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

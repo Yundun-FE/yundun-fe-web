@@ -1,8 +1,6 @@
 import api from './index'
 import axios from '@/utils/request'
-import {
-  promised
-} from 'q'
+import { promised } from 'q'
 
 /**
  * login func
