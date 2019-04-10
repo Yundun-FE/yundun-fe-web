@@ -49,31 +49,12 @@
           <a-switch v-decorator="['defaultValue']" />
         </template>
         <template v-if="form.getFieldValue('valueType') === 'img'">
-          <FormUploadImg/>
-          <!-- <a-upload
-            :show-upload-list="false"
-            name="avatar"
-            list-type="picture-card"
-            class="avatar-uploader"
-            action="//jsonplaceholder.typicode.com/posts/"
-          > -->
-            <!-- <img v-if="imageUrl" :src="imageUrl" alt="avatar" >
-            <div v-else>
-              <a-icon :type="loading ? 'loading' : 'plus'" />
-              <div class="ant-upload-text">Upload</div>
-            </div> -->
-          </a-upload>
+          <FormUploadImg v-decorator="['defaultValue']" @success="handleUpdateFile"/>
+          <a-input v-decorator="['defaultValue']" />
         </template>
         <template v-if="form.getFieldValue('valueType') === 'file'">
-          <a-upload
-            :multiple="true"
-            name="file"
-            action="//jsonplaceholder.typicode.com/posts/"
-          >
-            <a-button>
-              <a-icon type="upload" /> Click to Upload
-            </a-button>
-          </a-upload>
+          <FormUploadFile v-decorator="['defaultValue']" @success="handleUpdateFile"/>
+          <a-input v-decorator="['defaultValue']" />
         </template>
       </a-form-item>
     </a-form>
@@ -144,6 +125,10 @@ export default create({
   },
 
   methods: {
+    handleUpdateFile(defaultValue) {
+      this.form.setFieldsValue({ defaultValue })
+    },
+
     handleRemove() {
       this.$emit('remove')
     }

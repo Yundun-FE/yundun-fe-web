@@ -5,6 +5,7 @@ import FormSelect from './FormSelect'
 import FormCheckbox from './FormCheckbox'
 import FormSearch from './FormSearch'
 import FormUploadImg from './_FormUploadImg'
+import FormUploadFile from './_FormUploadFile'
 
 Form.install = Vue => {
   // Vue.component(Form.name, Form)
@@ -14,6 +15,7 @@ Form.install = Vue => {
   Vue.component(FormCheckbox.name, FormCheckbox)
   Vue.component(FormSearch.name, FormSearch)
   Vue.component(FormUploadImg.name, FormUploadImg)
+  Vue.component(FormUploadFile.name, FormUploadFile)
 }
 
 export default Form

@@ -19,7 +19,7 @@
   >
     <template>
       <div slot="extra">
-        <a-dropdown>
+        <a-dropdown :trigger="['click']">
           <a-menu slot="overlay" @click="handleSettingClick">
             <a-menu-item key="modify">编辑</a-menu-item>
             <a-menu-item key="delete">删除</a-menu-item>

@@ -1,5 +1,16 @@
 <template>
   <a-upload
+    :multiple="false"
+    :data="{ token }"
+    name="file"
+    action="https://upload.qiniup.com"
+    @change="handleChange"
+  >
+    <a-button>
+      <a-icon type="upload" /> Click to Upload
+    </a-button>
+  </a-upload>
+  <!-- <a-upload
     :show-upload-list="false"
     :before-upload="beforeUpload"
     :data="{ token }"
@@ -13,7 +24,7 @@
       <a-icon :type="loading ? 'loading' : 'plus'" />
       <div class="ant-upload-text">Upload</div>
     </div>
-  </a-upload>
+  </a-upload> -->
 </template>
 <script>
 function getBase64(img, callback) {
@@ -23,7 +34,7 @@ function getBase64(img, callback) {
 }
 
 export default {
-  name: 'FormUploadImg',
+  name: 'FormUploadFile',
 
   props: {
     value: String
@@ -84,21 +95,21 @@ export default {
 </script>
 
 <style lang="less">
-  .avatar-uploader > .ant-upload {
-    width: 128px;
-    height: 128px;
+.avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
 
-    img{
-      max-width: 128px;
-    }
+  img {
+    max-width: 128px;
   }
-  .ant-upload-select-picture-card i {
-    font-size: 32px;
-    color: #999;
-  }
+}
+.ant-upload-select-picture-card i {
+  font-size: 32px;
+  color: #999;
+}
 
-  .ant-upload-select-picture-card .ant-upload-text {
-    margin-top: 8px;
-    color: #666;
-  }
+.ant-upload-select-picture-card .ant-upload-text {
+  margin-top: 8px;
+  color: #666;
+}
 </style>
