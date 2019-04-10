@@ -93,6 +93,9 @@ export default create({
   },
 
   methods: {
+    startSubmitLoading() {
+      this.submitLoading = true
+    },
     // 重置提交 Loading
     resetSubmitLoading() {
       this.submitLoading = false

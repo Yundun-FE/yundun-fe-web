@@ -3,42 +3,37 @@
 
 <template>
   <div :class="b()">
+    <a-icon
+      v-if="showRemove"
+      style="cursor: pointer"
+      type="minus-circle-o"
+      @click="handleRemove"
+    />
     <a-form :form="form">
       <a-form-item
         v-bind="formItemLayout"
         label="Name"
       >
         <a-row :gutter="16">
-          <a-col :span="10">
+          <a-col :span="8">
             <a-input
               v-decorator="['name']"
               placeholder="Name"
             />
           </a-col>
-          <a-col :span="10">
+          <a-col :span="8">
             <a-input
               v-decorator="['title']"
               placeholder="别名"
             />
           </a-col>
-          <a-col :span="4">
-            <a-icon
-              v-if="showRemove"
-              style="cursor: pointer"
-              type="minus-circle-o"
-              @click="handleRemove"
+          <a-col :span="8">
+            <a-select
+              v-decorator="['valueType']"
+              :options="VALUE_TYPE"
             />
           </a-col>
         </a-row>
-      </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="类型"
-      >
-        <a-radio-group
-          v-decorator="['valueType']"
-          :options="VALUE_TYPE"
-        />
       </a-form-item>
       <a-form-item
         v-bind="formItemLayout"

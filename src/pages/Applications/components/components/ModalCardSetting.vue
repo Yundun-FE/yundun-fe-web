@@ -5,6 +5,7 @@
   <Modal
     ref="Modal"
     :fields="[ 'name', 'title', 'description']"
+    :width="700"
     title-label="配置"
     @submit="fetchSubmit"
   >
@@ -58,13 +59,6 @@
           </a-button>
         </a-form-item>
       </a-form>
-
-      <!-- {{ $refs.FormColumn.getFieldsValue() }} -->
-      <!--
-          {
-
-          }
-         -->
     </template>
   </Modal>
 </template>
@@ -114,7 +108,15 @@ export default create({
       })
 
       form.settings = columns
-      await this.Fetch.put(`/v2/jobs/${this.jobsId}/settings/${form.name}`, form)
+
+      try {
+        this.$refs.Modal.startSubmitLoading()
+        await this.Fetch.put(`/v2/jobs/${this.jobsId}/settings/${form.name}`, form)
+      } finally {
+        this.Notice('ACTION_SUCCESS')
+        this.$refs.Modal.handleClose()
+        this.$refs.Modal.resetSubmitLoading()
+      }
     },
 
     handleRemoveColumn(index) {
@@ -126,9 +128,16 @@ export default create({
     },
 
     afterOpen(form) {
-      this.columns = form.settings.map(_ => _.name)
+      const { settings = [] } = form
+      this.columns = settings.map(_ => _.name)
       this.$nextTick(() => {
         this.form.setFieldsValue(Object.assign(this.defaultForm, form))
+        settings.forEach((item, index) => {
+          this.$refs[`FormColumn${index}`][0].form.setFieldsValue(item)
+          this.$nextTick(() => {
+            this.$refs[`FormColumn${index}`][0].form.setFieldsValue(item)
+          })
+        })
       })
     }
   }
