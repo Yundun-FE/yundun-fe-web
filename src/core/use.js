@@ -5,6 +5,7 @@ import config from '@/config/defaultSettings'
 
 import Fetch from '@/utils/fetch'
 import Notice from '@/utils/notice'
+import Jump from '@/utils/helper/jump'
 import * as LABEL from '@/utils/constants/label'
 import VueStorage from 'vue-ls'
 import PermissionHelper from '@/utils/helper/permission'
@@ -78,11 +79,7 @@ import {
   Cascader,
   ColorPicker,
   Transfer,
-  Container,
   Header,
-  Aside,
-  Main,
-  Footer,
   Loading
 } from 'element-ui'
 
@@ -145,11 +142,7 @@ Vue.use(CollapseItem)
 Vue.use(Cascader)
 Vue.use(ColorPicker)
 Vue.use(Transfer)
-Vue.use(Container)
 Vue.use(Header)
-Vue.use(Aside)
-Vue.use(Main)
-Vue.use(Footer)
 
 Vue.use(VueStorage, config.storageOptions)
 Vue.use(PermissionHelper)
@@ -159,6 +152,7 @@ installFilter(Vue)
 installComponents(Vue)
 
 Vue.prototype.message = message
+Vue.prototype.Jump = Jump
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
 Vue.prototype.Notice = Notice

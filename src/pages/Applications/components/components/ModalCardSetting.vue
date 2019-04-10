@@ -29,15 +29,6 @@
             placeholder="别名"
           />
         </a-form-item>
-        <!-- <a-form-item
-          v-bind="formItemLayout"
-          label="配置类型"
-        >
-          <a-radio-group
-            v-decorator="['type']"
-            :options="TYPE"
-          />
-        </a-form-item> -->
         <template v-for="(item, index) in columns">
           <div :key="index">
             <a-divider />
@@ -48,7 +39,6 @@
             />
           </div>
         </template>
-
         <a-form-item v-bind="formItemLayoutWithOutLabel">
           <a-button
             type="dashed"

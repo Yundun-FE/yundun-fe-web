@@ -22,22 +22,9 @@ const mainMap = [
   {
     path: '/develop',
     redirect: '/develop/products',
-    meta: { title: '开发管理', icon: 'form', permission: ['form'] },
+    meta: { title: '开发', icon: 'form', permission: ['form'] },
     component: PageView,
     children: [
-      // {
-      //   path: '/develop/pages',
-      //   name: 'applicationsPages',
-      //   meta: { title: '页面管理' },
-      //   component: () => import('@/pages/ApplicationsPages/index')
-      // },
-      // {
-      //   path: '/develop/pages/:pageId/edit',
-      //   name: 'applicationsPages.Id',
-      //   hidden: true,
-      //   meta: { title: '修改页面' },
-      //   component: () => import('@/pages/ApplicationsPages/Show')
-      // },
       {
         path: '/develop/products',
         name: 'products',
@@ -54,25 +41,24 @@ const mainMap = [
       {
         path: '/develop/applications',
         name: 'applications.id',
-        meta: { title: '项目管理', keepAlive: true, permission: ['dashboard'] },
+        meta: { title: '应用', keepAlive: true, permission: ['dashboard'] },
         component: () => import('@/pages/Applications/ShowLayout'),
         hidden: true,
         children: [
           {
             path: '/develop/applications/:id',
-            redirect: '/develop/applications/:id/menu',
-            meta: { title: '目录管理', keepAlive: true, permission: ['dashboard'] }
+            redirect: '/develop/applications/:id/setting'
           },
           {
             path: '/develop/applications/:id/menu',
             name: 'applications.id.menu',
-            meta: { title: '目录管理', keepAlive: true, permission: ['dashboard'] },
+            meta: { title: '目录', keepAlive: true, permission: ['dashboard'] },
             component: () => import('@/pages/Applications/ShowMenu')
           },
           {
             path: '/develop/applications/:id/build',
             name: 'applications.id.build',
-            meta: { title: '编译管理', keepAlive: true, permission: ['dashboard'] },
+            meta: { title: '编译', keepAlive: true, permission: ['dashboard'] },
             component: () => import('@/pages/Applications/ShowBuild')
           },
           {
@@ -80,12 +66,6 @@ const mainMap = [
             name: 'applications.id.setting',
             meta: { title: '项目配置', keepAlive: true, permission: ['dashboard'] },
             component: () => import('@/pages/Applications/ShowSetting')
-          },
-          {
-            path: '/develop/applications/:id/assets',
-            name: 'applications.id.assets',
-            meta: { title: '资源配置', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Applications/ShowAssets')
           }
         ]
       }

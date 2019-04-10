@@ -17,7 +17,6 @@
         </a-button>
       </a-dropdown>
     </div>
-
     <ConsoleTable
       ref="Table"
       :columns="columns"
@@ -27,9 +26,9 @@
     >
       <template
         slot="action"
-        slot-scope="text, record"
+        slot-scope="scope"
       >
-        <a-dropdown-button @click="handleRowClick(record)">
+        <a-dropdown-button @click="handleRowClick(scope)">
           查看详情
           <a-menu slot="overlay" @click="handleRowClick">
             <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
@@ -39,7 +38,6 @@
         </a-dropdown-button>
       </template>
     </ConsoleTable>
-
     <ModalForm
       ref="ModalRow"
       :fields="[ 'name', 'title', 'description', 'productId']"
@@ -97,7 +95,7 @@ export default {
       queryParam: {},
       columns: [
         {
-          title: 'Name',
+          title: '名称',
           dataIndex: 'name'
         },
         {
@@ -114,7 +112,6 @@ export default {
         },
         {
           title: '操作',
-          dataIndex: 'action',
           width: '150px',
           scopedSlots: { customRender: 'action' }
         }
@@ -142,6 +139,7 @@ export default {
     },
 
     handleRowClick(row) {
+      console.log(row)
       this.$router.push({
         path: `/develop/applications/${row.id}`
       })

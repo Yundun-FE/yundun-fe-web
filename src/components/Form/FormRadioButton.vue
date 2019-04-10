@@ -1,22 +1,24 @@
 <template>
-  <el-radio-group
+  <a-radio-group
     v-model="val"
     :size="size"
+    :default-value="defaultValue"
+    :button-style="buttonStyle"
     @change="handleChange"
   >
-    <el-radio-button
+    <!-- <a-radio-button
       v-if="defaultLabel"
       :label="defaultValue"
       :key="defaultValue"
-    >{{ defaultLabel }}</el-radio-button>
-    <el-radio-button
+    >{{ defaultLabel }}</a-radio-button> -->
+    <a-radio-button
       v-for="item in radios"
       :key="item.value"
       :disabled="item.disabled"
-      :label="item.value"
-    >{{ item.label }}</el-radio-button>
+      :value="item.value"
+    >{{ item.label }}</a-radio-button>
     <slot />
-  </el-radio-group>
+  </a-radio-group>
 </template>
 
 <script>
@@ -27,6 +29,10 @@ export default create({
 
   props: {
     size: {
+      type: String,
+      default: 'default'
+    },
+    buttonStyle: {
       type: String,
       default: ''
     },
@@ -64,8 +70,8 @@ export default create({
   },
 
   methods: {
-    handleChange(val) {
-      this.$emit('change', val)
+    handleChange(e) {
+      this.$emit('change', e.target.value)
     }
   }
 })

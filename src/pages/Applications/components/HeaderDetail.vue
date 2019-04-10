@@ -1,6 +1,5 @@
 <style lang="less">
 .HeaderDetail{
-
   &__footer{
     text-align: center;
     margin: -24px;
@@ -12,14 +11,17 @@
 <template>
   <a-card :class="b()">
     <template slot="title">
-      <!-- {{ data.title }} -->
-      <!-- <a href="">所属项目：{{ data.name }}</a> -->
+      {{ jobsData.name }} （{{ jobsData.title }}）
+    </template>
+    <template slot="extra">
+      所属项目：{{ jobsData.productName }}
     </template>
     <a-form layout="inline">
-      <a-form-item>
+      <a-form-item label="切换环境">
         <yd-form-radio-button
           v-model="id"
           :radios="selectEnv"
+          button-style="solid"
           border
           @change="handleChangeEnv"
         />
@@ -55,30 +57,36 @@ export default create({
       current: ['menu'],
       tabs: [
         {
-          label: '目录管理',
-          key: 'menu'
-        },
-        {
-          label: '编译管理',
-          key: 'build'
-        },
-        {
-          label: '项目配置',
+          label: '配置',
           key: 'setting'
         },
         {
-          label: '资源配置',
-          key: 'assets'
+          label: '目录',
+          key: 'menu'
         }
       ]
     }
   },
 
+  watch: {
+    $route(val) {
+      this.initMenu()
+    }
+  },
+
+  created() {
+    this.initMenu()
+  },
+
   methods: {
+    initMenu() {
+      const nameArr = this.$route.name.split('.')
+      const name = nameArr[nameArr.length - 1]
+      this.current = [name]
+    },
+
     handleChangeEnv(id) {
-      this.$router.push({
-        path: `/develop/products/${id}/setting`
-      })
+      this.Jump.applicationsId(id)
     }
   }
 })

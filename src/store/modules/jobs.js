@@ -30,8 +30,9 @@ const jobs = {
   },
 
   actions: {
-    async getById({ commit, state }, id) {
-      const data = await Fetch.get(`/v2/jobs/${id || state.id}`)
+    async getById({ commit, state }, id = state.id) {
+      if (!id) return
+      const data = await Fetch.get(`/v2/jobs/${id}`)
       commit('SET_DATA', data)
     },
 
@@ -46,7 +47,6 @@ const jobs = {
       } catch (e) {
         return
       }
-      // this.getById()
     }
   }
 }
