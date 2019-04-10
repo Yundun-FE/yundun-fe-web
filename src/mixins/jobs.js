@@ -19,7 +19,7 @@ export default {
       }
     },
     ...mapState({
-      data: state => state.jobs.data,
+      jobsData: state => state.jobs.data,
       selectEnv: state => state.jobs.selectEnv
     })
   },

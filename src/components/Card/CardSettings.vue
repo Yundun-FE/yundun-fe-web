@@ -1,4 +1,14 @@
 <style lang="scss">
+.CardSettings{
+  .ant-card-body{
+    overflow: hidden;
+    .ps-container{
+      margin: -12px;
+      padding: 12px;
+      height: 300px;
+    }
+  }
+}
 </style>
 
 <template>
@@ -7,11 +17,22 @@
     :title="title"
     :style="{'height': isNaN(height) ? height : `${height}px`}"
   >
-    <a
-      slot="extra"
-      @click="handleSettings"
-    >配置</a>
-    <slot />
+    <template>
+      <div slot="extra">
+        <a-dropdown>
+          <a-menu slot="overlay" @click="handleSettingClick">
+            <a-menu-item key="modify">编辑</a-menu-item>
+            <a-menu-item key="delete">删除</a-menu-item>
+          </a-menu>
+          <a-button style="margin-left: 8px">
+            操作 <a-icon type="down" />
+          </a-button>
+        </a-dropdown>
+      </div>
+    </template>
+    <VuePerfectScrollbar>
+      <slot />
+    </VuePerfectScrollbar>
   </a-card>
 </template>
 
@@ -35,8 +56,8 @@ export default create({
   computed: {},
 
   methods: {
-    handleSettings() {
-      this.$emit('edit')
+    handleSettingClick(val) {
+      this.$emit('edit', val.key)
     }
   }
 })

@@ -2,7 +2,7 @@
   <CardSettings
     :title="title"
     height="400"
-    @edit="$refs.ModalCardSetting.handleOpen(content)"
+    @edit="handleSettingClick"
   >
     <a-list :data-source="content.settings ">
       <a-list-item slot="renderItem" slot-scope="item, index">
@@ -54,6 +54,22 @@ export default {
           dataIndex: 'value'
         }
       ]
+    }
+  },
+
+  methods: {
+    handleSettingClick(type) {
+      if (type === 'modify') {
+        this.$refs.ModalCardSetting.handleOpen(this.content)
+      } else if (type === 'delete') {
+        this.$confirm({
+          title: '确定删除？',
+          onOk: () => {
+            this.Fetch.delete(`/v1/products/${this.jobsData.productId}/settings/${this.content.name}`)
+            this.Notice('ACTION_SUCCESS')
+          }
+        })
+      }
     }
   }
 }

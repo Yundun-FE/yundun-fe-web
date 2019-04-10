@@ -8,6 +8,7 @@ import Card from './Card'
 import Dialog from './Dialog'
 import Table from './Table'
 import Header from './Header'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 function install(Vue) {
   if (install.installed) {
@@ -33,5 +34,6 @@ function install(Vue) {
   })
 }
 export function installComponents(Vue) {
+  Vue.component('VuePerfectScrollbar', VuePerfectScrollbar)
   Vue.use(install)
 }

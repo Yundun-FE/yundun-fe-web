@@ -5,21 +5,21 @@ import store from '@/store'
 import router from '@/router'
 import bootstrap from './core/bootstrap'
 import i18n from '@/core/i18n'
-import './core/use'
 import '@/permission'
 
 Vue.config.productionTip = false
-import ElementUI from 'element-ui'
+// import ElementUI from 'element-ui'
 
 import VueAxios from '@/utils/request'
 
 Vue.use(VueAxios, router)
 
-Vue.use(ElementUI, {
-  size: 'small',
-  i18n: (key, value) => i18n.t(key, value)
-})
+// Vue.use(ElementUI, {
+//   size: 'small',
+//   i18n: (key, value) => i18n.t(key, value)
+// })
 
+import './core/use'
 // new Vue({
 //   el: '#app',
 //   // router,

@@ -6,12 +6,12 @@
     >新增配置组</a-button>
 
     <a-row
-      v-if="data.settings"
+      v-if="jobsData.settings"
       :gutter="20"
       class="margin-top"
     >
       <a-col
-        v-for="(item, index) in data.settings"
+        v-for="(item, index) in jobsData.settings"
         :span="12"
         :key="index"
         class="margin-bottom"
@@ -126,7 +126,7 @@ export default {
     },
 
     fetchCreate(form) {
-      return this.Fetch.post(`/v1/products/${this.data.productId}/settings`, form)
+      return this.Fetch.post(`/v1/products/${this.jobsData.productId}/settings`, form)
     }
   }
 }

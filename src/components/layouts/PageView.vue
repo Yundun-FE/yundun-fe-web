@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 import PageLayout from '../Page/PageLayout'
 import RouteView from './RouteView'
 

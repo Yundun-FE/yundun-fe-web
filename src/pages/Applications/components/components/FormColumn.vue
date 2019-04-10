@@ -49,13 +49,14 @@
           <a-switch v-decorator="['defaultValue']" />
         </template>
         <template v-if="form.getFieldValue('valueType') === 'img'">
-          <a-upload
+          <FormUploadImg/>
+          <!-- <a-upload
             :show-upload-list="false"
             name="avatar"
             list-type="picture-card"
             class="avatar-uploader"
             action="//jsonplaceholder.typicode.com/posts/"
-          >
+          > -->
             <!-- <img v-if="imageUrl" :src="imageUrl" alt="avatar" >
             <div v-else>
               <a-icon :type="loading ? 'loading' : 'plus'" />

@@ -1,7 +1,10 @@
 <template>
-  <a-locale-provider :locale="locale">
-    <router-view/>
-  </a-locale-provider>
+
+  <VuePerfectScrollbar style="height: 100vh;">
+    <a-locale-provider :locale="locale">
+      <router-view/>
+    </a-locale-provider>
+  </VuePerfectScrollbar>
 </template>
 
 <script>
