@@ -27,11 +27,12 @@
     >
       <template
         slot="action"
-        slot-scope="text, record"
+        slot-scope="scope"
       >
         <ColumnAction>
-          <a @click="handleRowEdit(record)">{{ $t('du.toolbar.edit') }}</a>
-          <PopoverConfirm @confirm="handleRowDelete(record)">
+          <a @click="handleRowEdit(scope)">{{ $t('du.toolbar.edit') }}</a>
+          <a @click="handleOpenMenus(scope)">目录</a>
+          <PopoverConfirm @confirm="handleRowDelete(scope)">
             <a>{{ $t('du.toolbar.delete') }}</a>
           </PopoverConfirm>
         </ColumnAction>
@@ -80,14 +81,19 @@
         </a-form-item>
       </template>
     </ModalForm>
+    <ModalMenus ref="ModalMenus" :fetch-submit="handleSubmitMenus"/>
   </a-card>
 </template>
 
 <script>
 import tableData from '@/mixins/tableData'
+import ModalMenus from './components/ModalMenus'
+import productsMixins from '@/mixins/products'
 
 export default {
-  mixins: [tableData],
+  components: { ModalMenus },
+
+  mixins: [tableData, productsMixins],
 
   data() {
     return {
@@ -111,7 +117,6 @@ export default {
         },
         {
           title: '操作',
-          dataIndex: 'action',
           width: '150px',
           scopedSlots: { customRender: 'action' }
         }
@@ -124,9 +129,19 @@ export default {
   },
 
   methods: {
+    handleSubmitMenus() {
+      return this.productsSaveById()
+    },
+
     async handleRowDelete(row) {
       await this.Fetch.delete(`/v1/products/${row.id}`)
       this.handleRefresh()
+    },
+
+    handleOpenMenus(row) {
+      this.PRODUCTS_SET_ID(row.id)
+      this.productsGetById()
+      this.$refs.ModalMenus.handleOpen()
     },
 
     fetchUpdate(form) {

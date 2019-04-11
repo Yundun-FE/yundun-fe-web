@@ -36,6 +36,7 @@ service.interceptors.response.use(
 )
 
 const request = function(options) {
+  if (!options.url) return
   return new Promise((resolve, reject) => {
     const retry = new Retry({
       timeout: 8000,

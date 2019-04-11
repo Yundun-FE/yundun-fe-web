@@ -26,6 +26,10 @@ const jobs = {
           value: _.id
         }
       })
+    },
+
+    UPDATE_MENUS: (state, data) => {
+      state.jobsData.menus = data
     }
   },
 

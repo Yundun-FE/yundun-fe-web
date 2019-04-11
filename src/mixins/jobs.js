@@ -26,10 +26,11 @@ export default {
 
   methods: {
     ...mapMutations({
-      'SET_ID': 'jobs/SET_ID'
+      'SET_ID': 'jobs/SET_ID',
+      'JOBS_UPDATE_MENUS': 'jobs/UPDATE_MENUS'
     }),
     ...mapActions({
-      'saveById': 'jobs/saveById',
+      'jobsSaveById': 'jobs/saveById',
       'getByName': 'jobs/getByName',
       'getById': 'jobs/getById' })
   }
