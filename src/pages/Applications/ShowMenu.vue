@@ -53,23 +53,6 @@
       <a-col :span="12">
         <a-card title="目录管理">
           <FormMenus v-model="jobsData.menus" :data="jobsData.menus"/>
-          <!-- <a-form>
-            <a-form-item>
-              <FormMenuItem
-                v-for="(item, index) in jobsData.menus"
-                :data="item"
-                :key="index"
-              />
-            </a-form-item>
-
-            <a-form-item>
-              <a-button
-                type="primary"
-                @click="jobsSaveById"
-              >保存</a-button>
-            </a-form-item>
-          </a-form> -->
-          <NestedList/>
           <a-form-item>
             <a-button
               block

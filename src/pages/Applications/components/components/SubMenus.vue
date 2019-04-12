@@ -6,6 +6,7 @@
 
 <template>
   <a-card :class="b()">
+    <my-icon type="icon-menu" />
     <a-input v-model="item.title"/>
     <Menus v-model="item.childrens" collection="childrens" lock-axis="y">
       <MenuItemGroup

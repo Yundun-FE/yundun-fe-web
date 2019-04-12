@@ -2,14 +2,11 @@
 </style>
 
 <template>
-  <Menus v-model="data" lock-axis="y">
-    {{ data }}
-    <!-- <MenuItemGroup
-      v-for="(item, index) in data"
-      :index="index"
-      :key="index"
-      :item="item"
-    /> -->
+  <Menus
+    v-model="data"
+    :use-drag-handle="true"
+    lock-axis="y"
+  >
     <SubMenus
       v-for="(item, index) in data"
       :index="index"

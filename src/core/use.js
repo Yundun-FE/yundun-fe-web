@@ -10,6 +10,7 @@ import * as LABEL from '@/utils/constants/label'
 import VueStorage from 'vue-ls'
 import PermissionHelper from '@/utils/helper/permission'
 import message from 'ant-design-vue/lib/message'
+import MyIcon from '@/core/fonticon'
 
 import 'normalize.css/normalize.css'
 import 'ant-design-vue/dist/antd.less'
