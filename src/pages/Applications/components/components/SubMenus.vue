@@ -14,7 +14,6 @@ body {
 
 <template>
   <a-card :class="b()">
-
     <template slot="title">
       <a-dropdown>
         <a-menu
@@ -33,7 +32,6 @@ body {
           :type="item.icon || 'icon-appstore'"
         />
       </a-dropdown>
-
       <a-input
         v-model="item.title"
         style="width: 120px"
@@ -54,7 +52,7 @@ body {
       <a-dropdown>
         <a-menu
           slot="overlay"
-          @click="handleMenuAdd"
+          @click="handleMenuAdd(item)"
         >
           <a-menu-item
             v-for="(item, index) in productsData.pages"
@@ -62,8 +60,8 @@ body {
           >
           <my-icon :type="item.icon" />{{ item.title }}</a-menu-item>
         </a-menu>
-        <a-button style="margin-left: 8px">
-          Button
+        <a-button :target="['click']" style="margin-left: 8px">
+          添加
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
