@@ -52,7 +52,8 @@
       </a-col>
       <a-col :span="12">
         <a-card title="目录管理">
-          <a-form>
+          <FormMenus v-model="jobsData.menus" :data="jobsData.menus"/>
+          <!-- <a-form>
             <a-form-item>
               <FormMenuItem
                 v-for="(item, index) in jobsData.menus"
@@ -60,19 +61,21 @@
                 :key="index"
               />
             </a-form-item>
-            <a-form-item>
-              <a-button
-                block
-                @click="handleAdd"
-              >增加</a-button>
-            </a-form-item>
+
             <a-form-item>
               <a-button
                 type="primary"
                 @click="jobsSaveById"
               >保存</a-button>
             </a-form-item>
-          </a-form>
+          </a-form> -->
+          <NestedList/>
+          <a-form-item>
+            <a-button
+              block
+              @click="handleAdd"
+            >增加</a-button>
+          </a-form-item>
         </a-card>
       </a-col>
     </a-row>
@@ -82,9 +85,11 @@
 <script>
 import jobsMixins from '@/mixins/jobs'
 import FormMenuItem from './components/FormMenuItem'
+import FormMenus from './components/FormMenus'
+import NestedList from './components/nested-list-example/OuterList.vue'
 
 export default {
-  components: { FormMenuItem },
+  components: { FormMenuItem, FormMenus, NestedList },
 
   mixins: [jobsMixins],
 

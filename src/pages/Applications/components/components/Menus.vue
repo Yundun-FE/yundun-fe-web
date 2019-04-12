@@ -1,0 +1,16 @@
+<style lang="less">
+</style>
+
+<template>
+  <div>
+    <slot />
+  </div>
+</template>
+
+<script>
+import { ContainerMixin } from 'vue-slicksort'
+
+export default {
+  mixins: [ContainerMixin]
+}
+</script>
