@@ -10,6 +10,9 @@
       :gutter="20"
       class="margin-top"
     >
+      <a-col :span="12">
+        <CardSettings/>
+      </a-col>
       <a-col
         v-for="(item, index) in jobsData.settings"
         :span="12"
@@ -80,6 +83,7 @@
 <script>
 import jobsMixins from '@/mixins/jobs'
 import CardSettingsGroup from './components/CardSettingsGroup'
+import CardSettings from './components/CardSettings'
 
 const GROUP_TYPE = [
   {
@@ -101,7 +105,7 @@ const GROUP_TYPE = [
 ]
 
 export default {
-  components: { CardSettingsGroup },
+  components: { CardSettings, CardSettingsGroup },
 
   mixins: [jobsMixins],
 

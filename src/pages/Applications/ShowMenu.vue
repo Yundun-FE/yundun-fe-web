@@ -1,9 +1,8 @@
 <template>
   <page>
     <a-row :gutter="12">
-      <a-col :span="12">
+      <!-- <a-col :span="12">
         <a-card title="预览">
-          {{ jobsData.menus }}
           <a-menu
             :default-selected-keys="['1']"
             style="width: 256px"
@@ -49,16 +48,10 @@
             </a-sub-menu>
           </a-menu>
         </a-card>
-      </a-col>
+      </a-col> -->
       <a-col :span="12">
         <a-card title="目录管理">
           <FormMenus v-model="jobsData.menus" :data="jobsData.menus"/>
-          <a-form-item>
-            <a-button
-              block
-              @click="handleAdd"
-            >增加</a-button>
-          </a-form-item>
         </a-card>
       </a-col>
     </a-row>
@@ -69,10 +62,9 @@
 import jobsMixins from '@/mixins/jobs'
 import FormMenuItem from './components/FormMenuItem'
 import FormMenus from './components/FormMenus'
-import NestedList from './components/nested-list-example/OuterList.vue'
 
 export default {
-  components: { FormMenuItem, FormMenus, NestedList },
+  components: { FormMenuItem, FormMenus },
 
   mixins: [jobsMixins],
 
@@ -82,20 +74,7 @@ export default {
   },
 
   methods: {
-    handleAdd() {
-      this.jobsData.menus.push({
-        title: '',
-        icon: '',
-        childrens: [
-          {
-            name: '',
-            title: '',
-            alias: '',
-            icon: ''
-          }
-        ]
-      })
-    }
+
   }
 }
 </script>

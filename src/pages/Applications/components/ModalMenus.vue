@@ -2,14 +2,14 @@
 </style>
 
 <template>
-  <div>
+  <Modal ref="Modal" @submit="handleSave">
     <Menus
-      v-model="data"
+      v-model="jobsData.menus"
       :use-drag-handle="true"
       lock-axis="y"
     >
       <SubMenus
-        v-for="(item, index) in data"
+        v-for="(item, index) in jobsData.menus"
         :index="index"
         :key="index"
         :item="item"
@@ -22,7 +22,7 @@
       block
       @click="handleAdd"
     >增加</a-button>
-  </div>
+  </Modal>
 </template>
 
 <script>
@@ -30,6 +30,7 @@ import Menus from './components/Menus'
 import SubMenus from './components/SubMenus'
 import MenuItemGroup from './components/MenuItemGroup'
 import jobsMixin from '@/mixins/jobs'
+import consoleModal from '@/mixins/consoleModal'
 
 export default {
   components: {
@@ -38,7 +39,7 @@ export default {
     MenuItemGroup
   },
 
-  mixins: [jobsMixin],
+  mixins: [consoleModal, jobsMixin],
 
   props: {
     data: {
@@ -49,18 +50,18 @@ export default {
     }
   },
 
-  data() {
-    return {
-      items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8']
-    }
-  },
-
   computed: {},
 
   methods: {
     handleRemove(index) {
       this.jobsData.menus.splice(index, 1)
     },
+
+    handleSave() {
+      this.jobsSaveById()
+      this.handleClose()
+    },
+
     handleAdd() {
       this.jobsData.menus.push({
         title: '',

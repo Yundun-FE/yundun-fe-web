@@ -27,7 +27,7 @@
         />
       </a-form-item>
     </a-form>
-    <div :class="b('footer')">
+    <!-- <div :class="b('footer')">
       <a-menu
         v-model="current"
         mode="horizontal"
@@ -39,7 +39,7 @@
           <router-link :to="item.key">{{ item.label }}</router-link>
         </a-menu-item>
       </a-menu>
-    </div>
+    </div> -->
   </a-card>
 </template>
 

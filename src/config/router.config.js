@@ -56,12 +56,6 @@ const mainMap = [
             component: () => import('@/pages/Applications/ShowMenu')
           },
           {
-            path: '/develop/applications/:id/build',
-            name: 'applications.id.build',
-            meta: { title: '编译', keepAlive: true, permission: ['dashboard'] },
-            component: () => import('@/pages/Applications/ShowBuild')
-          },
-          {
             path: '/develop/applications/:id/setting',
             name: 'applications.id.setting',
             meta: { title: '项目配置', keepAlive: true, permission: ['dashboard'] },

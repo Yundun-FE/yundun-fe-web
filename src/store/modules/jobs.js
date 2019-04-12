@@ -1,4 +1,5 @@
 import Fetch from '@/utils/fetch'
+import Notice from '@/utils/notice'
 
 const jobs = {
   namespaced: true,
@@ -51,6 +52,7 @@ const jobs = {
       } catch (e) {
         return
       }
+      Notice('ACTION_SUCCESS')
     }
   }
 }
