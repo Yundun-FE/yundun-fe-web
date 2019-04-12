@@ -10,7 +10,6 @@ import * as LABEL from '@/utils/constants/label'
 import VueStorage from 'vue-ls'
 import PermissionHelper from '@/utils/helper/permission'
 import message from 'ant-design-vue/lib/message'
-import MyIcon from '@/core/fonticon'
 
 import 'normalize.css/normalize.css'
 import 'ant-design-vue/dist/antd.less'
@@ -20,6 +19,7 @@ import '@/styles/index.scss'
 // ui
 import { installFilter } from '@/utils/filter'
 import { installComponents } from '@/components'
+import MyIcon from './fonticon'
 
 import {
   Pagination,
@@ -149,6 +149,7 @@ Vue.use(VueStorage, config.storageOptions)
 Vue.use(PermissionHelper)
 Vue.use(Antd)
 Vue.mixin(appMixins)
+
 installFilter(Vue)
 installComponents(Vue)
 
@@ -157,4 +158,4 @@ Vue.prototype.Jump = Jump
 Vue.prototype.Fetch = Fetch
 Vue.prototype.LABEL = LABEL
 Vue.prototype.Notice = Notice
-
+Vue.component('my-icon', MyIcon)

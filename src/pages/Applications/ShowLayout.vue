@@ -7,6 +7,7 @@
 
 <script>
 import jobsMixins from '@/mixins/jobs'
+import productsMixins from '@/mixins/products'
 import HeaderDetail from './components/HeaderDetail'
 
 export default {
@@ -14,7 +15,7 @@ export default {
 
   components: { HeaderDetail },
 
-  mixins: [jobsMixins],
+  mixins: [jobsMixins, productsMixins],
 
   watch: {
     $route(val) {
@@ -24,6 +25,7 @@ export default {
 
   created() {
     this.getByName('console-v6-web')
+    this.productsGetById(12)
     this.init()
   },
 

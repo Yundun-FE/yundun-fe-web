@@ -139,7 +139,6 @@ export default {
     },
 
     handleRowClick(row) {
-      console.log(row)
       this.$router.push({
         path: `/develop/applications/${row.id}`
       })
