@@ -6,7 +6,7 @@
         icon="plus"
         @click="handleCreate"
       >{{ $t('du.toolbar.create') }}</a-button>
-      <a-dropdown>
+      <!-- <a-dropdown>
         <a-menu slot="overlay">
           <a-menu-item key="1">
           <a-icon type="delete" />{{ $t('du.toolbar.delete') }}</a-menu-item>
@@ -15,7 +15,7 @@
           {{ $t('du.toolbar.bulkAction') }}
           <a-icon type="down" />
         </a-button>
-      </a-dropdown>
+      </a-dropdown> -->
     </div>
     <ConsoleTable
       ref="Table"
@@ -28,14 +28,9 @@
         slot="action"
         slot-scope="scope"
       >
-        <a-dropdown-button @click="handleRowClick(scope)">
+        <a-button @click="handleRowClick(scope)">
           查看详情
-          <a-menu slot="overlay" @click="handleRowClick">
-            <a-menu-item key="1"><a-icon type="user" />1st menu item</a-menu-item>
-            <a-menu-item key="2"><a-icon type="user" />2nd menu item</a-menu-item>
-            <a-menu-item key="3"><a-icon type="user" />3rd item</a-menu-item>
-          </a-menu>
-        </a-dropdown-button>
+        </a-button>
       </template>
     </ConsoleTable>
     <ModalForm
