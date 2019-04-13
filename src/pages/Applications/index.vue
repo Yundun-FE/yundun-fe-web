@@ -35,42 +35,61 @@
     </ConsoleTable>
     <ModalForm
       ref="ModalRow"
-      :fields="[ 'name', 'title', 'description', 'productId']"
+      :fields="[ 'name', 'title', 'productId', 'envs']"
       :fetch-update="fetchUpdate"
       :fetch-create="fetchCreate"
       title-label="应用"
       @submit-success="handleRefresh"
     >
       <template slot-scope="scope">
+        <a-row>
+          <a-col :span="11">
+            <a-form-item
+              :colon="false"
+              label="项目"
+            >
+              <a-select
+                v-decorator="['productId']"
+                :options="selectsProducts"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="2">
+            <a-form-item
+              :colon="false"
+              label=" "
+            >
+              <div style="text-align: center">/</div>
+            </a-form-item>
+          </a-col>
+          <a-col :span="11">
+            <a-form-item
+              :colon="false"
+              label="应用名"
+            >
+              <a-input
+                v-decorator="['name']"
+                placeholder="Application name"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
         <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="项目"
-        >
-          <a-select
-            v-decorator="['productId']"
-            :options="selectsProducts"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="Name"
-          help="唯一标识，不可修改"
-        >
-          <a-input
-            v-decorator="['name']"
-            placeholder="Name"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
-          label="别名"
+          :colon="false"
+          label="备注"
         >
           <a-input
             v-decorator="['title']"
-            placeholder="Title"
+            placeholder="Description"
+          />
+        </a-form-item>
+        <a-form-item
+          :colon="false"
+          label="环境配置（env）"
+        >
+          <a-checkbox-group
+            v-decorator="['envs']"
+            :options="ENV_SELECT"
           />
         </a-form-item>
       </template>
@@ -88,6 +107,20 @@ export default {
     return {
       selectsProducts: [],
       queryParam: {},
+      ENV_SELECT: [
+        {
+          label: '测试（test）',
+          value: 'test'
+        },
+        {
+          label: '预发布（pre）',
+          value: 'pre'
+        },
+        {
+          label: '线上（prod）',
+          value: 'prod'
+        }
+      ],
       columns: [
         {
           title: '名称',
@@ -123,6 +156,10 @@ export default {
   },
 
   methods: {
+    handleCreate() {
+      this.$refs.ModalRow.handleOpen({ productId: this.selectsProducts[0].value })
+    },
+
     async init() {
       const productData = await this.Fetch.get('/v1/products')
       this.selectsProducts = productData.list.map(_ => {

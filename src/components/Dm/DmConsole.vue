@@ -128,7 +128,7 @@
         </span>
         <el-pagination
           :current-page="page"
-          :page-sizes="[10, 20, 50, 100]"
+          :page-sizes="[20, 50, 100]"
           :page-size="pageSize"
           :total="total"
           background
@@ -209,7 +209,7 @@ export default create({
     return {
       total: 0,
       page: 1,
-      pageSize: 10
+      pageSize: 20
     }
   },
 

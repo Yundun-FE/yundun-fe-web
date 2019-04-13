@@ -77,10 +77,6 @@ export default create({
       type: [String, Number],
       default: 580
     },
-    labelWidth: {
-      type: String,
-      default: '120px'
-    },
     loading: Boolean,
     fields: {
       type: Array,
