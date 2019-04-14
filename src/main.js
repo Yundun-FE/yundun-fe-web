@@ -13,11 +13,6 @@ Vue.config.productionTip = false
 import VueAxios from '@/utils/request'
 Vue.use(VueAxios, router)
 
-// Vue.use(ElementUI, {
-//   size: 'small',
-//   i18n: (key, value) => i18n.t(key, value)
-// })
-
 new Vue({
   i18n,
   router,

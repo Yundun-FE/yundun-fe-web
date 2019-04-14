@@ -41,6 +41,7 @@
       >
         <template v-if="form.getFieldValue('valueType') === 'string'">
           <a-input v-decorator="['defaultValue']" />
+          <a-input v-decorator="['value']" />
         </template>
         <template v-if="form.getFieldValue('valueType') === 'number'">
           <a-input-number v-decorator="['defaultValue']" />

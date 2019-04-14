@@ -1,11 +1,22 @@
-<style lang="scss">
+<style lang="less">
 .CardSettings{
+  .ant-card-head{
+    padding: 12px;
+    font-size: 14px;
+
+    .ant-card-head-title{
+      padding: 0px;
+    }
+    .ant-card-extra{
+      padding: 0px;
+    }
+  }
   .ant-card-body{
-    overflow: hidden;
+    padding: 0px;
+
     .ps-container{
-      margin: -12px;
       padding: 12px;
-      height: 300px;
+      height: calc(400px - 65px);
     }
   }
 }
@@ -19,7 +30,10 @@
   >
     <template>
       <div slot="extra">
-        <a-dropdown :trigger="['click']">
+        <a @click="handleSettingClick('modify')">
+          <a-icon type="edit" />
+        </a>
+        <!-- <a-dropdown :trigger="['click']">
           <a-menu slot="overlay" @click="handleSettingClick">
             <a-menu-item key="modify">编辑</a-menu-item>
             <a-menu-item key="delete">删除</a-menu-item>
@@ -27,10 +41,10 @@
           <a-button style="margin-left: 8px">
             操作 <a-icon type="down" />
           </a-button>
-        </a-dropdown>
+        </a-dropdown> -->
       </div>
     </template>
-    <VuePerfectScrollbar>
+    <VuePerfectScrollbar :style="`${height - 65}px`">
       <slot />
     </VuePerfectScrollbar>
   </a-card>
@@ -42,22 +56,14 @@ import create from '@/utils/create-basic'
 export default create({
   name: 'CardSettings',
 
-  components: {},
-
   props: {
     title: String,
     height: [Number, String]
   },
 
-  data() {
-    return {}
-  },
-
-  computed: {},
-
   methods: {
     handleSettingClick(val) {
-      this.$emit('edit', val.key)
+      this.$emit('edit', val)
     }
   }
 })

@@ -1,5 +1,9 @@
 <style lang="less">
 .CardSettingsGroup {
+  .ant-list-item-content{
+    white-space: nowrap;
+  }
+
   .item {
     &Img {
       overflow: hidden;
@@ -31,8 +35,8 @@
         slot-scope="item, index"
       >
         <a-list-item-meta>
-          <span slot="title">{{ item.name }}</span>
-          <span slot="description">{{ item.title }}</span>
+          <span slot="title">{{ item.title || item.name }}</span>
+          <!-- <span slot="description">{{ item.title }}</span> -->
         </a-list-item-meta>
         <template v-if="item.valueType === 'string'">
           {{ item.defaultValue }}

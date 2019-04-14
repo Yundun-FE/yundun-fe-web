@@ -43,10 +43,6 @@ module.exports = {
         data: `@import "./src/styles/variables.scss";`
       },
       less: {
-        modifyVars: {
-          // 'primary-color': '#2991fa',
-          // 'border-radius-base': '2px'
-        },
         javascriptEnabled: true
       }
     }

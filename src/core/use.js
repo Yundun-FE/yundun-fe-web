@@ -11,9 +11,10 @@ import VueStorage from 'vue-ls'
 import PermissionHelper from '@/utils/helper/permission'
 import message from 'ant-design-vue/lib/message'
 
-import 'normalize.css/normalize.css'
-import 'ant-design-vue/dist/antd.less'
 import '@/components/global'
+
+import 'normalize.css/normalize.css'
+import '@/styles/index.less'
 import '@/styles/index.scss'
 
 // ui
