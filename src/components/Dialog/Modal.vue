@@ -80,9 +80,7 @@ export default create({
   data() {
     return {
       modify: false,
-      submitLoading: false,
-      form: '',
-      formRaw: {}
+      submitLoading: false
     }
   },
 
@@ -102,26 +100,8 @@ export default create({
     },
     // hook: 打开前
     beforeOpen(form = {}) {
-      this.form = this.$form.createForm(this)
       this.modify = form && form.id
-      this.formRaw = form
       this.resetSubmitLoading()
-    },
-
-    afterOpen(form = {}) {
-      const data = {}
-      Object.keys(form).forEach(key => {
-        if (this.fields.includes(key)) data[key] = form[key]
-      })
-
-      this.$nextTick(() => {
-        this.form.setFieldsValue(data)
-      })
-    },
-    // hook: 验证后
-    afterValidate(valid) {
-      // 验证不通过
-      if (!valid) this.resetSubmitLoading()
     },
 
     async handleSubmitData(form, fn) {
@@ -133,7 +113,6 @@ export default create({
         this.resetSubmitLoading()
       }
       this.$emit('submit-success')
-      this.message.success('保存成功')
       setTimeout(() => {
         this.handleClose()
       }, 150)
@@ -141,28 +120,6 @@ export default create({
 
     async handleSubmit(e) {
       this.$emit('submit')
-      // this.submitLoading = true
-      // e.preventDefault()
-
-      // try {
-      //   await this.fetchSubmit()
-      // } catch (e) {
-      //   return
-      // } finally {
-      //   this.submitLoading = false
-      // }
-      // this.form.validateFields((err, values) => {
-      //   if (!err) {
-      //     const form = {
-      //       ...this.formRaw, ...values
-      //     }
-      //     if (this.modify) {
-      //       if (this.fetchUpdate) this.handleSubmitData(form, this.fetchUpdate)
-      //     } else {
-      //       if (this.fetchCreate) this.handleSubmitData(form, this.fetchCreate)
-      //     }
-      //   }
-      // })
     }
   }
 })

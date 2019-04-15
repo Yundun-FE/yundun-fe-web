@@ -118,7 +118,7 @@ export default {
 
   methods: {
     handleRefresh() {
-      this.getById()
+      this.jobsGetById()
     },
 
     handleAdd() {

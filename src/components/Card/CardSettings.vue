@@ -16,7 +16,7 @@
 
     .ps-container{
       padding: 12px;
-      height: calc(400px - 65px);
+      height: calc(400px - 48px);
     }
   }
 }
@@ -44,7 +44,7 @@
         </a-dropdown> -->
       </div>
     </template>
-    <VuePerfectScrollbar :style="`${height - 65}px`">
+    <VuePerfectScrollbar :style="`${height - 48}px`">
       <slot />
     </VuePerfectScrollbar>
   </a-card>

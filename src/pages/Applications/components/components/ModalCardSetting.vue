@@ -10,44 +10,33 @@
     @submit="fetchSubmit"
   >
     <template slot-scope="scope">
-      <a-form :form="form">
-        <a-form-item
-          v-bind="formItemLayout"
-          label="Name"
-        >
-          <a-input
-            v-decorator="['name']"
-            placeholder="Name"
-          />
-        </a-form-item>
-        <a-form-item
-          v-bind="formItemLayout"
-          label="别名"
-        >
-          <a-input
-            v-decorator="['title']"
-            placeholder="别名"
-          />
-        </a-form-item>
-        <template v-for="(item, index) in columns">
-          <div :key="index">
-            <a-divider />
-            <FormColumn
-              :show-remove="index > 0"
-              :ref="`FormColumn${index}`"
-              @remove="handleRemoveColumn(index)"
-            />
-          </div>
-        </template>
-        <a-form-item v-bind="formItemLayoutWithOutLabel">
-          <a-button
-            type="dashed"
-            block
-            @click="handleAddColumn"
-          >
-            <a-icon type="plus" />新增
-          </a-button>
-        </a-form-item>
+      <a-form>
+        <a-row :gutter="12">
+          <a-col :span="12">
+            <a-form-item
+              label="Name"
+            >
+              <a-input
+                v-model="data.name"
+                placeholder="Name"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+              label="别名"
+            >
+              <a-input
+                v-model="data.title"
+                placeholder="别名"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <FormColumn
+          :data="data.settings"
+          refs="FormColumn"
+        />
       </a-form>
     </template>
   </Modal>
@@ -66,18 +55,8 @@ export default create({
 
   data() {
     return {
-      form: this.$form.createForm(this),
-      columns: [0],
-      formItemLayoutWithOutLabel: {
-        wrapperCol: {
-          span: 12,
-          offset: 4
-        }
-      },
+      data: {},
       formItemLayout: {
-        labelCol: {
-          span: 4
-        },
         wrapperCol: {
           span: 20
         }
@@ -91,14 +70,7 @@ export default create({
 
   methods: {
     async fetchSubmit() {
-      const form = this.form.getFieldsValue()
-      const columns = []
-      this.columns.forEach((item, index) => {
-        columns.push(this.$refs[`FormColumn${index}`][0].form.getFieldsValue())
-      })
-
-      form.settings = columns
-
+      const form = this.data
       try {
         this.$refs.Modal.startSubmitLoading()
         await this.Fetch.put(`/v2/jobs/${this.jobsId}/settings/${form.name}`, form)
@@ -106,29 +78,13 @@ export default create({
         this.Notice('ACTION_SUCCESS')
         this.$refs.Modal.handleClose()
         this.$refs.Modal.resetSubmitLoading()
+        this.jobsGetById()
       }
-    },
-
-    handleRemoveColumn(index) {
-      this.columns.splice(index, 1)
-    },
-
-    handleAddColumn() {
-      this.columns.push(0)
     },
 
     afterOpen(form) {
       const { settings = [] } = form
-      this.columns = settings.map(_ => _.name)
-      this.$nextTick(() => {
-        this.form.setFieldsValue(Object.assign(this.defaultForm, form))
-        settings.forEach((item, index) => {
-          this.$refs[`FormColumn${index}`][0].form.setFieldsValue(item)
-          this.$nextTick(() => {
-            this.$refs[`FormColumn${index}`][0].form.setFieldsValue(item)
-          })
-        })
-      })
+      this.data = form
     }
   }
 })

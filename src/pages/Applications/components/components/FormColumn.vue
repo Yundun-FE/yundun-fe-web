@@ -3,77 +3,108 @@
 
 <template>
   <div :class="b()">
-    <a-icon
-      v-if="showRemove"
-      style="cursor: pointer"
-      type="minus-circle-o"
-      @click="handleRemove"
-    />
-    <a-form :form="form">
-      <a-form-item
-        v-bind="formItemLayout"
-        label="Name"
+    <a-form-item label="进入配置模式">
+      <a-switch v-model="optionsMode" @change="initMode"/>
+    </a-form-item>
+    <!-- <a-form :form="form" > -->
+    <a-table
+      :columns="columns"
+      :pagination="false"
+      :data-source="data"
+      row-key="name"
+    >
+      <a-input
+        slot="inputName"
+        slot-scope="row"
+        v-model="row.name"
+      />
+      <a-input
+        slot="inputTitle"
+        slot-scope="row"
+        v-model="row.title"
+        placeholder="别名"
+      />
+      <template slot="inputDefaultValue" slot-scope="row">
+        <template v-if="row.valueType === 'string'">
+          <a-input v-model="row.defaultValue" placeholder="Default value"/>
+        </template>
+        <template v-if="row.valueType === 'number'">
+          <a-input-number v-model="row.defaultValue" />
+        </template>
+        <template v-if="row.valueType === 'switch'">
+          <a-switch v-model="row.defaultValue" />
+        </template>
+        <template v-if="row.valueType === 'img'">
+          <FormUploadImg v-model="row.defaultValue" @success="handleUpdateFile"/>
+          <a-input v-model="row.defaultValue" />
+        </template>
+        <template v-if="row.valueType === 'file'">
+          <FormUploadFile v-model="row.defaultValue" @success="handleUpdateFile"/>
+          <a-input v-model="row.defaultValue" />
+        </template>
+      </template>
+
+      <template slot="inputValue" slot-scope="row">
+        <template v-if="row.valueType === 'string'">
+          <a-input v-model="row.value" :placeholder="row.defaultValue"/>
+        </template>
+        <template v-if="row.valueType === 'number'">
+          <a-input-number v-model="row.value" />
+        </template>
+        <template v-if="row.valueType === 'switch'">
+          <a-switch v-model="row.value" />
+        </template>
+        <template v-if="row.valueType === 'img'">
+          <FormUploadImg v-model="row.value" @success="handleUpdateFile"/>
+          <a-input v-model="row.value" />
+        </template>
+        <template v-if="row.valueType === 'file'">
+          <FormUploadFile v-model="row.value" @success="handleUpdateFile"/>
+          <a-input v-model="row.value" />
+        </template>
+      </template>
+
+      <template
+        slot="action"
+        slot-scope="row"
       >
-        <a-row :gutter="16">
-          <a-col :span="8">
-            <a-input
-              v-decorator="['name']"
-              placeholder="Name"
-            />
-          </a-col>
-          <a-col :span="8">
-            <a-input
-              v-decorator="['title']"
-              placeholder="别名"
-            />
-          </a-col>
-          <a-col :span="8">
-            <a-select
-              v-decorator="['valueType']"
-              :options="VALUE_TYPE"
-            />
-          </a-col>
-        </a-row>
-      </a-form-item>
-      <a-form-item
-        v-bind="formItemLayout"
-        label="默认值"
-      >
-        <template v-if="form.getFieldValue('valueType') === 'string'">
-          <a-input v-decorator="['defaultValue']" />
-          <a-input v-decorator="['value']" />
-        </template>
-        <template v-if="form.getFieldValue('valueType') === 'number'">
-          <a-input-number v-decorator="['defaultValue']" />
-        </template>
-        <template v-if="form.getFieldValue('valueType') === 'switch'">
-          <a-switch v-decorator="['defaultValue']" />
-        </template>
-        <template v-if="form.getFieldValue('valueType') === 'img'">
-          <FormUploadImg v-decorator="['defaultValue']" @success="handleUpdateFile"/>
-          <a-input v-decorator="['defaultValue']" />
-        </template>
-        <template v-if="form.getFieldValue('valueType') === 'file'">
-          <FormUploadFile v-decorator="['defaultValue']" @success="handleUpdateFile"/>
-          <a-input v-decorator="['defaultValue']" />
-        </template>
-      </a-form-item>
-    </a-form>
+        <a>
+          <a-icon
+            type="minus-circle-o"
+            @click="handleRemove(row.name)"
+          />
+        </a>
+      </template>
+    </a-table>
+
+    <a-button
+      v-if="optionsMode"
+      class="margin-top"
+      type="dashed"
+      block
+      @click="handleAdd"
+    >
+      <a-icon type="plus" />新增
+    </a-button>
   </div>
 </template>
 
 <script>
 import create from '@/utils/create-basic'
+import { deepClone } from '@/utils'
 
 export default create({
   name: '',
 
   props: {
+    data: Array,
     showRemove: Boolean
   },
 
   data() {
     return {
+      dataSource: deepClone(this.data),
+      optionsMode: false,
       formItemLayout: {
         labelCol: {
           span: 4
@@ -82,7 +113,7 @@ export default create({
           span: 20
         }
       },
-      form: this.$form.createForm(this),
+      columns: [],
       defaultForm: {
         name: '',
         title: '',
@@ -90,7 +121,7 @@ export default create({
       },
       VALUE_TYPE: [
         {
-          label: '字符串',
+          label: '文本',
           value: 'string'
         },
         {
@@ -121,17 +152,68 @@ export default create({
     }
   },
 
-  mounted() {
-    this.form.setFieldsValue(this.defaultForm)
+  watch: {
+    data(val) {
+      this.dataSource = deepClone(val)
+    }
+  },
+
+  created() {
+    this.initMode()
   },
 
   methods: {
-    handleUpdateFile(defaultValue) {
-      this.form.setFieldsValue({ defaultValue })
+    initMode(op = this.optionsMode) {
+      console.log(op)
+      if (op) {
+        this.columns = [
+          {
+            title: 'Name',
+            key: 'name',
+            scopedSlots: { customRender: 'inputName' }
+          },
+          {
+            title: '别名',
+            key: 'title',
+            scopedSlots: { customRender: 'inputTitle' }
+          },
+          {
+            title: '初始值',
+            key: 'defaultValue',
+            scopedSlots: { customRender: 'inputDefaultValue' }
+          },
+          {
+            title: '操作',
+            width: 80,
+            key: 'action',
+            scopedSlots: { customRender: 'action' }
+          }
+        ]
+      } else {
+        this.columns = [
+          {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name'
+          },
+          {
+            title: '配置',
+            key: 'value',
+            scopedSlots: { customRender: 'inputValue' }
+          }
+        ]
+      }
+    },
+    handleAdd() {
+      this.data.push(this.defaultForm)
     },
 
-    handleRemove() {
-      this.$emit('remove')
+    handleUpdateFile(defaultValue) {
+    },
+
+    handleRemove(name) {
+      const index = this.data.map(_ => _.name).indexOf(name)
+      this.data.splice(index, 1)
     }
   }
 })

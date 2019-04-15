@@ -32,6 +32,6 @@ export default {
     ...mapActions({
       'jobsSaveById': 'jobs/saveById',
       'getByName': 'jobs/getByName',
-      'getById': 'jobs/getById' })
+      'jobsGetById': 'jobs/getById' })
   }
 }

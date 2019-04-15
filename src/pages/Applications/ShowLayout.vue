@@ -33,7 +33,7 @@ export default {
     init() {
       const id = this.$route.params.id
       this.SET_ID(id)
-      this.getById()
+      this.jobsGetById()
     }
   }
 }

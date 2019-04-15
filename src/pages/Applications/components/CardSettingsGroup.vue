@@ -36,10 +36,9 @@
       >
         <a-list-item-meta>
           <span slot="title">{{ item.title || item.name }}</span>
-          <!-- <span slot="description">{{ item.title }}</span> -->
         </a-list-item-meta>
         <template v-if="item.valueType === 'string'">
-          {{ item.defaultValue }}
+          {{ item.value || item.defaultValue }}
         </template>
         <template v-if="item.valueType === 'img'">
           <div class="itemImg">
