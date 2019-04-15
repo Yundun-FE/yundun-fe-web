@@ -20,6 +20,17 @@
         v-model="row.title"
         placeholder="别名"
       />
+      <a-select
+        slot="inputValueType"
+        slot-scope="row"
+        :options="VALUE_TYPE"
+        v-model="row.valueType"
+        placeholder="类型"
+      />
+      <template slot="nameView" slot-scope="row">
+        {{ row.title || row.name }}
+      </template>
+
       <template slot="inputDefaultValue" slot-scope="row">
         <template v-if="row.valueType === 'string'">
           <a-input v-model="row.defaultValue" placeholder="Default value"/>
@@ -99,8 +110,6 @@ export default create({
 
   data() {
     return {
-      dataSource: deepClone(this.data),
-      // optionsMode: false,
       formItemLayout: {
         labelCol: {
           span: 4
@@ -149,10 +158,6 @@ export default create({
   },
 
   watch: {
-    data(val) {
-      this.dataSource = deepClone(val)
-    },
-
     optionsMode(val) {
       this.initMode(val)
     }
@@ -178,6 +183,11 @@ export default create({
             scopedSlots: { customRender: 'inputTitle' }
           },
           {
+            title: '类型',
+            key: 'valueType',
+            scopedSlots: { customRender: 'inputValueType' }
+          },
+          {
             title: '初始值',
             key: 'defaultValue',
             scopedSlots: { customRender: 'inputDefaultValue' }
@@ -193,8 +203,9 @@ export default create({
         this.columns = [
           {
             title: 'Name',
-            dataIndex: 'name',
-            key: 'name'
+            // dataIndex: 'name',
+            key: 'name',
+            scopedSlots: { customRender: 'nameView' }
           },
           {
             title: '配置',
@@ -205,7 +216,7 @@ export default create({
       }
     },
     handleAdd() {
-      this.data.push(this.defaultForm)
+      this.data.push(deepClone(this.defaultForm))
     },
 
     handleUpdateFile(defaultValue) {

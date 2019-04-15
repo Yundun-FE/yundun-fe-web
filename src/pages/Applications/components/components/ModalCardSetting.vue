@@ -2,7 +2,7 @@
   <Modal
     ref="Modal"
     :fields="[ 'name', 'title', 'description']"
-    :width="700"
+    :width="800"
     :title="title"
     @submit="fetchSubmit"
   >

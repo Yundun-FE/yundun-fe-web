@@ -38,19 +38,29 @@
           <span slot="title">{{ item.title || item.name }}</span>
         </a-list-item-meta>
         <template v-if="item.valueType === 'string'">
-          {{ item.value || item.defaultValue }}
+          {{ item.valueView }}
+        </template>
+        <template v-if="item.valueType === 'switch'">
+          <a-switch
+            v-model="item.valueView"
+            size="small"
+            disabled
+          />
         </template>
         <template v-if="item.valueType === 'img'">
           <div class="itemImg">
             <img
-              v-if="item.defaultValue"
-              :src="item.value || item.defaultValue"
+              v-if="item.valueView"
+              :src="item.valueView"
               :alt="item.title || item.name"
             >
           </div>
         </template>
         <template v-if="item.valueType === 'file'">
-          <a :href="item.value || item.defaultValue">{{ item.value || item.defaultValue }}</a>
+          <a
+            :href="item.valueView"
+            target="_blank"
+          >{{ item.valueView }}</a>
         </template>
       </a-list-item>
     </a-list>
