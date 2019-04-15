@@ -3,10 +3,6 @@
 
 <template>
   <div :class="b()">
-    <a-form-item label="进入配置模式">
-      <a-switch v-model="optionsMode" @change="initMode"/>
-    </a-form-item>
-    <!-- <a-form :form="form" > -->
     <a-table
       :columns="columns"
       :pagination="false"
@@ -43,7 +39,7 @@
           <a-input v-model="row.defaultValue" />
         </template>
       </template>
-
+      <!--  -->
       <template slot="inputValue" slot-scope="row">
         <template v-if="row.valueType === 'string'">
           <a-input v-model="row.value" :placeholder="row.defaultValue"/>
@@ -63,7 +59,6 @@
           <a-input v-model="row.value" />
         </template>
       </template>
-
       <template
         slot="action"
         slot-scope="row"
@@ -98,13 +93,14 @@ export default create({
 
   props: {
     data: Array,
+    optionsMode: Boolean,
     showRemove: Boolean
   },
 
   data() {
     return {
       dataSource: deepClone(this.data),
-      optionsMode: false,
+      // optionsMode: false,
       formItemLayout: {
         labelCol: {
           span: 4
@@ -155,6 +151,10 @@ export default create({
   watch: {
     data(val) {
       this.dataSource = deepClone(val)
+    },
+
+    optionsMode(val) {
+      this.initMode(val)
     }
   },
 

@@ -1,23 +1,32 @@
-<style lang="scss">
-</style>
-
 <template>
   <Modal
     ref="Modal"
     :fields="[ 'name', 'title', 'description']"
     :width="700"
-    title-label="配置"
+    :title="title"
     @submit="fetchSubmit"
   >
-    <template slot-scope="scope">
-      <a-form>
-        <a-row :gutter="12">
+    <a-form>
+      <a-form-item v-if="jobsData.isChildren" label="设置">
+        <a-checkbox v-model="data.useParent">使用父配置</a-checkbox>
+      </a-form-item>
+      <template v-if="!data.useParent">
+        <FormColumn
+          :options-mode="optionsMode"
+          :data="data.settings"
+          refs="FormColumn"
+        />
+        <a-form-item label="高级配置">
+          <a-switch v-model="optionsMode"/>
+        </a-form-item>
+        <a-row v-if="optionsMode" :gutter="12">
           <a-col :span="12">
             <a-form-item
               label="Name"
             >
               <a-input
                 v-model="data.name"
+                disabled
                 placeholder="Name"
               />
             </a-form-item>
@@ -33,12 +42,8 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <FormColumn
-          :data="data.settings"
-          refs="FormColumn"
-        />
-      </a-form>
-    </template>
+      </template>
+    </a-form>
   </Modal>
 </template>
 
@@ -53,9 +58,14 @@ export default create({
 
   components: { FormColumn },
 
+  props: {
+    title: String
+  },
+
   data() {
     return {
       data: {},
+      optionsMode: false,
       formItemLayout: {
         wrapperCol: {
           span: 20
@@ -73,7 +83,13 @@ export default create({
       const form = this.data
       try {
         this.$refs.Modal.startSubmitLoading()
-        await this.Fetch.put(`/v2/jobs/${this.jobsId}/settings/${form.name}`, form)
+        const { useParent } = form
+        // 使用父配置则删除配置
+        if (useParent) {
+          await this.Fetch.delete(`/v2/jobs/${this.jobsId}/settings/${form.name}`)
+        } else {
+          await this.Fetch.put(`/v2/jobs/${this.jobsId}/settings/${form.name}`, form)
+        }
       } finally {
         this.Notice('ACTION_SUCCESS')
         this.$refs.Modal.handleClose()

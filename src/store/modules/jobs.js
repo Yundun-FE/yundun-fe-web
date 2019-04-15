@@ -1,6 +1,12 @@
 import Fetch from '@/utils/fetch'
 import Notice from '@/utils/notice'
 
+const ENV_MAP = {
+  'test': '测试',
+  'pre': '预发布',
+  'prod': '线上'
+}
+
 const jobs = {
   namespaced: true,
 
@@ -17,13 +23,18 @@ const jobs = {
     },
 
     SET_DATA: (state, data) => {
+      data.parent = !data.name.includes('--')
+      data.isChildren = data.name.includes('--')
       state.data = data
     },
 
     SET_SELECT_ENV: (state, data) => {
       state.selectEnv = data.list.map(_ => {
+        const env = _.name.split('--')[1]
+        const label = _.title + (env ? `（${ENV_MAP[env]}）` : '')
+
         return {
-          label: _.env === 'root' ? 'PRIMARY' : _.title,
+          label,
           value: _.id
         }
       })

@@ -11,7 +11,7 @@
       class="margin-top"
     >
       <a-col :span="12">
-        <CardSettings/>
+        <CardSettings @open-modal="handleOpenModal"/>
       </a-col>
       <a-col
         v-for="(item, index) in jobsData.settings"
@@ -21,9 +21,9 @@
       >
         <CardSettingsGroup
           :title="item.title"
+          :ref="item.name"
           :content="item"
         />
-        <!-- <CardProxy /> -->
       </a-col>
     </a-row>
     <ModalForm
@@ -58,16 +58,6 @@
         <a-form-item
           :label-col="{ span: 5 }"
           :wrapper-col="{ span: 12 }"
-          label="类型"
-        >
-          <a-select
-            v-decorator="['type']"
-            :options="GROUP_TYPE"
-          />
-        </a-form-item>
-        <a-form-item
-          :label-col="{ span: 5 }"
-          :wrapper-col="{ span: 12 }"
           label="介绍"
         >
           <a-input
@@ -85,25 +75,6 @@ import jobsMixins from '@/mixins/jobs'
 import CardSettingsGroup from './components/CardSettingsGroup'
 import CardSettings from './components/CardSettings'
 
-const GROUP_TYPE = [
-  {
-    label: '配置',
-    value: 'CONFIG'
-  },
-  {
-    label: '导航',
-    value: 'NAVBAR'
-  },
-  {
-    label: '图文资源',
-    value: 'ASSETS'
-  },
-  {
-    label: '文件资源',
-    value: 'FILES'
-  }
-]
-
 export default {
   components: { CardSettings, CardSettingsGroup },
 
@@ -111,12 +82,16 @@ export default {
 
   data() {
     return {
-      form: {},
-      GROUP_TYPE
+      form: {}
     }
   },
 
   methods: {
+    handleOpenModal(type) {
+      console.log(this.$refs)
+      this.$refs[type][0].handleSettingClick('modify')
+    },
+
     handleRefresh() {
       this.jobsGetById()
     },

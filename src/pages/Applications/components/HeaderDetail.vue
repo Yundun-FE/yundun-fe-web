@@ -17,7 +17,7 @@
       所属项目：{{ jobsData.productName }}
     </template>
     <a-form layout="inline">
-      <a-form-item label="切换环境">
+      <a-form-item>
         <yd-form-radio-button
           v-model="id"
           :radios="selectEnv"

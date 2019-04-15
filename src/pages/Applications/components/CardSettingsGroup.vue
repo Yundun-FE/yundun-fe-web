@@ -1,6 +1,6 @@
 <style lang="less">
 .CardSettingsGroup {
-  .ant-list-item-content{
+  .ant-list-item-content {
     white-space: nowrap;
   }
 
@@ -44,17 +44,20 @@
           <div class="itemImg">
             <img
               v-if="item.defaultValue"
-              :src="item.defaultValue"
+              :src="item.value || item.defaultValue"
               :alt="item.title || item.name"
             >
           </div>
         </template>
         <template v-if="item.valueType === 'file'">
-          {{ item.defaultValue }}
+          <a :href="item.value || item.defaultValue">{{ item.value || item.defaultValue }}</a>
         </template>
       </a-list-item>
     </a-list>
-    <ModalCardSetting ref="ModalCardSetting" />
+    <ModalCardSetting
+      ref="ModalCardSetting"
+      :title="title"
+    />
   </CardSettings>
 </template>
 

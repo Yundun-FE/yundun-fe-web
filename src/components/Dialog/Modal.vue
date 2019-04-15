@@ -86,7 +86,7 @@ export default create({
 
   computed: {
     titleShow() {
-      return this.title || this.modify ? `${this.$t('du.toolbar.modify')}${this.titleLabel}` : `${this.$t('du.toolbar.create')}${this.titleLabel}`
+      return this.title || (this.modify ? `${this.$t('du.toolbar.modify')}${this.titleLabel}` : `${this.$t('du.toolbar.create')}${this.titleLabel}`)
     }
   },
 

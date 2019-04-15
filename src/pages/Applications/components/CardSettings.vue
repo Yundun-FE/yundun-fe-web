@@ -16,6 +16,13 @@
       style="width:25%; textAlign:'center'"
       @click="handleOpenModal"
     >目录配置</a-card-grid>
+    <a-card-grid
+      v-for="(item, index) in jobsData.settings"
+      :class="b('item')"
+      :key="index"
+      style="width:25%; textAlign:'center'"
+      @click="handleOpenSettings(item.name)"
+    >{{ item.title }}</a-card-grid>
     <ModalMenus ref="ModalMenus" />
   </a-card>
 </template>
@@ -23,21 +30,19 @@
 <script>
 import create from '@/utils/create-basic'
 import ModalMenus from './ModalMenus'
+import jobsMixin from '@/mixins/jobs'
 
 export default create({
   name: 'CardSettings',
 
   components: { ModalMenus },
 
-  props: {},
-
-  data() {
-    return {}
-  },
-
-  computed: {},
+  mixins: [jobsMixin],
 
   methods: {
+    handleOpenSettings(type) {
+      this.$emit('open-modal', type)
+    },
     handleOpenModal() {
       this.$refs.ModalMenus.handleOpen()
     }
