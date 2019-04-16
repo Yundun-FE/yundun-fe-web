@@ -29,13 +29,16 @@
         slot="action"
         slot-scope="scope"
       >
-        <ColumnAction>
-          <a @click="handleRowEdit(scope)">{{ $t('du.toolbar.edit') }}</a>
-          <a @click="handleOpenMenus(scope)">目录</a>
-          <PopoverConfirm @confirm="handleRowDelete(scope)">
-            <a>{{ $t('du.toolbar.delete') }}</a>
-          </PopoverConfirm>
-        </ColumnAction>
+        <!-- <ColumnAction> -->
+        <a-button>查看详情</a-button>
+        <!-- <a-divider type="vertical" />
+        <a @click="handleRowEdit(scope)">{{ $t('du.toolbar.edit') }}</a>
+        <a-divider type="vertical" />
+        <a @click="handleOpenMenus(scope)">目录</a>
+        <PopoverConfirm @confirm="handleRowDelete(scope)">
+          <a>{{ $t('du.toolbar.delete') }}</a>
+        </PopoverConfirm> -->
+        <!-- </ColumnAction> -->
       </template>
     </ConsoleTable>
 

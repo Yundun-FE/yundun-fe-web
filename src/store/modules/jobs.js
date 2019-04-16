@@ -32,7 +32,6 @@ const jobs = {
       state.selectEnv = data.list.map(_ => {
         const env = _.name.split('--')[1]
         const label = _.title + (env ? `（${ENV_MAP[env]}）` : '')
-
         return {
           label,
           value: _.id
@@ -53,7 +52,7 @@ const jobs = {
     },
 
     async getByName({ commit }, productName) {
-      const data = await Fetch.get(`/v2/jobs`, { productName })
+      const data = await Fetch.get(`/v2/jobs`, { productName, pageSize: 100 })
       commit(`SET_SELECT_ENV`, data)
     },
 

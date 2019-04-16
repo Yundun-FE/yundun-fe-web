@@ -9,6 +9,7 @@
 <template>
   <a-card
     :class="b()"
+    style="height: 400px"
     title="常用配置"
   >
     <a-card-grid
