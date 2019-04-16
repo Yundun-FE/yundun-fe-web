@@ -5,6 +5,12 @@ const Jump = {
     router.push({
       path: `/develop/applications/${id}/setting`
     })
+  },
+
+  productsId: (id) => {
+    router.push({
+      path: `/develop/products/${id}`
+    })
   }
 }
 

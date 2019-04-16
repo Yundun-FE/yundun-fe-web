@@ -27,18 +27,9 @@
     >
       <template
         slot="action"
-        slot-scope="scope"
+        slot-scope="row"
       >
-        <!-- <ColumnAction> -->
-        <a-button>查看详情</a-button>
-        <!-- <a-divider type="vertical" />
-        <a @click="handleRowEdit(scope)">{{ $t('du.toolbar.edit') }}</a>
-        <a-divider type="vertical" />
-        <a @click="handleOpenMenus(scope)">目录</a>
-        <PopoverConfirm @confirm="handleRowDelete(scope)">
-          <a>{{ $t('du.toolbar.delete') }}</a>
-        </PopoverConfirm> -->
-        <!-- </ColumnAction> -->
+        <a-button @click="Jump.productsId(row.id)">查看详情</a-button>
       </template>
     </ConsoleTable>
 

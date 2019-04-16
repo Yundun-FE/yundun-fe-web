@@ -32,6 +32,13 @@ const mainMap = [
         component: () => import('@/pages/Products/index')
       },
       {
+        path: '/develop/products/:id',
+        name: 'products',
+        meta: { title: '项目', keepAlive: true, permission: ['dashboard'] },
+        component: () => import('@/pages/Products/Show'),
+        hidden: true
+      },
+      {
         path: '/develop/applications',
         name: 'applications',
         hideChildrenInMenu: true,
