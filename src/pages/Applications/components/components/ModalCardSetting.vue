@@ -16,9 +16,11 @@
           :data="data.settings"
           refs="FormColumn"
         />
+        <!-- 高级配置开关 -->
         <a-form-item label="高级配置">
           <a-switch v-model="optionsMode"/>
         </a-form-item>
+        <!-- 主表单 -->
         <a-row v-if="optionsMode" :gutter="12">
           <a-col :span="12">
             <a-form-item
@@ -49,9 +51,9 @@
 
 <script>
 import create from '@/utils/create-basic'
-import FormColumn from './FormColumn'
 import consoleModal from '@/mixins/consoleModal'
 import jobsMixins from '@/mixins/jobs'
+import FormColumn from './FormColumn'
 
 export default create({
   mixins: [consoleModal, jobsMixins],

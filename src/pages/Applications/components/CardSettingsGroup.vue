@@ -29,7 +29,7 @@
     height="400"
     @edit="handleSettingClick"
   >
-    <a-list :data-source="content.settings ">
+    <a-list :data-source="content.settings.filter(_ => _.enable) ">
       <a-list-item
         slot="renderItem"
         slot-scope="item, index"

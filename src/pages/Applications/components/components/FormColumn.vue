@@ -1,6 +1,3 @@
-<style lang="scss">
-</style>
-
 <template>
   <div :class="b()">
     <a-table
@@ -9,6 +6,11 @@
       :data-source="data"
       row-key="name"
     >
+      <a-checkbox
+        slot="enableCheckbox"
+        slot-scope="row"
+        v-model="row.enable"
+      />
       <a-input
         slot="inputName"
         slot-scope="row"
@@ -169,7 +171,6 @@ export default create({
 
   methods: {
     initMode(op = this.optionsMode) {
-      console.log(op)
       if (op) {
         this.columns = [
           {
@@ -201,6 +202,12 @@ export default create({
         ]
       } else {
         this.columns = [
+          {
+            title: '启用',
+            key: 'enable',
+            width: 60,
+            scopedSlots: { customRender: 'enableCheckbox' }
+          },
           {
             title: 'Name',
             // dataIndex: 'name',

@@ -1,6 +1,3 @@
-<style lang="less">
-</style>
-
 <template>
   <Modal ref="Modal" @submit="handleSave">
     <Menus
@@ -49,8 +46,6 @@ export default {
       }
     }
   },
-
-  computed: {},
 
   methods: {
     handleRemove(index) {

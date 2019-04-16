@@ -106,11 +106,11 @@ body {
 
 <script>
 import { ContainerMixin, ElementMixin, HandleDirective } from 'vue-slicksort'
-import Menus from './Menus'
-import MenuItemGroup from './MenuItemGroup'
 import create from '@/utils/create-basic'
 import productsMixin from '@/mixins/products'
 import jobsMixin from '@/mixins/jobs'
+import Menus from './Menus'
+import MenuItemGroup from './MenuItemGroup'
 
 export default create({
   name: 'SubMenus',

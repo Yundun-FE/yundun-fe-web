@@ -60,11 +60,10 @@
 
 <script>
 import jobsMixins from '@/mixins/jobs'
-import FormMenuItem from './components/FormMenuItem'
 import FormMenus from './components/FormMenus'
 
 export default {
-  components: { FormMenuItem, FormMenus },
+  components: { FormMenus },
 
   mixins: [jobsMixins],
 

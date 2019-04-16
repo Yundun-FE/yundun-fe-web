@@ -29,8 +29,8 @@
 
 <script>
 import create from '@/utils/create-basic'
-import ModalMenus from './ModalMenus'
 import jobsMixin from '@/mixins/jobs'
+import ModalMenus from './ModalMenus'
 
 export default create({
   name: 'CardSettings',

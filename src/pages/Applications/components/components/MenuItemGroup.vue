@@ -89,9 +89,9 @@ body {
 <script>
 import { ContainerMixin, ElementMixin, HandleDirective } from 'vue-slicksort'
 import create from '@/utils/create-basic'
-import SubMenus from './SubMenus'
 import { deepClone } from '@/utils'
 import jobsMixin from '@/mixins/jobs'
+import SubMenus from './SubMenus'
 
 export default create({
   name: 'MenuItem',
@@ -124,21 +124,14 @@ export default create({
     }
   },
 
-  computed: {},
-
   created() {
     this.init(this.item)
   },
 
   methods: {
     saveAlias() {
-      // this.data.alias = this.alias
-      // this.item.alias = this.alias
-
       this.$set(this.data, 'alias', this.alias)
       this.$set(this.item, 'alias', this.alias)
-
-      // this.jobsSaveById()
     },
 
     handleRemove() {
