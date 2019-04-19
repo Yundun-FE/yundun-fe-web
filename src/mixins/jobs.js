@@ -1,4 +1,4 @@
-import { mapMutations, mapState, mapActions } from 'vuex'
+import { mapMutations, mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -21,6 +21,9 @@ export default {
     ...mapState({
       jobsData: state => state.jobs.data,
       selectEnv: state => state.jobs.selectEnv
+    }),
+    ...mapGetters({
+      jobsSelectChildrens: 'jobs/selectChildrens'
     })
   },
 

@@ -24,7 +24,6 @@ export default {
   },
 
   created() {
-    this.getByName('console-v6-web')
     this.productsGetById(12)
     this.init()
   },

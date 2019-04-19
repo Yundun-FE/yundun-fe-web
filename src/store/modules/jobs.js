@@ -14,7 +14,21 @@ const jobs = {
     loading: true,
     id: '',
     data: {},
-    selectEnv: []
+    selectEnv: [],
+    envsData: []
+  },
+
+  getters: {
+    selectChildrens: (state) => () => {
+      const { productName, env } = state.data
+      const select = state.envsData.filter(item => item.name.includes(`${productName}/${env}`) && item.name !== `${productName}/${env}`)
+      return select.map(_ => {
+        return {
+          label: _.name,
+          value: _.id
+        }
+      })
+    }
   },
 
   mutations: {
@@ -39,26 +53,37 @@ const jobs = {
       })
     },
 
+    SET_ENVS_DATA: (state, data) => {
+      state.envsData = data
+    },
+
     UPDATE_MENUS: (state, data) => {
       state.jobsData.menus = data
     }
   },
 
   actions: {
-    async getById({ commit, state }, id = state.id) {
+    async getById({ commit, state, dispatch }, id = state.id) {
       if (!id) return
       const data = await Fetch.get(`/v2/jobs/${id}`)
+
+      dispatch('getByName', data.productName)
       commit('SET_DATA', data)
     },
 
     async getByName({ commit }, productName) {
       const data = await Fetch.get(`/v2/jobs`, { productName, pageSize: 100 })
       commit(`SET_SELECT_ENV`, data)
+      commit(`SET_ENVS_DATA`, data.list)
     },
 
-    async saveById({ commit, state }) {
+    async saveById({ commit, state }, update) {
+      update = {
+        ...state.data,
+        ...update
+      }
       try {
-        await Fetch.put(`/v2/jobs/${state.id}`, state.data)
+        await Fetch.put(`/v2/jobs/${state.id}`, update)
       } catch (e) {
         return
       }

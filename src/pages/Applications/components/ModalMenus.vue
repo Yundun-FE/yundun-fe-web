@@ -1,5 +1,8 @@
 <template>
-  <Modal ref="Modal" @submit="handleSave">
+  <Modal
+    ref="Modal"
+    @submit="handleSave"
+  >
     <Menus
       v-model="jobsData.menus"
       :use-drag-handle="true"
@@ -19,6 +22,13 @@
       block
       @click="handleAdd"
     >增加</a-button>
+
+    <a-form-item
+      v-if="jobsSelectChildrens().length > 0"
+      label="同步至"
+    >
+      <a-checkbox-group v-model="menusAsync" :options="jobsSelectChildrens() " />
+    </a-form-item>
   </Modal>
 </template>
 
@@ -47,13 +57,19 @@ export default {
     }
   },
 
+  data() {
+    return {
+      menusAsync: []
+    }
+  },
+
   methods: {
     handleRemove(index) {
       this.jobsData.menus.splice(index, 1)
     },
 
     handleSave() {
-      this.jobsSaveById()
+      this.jobsSaveById({ menusAsync: this.menusAsync })
       this.handleClose()
     },
 
