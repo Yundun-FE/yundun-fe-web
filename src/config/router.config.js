@@ -127,8 +127,19 @@ export const constantRouterMap = [
   // },
 
   {
+    path: '/settings',
+    redirect: '/settings/Profile',
+    component: BasicLayout,
+    hidden: true,
+    children: [
+      {
+        path: 'profile',
+        component: () => import('@/pages/Settings/profile')
+      }
+    ]
+  },
+  {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/pages/exception/404')
   }
-
 ]
