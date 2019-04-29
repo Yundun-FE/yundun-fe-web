@@ -8,9 +8,7 @@
             <span class="title">YUNDUN FE</span>
           </a>
         </div>
-        <div class="desc">
-          云盾前端
-        </div>
+        <div class="desc"/>
       </div>
       <route-view/>
       <div class="footer">

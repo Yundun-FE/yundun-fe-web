@@ -1,8 +1,16 @@
 import request from './request'
+import store from '@/store'
+
+const headers = function() {
+  return {
+    'Authorization': `Bearer ${store.state.user.token}`
+  }
+}
 
 export default {
   post(url, data, params) {
     return request({
+      headers: headers(),
       url,
       method: 'POST',
       data,
@@ -12,6 +20,7 @@ export default {
 
   delete(url, data, params) {
     return request({
+      headers: headers(),
       url,
       method: 'DELETE',
       data,
@@ -21,6 +30,7 @@ export default {
 
   put(url, data, params) {
     return request({
+      headers: headers(),
       url,
       method: 'PUT',
       data,
@@ -30,6 +40,7 @@ export default {
 
   patch(url, data, params) {
     return request({
+      headers: headers(),
       url,
       method: 'PATCH',
       data,
@@ -39,6 +50,7 @@ export default {
 
   get(url, params) {
     return request({
+      headers: headers(),
       url,
       method: 'GET',
       params

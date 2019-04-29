@@ -7,7 +7,7 @@
     <a-dropdown>
       <span class="action ant-dropdown-link user-dropdown-menu">
         <a-avatar :src="avatar()" class="avatar" size="small"/>
-        <span>{{ nickname() }}</span>
+        <span>312</span>
       </span>
       <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
         <a-menu-item key="0">
@@ -65,8 +65,6 @@ export default {
               description: err.message
             })
           })
-        },
-        onCancel() {
         }
       })
     }

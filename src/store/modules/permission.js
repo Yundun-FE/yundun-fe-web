@@ -12,6 +12,7 @@ function hasPermission(permission, route) {
     let flag = false
     for (let i = 0, len = permission.length; i < len; i++) {
       flag = route.meta.permission.includes(permission[i])
+      console.log(route.meta)
       if (flag) {
         return true
       }
@@ -90,6 +91,7 @@ const permission = {
   },
   actions: {
     GenerateRoutes({ commit }, data) {
+      console.log(data)
       return new Promise(resolve => {
         const { roles } = data
         const accessedRouters = filterAsyncRouter(asyncRouterMap, roles)

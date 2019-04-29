@@ -2,15 +2,14 @@ import axios from 'axios'
 import { MessageBox } from 'element-ui'
 import Message from 'ant-design-vue/lib/message'
 import Retry from './retry.js'
-
 let networkError = false
 
 const service = axios.create({
   baseURL: 'api',
-  timeout: 15000
-  // headers: {
-  //   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-  // }
+  timeout: 15000,
+  headers: {
+    // 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+  }
 })
 
 // 拦截器
@@ -75,6 +74,7 @@ const request = function(options) {
         const { response } = error
         let message = error.message
         if (response && response.data) {
+          console.log(response)
           const { message: mainMessage, errors } = response.data
           if (errors) {
             if (errors.length > 0) {

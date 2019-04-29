@@ -22,7 +22,7 @@ const mainMap = [
   {
     path: '/develop',
     redirect: '/develop/products',
-    meta: { title: '开发', icon: 'form', permission: ['form'] },
+    meta: { title: '开发', icon: 'form', permission: ['dashboard'] },
     component: PageView,
     children: [
       {

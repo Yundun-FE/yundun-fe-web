@@ -24,7 +24,7 @@
               ]"
               size="large"
               type="text"
-              placeholder="帐户名或邮箱地址 / admin"
+              placeholder="帐户名 / 邮箱 / 手机号"
             >
               <a-icon
                 slot="prefix"
@@ -43,7 +43,7 @@
               size="large"
               type="password"
               autocomplete="false"
-              placeholder="密码 / admin"
+              placeholder="密码"
             >
               <a-icon
                 slot="prefix"
@@ -193,15 +193,20 @@ export default {
       }
     }
   },
+  mounted() {
+    this.form.setFieldsValue({
+      username: 'xank@qq.com',
+      password: 'cs1234'
+    })
+  },
   created() {
-    get2step({})
-      .then(res => {
-        this.requiredTwoStepCaptcha = res.result.stepCode
-      })
-      .catch(() => {
-        this.requiredTwoStepCaptcha = false
-      })
-    // this.requiredTwoStepCaptcha = true
+    // get2step({})
+    //   .then(res => {
+    //     this.requiredTwoStepCaptcha = res.result.stepCode
+    //   })
+    //   .catch(() => {
+    //     this.requiredTwoStepCaptcha = false
+    //   })
   },
   methods: {
     ...mapActions(['Login', 'Logout']),
@@ -232,44 +237,9 @@ export default {
       state.loginBtn = true
 
       const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
-
-      const res = {
-        'message': '',
-        'status': 200,
-        'timestamp': 1534844188679,
-        'body': {
-          'password': '21232f297a57a5a743894a0e4a801fc3',
-          'username': 'admin'
-        },
-        'result': {
-          'id': '4291d7da9005377ec9aec4a71ea837f',
-          'name': 'Robert Anderson',
-          'username': 'admin',
-          'password': '',
-          'avatar': 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
-          'status': 1,
-          'telephone': '',
-          'lastLoginIp': '27.154.74.117',
-          'lastLoginTime': 1534837621348,
-          'creatorId': 'admin',
-          'createTime': 1497160610259,
-          'deleted': 0,
-          'roleId': 'admin',
-          'token': '4291d7da9005377ec9aec4a71ea837f'
-        }
-      }
-
-      // this.loginSuccess(res)
-
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
-          console.log('login form', values)
           const loginParams = { ...values }
-          delete loginParams.username
-          loginParams[!state.loginType ? 'email' : 'username'] = values.username
-          loginParams.password = md5(values.password)
-
-          console.log(loginParams)
           Login(loginParams)
             .then((res) => this.loginSuccess(res))
             .catch(err => this.requestFailed(err))
