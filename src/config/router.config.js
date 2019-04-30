@@ -134,7 +134,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'profile',
-        component: () => import('@/pages/Settings/profile')
+        component: () => import('@/pages/Settings/Profile')
       }
     ]
   },
